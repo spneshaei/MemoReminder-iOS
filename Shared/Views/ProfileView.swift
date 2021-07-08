@@ -10,22 +10,52 @@ import SwiftUI
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
     @State var editMode = false
+    @State var birthDate = Date() // TODO: This should be linked to the real birthday
+    
+    init(viewModel: ProfileViewModel) {
+        self.viewModel = viewModel
+        UITextView.appearance().backgroundColor = .clear
+    }
     
     var body: some View {
         NavigationView {
             List {
                 ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $viewModel.user.name, editMode: editMode)
-                    .listRowSeparator(.hidden)
-                ThreeStatsView(user: viewModel.user)
-                Text("My created memories").font(.title).bold()
-                    .listRowSeparator(.hidden)
-                ForEach(viewModel.myMemories) { memory in
-                    MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                    .listRowSeparator(editMode ? .visible : .hidden)
+                if editMode {
+                    VStack(alignment: .leading) {
+                        Text("USERNAME")
+                        TextField(viewModel.user.username, text: $viewModel.user.username)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    VStack(alignment: .leading) {
+                        Text("EMAIL")
+                        TextField(viewModel.user.email, text: $viewModel.user.email)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    VStack(alignment: .leading) {
+                        Text("PHONE NUMBER")
+                        TextField(viewModel.user.phoneNumber, text: $viewModel.user.phoneNumber)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    }
+                    DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                        Text("Birthday")
+                    }
+                } else {
+                    ThreeStatsView(user: viewModel.user)
+                    Text("My created memories").font(.title).bold()
+                        .listRowSeparator(.hidden)
+                    ForEach(viewModel.myMemories) { memory in
+                        MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                    }
                 }
+                
             }
             .navigationBarTitle("My Profile")
             .navigationBarItems(trailing: Button(action: {
-                editMode.toggle()
+                withAnimation {
+                    editMode.toggle()
+                }
             }) {
                 if editMode {
                     Text("Done")
@@ -54,10 +84,13 @@ struct ProfilePictureAndNameView: View {
             if !profilePictureURL.isEmpty {
                 AsyncImage(url: URL(string: profilePictureURL)!)
             }
-            TextField(name, text: $name)
-                .font(.title)
-                .lineLimit(2)
-                .disabled(!editMode)
+            if editMode {
+                TextField("Enter your name", text: $name)
+                    .font(.title2)
+            } else {
+                Text(name)
+                    .font(.title2)
+            }
         }
     }
 }
