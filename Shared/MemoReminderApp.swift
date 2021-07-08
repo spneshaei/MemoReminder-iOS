@@ -10,10 +10,14 @@ import SwiftUI
 @main
 struct MemoReminderApp: App {
     let persistenceController = PersistenceController.shared
+    
+    init() {
+        Webber.server = "" // TODO: Server URL
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainTabView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
