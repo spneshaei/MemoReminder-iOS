@@ -11,6 +11,12 @@
 		424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCE7269715AE004051FD /* MemoriesView.swift */; };
 		424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCEA269715F5004051FD /* MemoriesViewModel.swift */; };
 		424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCEA269715F5004051FD /* MemoriesViewModel.swift */; };
+		424FDCEE26971A59004051FD /* MemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCED26971A59004051FD /* MemoryView.swift */; };
+		424FDCEF26971A59004051FD /* MemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCED26971A59004051FD /* MemoryView.swift */; };
+		424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF026971B4C004051FD /* ProfileViewModel.swift */; };
+		424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF026971B4C004051FD /* ProfileViewModel.swift */; };
+		424FDCF426971C3D004051FD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF326971C3D004051FD /* ProfileView.swift */; };
+		424FDCF526971C3D004051FD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF326971C3D004051FD /* ProfileView.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -72,6 +78,9 @@
 /* Begin PBXFileReference section */
 		424FDCE7269715AE004051FD /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
 		424FDCEA269715F5004051FD /* MemoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesViewModel.swift; sourceTree = "<group>"; };
+		424FDCED26971A59004051FD /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = SOURCE_ROOT; };
+		424FDCF026971B4C004051FD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		424FDCF326971C3D004051FD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -187,7 +196,9 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				424FDCED26971A59004051FD /* MemoryView.swift */,
 				42B22C5E2696C02400091D30 /* MainTabView.swift */,
+				424FDCF326971C3D004051FD /* ProfileView.swift */,
 				42B22C612696C05700091D30 /* HomeView.swift */,
 				42B22C782696E6EE00091D30 /* MemoryCell.swift */,
 				42B22C4D2696A6F900091D30 /* LoginView.swift */,
@@ -223,6 +234,7 @@
 			children = (
 				42B22C752696DFF400091D30 /* HomeViewModel.swift */,
 				424FDCEA269715F5004051FD /* MemoriesViewModel.swift */,
+				424FDCF026971B4C004051FD /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -397,7 +409,9 @@
 				42B22C722696DCF000091D30 /* Webber.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				424FDCE8269715AE004051FD /* MemoriesView.swift in Sources */,
+				424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C5F2696C02400091D30 /* MainTabView.swift in Sources */,
+				424FDCEE26971A59004051FD /* MemoryView.swift in Sources */,
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
 				42B22C562696B49F00091D30 /* ImageSlideshow.swift in Sources */,
 				42B22C662696C39B00091D30 /* Memory.swift in Sources */,
@@ -409,6 +423,7 @@
 				42B22C512696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C392696274300091D30 /* ContentView.swift in Sources */,
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
+				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,7 +438,9 @@
 				42B22C732696DCF000091D30 /* Webber.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */,
+				424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C602696C02400091D30 /* MainTabView.swift in Sources */,
+				424FDCEF26971A59004051FD /* MemoryView.swift in Sources */,
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
 				42B22C572696B49F00091D30 /* ImageSlideshow.swift in Sources */,
 				42B22C672696C39B00091D30 /* Memory.swift in Sources */,
@@ -435,6 +452,7 @@
 				42B22C522696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C3A2696274300091D30 /* ContentView.swift in Sources */,
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
+				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

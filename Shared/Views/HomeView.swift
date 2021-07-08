@@ -32,7 +32,7 @@ struct HomeView: View {
                         .listRowSeparator(.hidden)
                     
                     ForEach(viewModel.topMemories) { memory in
-                        NavigationLink(destination: Text("Hi")) {
+                        NavigationLink(destination: MemoryView(memory: memory)) {
                             MemoryCell(memory: memory)
                         }
                     }

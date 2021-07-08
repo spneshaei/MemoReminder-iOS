@@ -9,6 +9,12 @@ import SwiftUI
 
 struct MemoryCell: View {
     var memory: Memory
+    var shouldShowProfilePicture: Bool
+    
+    init(memory: Memory, shouldShowProfilePicture: Bool = true) {
+        self.memory = memory
+        self.shouldShowProfilePicture = shouldShowProfilePicture
+    }
     
     var body: some View {
         HStack() {

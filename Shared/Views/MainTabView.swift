@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainTabView: View {
     @StateObject var homeViewModel = HomeViewModel()
+    @StateObject var memoriesViewModel = MemoriesViewModel()
+    @StateObject var profileViewModel = ProfileViewModel()
     
     var body: some View {
         TabView {
@@ -16,13 +18,13 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            HomeView(viewModel: homeViewModel)
+            MemoriesView(viewModel: memoriesViewModel)
                 .tabItem {
                     Label("Memories", systemImage: "list.bullet")
                 }
-            HomeView(viewModel: homeViewModel)
+            ProfileView(viewModel: profileViewModel)
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Profile", systemImage: "person")
                 }
         }
     }
