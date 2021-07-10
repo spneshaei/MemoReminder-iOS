@@ -17,6 +17,30 @@
 		424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF026971B4C004051FD /* ProfileViewModel.swift */; };
 		424FDCF426971C3D004051FD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF326971C3D004051FD /* ProfileView.swift */; };
 		424FDCF526971C3D004051FD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF326971C3D004051FD /* ProfileView.swift */; };
+		424FDCF726972FC5004051FD /* StickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF626972FC5004051FD /* StickyHeader.swift */; };
+		424FDCF826972FC5004051FD /* StickyHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCF626972FC5004051FD /* StickyHeader.swift */; };
+		424FDD042697410F004051FD /* HeaderScrollViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFA2697410F004051FD /* HeaderScrollViewTitle.swift */; };
+		424FDD052697410F004051FD /* HeaderScrollViewTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFA2697410F004051FD /* HeaderScrollViewTitle.swift */; };
+		424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFB2697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift */; };
+		424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFB2697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift */; };
+		424FDD082697410F004051FD /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFC2697410F004051FD /* BlurView.swift */; };
+		424FDD092697410F004051FD /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFC2697410F004051FD /* BlurView.swift */; };
+		424FDD0A2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFD2697410F004051FD /* AppleMusicStyleScrollView.swift */; };
+		424FDD0B2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFD2697410F004051FD /* AppleMusicStyleScrollView.swift */; };
+		424FDD0C2697410F004051FD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFE2697410F004051FD /* BackButton.swift */; };
+		424FDD0D2697410F004051FD /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFE2697410F004051FD /* BackButton.swift */; };
+		424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFF2697410F004051FD /* FancyScrollView.swift */; };
+		424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCFF2697410F004051FD /* FancyScrollView.swift */; };
+		424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD002697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift */; };
+		424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD002697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift */; };
+		424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD012697410F004051FD /* HeaderScrollView.swift */; };
+		424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD012697410F004051FD /* HeaderScrollView.swift */; };
+		424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD022697410F004051FD /* ScrollUpHeaderBehavior.swift */; };
+		424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD022697410F004051FD /* ScrollUpHeaderBehavior.swift */; };
+		424FDD162697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD032697410F004051FD /* ScrollDownHeaderBehavior.swift */; };
+		424FDD172697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD032697410F004051FD /* ScrollDownHeaderBehavior.swift */; };
+		424FDD1926974473004051FD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1826974473004051FD /* CommentsView.swift */; };
+		424FDD1A26974473004051FD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1826974473004051FD /* CommentsView.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -81,6 +105,18 @@
 		424FDCED26971A59004051FD /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = SOURCE_ROOT; };
 		424FDCF026971B4C004051FD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		424FDCF326971C3D004051FD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		424FDCF626972FC5004051FD /* StickyHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyHeader.swift; sourceTree = SOURCE_ROOT; };
+		424FDCFA2697410F004051FD /* HeaderScrollViewTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderScrollViewTitle.swift; sourceTree = "<group>"; };
+		424FDCFB2697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+hideNavigationBarWithoutLosingSwipeBack.swift"; sourceTree = "<group>"; };
+		424FDCFC2697410F004051FD /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		424FDCFD2697410F004051FD /* AppleMusicStyleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleMusicStyleScrollView.swift; sourceTree = "<group>"; };
+		424FDCFE2697410F004051FD /* BackButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		424FDCFF2697410F004051FD /* FancyScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyScrollView.swift; sourceTree = "<group>"; };
+		424FDD002697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+navigationAllowSpipeBackWhenHidden.swift"; sourceTree = "<group>"; };
+		424FDD012697410F004051FD /* HeaderScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderScrollView.swift; sourceTree = "<group>"; };
+		424FDD022697410F004051FD /* ScrollUpHeaderBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollUpHeaderBehavior.swift; sourceTree = "<group>"; };
+		424FDD032697410F004051FD /* ScrollDownHeaderBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDownHeaderBehavior.swift; sourceTree = "<group>"; };
+		424FDD1826974473004051FD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +176,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		424FDCF92697410F004051FD /* FancyScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				424FDCFA2697410F004051FD /* HeaderScrollViewTitle.swift */,
+				424FDCFB2697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift */,
+				424FDCFC2697410F004051FD /* BlurView.swift */,
+				424FDCFD2697410F004051FD /* AppleMusicStyleScrollView.swift */,
+				424FDCFE2697410F004051FD /* BackButton.swift */,
+				424FDCFF2697410F004051FD /* FancyScrollView.swift */,
+				424FDD002697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift */,
+				424FDD012697410F004051FD /* HeaderScrollView.swift */,
+				424FDD022697410F004051FD /* ScrollUpHeaderBehavior.swift */,
+				424FDD032697410F004051FD /* ScrollDownHeaderBehavior.swift */,
+			);
+			path = FancyScrollView;
+			sourceTree = "<group>";
+		};
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				424FDCED26971A59004051FD /* MemoryView.swift */,
+				424FDD1826974473004051FD /* CommentsView.swift */,
 				42B22C5E2696C02400091D30 /* MainTabView.swift */,
 				424FDCF326971C3D004051FD /* ProfileView.swift */,
 				42B22C612696C05700091D30 /* HomeView.swift */,
@@ -211,6 +265,8 @@
 		42B22C542696B49000091D30 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				424FDCF92697410F004051FD /* FancyScrollView */,
+				424FDCF626972FC5004051FD /* StickyHeader.swift */,
 				42B22C552696B49F00091D30 /* ImageSlideshow.swift */,
 				42B22C582696BB2D00091D30 /* AsyncSlideshow.swift */,
 			);
@@ -405,20 +461,32 @@
 			files = (
 				42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42B22C3B2696274300091D30 /* Persistence.swift in Sources */,
+				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
 				42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				42B22C722696DCF000091D30 /* Webber.swift in Sources */,
+				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
+				424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				424FDCE8269715AE004051FD /* MemoriesView.swift in Sources */,
+				424FDD162697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
 				424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C5F2696C02400091D30 /* MainTabView.swift in Sources */,
+				424FDD082697410F004051FD /* BlurView.swift in Sources */,
+				424FDD0A2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
 				424FDCEE26971A59004051FD /* MemoryView.swift in Sources */,
+				424FDD0C2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
+				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
+				424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C562696B49F00091D30 /* ImageSlideshow.swift in Sources */,
+				424FDD042697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
 				42B22C662696C39B00091D30 /* Memory.swift in Sources */,
 				42B22C6F2696C56800091D30 /* User.swift in Sources */,
 				42B22C372696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C692696C50900091D30 /* Comment.swift in Sources */,
+				424FDCF726972FC5004051FD /* StickyHeader.swift in Sources */,
 				42B22C592696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
+				424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C512696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C392696274300091D30 /* ContentView.swift in Sources */,
@@ -434,20 +502,32 @@
 			files = (
 				42B22C362696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42B22C3C2696274300091D30 /* Persistence.swift in Sources */,
+				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
 				42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				42B22C732696DCF000091D30 /* Webber.swift in Sources */,
+				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
+				424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */,
+				424FDD172697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
 				424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C602696C02400091D30 /* MainTabView.swift in Sources */,
+				424FDD092697410F004051FD /* BlurView.swift in Sources */,
+				424FDD0B2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
 				424FDCEF26971A59004051FD /* MemoryView.swift in Sources */,
+				424FDD0D2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
+				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
+				424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C572696B49F00091D30 /* ImageSlideshow.swift in Sources */,
+				424FDD052697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
 				42B22C672696C39B00091D30 /* Memory.swift in Sources */,
 				42B22C702696C56800091D30 /* User.swift in Sources */,
 				42B22C382696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C6A2696C50900091D30 /* Comment.swift in Sources */,
+				424FDCF826972FC5004051FD /* StickyHeader.swift in Sources */,
 				42B22C5A2696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
+				424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C522696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C3A2696274300091D30 /* ContentView.swift in Sources */,

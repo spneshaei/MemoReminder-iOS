@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    //MARK: - PROPERTIES
+    // MARK: - PROPERTIES
     @State var username = "";
     @State var password = "";
     
