@@ -20,6 +20,7 @@ struct SignUpView: View {
     @State var password = "";
     @State var name = "";
     @State var email = "";
+    @State var topTitle = "Sign Up"
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
     
     var body: some View {
@@ -34,7 +35,7 @@ struct SignUpView: View {
 //                    Image("logo-4")
 //                        .resizable()
 //                        .frame(width: 60, height: 60)
-                    Text("Sign Up")
+                    Text(topTitle)
                         .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: Color.primary))
                 }
                 .padding(.top,55)
@@ -102,8 +103,12 @@ struct SignUpView: View {
     }
     
     func signUp() {
-        
+        async {
+            topTitle = "\(await User.signUp(username: username, firstName: name, lastName: "L", birthday: "2020-01-01", password: password, phoneNumber: "09111111111", email: email))"
+        }
     }
+    
+    // TODO: login and sign up fields verification in the client!
     
     func backToLogin() {
         

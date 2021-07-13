@@ -12,13 +12,14 @@ struct MemoReminderApp: App {
     let persistenceController = PersistenceController.shared
     
     init() {
-        Webber.server = "" // TODO: Server URL
+        Rester.server = "http://memoreminder.ir/api/v1"
     }
 
     var body: some Scene {
         WindowGroup {
-            MainTabView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            SignUpView()
+//            MainTabView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

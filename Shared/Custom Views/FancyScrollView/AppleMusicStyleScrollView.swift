@@ -28,7 +28,6 @@ struct AppleMusicStyleScrollView: View {
                            height: geometry.safeAreaInsets.top)
                     .position(x: geometry.size.width / 2, y: geometry.safeAreaInsets.top / 2)
                     .edgesIgnoringSafeArea(.top)
-                    .animation(.spring())
             }
         }
         .hideNavigationBarWithoutLosingSwipeBack(true)

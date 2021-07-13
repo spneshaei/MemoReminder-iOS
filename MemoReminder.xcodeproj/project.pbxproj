@@ -41,6 +41,10 @@
 		424FDD172697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD032697410F004051FD /* ScrollDownHeaderBehavior.swift */; };
 		424FDD1926974473004051FD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1826974473004051FD /* CommentsView.swift */; };
 		424FDD1A26974473004051FD /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1826974473004051FD /* CommentsView.swift */; };
+		424FDD1C269A0AF6004051FD /* Rester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1B269A0AF6004051FD /* Rester.swift */; };
+		424FDD1D269A0AF6004051FD /* Rester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1B269A0AF6004051FD /* Rester.swift */; };
+		424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1E269A9F67004051FD /* SwiftyJSON.swift */; };
+		424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1E269A9F67004051FD /* SwiftyJSON.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -74,8 +78,6 @@
 		42B22C6D2696C54200091D30 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C6B2696C54200091D30 /* Tag.swift */; };
 		42B22C6F2696C56800091D30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C6E2696C56800091D30 /* User.swift */; };
 		42B22C702696C56800091D30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C6E2696C56800091D30 /* User.swift */; };
-		42B22C722696DCF000091D30 /* Webber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C712696DCF000091D30 /* Webber.swift */; };
-		42B22C732696DCF000091D30 /* Webber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C712696DCF000091D30 /* Webber.swift */; };
 		42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C752696DFF400091D30 /* HomeViewModel.swift */; };
 		42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C752696DFF400091D30 /* HomeViewModel.swift */; };
 		42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C782696E6EE00091D30 /* MemoryCell.swift */; };
@@ -117,6 +119,9 @@
 		424FDD022697410F004051FD /* ScrollUpHeaderBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollUpHeaderBehavior.swift; sourceTree = "<group>"; };
 		424FDD032697410F004051FD /* ScrollDownHeaderBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollDownHeaderBehavior.swift; sourceTree = "<group>"; };
 		424FDD1826974473004051FD /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		424FDD1B269A0AF6004051FD /* Rester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rester.swift; sourceTree = SOURCE_ROOT; };
+		424FDD1E269A9F67004051FD /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MemoReminder--iOS--Info.plist"; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -138,7 +143,6 @@
 		42B22C682696C50900091D30 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		42B22C6B2696C54200091D30 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		42B22C6E2696C56800091D30 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		42B22C712696DCF000091D30 /* Webber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webber.swift; sourceTree = "<group>"; };
 		42B22C752696DFF400091D30 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		42B22C782696E6EE00091D30 /* MemoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +200,7 @@
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
+				424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */,
 				42B22C0F2696274200091D30 /* Shared */,
 				42B22C282696274300091D30 /* Tests iOS */,
 				42B22C322696274300091D30 /* Tests macOS */,
@@ -276,11 +281,12 @@
 		42B22C642696C38900091D30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				424FDD1B269A0AF6004051FD /* Rester.swift */,
 				42B22C652696C39B00091D30 /* Memory.swift */,
-				42B22C712696DCF000091D30 /* Webber.swift */,
 				42B22C682696C50900091D30 /* Comment.swift */,
 				42B22C6E2696C56800091D30 /* User.swift */,
 				42B22C6B2696C54200091D30 /* Tag.swift */,
+				424FDD1E269A9F67004051FD /* SwiftyJSON.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -463,7 +469,6 @@
 				42B22C3B2696274300091D30 /* Persistence.swift in Sources */,
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
 				42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */,
-				42B22C722696DCF000091D30 /* Webber.swift in Sources */,
 				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
@@ -493,6 +498,8 @@
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
+				424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */,
+				424FDD1C269A0AF6004051FD /* Rester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,7 +511,6 @@
 				42B22C3C2696274300091D30 /* Persistence.swift in Sources */,
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
 				42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */,
-				42B22C732696DCF000091D30 /* Webber.swift in Sources */,
 				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
@@ -534,6 +540,8 @@
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
+				424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */,
+				424FDD1D269A0AF6004051FD /* Rester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,6 +700,10 @@
 				DEVELOPMENT_TEAM = 44TVYQ8RAX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MemoReminder--iOS--Info.plist";
+				INFOPLIST_KEY_CFBundleExecutable = MemoReminder;
+				INFOPLIST_KEY_CFBundleName = MemoReminder;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -722,6 +734,10 @@
 				DEVELOPMENT_TEAM = 44TVYQ8RAX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MemoReminder--iOS--Info.plist";
+				INFOPLIST_KEY_CFBundleExecutable = MemoReminder;
+				INFOPLIST_KEY_CFBundleName = MemoReminder;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

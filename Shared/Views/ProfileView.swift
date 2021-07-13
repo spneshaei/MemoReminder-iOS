@@ -20,7 +20,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             List {
-                ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $viewModel.user.name, editMode: editMode)
+                ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $viewModel.user.firstName, editMode: editMode)
                     .listRowSeparator(editMode ? .visible : .hidden)
                 if editMode {
                     VStack(alignment: .leading) {

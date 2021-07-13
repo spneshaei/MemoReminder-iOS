@@ -30,7 +30,6 @@ struct ImageSlideshow<Content: View>: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading) // 4
                 .offset(x: CGFloat(self.currentIndex) * -geometry.size.width, y: 0) // 5
-                .animation(.spring()) // 6
                 .onReceive(self.timer) { _ in
                     // 7
                     self.currentIndex = (self.currentIndex + 1) % 3
@@ -43,7 +42,6 @@ struct ImageSlideshow<Content: View>: View {
                           .foregroundColor(index == self.currentIndex ? Color("yellow") : .white)
                           .overlay(Circle().stroke(Color.gray, lineWidth: 1))
                           .padding(.bottom, 8)
-                          .animation(.spring())
                     }
                 }
             }
