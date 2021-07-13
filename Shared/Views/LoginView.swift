@@ -12,6 +12,8 @@ struct LoginView: View {
     @State var username = "";
     @State var password = "";
     
+    @ObservedObject var viewModel: MainAppViewModel
+    
     var body: some View {
         ZStack{
             Image("login-4")
@@ -91,17 +93,19 @@ struct LoginView: View {
     }
     
     func login() {
-        
+        // TODO: Login
     }
     
     func goToSignUp() {
-        
+        withAnimation {
+            viewModel.currentView = .signUp
+        }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(viewModel: MainAppViewModel.sample)
             
     }
 }
@@ -122,6 +126,8 @@ struct SFInputComponent: View {
             Group{
                 if !isSecure {
                     TextField("", text: $username)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
                 } else {
                     SecureField("", text: $username)
                 }

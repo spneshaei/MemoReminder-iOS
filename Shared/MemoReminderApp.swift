@@ -7,9 +7,16 @@
 
 import SwiftUI
 
+extension View {
+    func erasedToAnyView() -> AnyView {
+        AnyView(self)
+    }
+}
+
 @main
 struct MemoReminderApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject var viewModel = MainAppViewModel()
     
     init() {
         Rester.server = "http://memoreminder.ir/api/v1"
@@ -17,9 +24,18 @@ struct MemoReminderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            SignUpView()
-//            MainTabView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            switch viewModel.currentView {
+            case .login:
+                LoginView(viewModel: viewModel)
+                    .erasedToAnyView()
+            case .signUp:
+                SignUpView(viewModel: viewModel)
+                    .erasedToAnyView()
+            case .mainTabView:
+                MainTabView()
+                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                    .erasedToAnyView()
+            }
         }
     }
 }

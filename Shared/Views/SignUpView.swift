@@ -20,8 +20,22 @@ struct SignUpView: View {
     @State var password = "";
     @State var name = "";
     @State var email = "";
-    @State var topTitle = "Sign Up"
+    @State var signUpStatus: User.SignUpStatus = .failed
+    @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
+    
+    @ObservedObject var viewModel: MainAppViewModel
+    
+    var alertTextMessage: String { // TODO: better messages!
+        switch signUpStatus {
+        case .failed:
+            return "Sign up failed. Please try again."
+        case .invalidData:
+            return "Invalid data provided. Please try again."
+        case .success:
+            return "Sign up successful! Now you can login"
+        }
+    }
     
     var body: some View {
         ZStack{
@@ -35,7 +49,7 @@ struct SignUpView: View {
 //                    Image("logo-4")
 //                        .resizable()
 //                        .frame(width: 60, height: 60)
-                    Text(topTitle)
+                    Text("Sign Up")
                         .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: Color.primary))
                 }
                 .padding(.top,55)
@@ -69,7 +83,9 @@ struct SignUpView: View {
                                     .cornerRadius(10)
                             }
                             .padding(.top,30)
-                            
+                            .alert(alertTextMessage, isPresented: $showingAlert) {
+                                Button("OK", role: .cancel) { }
+                            }
                         }
                         .padding(.horizontal,30)
                         .padding(.vertical,40)
@@ -104,19 +120,24 @@ struct SignUpView: View {
     
     func signUp() {
         async {
-            topTitle = "\(await User.signUp(username: username, firstName: name, lastName: "L", birthday: "2020-01-01", password: password, phoneNumber: "09111111111", email: email))"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM-dd"
+            signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email) // TODO: Phone Number and Last Name
+            showingAlert = true
         }
     }
     
     // TODO: login and sign up fields verification in the client!
     
     func backToLogin() {
-        
+        withAnimation {
+            viewModel.currentView = .login
+        }
     }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView()
+        SignUpView(viewModel: .sample)
     }
 }
