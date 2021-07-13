@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var globalData: GlobalData
+    
     // MARK: - PROPERTIES
     @State var username = "";
     @State var password = "";
@@ -93,7 +95,9 @@ struct LoginView: View {
     }
     
     func login() {
-        // TODO: Login
+        async {
+            let loginStatus = await User.login(username: username, password: password, globalData: globalData)
+        }
     }
     
     func goToSignUp() {

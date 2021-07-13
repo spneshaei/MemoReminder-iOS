@@ -47,14 +47,14 @@ class User: Identifiable, Codable {
     
     // TODO: On net disconnection error
     // TODO: Distinguish validation and repeated account error and...
-    enum SignUpStatus: Error {
+    enum AuthenticationStatus: Error {
         case invalidData
         case failed
         case success
     }
     
     // TODO: Email and password validation in client
-    static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String) async -> SignUpStatus {
+    static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String) async -> AuthenticationStatus {
         let body: JSON = [
             "username": username,
             "first_name": firstName,
@@ -64,9 +64,32 @@ class User: Identifiable, Codable {
             "phone_number": phoneNumber,
             "email": email
         ]
-        guard let bodyString = body.rawString() else { return SignUpStatus.invalidData }
+        guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
         do {
             try await Rester.rest(endPoint: "memo-user/", body: bodyString, method: .post)
+            return .success
+        } catch {
+            return .failed
+        }
+    }
+    
+    static func login(username: String, password: String, globalData: GlobalData) async -> AuthenticationStatus {
+        let body: JSON = [
+            "username": username,
+            "password": password
+        ]
+        guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
+        do {
+            let result = try await Rester.rest(endPoint: "login/", body: bodyString, method: .post)
+            let json = JSON(parseJSON: result)
+            globalData.loggedIn = true
+            globalData.username = json["username"].stringValue
+            globalData.firstName = json["first_name"].stringValue
+            globalData.lastName = json["last_name"].stringValue
+            globalData.email = json["email"].stringValue
+            globalData.phoneNumber = json["phone_number"].stringValue
+            globalData.birthday = json["birthday_date"].stringValue
+            globalData.token = json["token"].stringValue
             return .success
         } catch {
             return .failed

@@ -20,7 +20,7 @@ struct SignUpView: View {
     @State var password = "";
     @State var name = "";
     @State var email = "";
-    @State var signUpStatus: User.SignUpStatus = .failed
+    @State var signUpStatus: User.AuthenticationStatus = .failed
     @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
     

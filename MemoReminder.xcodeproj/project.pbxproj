@@ -84,6 +84,8 @@
 		42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C782696E6EE00091D30 /* MemoryCell.swift */; };
 		42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196B269D45DC00D20808 /* MainAppViewModel.swift */; };
 		42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196B269D45DC00D20808 /* MainAppViewModel.swift */; };
+		42D0196F269D4E9100D20808 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196E269D4E9100D20808 /* GlobalData.swift */; };
+		42D01970269D4E9100D20808 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196E269D4E9100D20808 /* GlobalData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +150,7 @@
 		42B22C752696DFF400091D30 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		42B22C782696E6EE00091D30 /* MemoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
 		42D0196B269D45DC00D20808 /* MainAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewModel.swift; sourceTree = "<group>"; };
+		42D0196E269D4E9100D20808 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +300,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42D0196E269D4E9100D20808 /* GlobalData.swift */,
 				42D0196B269D45DC00D20808 /* MainAppViewModel.swift */,
 				42B22C752696DFF400091D30 /* HomeViewModel.swift */,
 				424FDCEA269715F5004051FD /* MemoriesViewModel.swift */,
@@ -499,6 +503,7 @@
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C512696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C392696274300091D30 /* ContentView.swift in Sources */,
+				42D0196F269D4E9100D20808 /* GlobalData.swift in Sources */,
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
@@ -542,6 +547,7 @@
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C522696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C3A2696274300091D30 /* ContentView.swift in Sources */,
+				42D01970269D4E9100D20808 /* GlobalData.swift in Sources */,
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
