@@ -22,14 +22,16 @@ struct ProfileView: View {
     
     fileprivate func reloadData() async {
         do {
-            showActivityIndicatorView = true
+            main { showActivityIndicatorView = true }
             try await viewModel.loadUser()
             try await viewModel.loadFollowRequests(globalData: globalData)
             try await viewModel.loadMyMemories()
-            showActivityIndicatorView = false
+            main { showActivityIndicatorView = false }
         } catch {
-            viewModel.shouldShowLoadingDataErrorAlert = true
-            showActivityIndicatorView = false
+            main {
+                viewModel.shouldShowLoadingDataErrorAlert = true
+                showActivityIndicatorView = false
+            }
         }
     }
     
@@ -102,7 +104,7 @@ struct ProfileView: View {
                     }
                 })
                 
-                ActivityIndicatorView(isVisible: .constant(true), type: .equalizer)
+                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                     .frame(width: 100.0, height: 100.0)
                     .foregroundColor(.orange)
             }

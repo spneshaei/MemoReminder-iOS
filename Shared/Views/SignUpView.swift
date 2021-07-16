@@ -129,7 +129,7 @@ struct SignUpView: View {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"
             signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email) // TODO: Phone Number and Last Name
-            showingAlert = true
+            main { showingAlert = true }
         }
     }
     

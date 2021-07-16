@@ -98,6 +98,9 @@
 		42D0198726A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
 		42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */; };
 		42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */; };
+		42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 42D0198C26A1435C00D20808 /* BottomSheet */; };
+		42D0198F26A144C000D20808 /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
+		42D0199026A144C000D20808 /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +171,7 @@
 		42D0198226A011CB00D20808 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		42D0198526A01D2C00D20808 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = SOURCE_ROOT; };
 		42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectUserCell.swift; sourceTree = SOURCE_ROOT; };
+		42D0198E26A144C000D20808 /* MainAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAsync.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D0197C269FE98100D20808 /* URLImage in Frameworks */,
+				42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */,
 				42D0197E269FE98100D20808 /* URLImageStore in Frameworks */,
 				42B22C5D2696BF2E00091D30 /* ActivityIndicatorView in Frameworks */,
 			);
@@ -225,7 +230,6 @@
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
-				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
 				424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */,
 				42B22C0F2696274200091D30 /* Shared */,
 				42B22C282696274300091D30 /* Tests iOS */,
@@ -311,6 +315,7 @@
 		42B22C642696C38900091D30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				42D0198E26A144C000D20808 /* MainAsync.swift */,
 				424FDD1B269A0AF6004051FD /* Rester.swift */,
 				42B22C652696C39B00091D30 /* Memory.swift */,
 				42B22C682696C50900091D30 /* Comment.swift */,
@@ -324,6 +329,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
 				42D0196E269D4E9100D20808 /* GlobalData.swift */,
 				42D0196B269D45DC00D20808 /* MainAppViewModel.swift */,
 				42B22C752696DFF400091D30 /* HomeViewModel.swift */,
@@ -353,6 +359,7 @@
 				42B22C5C2696BF2E00091D30 /* ActivityIndicatorView */,
 				42D0197B269FE98100D20808 /* URLImage */,
 				42D0197D269FE98100D20808 /* URLImageStore */,
+				42D0198C26A1435C00D20808 /* BottomSheet */,
 			);
 			productName = "MemoReminder (iOS)";
 			productReference = 42B22C1A2696274300091D30 /* MemoReminder.app */;
@@ -449,6 +456,7 @@
 			packageReferences = (
 				42B22C5B2696BF2E00091D30 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
 				42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */,
+				42D0198B26A1435C00D20808 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 			);
 			productRefGroup = 42B22C1B2696274300091D30 /* Products */;
 			projectDirPath = "";
@@ -524,6 +532,7 @@
 				42B22C562696B49F00091D30 /* ImageSlideshow.swift in Sources */,
 				424FDD042697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
 				42B22C662696C39B00091D30 /* Memory.swift in Sources */,
+				42D0198F26A144C000D20808 /* MainAsync.swift in Sources */,
 				42B22C6F2696C56800091D30 /* User.swift in Sources */,
 				42B22C372696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C692696C50900091D30 /* Comment.swift in Sources */,
@@ -573,6 +582,7 @@
 				42B22C572696B49F00091D30 /* ImageSlideshow.swift in Sources */,
 				424FDD052697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
 				42B22C672696C39B00091D30 /* Memory.swift in Sources */,
+				42D0199026A144C000D20808 /* MainAsync.swift in Sources */,
 				42B22C702696C56800091D30 /* User.swift in Sources */,
 				42B22C382696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C6A2696C50900091D30 /* Comment.swift in Sources */,
@@ -1034,6 +1044,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		42D0198B26A1435C00D20808 /* XCRemoteSwiftPackageReference "bottom-sheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weitieda/bottom-sheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1051,6 +1069,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */;
 			productName = URLImageStore;
+		};
+		42D0198C26A1435C00D20808 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42D0198B26A1435C00D20808 /* XCRemoteSwiftPackageReference "bottom-sheet" */;
+			productName = BottomSheet;
 		};
 /* End XCSwiftPackageProductDependency section */
 

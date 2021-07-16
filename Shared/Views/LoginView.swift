@@ -114,11 +114,13 @@ struct LoginView: View {
         async {
             loginStatus = await User.login(username: username, password: password, globalData: globalData)
             if loginStatus == .success {
-                withAnimation {
-                    mainAppViewModel.currentView = .mainTabView
+                main {
+                    withAnimation {
+                        mainAppViewModel.currentView = .mainTabView
+                    }
                 }
             } else {
-                showingAlert = true
+                main { showingAlert = true }
             }
         }
     }

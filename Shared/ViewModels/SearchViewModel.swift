@@ -24,22 +24,24 @@ class SearchViewModel: ObservableObject {
     func loadUsers(globalData: GlobalData) async throws {
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "memo-user/", body: "", method: .get)
-        let results = JSON(parseJSON: resultString)["results"]
-        friends = []
-        users = results.arrayValue.map { result -> User in
-            let user = User(id: "\(result["id"].stringValue)")
-            user.username = result["username"].stringValue
-            user.firstName = result["first_name"].stringValue
-            user.lastName = result["last_name"].stringValue
-            user.email = result["email"].stringValue
-            user.phoneNumber = result["phone_number"].stringValue
-            user.birthday = result["birthday_date"].stringValue
-            if user.username == globalData.username {
-                friends.append(user)
+        main {
+            let results = JSON(parseJSON: resultString)["results"]
+            self.friends = []
+            self.users = results.arrayValue.map { result -> User in
+                let user = User(id: "\(result["id"].stringValue)")
+                user.username = result["username"].stringValue
+                user.firstName = result["first_name"].stringValue
+                user.lastName = result["last_name"].stringValue
+                user.email = result["email"].stringValue
+                user.phoneNumber = result["phone_number"].stringValue
+                user.birthday = result["birthday_date"].stringValue
+                if user.username == globalData.username {
+                    self.friends.append(user)
+                }
+                return user
             }
-            return user
+            .filter { $0.username != globalData.username }
         }
-        .filter { $0.username != globalData.username }
     }
     
     func follow(user: User, globalData: GlobalData) async throws {

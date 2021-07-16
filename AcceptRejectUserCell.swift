@@ -45,9 +45,9 @@ struct AcceptRejectUserCell: View {
                     do {
                         try await profileViewModel.accept(user: user, globalData: globalData)
                         try await profileViewModel.loadFollowRequests(globalData: globalData)
-                        profileViewModel.shouldShowAcceptSuccessAlert = true
+                        main { profileViewModel.shouldShowAcceptSuccessAlert = true }
                     } catch {
-                        profileViewModel.shouldShowAcceptErrorAlert = true
+                        main { profileViewModel.shouldShowAcceptErrorAlert = true }
                     }
                 }
             }

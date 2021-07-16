@@ -81,15 +81,17 @@ class User: Identifiable, Codable {
         guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
         do {
             let result = try await Rester.rest(endPoint: "login/", body: bodyString, method: .post)
-            let json = JSON(parseJSON: result)
-            globalData.loggedIn = true
-            globalData.username = json["username"].stringValue
-            globalData.firstName = json["first_name"].stringValue
-            globalData.lastName = json["last_name"].stringValue
-            globalData.email = json["email"].stringValue
-            globalData.phoneNumber = json["phone_number"].stringValue
-            globalData.birthday = json["birthday_date"].stringValue
-            globalData.token = json["token"].stringValue
+            main {
+                let json = JSON(parseJSON: result)
+                globalData.loggedIn = true
+                globalData.username = json["username"].stringValue
+                globalData.firstName = json["first_name"].stringValue
+                globalData.lastName = json["last_name"].stringValue
+                globalData.email = json["email"].stringValue
+                globalData.phoneNumber = json["phone_number"].stringValue
+                globalData.birthday = json["birthday_date"].stringValue
+                globalData.token = json["token"].stringValue
+            }
             return .success
         } catch {
             return .failed

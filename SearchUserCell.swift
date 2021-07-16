@@ -54,9 +54,9 @@ struct SearchUserCell: View {
                     async {
                         do {
                             try await searchViewModel.follow(user: user, globalData: globalData)
-                            searchViewModel.shouldShowFollowedAlert = true
+                            main { searchViewModel.shouldShowFollowedAlert = true }
                         } catch {
-                            searchViewModel.followingErrorAlert = true
+                            main { searchViewModel.followingErrorAlert = true }
                         }
                     }
                 }

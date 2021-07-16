@@ -17,12 +17,14 @@ struct SearchView: View {
     
     fileprivate func reloadData() async {
         do {
-            showActivityIndicatorView = true
+            main { showActivityIndicatorView = true }
             try await viewModel.loadUsers(globalData: globalData)
-            showActivityIndicatorView = false
+            main { showActivityIndicatorView = false }
         } catch {
-            viewModel.showingLoadingUsersErrorAlert = true
-            showActivityIndicatorView = false
+            main {
+                viewModel.showingLoadingUsersErrorAlert = true
+                showActivityIndicatorView = false
+            }
         }
     }
     
@@ -49,7 +51,7 @@ struct SearchView: View {
                 await reloadData()
             }
             
-            ActivityIndicatorView(isVisible: .constant(true), type: .equalizer)
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
         }
