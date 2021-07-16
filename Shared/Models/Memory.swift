@@ -32,7 +32,7 @@ class Memory: Identifiable, Codable {
     var longitude = 0.0
     var numberOfLikes = 0
     var hasCurrentUserLiked = false
-    var commentIDs: [String] = []
+    var comments: [Comment] = []
     
     init(id: Int) {
         self.id = id
@@ -58,7 +58,7 @@ class Memory: Identifiable, Codable {
         memory.longitude = 20
         memory.numberOfLikes = 5
         memory.hasCurrentUserLiked = false
-        memory.commentIDs = []
+        memory.comments = [Comment.sample]
         return memory
     }
     
@@ -71,7 +71,20 @@ class Memory: Identifiable, Codable {
         memory.contents = result["text"].stringValue
         let likes = result["likes"].arrayValue
         memory.numberOfLikes = likes.count
-        memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"].intValue == currentUserID }
+        memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"]["id"].intValue == currentUserID }
+        // TODO: Date for everything (comments, memories, ...) in the system!
+        memory.comments = result["comments"].arrayValue.map { commentJSON in
+            let comment = Comment(id: commentJSON["id"].intValue)
+            let commentUser = commentJSON["memo_user"]
+            comment.senderUsername = commentUser["username"].stringValue
+            comment.senderFirstName = commentUser["first_name"].stringValue
+            comment.senderLastName = commentUser["last_name"].stringValue
+            comment.contents = commentJSON["text"].stringValue
+            let commentLikes = commentJSON["likes"].arrayValue
+            comment.numberOfLikes = commentLikes.count
+            comment.hasCurrentUserLiked = commentLikes.contains { like in like["memo_user"]["id"].intValue == currentUserID }
+            return comment
+        }
         return memory
     }
 }
