@@ -23,8 +23,8 @@ class HomeViewModel: ObservableObject {
     static var sample: HomeViewModel {
         let viewModel = HomeViewModel()
         viewModel.isSample = true
-        viewModel.topMemories = [Memory.sample]
-        viewModel.friendsMemories = [Memory.sample]
+        viewModel.topMemories = [Memory.sample, Memory.sample]
+        viewModel.friendsMemories = [Memory.sample, Memory.sample]
         return viewModel
     }
 }

@@ -20,12 +20,11 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("login-5").edgesIgnoringSafeArea(.all)
                 List {
                     AsyncSlideshow(imageURLs: slideshowURLs)
                         .frame(height: 120)
                         .listRowSeparator(.hidden)
-                        
+                    
                     Text("Explore top memories")
                         .font(.title2)
                         .fontWeight(.bold)
@@ -34,18 +33,26 @@ struct HomeView: View {
                     ForEach(viewModel.topMemories) { memory in
                         NavigationLink(destination: MemoryView(memory: memory)) {
                             MemoryCell(memory: memory)
+                                .listRowSeparator(.hidden)
                         }
                     }
+                    .listRowSeparator(.hidden)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
+                .listStyle(PlainListStyle())
                 
             }.navigationBarTitle("Home")
-            .toolbar {
-                Button(action: {
-                    // TODO: Add Memory page
-                }) {
-                    Image(systemName: "plus.square")
-                }
-            }
+                .navigationBarItems(trailing: HStack(spacing: 20) {
+                    NavigationLink(destination: SearchView()) {
+                        Image(systemName: "magnifyingglass")
+                    }
+                    Button(action: {
+                        // TODO: Add Memory page
+                    }) {
+                        Image(systemName: "plus.square")
+                    }
+                    
+                })
         }
     }
 }

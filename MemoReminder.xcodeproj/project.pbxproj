@@ -86,6 +86,16 @@
 		42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196B269D45DC00D20808 /* MainAppViewModel.swift */; };
 		42D0196F269D4E9100D20808 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196E269D4E9100D20808 /* GlobalData.swift */; };
 		42D01970269D4E9100D20808 /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196E269D4E9100D20808 /* GlobalData.swift */; };
+		42D01972269D547700D20808 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D01971269D547700D20808 /* TopView.swift */; };
+		42D01973269D547700D20808 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D01971269D547700D20808 /* TopView.swift */; };
+		42D0197C269FE98100D20808 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 42D0197B269FE98100D20808 /* URLImage */; };
+		42D0197E269FE98100D20808 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 42D0197D269FE98100D20808 /* URLImageStore */; };
+		42D0198026A0000E00D20808 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0197F26A0000E00D20808 /* SearchView.swift */; };
+		42D0198126A0000E00D20808 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0197F26A0000E00D20808 /* SearchView.swift */; };
+		42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* SearchViewModel.swift */; };
+		42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* SearchViewModel.swift */; };
+		42D0198626A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
+		42D0198726A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +161,10 @@
 		42B22C782696E6EE00091D30 /* MemoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
 		42D0196B269D45DC00D20808 /* MainAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewModel.swift; sourceTree = "<group>"; };
 		42D0196E269D4E9100D20808 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
+		42D01971269D547700D20808 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		42D0197F26A0000E00D20808 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		42D0198226A011CB00D20808 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		42D0198526A01D2C00D20808 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +172,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D0197C269FE98100D20808 /* URLImage in Frameworks */,
+				42D0197E269FE98100D20808 /* URLImageStore in Frameworks */,
 				42B22C5D2696BF2E00091D30 /* ActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +222,7 @@
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
+				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
 				424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */,
 				42B22C0F2696274200091D30 /* Shared */,
 				42B22C282696274300091D30 /* Tests iOS */,
@@ -260,11 +277,13 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42D01971269D547700D20808 /* TopView.swift */,
 				424FDCED26971A59004051FD /* MemoryView.swift */,
 				424FDD1826974473004051FD /* CommentsView.swift */,
 				42B22C5E2696C02400091D30 /* MainTabView.swift */,
 				424FDCF326971C3D004051FD /* ProfileView.swift */,
 				42B22C612696C05700091D30 /* HomeView.swift */,
+				42D0197F26A0000E00D20808 /* SearchView.swift */,
 				42B22C782696E6EE00091D30 /* MemoryCell.swift */,
 				42B22C4D2696A6F900091D30 /* LoginView.swift */,
 				42B22C502696A83E00091D30 /* SignUpView.swift */,
@@ -276,6 +295,7 @@
 		42B22C542696B49000091D30 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				42D0198526A01D2C00D20808 /* SearchUserCell.swift */,
 				424FDCF92697410F004051FD /* FancyScrollView */,
 				424FDCF626972FC5004051FD /* StickyHeader.swift */,
 				42B22C552696B49F00091D30 /* ImageSlideshow.swift */,
@@ -327,6 +347,8 @@
 			name = "MemoReminder (iOS)";
 			packageProductDependencies = (
 				42B22C5C2696BF2E00091D30 /* ActivityIndicatorView */,
+				42D0197B269FE98100D20808 /* URLImage */,
+				42D0197D269FE98100D20808 /* URLImageStore */,
 			);
 			productName = "MemoReminder (iOS)";
 			productReference = 42B22C1A2696274300091D30 /* MemoReminder.app */;
@@ -422,6 +444,7 @@
 			mainGroup = 42B22C0A2696274100091D30;
 			packageReferences = (
 				42B22C5B2696BF2E00091D30 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */,
+				42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */,
 			);
 			productRefGroup = 42B22C1B2696274300091D30 /* Products */;
 			projectDirPath = "";
@@ -485,10 +508,12 @@
 				424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C5F2696C02400091D30 /* MainTabView.swift in Sources */,
 				424FDD082697410F004051FD /* BlurView.swift in Sources */,
+				42D01972269D547700D20808 /* TopView.swift in Sources */,
 				424FDD0A2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
 				424FDCEE26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0C2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
+				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C562696B49F00091D30 /* ImageSlideshow.swift in Sources */,
@@ -503,9 +528,11 @@
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C512696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C392696274300091D30 /* ContentView.swift in Sources */,
+				42D0198626A01D2C00D20808 /* SearchUserCell.swift in Sources */,
 				42D0196F269D4E9100D20808 /* GlobalData.swift in Sources */,
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
+				42D0198026A0000E00D20808 /* SearchView.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -529,10 +556,12 @@
 				424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C602696C02400091D30 /* MainTabView.swift in Sources */,
 				424FDD092697410F004051FD /* BlurView.swift in Sources */,
+				42D01973269D547700D20808 /* TopView.swift in Sources */,
 				424FDD0B2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
 				424FDCEF26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0D2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
+				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C572696B49F00091D30 /* ImageSlideshow.swift in Sources */,
@@ -547,9 +576,11 @@
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C522696A83E00091D30 /* SignUpView.swift in Sources */,
 				42B22C3A2696274300091D30 /* ContentView.swift in Sources */,
+				42D0198726A01D2C00D20808 /* SearchUserCell.swift in Sources */,
 				42D01970269D4E9100D20808 /* GlobalData.swift in Sources */,
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
+				42D0198126A0000E00D20808 /* SearchView.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -989,6 +1020,14 @@
 				minimumVersion = 0.0.7;
 			};
 		};
+		42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmytro-anokhin/url-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -996,6 +1035,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42B22C5B2696BF2E00091D30 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
 			productName = ActivityIndicatorView;
+		};
+		42D0197B269FE98100D20808 /* URLImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImage;
+		};
+		42D0197D269FE98100D20808 /* URLImageStore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */;
+			productName = URLImageStore;
 		};
 /* End XCSwiftPackageProductDependency section */
 

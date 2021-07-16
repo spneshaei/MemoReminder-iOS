@@ -16,8 +16,8 @@ extension View {
 @main
 struct MemoReminderApp: App {
     let persistenceController = PersistenceController.shared
-    @StateObject var viewModel = MainAppViewModel()
     @StateObject var globalData = GlobalData()
+    @StateObject var viewModel = MainAppViewModel()
     
     init() {
         Rester.server = "http://memoreminder.ir/api/v1"
@@ -25,21 +25,12 @@ struct MemoReminderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            switch viewModel.currentView {
-            case .login:
-                LoginView(viewModel: viewModel)
-                    .environmentObject(globalData)
-                    .erasedToAnyView()
-            case .signUp:
-                SignUpView(viewModel: viewModel)
-                    .environmentObject(globalData)
-                    .erasedToAnyView()
-            case .mainTabView:
-                MainTabView()
-                    .environmentObject(globalData)
-                    .environment(\.managedObjectContext, persistenceController.container.viewContext)
-                    .erasedToAnyView()
-            }
+            TopView(viewModel: viewModel)
+                .environmentObject(globalData)
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .onAppear {
+                    viewModel.currentView = globalData.loggedIn ? .mainTabView : .login
+                }
         }
     }
 }

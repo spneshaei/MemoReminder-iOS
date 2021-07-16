@@ -13,8 +13,21 @@ struct LoginView: View {
     // MARK: - PROPERTIES
     @State var username = "";
     @State var password = "";
+    @State var showingAlert = false
+    @State var loginStatus: User.AuthenticationStatus = .failed
     
-    @ObservedObject var viewModel: MainAppViewModel
+    var alertTextMessage: String { // TODO: better messages!
+        switch loginStatus {
+        case .failed:
+            return "Login failed. Please try again."
+        case .invalidData:
+            return "Invalid data provided. Please try again."
+        default:
+            return ""
+        }
+    }
+    
+    @ObservedObject var mainAppViewModel: MainAppViewModel
     
     var body: some View {
         ZStack{
@@ -60,6 +73,9 @@ struct LoginView: View {
                                     .cornerRadius(10)
                             }
                             .padding(.top,30)
+                            .alert(alertTextMessage, isPresented: $showingAlert) {
+                                Button("OK", role: .cancel) { }
+                            }
                             
                         }
                         .padding(.horizontal,30)
@@ -96,20 +112,27 @@ struct LoginView: View {
     
     func login() {
         async {
-            let loginStatus = await User.login(username: username, password: password, globalData: globalData)
+            loginStatus = await User.login(username: username, password: password, globalData: globalData)
+            if loginStatus == .success {
+                withAnimation {
+                    mainAppViewModel.currentView = .mainTabView
+                }
+            } else {
+                showingAlert = true
+            }
         }
     }
     
     func goToSignUp() {
         withAnimation {
-            viewModel.currentView = .signUp
+            mainAppViewModel.currentView = .signUp
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(viewModel: MainAppViewModel.sample)
+        LoginView(mainAppViewModel: MainAppViewModel.sample)
             
     }
 }

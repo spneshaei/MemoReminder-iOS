@@ -24,7 +24,7 @@ struct SignUpView: View {
     @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
     
-    @ObservedObject var viewModel: MainAppViewModel
+    @ObservedObject var mainAppViewModel: MainAppViewModel
     
     var alertTextMessage: String { // TODO: better messages!
         switch signUpStatus {
@@ -84,7 +84,13 @@ struct SignUpView: View {
                             }
                             .padding(.top,30)
                             .alert(alertTextMessage, isPresented: $showingAlert) {
-                                Button("OK", role: .cancel) { }
+                                Button("OK", role: .cancel) {
+                                    if signUpStatus == .success {
+                                        withAnimation {
+                                            mainAppViewModel.currentView = .login
+                                        }
+                                    }
+                                }
                             }
                         }
                         .padding(.horizontal,30)
@@ -131,13 +137,13 @@ struct SignUpView: View {
     
     func backToLogin() {
         withAnimation {
-            viewModel.currentView = .login
+            mainAppViewModel.currentView = .login
         }
     }
 }
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(viewModel: .sample)
+        SignUpView(mainAppViewModel: .sample)
     }
 }

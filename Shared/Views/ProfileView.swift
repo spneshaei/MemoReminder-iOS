@@ -43,6 +43,11 @@ struct ProfileView: View {
                     }
                 } else {
                     ThreeStatsView(user: viewModel.user)
+                    Text("Follow Requests").font(.title).bold()
+                        .listRowSeparator(.hidden)
+                    ForEach(viewModel.myMemories) { memory in
+                        MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                    }
                     Text("My created memories").font(.title).bold()
                         .listRowSeparator(.hidden)
                     ForEach(viewModel.myMemories) { memory in
