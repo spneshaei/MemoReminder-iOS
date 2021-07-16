@@ -6,69 +6,106 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
+    @EnvironmentObject var globalData: GlobalData
     @State var editMode = false
     @State var birthDate = Date() // TODO: This should be linked to the real birthday
+    @State var showActivityIndicatorView = false
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         UITextView.appearance().backgroundColor = .clear
     }
     
+    fileprivate func reloadData() async {
+        do {
+            showActivityIndicatorView = true
+            try await viewModel.loadUser()
+            try await viewModel.loadFollowRequests(globalData: globalData)
+            try await viewModel.loadMyMemories()
+            showActivityIndicatorView = false
+        } catch {
+            viewModel.shouldShowLoadingDataErrorAlert = true
+            showActivityIndicatorView = false
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            List {
-                ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $viewModel.user.firstName, editMode: editMode)
-                    .listRowSeparator(editMode ? .visible : .hidden)
-                if editMode {
-                    VStack(alignment: .leading) {
-                        Text("USERNAME")
-                        TextField(viewModel.user.username, text: $viewModel.user.username)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+            ZStack {
+                List {
+                    ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $viewModel.user.firstName, editMode: editMode)
+                        .listRowSeparator(editMode ? .visible : .hidden)
+                    if editMode {
+                        VStack(alignment: .leading) {
+                            Text("USERNAME")
+                            TextField(viewModel.user.username, text: $viewModel.user.username)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        VStack(alignment: .leading) {
+                            Text("EMAIL")
+                            TextField(viewModel.user.email, text: $viewModel.user.email)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        VStack(alignment: .leading) {
+                            Text("PHONE NUMBER")
+                            TextField(viewModel.user.phoneNumber, text: $viewModel.user.phoneNumber)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                        }
+                        DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                            Text("Birthday")
+                        }
+                    } else {
+                        ThreeStatsView(user: viewModel.user)
+                        Text("Follow requests").font(.title).bold()
+                            .listRowSeparator(.hidden)
+                        ForEach(viewModel.followRequests) { user in
+                            AcceptRejectUserCell(user: user, profileViewModel: viewModel)
+                        }
+                        Text("My created memories").font(.title).bold()
+                            .listRowSeparator(.hidden)
+                        ForEach(viewModel.myMemories) { memory in
+                            MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                        }
                     }
-                    VStack(alignment: .leading) {
-                        Text("EMAIL")
-                        TextField(viewModel.user.email, text: $viewModel.user.email)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                    }
-                    VStack(alignment: .leading) {
-                        Text("PHONE NUMBER")
-                        TextField(viewModel.user.phoneNumber, text: $viewModel.user.phoneNumber)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                    }
-                    DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
-                        Text("Birthday")
-                    }
-                } else {
-                    ThreeStatsView(user: viewModel.user)
-                    Text("Follow Requests").font(.title).bold()
-                        .listRowSeparator(.hidden)
-                    ForEach(viewModel.myMemories) { memory in
-                        MemoryCell(memory: memory, shouldShowProfilePicture: false)
-                    }
-                    Text("My created memories").font(.title).bold()
-                        .listRowSeparator(.hidden)
-                    ForEach(viewModel.myMemories) { memory in
-                        MemoryCell(memory: memory, shouldShowProfilePicture: false)
-                    }
+                    
                 }
+                .alert("Accept was successful", isPresented: $viewModel.shouldShowAcceptSuccessAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .alert("Accept failed. Please try again", isPresented: $viewModel.shouldShowAcceptErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .alert("Loading data failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .task {
+                    await reloadData()
+                }
+                .refreshable {
+                    await reloadData()
+                }
+                .navigationBarTitle("My Profile")
+                .navigationBarItems(trailing: Button(action: {
+                    withAnimation {
+                        editMode.toggle()
+                    }
+                }) {
+                    if editMode {
+                        Text("Done")
+                            .fontWeight(.bold)
+                    } else {
+                        Image(systemName: "square.and.pencil")
+                    }
+                })
                 
+                ActivityIndicatorView(isVisible: .constant(true), type: .equalizer)
+                    .frame(width: 100.0, height: 100.0)
+                    .foregroundColor(.orange)
             }
-            .navigationBarTitle("My Profile")
-            .navigationBarItems(trailing: Button(action: {
-                withAnimation {
-                    editMode.toggle()
-                }
-            }) {
-                if editMode {
-                    Text("Done")
-                        .fontWeight(.bold)
-                } else {
-                    Image(systemName: "square.and.pencil")
-                }
-            })
         }
     }
 }

@@ -19,7 +19,7 @@ class Rester {
     }
     
     enum RestMethod: String {
-        case get = "GET", post = "POST", put = "PUT", delete = "DELETE"
+        case get = "GET", post = "POST", put = "PUT", delete = "DELETE", patch = "PATCH"
     }
     
     fileprivate static func rest(endPoint: String, token: String, body: String = "", method: RestMethod = .get) async throws -> String {

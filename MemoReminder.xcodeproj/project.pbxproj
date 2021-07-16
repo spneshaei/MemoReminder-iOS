@@ -96,6 +96,8 @@
 		42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* SearchViewModel.swift */; };
 		42D0198626A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
 		42D0198726A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
+		42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */; };
+		42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +167,7 @@
 		42D0197F26A0000E00D20808 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		42D0198226A011CB00D20808 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		42D0198526A01D2C00D20808 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = SOURCE_ROOT; };
+		42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectUserCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +280,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */,
 				42D01971269D547700D20808 /* TopView.swift */,
 				424FDCED26971A59004051FD /* MemoryView.swift */,
 				424FDD1826974473004051FD /* CommentsView.swift */,
@@ -513,6 +517,7 @@
 				424FDCEE26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0C2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
+				42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */,
@@ -561,6 +566,7 @@
 				424FDCEF26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0D2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
+				42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */,

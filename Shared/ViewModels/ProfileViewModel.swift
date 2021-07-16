@@ -12,18 +12,48 @@ class ProfileViewModel: ObservableObject {
     @Published var myMemories: [Memory] = []
     @Published var user = User()
     @Published var followRequests: [User] = []
+    @Published var shouldShowAcceptSuccessAlert = false
+    @Published var shouldShowAcceptErrorAlert = false
+    @Published var shouldShowLoadingDataErrorAlert = false
     
     func loadMyMemories() async {
-        guard !isSample else { return }
+        guard !isSample else { return } // TODO: Fill!
     }
     
     func loadUser() async {
-        guard !isSample else { return }
+        guard !isSample else { return } // TODO: Fill!
     }
     
-    func loadFollowRequests() async {
+    func loadFollowRequests(globalData: GlobalData) async throws {
         guard !isSample else { return }
+        // TODO: Next line to prevent wrongities
+        guard false else { return }
+        let resultString = try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: "", method: .get)
+        let results = JSON(parseJSON: resultString)["results"]
+        followRequests = results.arrayValue.map { result -> User in
+            let user = User(id: "\(result["id"].stringValue)")
+            user.username = result["username"].stringValue
+            user.firstName = result["first_name"].stringValue
+            user.lastName = result["last_name"].stringValue
+            user.email = result["email"].stringValue
+            user.phoneNumber = result["phone_number"].stringValue
+            user.birthday = result["birthday_date"].stringValue
+            // TODO: This doesn't work! Merge has not been done in the backend API
+            return user
+        }
+        .filter { $0.username != globalData.username }
     }
+    
+    func accept(user: User, globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let body: JSON = [
+            "status": "accepted"
+        ]
+        guard let bodyString = body.rawString() else { return }
+        try await Rester.rest(endPoint: "friend-request/\(Int(user.id) ?? -1)/?token=\(globalData.token)", body: bodyString, method: .patch)
+    }
+    
+    // TODO: We don't have reject friend request!
     
     static var sample: ProfileViewModel {
         let viewModel = ProfileViewModel()
