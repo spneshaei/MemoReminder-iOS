@@ -38,7 +38,6 @@ class Memory: Identifiable, Codable {
         self.id = id
     }
     
-    // TODO: Adjust this fields!
     static var sample: Memory {
         let memory = Memory(id: 1)
         memory.title = "A great memory"
@@ -72,7 +71,6 @@ class Memory: Identifiable, Codable {
         let likes = result["likes"].arrayValue
         memory.numberOfLikes = likes.count
         memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"]["id"].intValue == currentUserID }
-        // TODO: Date for everything (comments, memories, ...) in the system!
         memory.comments = result["comments"].arrayValue.map { commentJSON in
             let comment = Comment(id: commentJSON["id"].intValue)
             let commentUser = commentJSON["memo_user"]

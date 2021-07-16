@@ -36,6 +36,7 @@ struct HomeView: View {
                 main {
                     showActivityIndicatorView = false
                     showingAddMemorySuccessAlert = true
+                    shouldPresentMemorySheet = false
                     memoryTitle = ""
                     memoryContents = "Enter memory details"
                 }

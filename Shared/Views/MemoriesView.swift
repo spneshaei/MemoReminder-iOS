@@ -13,8 +13,6 @@ struct MemoriesView: View {
     @ObservedObject var viewModel: MemoriesViewModel
     @State var showActivityIndicatorView = false
     @State var showingLoadingMemoriesErrorAlert = false
-    @State var shouldPresentMemorySheet = false
-    @State var memoryToShowInMemorySheet = Memory.sample
     
     fileprivate func reloadData() async {
         do {
@@ -33,29 +31,27 @@ struct MemoriesView: View {
         NavigationView {
             ZStack {
                 List(viewModel.memories) { memory in
-                    MemoryCell(memory: memory)
-                        .listRowSeparator(.hidden)
-                        .onTapGesture {
-                            memoryToShowInMemorySheet = memory
-                            shouldPresentMemorySheet = true
-                        }
+                    NavigationLink(destination: MemoryView(memory: memory)) {
+                        MemoryCell(memory: memory)
+                            .listRowSeparator(.hidden)
+                    }
                 }
-                .listStyle(PlainListStyle())
-                .searchable(text: $viewModel.searchPredicate)
-                .task { await reloadData() }
-                .refreshable { await reloadData() }
-                .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-                .sheet(isPresented: $shouldPresentMemorySheet) {
-                    MemoryView(memory: memoryToShowInMemorySheet)
-                }
-                
-                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
-                    .frame(width: 100.0, height: 100.0)
-                    .foregroundColor(.orange)
-            }.navigationBarTitle("Memories")
-        }
+            }
+            .listStyle(PlainListStyle())
+            .searchable(text: $viewModel.searchPredicate)
+            .task { await reloadData() }
+            .refreshable { await reloadData() }
+            .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            //                .sheet(isPresented: $shouldPresentMemorySheet) {
+            //                    MemoryView(memory: memoryToShowInMemorySheet)
+            //                }
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
+        }.navigationBarTitle("Memories")
     }
 }
 

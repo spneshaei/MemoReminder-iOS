@@ -17,7 +17,6 @@ class ProfileViewModel: ObservableObject {
     @Published var shouldShowLoadingDataErrorAlert = false
     
     func loadMyMemories(globalData: GlobalData) async throws {
-        // TODO: All the extra details from memories!!
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
         main {

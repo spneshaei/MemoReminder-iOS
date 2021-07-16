@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ActivityIndicatorView
+import MapKit
 
 // TODO: Only owner should be able to delete memories
 
@@ -36,64 +37,81 @@ struct MemoryView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                List {
-                    if !memory.imageLink.isEmpty {
-                        AsyncImage(url: URL(string: memory.imageLink)!)
-                            .frame(maxHeight: 200)
-                            .listRowSeparator(.hidden)
-                            .onTapGesture(count: 2) {
-                                async { await likeMemory() }
-                            }
-                    }
-                    VStack(alignment: .leading, spacing: 5) {
-                        Text("Description").font(.caption)
-                        Text(memory.contents)
-                    }
-                    Text("\(memory.numberOfLikes) likes and \(memory.comments.count) comments")
+        ZStack {
+            List {
+                if !memory.imageLink.isEmpty {
+                    AsyncImage(url: URL(string: memory.imageLink)!)
+                        .frame(maxHeight: 200)
                         .listRowSeparator(.hidden)
-                    NavigationLink(destination: CommentsView(memory: memory)) {
-                        Text("Show comments")
-                    }
-                    // TODO: Not lat/lon! Real loc!
-                    LocationRow(memory: memory)
-                    
-                    
-                }
-                .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-                .navigationBarTitle(Text(memory.title))
-                    .navigationBarItems(trailing: HStack(spacing: 15) {
-                        Button(action: {
-                            // TODO: delete memory (and show only when needed!)
-                        }) {
-                            Image(systemName: "trash")
-                                .foregroundColor(.red)
-                        }
-                        Button(action: {
-                            withAnimation {
-                                // TODO: edit memory (and show only when needed!)
-                            }
-                        }) {
-                            Image(systemName: "square.and.pencil")
-                        }
-                        Button(action: {
-                            // TODO: We don't have unlike!!
+                        .onTapGesture(count: 2) {
                             async { await likeMemory() }
-                        }) {
-                            Image(systemName: memory.hasCurrentUserLiked ? "heart.fill" : "heart")
                         }
-                    })
+                }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Description").font(.caption)
+                    Text(memory.contents)
+                }
+                Text("\(memory.numberOfLikes) likes and \(memory.comments.count) comments")
+                    .listRowSeparator(.hidden)
+                NavigationLink(destination: CommentsView(memory: memory)) {
+                    Text("Show comments")
+                }
+                // TODO: Not lat/lon! Real loc!
+                LocationRow(memory: memory)
+                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
+                    Text("Show on the map")
+                    // TODO: Map doesn't work???
+                }
                 
-                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
-                    .frame(width: 100.0, height: 100.0)
-                    .foregroundColor(.orange)
+                
             }
+            .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            .navigationBarTitle(Text(memory.title))
+            .navigationBarItems(trailing: HStack(spacing: 15) {
+                Button(action: {
+                    // TODO: delete memory (and show only when needed!)
+                }) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                }
+                Button(action: {
+                    withAnimation {
+                        // TODO: edit memory (and show only when needed!)
+                    }
+                }) {
+                    Image(systemName: "square.and.pencil")
+                }
+                Button(action: {
+                    // TODO: We don't have unlike!!
+                    async { await likeMemory() }
+                }) {
+                    Image(systemName: memory.hasCurrentUserLiked ? "heart.fill" : "heart")
+                }
+            })
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }
     }
 }
+
+struct MemoryMapView: View {
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    
+    init(latitude: Double, longitude: Double) {
+        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+    }
+    
+    var body: some View {
+        Map(coordinateRegion: $region)
+            .edgesIgnoringSafeArea(.all)
+    }
+}
+
+// TODO: Date for everything (comments, memories, ...) in the system!
 
 struct LocationRow: View {
     var memory: Memory

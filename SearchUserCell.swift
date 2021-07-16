@@ -71,6 +71,7 @@ struct SearchUserCell: View {
         .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
+        .listRowSeparator(.hidden)
     }
 }
 

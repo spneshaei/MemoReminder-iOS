@@ -118,6 +118,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel.sample)
+            .environmentObject(GlobalData.sample)
     }
 }
 

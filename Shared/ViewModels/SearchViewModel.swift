@@ -17,8 +17,8 @@ class SearchViewModel: ObservableObject {
     @Published var followingErrorAlert = false
     
     var filteredUsers: [User] {
-        searchPredicate.isEmpty ? users : users.filter { $0.username.contains(searchPredicate)
-            || $0.firstName.contains(searchPredicate) || $0.lastName.contains(searchPredicate) }
+        searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
+            || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
     }
     
     func loadUsers(globalData: GlobalData) async throws {
