@@ -18,6 +18,7 @@ class MemoriesViewModel: ObservableObject {
     }
     
     func loadMemories(globalData: GlobalData) async throws {
+        // TODO: All the extra details from memories!!
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
         main {

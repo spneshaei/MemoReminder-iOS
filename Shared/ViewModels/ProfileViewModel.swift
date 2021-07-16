@@ -17,6 +17,7 @@ class ProfileViewModel: ObservableObject {
     @Published var shouldShowLoadingDataErrorAlert = false
     
     func loadMyMemories(globalData: GlobalData) async throws {
+        // TODO: All the extra details from memories!!
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
         main {
@@ -31,8 +32,22 @@ class ProfileViewModel: ObservableObject {
         }
     }
     
-    func loadUser() async {
-        guard !isSample else { return } // TODO: Fill!
+    func loadUser(globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let resultString = try await Rester.rest(endPoint: "memo-user/?username=\(globalData.username)", body: "", method: .get)
+        main {
+            let results = JSON(parseJSON: resultString)["results"]
+            self.user = results.arrayValue.map { result -> User in
+                let user = User(id: "\(result["id"].stringValue)")
+                user.username = result["username"].stringValue
+                user.firstName = result["first_name"].stringValue
+                user.lastName = result["last_name"].stringValue
+                user.email = result["email"].stringValue
+                user.phoneNumber = result["phone_number"].stringValue
+                user.birthday = result["birthday_date"].stringValue
+                return user
+            }.first ?? User()
+        }
     }
     
     func loadFollowRequests(globalData: GlobalData) async throws {
