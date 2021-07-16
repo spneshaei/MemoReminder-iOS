@@ -23,7 +23,7 @@ struct ProfileView: View {
     fileprivate func reloadData() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.loadUser()
+            try await viewModel.loadUser(globalData: globalData)
             try await viewModel.loadFollowRequests(globalData: globalData)
             try await viewModel.loadMyMemories(globalData: globalData)
             main { showActivityIndicatorView = false }
@@ -36,6 +36,9 @@ struct ProfileView: View {
     }
     
     var body: some View {
+        // TODO: The real big numbers in this page are not shown :(
+        // TODO: Tags and uploading files to memories
+        // TODO: Likes and comments
         NavigationView {
             ZStack {
                 List {

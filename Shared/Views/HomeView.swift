@@ -19,6 +19,8 @@ struct HomeView: View {
     @State var showActivityIndicatorView = false
     @State var showingAddMemoryErrorAlert = false
     @State var showingAddMemorySuccessAlert = false
+    @State var shouldPresentMemorySheet = false
+    @State var memoryToShowInMemorySheet = Memory.sample
     
     var slideshowURLs: [String] {
         viewModel.friendsMemories
@@ -58,15 +60,20 @@ struct HomeView: View {
                         .listRowSeparator(.hidden)
                     
                     ForEach(viewModel.topMemories) { memory in
-                        NavigationLink(destination: MemoryView(memory: memory)) {
-                            MemoryCell(memory: memory)
-                                .listRowSeparator(.hidden)
-                        }
+                        MemoryCell(memory: memory)
+                            .listRowSeparator(.hidden)
+                            .onTapGesture {
+                                memoryToShowInMemorySheet = memory
+                                shouldPresentMemorySheet = true
+                            }
                     }
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 .listStyle(PlainListStyle())
+                .sheet(isPresented: $shouldPresentMemorySheet) {
+                    MemoryView(memory: memoryToShowInMemorySheet)
+                }
                 
             }
             .navigationBarTitle("Home")
@@ -125,5 +132,6 @@ struct AddMemoryButton: ButtonStyle {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel.sample)
+            .environmentObject(GlobalData.sample)
     }
 }

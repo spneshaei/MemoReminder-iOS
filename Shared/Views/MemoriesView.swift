@@ -13,6 +13,8 @@ struct MemoriesView: View {
     @ObservedObject var viewModel: MemoriesViewModel
     @State var showActivityIndicatorView = false
     @State var showingLoadingMemoriesErrorAlert = false
+    @State var shouldPresentMemorySheet = false
+    @State var memoryToShowInMemorySheet = Memory.sample
     
     fileprivate func reloadData() async {
         do {
@@ -31,9 +33,12 @@ struct MemoriesView: View {
         NavigationView {
             ZStack {
                 List(viewModel.memories) { memory in
-                    NavigationLink(destination: MemoryView(memory: memory)) {
-                        MemoryCell(memory: memory)
-                    }
+                    MemoryCell(memory: memory)
+                        .listRowSeparator(.hidden)
+                        .onTapGesture {
+                            memoryToShowInMemorySheet = memory
+                            shouldPresentMemorySheet = true
+                        }
                 }
                 .listStyle(PlainListStyle())
                 .searchable(text: $viewModel.searchPredicate)
@@ -42,17 +47,21 @@ struct MemoriesView: View {
                 .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
+                .sheet(isPresented: $shouldPresentMemorySheet) {
+                    MemoryView(memory: memoryToShowInMemorySheet)
+                }
                 
                 ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                     .frame(width: 100.0, height: 100.0)
                     .foregroundColor(.orange)
-            }
-        }.navigationBarTitle("Memories")
+            }.navigationBarTitle("Memories")
+        }
     }
 }
 
 struct MemoriesView_Previews: PreviewProvider {
     static var previews: some View {
         MemoriesView(viewModel: MemoriesViewModel.sample)
+            .environmentObject(GlobalData.sample)
     }
 }
