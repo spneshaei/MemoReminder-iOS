@@ -29,5 +29,6 @@ class Comment: Identifiable, Codable {
         comment.contents = "What a great memory!"
         comment.numberOfLikes = 2
         comment.hasCurrentUserLiked = false
+        return comment
     }
 }

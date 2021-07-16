@@ -8,10 +8,24 @@
 import SwiftUI
 
 struct CommentsView: View {
-    var memory: Memory
+    @State var memory: Memory
     
     var body: some View {
-        Text(memory.title)
+        List(memory.comments) { comment in
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("\(comment.senderFirstName) wrote:")
+                        .bold()
+                    Text(comment.contents)
+                }
+                Spacer()
+                Label("\(comment.numberOfLikes)", systemImage: comment.hasCurrentUserLiked ? "heart.fill" : "heart")
+                    .onTapGesture {
+                        print("")
+                    }
+                    
+            }
+        }.navigationBarTitle(Text("Comments"))
     }
 }
 

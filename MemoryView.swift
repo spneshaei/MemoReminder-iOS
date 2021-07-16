@@ -51,7 +51,7 @@ struct MemoryView: View {
                         Text("Description").font(.caption)
                         Text(memory.contents)
                     }
-                    Text("\(memory.numberOfLikes) likes and \(memory.commentIDs.count) comments")
+                    Text("\(memory.numberOfLikes) likes and \(memory.comments.count) comments")
                         .listRowSeparator(.hidden)
                     NavigationLink(destination: CommentsView(memory: memory)) {
                         Text("Show comments")
