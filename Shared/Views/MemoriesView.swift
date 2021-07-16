@@ -6,25 +6,48 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct MemoriesView: View {
+    @EnvironmentObject var globalData: GlobalData
     @ObservedObject var viewModel: MemoriesViewModel
+    @State var showActivityIndicatorView = false
+    @State var showingLoadingMemoriesErrorAlert = false
+    
+    fileprivate func reloadData() async {
+        do {
+            main { showActivityIndicatorView = true }
+            try await viewModel.loadMemories(globalData: globalData)
+            main { showActivityIndicatorView = false }
+        } catch {
+            main {
+                showingLoadingMemoriesErrorAlert = true
+                showActivityIndicatorView = false
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
-            List(viewModel.memories) { memory in
-                NavigationLink(destination: MemoryView(memory: memory)) {
-                    MemoryCell(memory: memory)
+            ZStack {
+                List(viewModel.memories) { memory in
+                    NavigationLink(destination: MemoryView(memory: memory)) {
+                        MemoryCell(memory: memory)
+                    }
                 }
+                .listStyle(PlainListStyle())
+                .searchable(text: $viewModel.searchPredicate)
+                .task { await reloadData() }
+                .refreshable { await reloadData() }
+                .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                
+                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                    .frame(width: 100.0, height: 100.0)
+                    .foregroundColor(.orange)
             }
-        }.navigationBarTitle("My Memories")
-        .toolbar {
-            Button(action: {
-                // TODO: Add Memory page
-            }) {
-                Image(systemName: "plus.square")
-            }
-        }
+        }.navigationBarTitle("Memories")
     }
 }
 
