@@ -16,8 +16,19 @@ class ProfileViewModel: ObservableObject {
     @Published var shouldShowAcceptErrorAlert = false
     @Published var shouldShowLoadingDataErrorAlert = false
     
-    func loadMyMemories() async {
-        guard !isSample else { return } // TODO: Fill!
+    func loadMyMemories(globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
+        main {
+            let results = JSON(parseJSON: resultString)["results"]
+            self.myMemories = results.arrayValue.map { result -> Memory in
+                let memory = Memory(id: "\(result["id"].stringValue)")
+                memory.creatorUsername = "" // TODO: This should be done after API merge
+                memory.title = result["title"].stringValue
+                memory.contents = result["text"].stringValue
+                return memory
+            }.filter { $0.creatorUsername == globalData.username }
+        }
     }
     
     func loadUser() async {

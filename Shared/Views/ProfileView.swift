@@ -25,7 +25,7 @@ struct ProfileView: View {
             main { showActivityIndicatorView = true }
             try await viewModel.loadUser()
             try await viewModel.loadFollowRequests(globalData: globalData)
-            try await viewModel.loadMyMemories()
+            try await viewModel.loadMyMemories(globalData: globalData)
             main { showActivityIndicatorView = false }
         } catch {
             main {
