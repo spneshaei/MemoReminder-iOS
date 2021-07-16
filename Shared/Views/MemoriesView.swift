@@ -31,27 +31,28 @@ struct MemoriesView: View {
         NavigationView {
             ZStack {
                 List(viewModel.memories) { memory in
-                    NavigationLink(destination: MemoryView(memory: memory)) {
+                    NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
                         MemoryCell(memory: memory)
                             .listRowSeparator(.hidden)
                     }
                 }
+                .listStyle(PlainListStyle())
+                .searchable(text: $viewModel.searchPredicate)
+                .task { await reloadData() }
+                .refreshable { await reloadData() }
+                .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .navigationBarTitle("Memories")
+                //                .sheet(isPresented: $shouldPresentMemorySheet) {
+                //                    MemoryView(memory: memoryToShowInMemorySheet)
+                //                }
+                
+                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                    .frame(width: 100.0, height: 100.0)
+                    .foregroundColor(.orange)
             }
-            .listStyle(PlainListStyle())
-            .searchable(text: $viewModel.searchPredicate)
-            .task { await reloadData() }
-            .refreshable { await reloadData() }
-            .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            //                .sheet(isPresented: $shouldPresentMemorySheet) {
-            //                    MemoryView(memory: memoryToShowInMemorySheet)
-            //                }
-            
-            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
-                .frame(width: 100.0, height: 100.0)
-                .foregroundColor(.orange)
-        }.navigationBarTitle("Memories")
+        }
     }
 }
 

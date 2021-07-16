@@ -18,24 +18,6 @@ struct CommentsView: View {
     @State var showingLikeErrorAlert = false
     @State var commentText = ""
     
-    // TODO: Unlike a comment?
-    func likeComment(comment: Comment) async {
-        do {
-            main { showActivityIndicatorView = true }
-            try await viewModel.likeComment(comment: comment, globalData: globalData)
-            main {
-                comment.numberOfLikes += 1
-                comment.hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
-                showActivityIndicatorView = false
-            }
-        } catch {
-            main {
-                showingLikeErrorAlert = true
-                showActivityIndicatorView = false
-            }
-        }
-    }
-    
     fileprivate func addCommentToMemoryComments(id: Int) {
         let comment = Comment(id: id)
         // TODO: Check for further exploration of comment features
@@ -71,20 +53,7 @@ struct CommentsView: View {
         ZStack {
             VStack {
                 List(memory.comments) { comment in
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text("\(comment.senderFirstName) wrote:")
-                                .bold()
-                            Text(comment.contents)
-                        }
-                        Spacer()
-                        Label("\(comment.numberOfLikes)", systemImage: comment.hasCurrentUserLiked ? "heart.fill" : "heart")
-                            .onTapGesture {
-                                print("")
-                            }
-                            .padding()
-                        
-                    }
+                    CommentCell(comment: comment, showActivityIndicatorView: $showActivityIndicatorView, viewModel: viewModel, showingLikeErrorAlert: $showingLikeErrorAlert)
                 }
                 .alert("Error in liking the comment. Please try again", isPresented: $showingLikeErrorAlert) {
                     Button("OK", role: .cancel) { }

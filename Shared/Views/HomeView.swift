@@ -36,7 +36,7 @@ struct HomeView: View {
                 main {
                     showActivityIndicatorView = false
                     showingAddMemorySuccessAlert = true
-                    shouldPresentMemorySheet = false
+                    isBottomSheetPresented = false
                     memoryTitle = ""
                     memoryContents = "Enter memory details"
                 }
@@ -73,7 +73,7 @@ struct HomeView: View {
                 }
                 .listStyle(PlainListStyle())
                 .sheet(isPresented: $shouldPresentMemorySheet) {
-                    MemoryView(memory: memoryToShowInMemorySheet)
+                    MemoryView(memory: memoryToShowInMemorySheet, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
                 }
                 
             }

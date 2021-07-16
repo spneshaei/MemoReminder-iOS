@@ -30,6 +30,8 @@ class MemoriesViewModel: ObservableObject {
         }
     }
     
+    // TODO: Forgot password?
+    
     static var sample: MemoriesViewModel {
         let viewModel = MemoriesViewModel()
         viewModel.isSample = true

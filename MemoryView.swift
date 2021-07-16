@@ -17,6 +17,8 @@ struct MemoryView: View {
     @StateObject var viewModel = MemoryViewModel()
     
     @State var memory: Memory
+    @State var numberOfLikes: Int
+    @State var hasCurrentUserLiked: Bool
     @State var showActivityIndicatorView = false
     @State var showingLikeErrorAlert = false
     
@@ -25,7 +27,10 @@ struct MemoryView: View {
             main { showActivityIndicatorView = true }
             try await viewModel.likeMemory(memory: memory, globalData: globalData)
             main {
+                memory.numberOfLikes += 1
+                numberOfLikes += 1
                 memory.hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
+                hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
                 showActivityIndicatorView = false
             }
         } catch {
@@ -51,7 +56,7 @@ struct MemoryView: View {
                     Text("Description").font(.caption)
                     Text(memory.contents)
                 }
-                Text("\(memory.numberOfLikes) likes and \(memory.comments.count) comments")
+                Text("\(numberOfLikes) likes and \(memory.comments.count) comments")
                     .listRowSeparator(.hidden)
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
@@ -87,7 +92,7 @@ struct MemoryView: View {
                     // TODO: We don't have unlike!!
                     async { await likeMemory() }
                 }) {
-                    Image(systemName: memory.hasCurrentUserLiked ? "heart.fill" : "heart")
+                    Image(systemName: hasCurrentUserLiked ? "heart.fill" : "heart")
                 }
             })
             
@@ -126,6 +131,6 @@ struct LocationRow: View {
 
 struct MemoryView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryView(memory: Memory.sample)
+        MemoryView(memory: Memory.sample, numberOfLikes: Memory.sample.numberOfLikes, hasCurrentUserLiked: Memory.sample.hasCurrentUserLiked)
     }
 }

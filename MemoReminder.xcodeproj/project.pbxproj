@@ -105,6 +105,8 @@
 		42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199126A1623B00D20808 /* MemoryViewModel.swift */; };
 		42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199426A17D1400D20808 /* CommentsViewModel.swift */; };
 		42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199426A17D1400D20808 /* CommentsViewModel.swift */; };
+		42D0199826A1C2F200D20808 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199726A1C2F200D20808 /* CommentCell.swift */; };
+		42D0199926A1C2F200D20808 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199726A1C2F200D20808 /* CommentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,7 @@
 		42D0198E26A144C000D20808 /* MainAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAsync.swift; sourceTree = SOURCE_ROOT; };
 		42D0199126A1623B00D20808 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42D0199426A17D1400D20808 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = SOURCE_ROOT; };
+		42D0199726A1C2F200D20808 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42D0199726A1C2F200D20808 /* CommentCell.swift */,
 				42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */,
 				42D01971269D547700D20808 /* TopView.swift */,
 				424FDCED26971A59004051FD /* MemoryView.swift */,
@@ -529,6 +533,7 @@
 				424FDD162697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
 				424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C5F2696C02400091D30 /* MainTabView.swift in Sources */,
+				42D0199826A1C2F200D20808 /* CommentCell.swift in Sources */,
 				424FDD082697410F004051FD /* BlurView.swift in Sources */,
 				42D01972269D547700D20808 /* TopView.swift in Sources */,
 				424FDD0A2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
@@ -581,6 +586,7 @@
 				424FDD172697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
 				424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				42B22C602696C02400091D30 /* MainTabView.swift in Sources */,
+				42D0199926A1C2F200D20808 /* CommentCell.swift in Sources */,
 				424FDD092697410F004051FD /* BlurView.swift in Sources */,
 				42D01973269D547700D20808 /* TopView.swift in Sources */,
 				424FDD0B2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
