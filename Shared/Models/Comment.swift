@@ -8,17 +8,14 @@
 import Foundation
 
 class Comment: Identifiable, Codable {
-    var id: String
+    var id: Int
     
     var senderUsername = ""
     var contents = ""
     var numberOfLikes = 0
+    var hasCurrentUserLiked = false
     
-    init(id: String) {
+    init(id: Int) {
         self.id = id
-    }
-    
-    convenience init() {
-        self.init(id: UUID().uuidString)
     }
 }

@@ -30,7 +30,6 @@ class HomeViewModel: ObservableObject {
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: bodyString, method: .post)
-    
     }
     
     static var sample: HomeViewModel {

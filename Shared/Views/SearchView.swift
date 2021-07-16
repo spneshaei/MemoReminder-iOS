@@ -38,7 +38,7 @@ struct SearchView: View {
             .alert("Error in loading users", isPresented: $viewModel.showingLoadingUsersErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
-            .alert("Error in following. Please try again", isPresented: $viewModel.followingErrorAlert) {
+            .alert("Error in following the user. Please try again", isPresented: $viewModel.followingErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
             .alert("Your follow request has been sent; when accepted, the user will be displayed as \"Following\" in this list.", isPresented: $viewModel.shouldShowFollowedAlert) {

@@ -8,16 +8,12 @@
 import Foundation
 
 class Tag: Identifiable, Codable {
-    var id: String
+    var id: Int
     
     var name = ""
     var colorHexCode = ""
     
-    init(id: String) {
+    init(id: Int) {
         self.id = id
-    }
-    
-    convenience init() {
-        self.init(id: UUID().uuidString)
     }
 }

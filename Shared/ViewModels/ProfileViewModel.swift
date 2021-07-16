@@ -10,7 +10,7 @@ import SwiftUI
 class ProfileViewModel: ObservableObject {
     var isSample = false
     @Published var myMemories: [Memory] = []
-    @Published var user = User()
+    @Published var user = User(id: 1)
     @Published var followRequests: [User] = []
     @Published var shouldShowAcceptSuccessAlert = false
     @Published var shouldShowAcceptErrorAlert = false
@@ -34,7 +34,7 @@ class ProfileViewModel: ObservableObject {
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.user = results.arrayValue.map { result -> User in
-                let user = User(id: "\(result["id"].stringValue)")
+                let user = User(id: result["id"].intValue)
                 user.username = result["username"].stringValue
                 user.firstName = result["first_name"].stringValue
                 user.lastName = result["last_name"].stringValue
@@ -42,26 +42,22 @@ class ProfileViewModel: ObservableObject {
                 user.phoneNumber = result["phone_number"].stringValue
                 user.birthday = result["birthday_date"].stringValue
                 return user
-            }.first ?? User()
+            }.first ?? User(id: 1)
         }
     }
     
     func loadFollowRequests(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        // TODO: Next line to prevent wrongities
-        guard false else { return }
         let resultString = try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: "", method: .get)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.followRequests = results.arrayValue.map { result -> User in
-                let user = User(id: "\(result["id"].stringValue)")
-                user.username = result["username"].stringValue
-                user.firstName = result["first_name"].stringValue
-                user.lastName = result["last_name"].stringValue
-                user.email = result["email"].stringValue
-                user.phoneNumber = result["phone_number"].stringValue
-                user.birthday = result["birthday_date"].stringValue
-                // TODO: This doesn't work! Merge has not been done in the backend API
+                let fromUser = result["from_user"]
+                let user = User(id: fromUser["id"].intValue)
+                user.username = fromUser["username"].stringValue
+                user.firstName = fromUser["first_name"].stringValue
+                user.lastName = fromUser["last_name"].stringValue
+                user.followRequestID = result["id"].intValue
                 return user
             }
             .filter { $0.username != globalData.username }
@@ -74,7 +70,7 @@ class ProfileViewModel: ObservableObject {
             "status": "accepted"
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "friend-request/\(Int(user.id) ?? -1)/?token=\(globalData.token)", body: bodyString, method: .patch)
+        try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
     }
     
     // TODO: We don't have reject friend request!

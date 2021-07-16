@@ -28,7 +28,7 @@ class SearchViewModel: ObservableObject {
             let results = JSON(parseJSON: resultString)["results"]
             self.friends = []
             self.users = results.arrayValue.map { result -> User in
-                let user = User(id: "\(result["id"].stringValue)")
+                let user = User(id: result["id"].intValue)
                 user.username = result["username"].stringValue
                 user.firstName = result["first_name"].stringValue
                 user.lastName = result["last_name"].stringValue
@@ -47,7 +47,7 @@ class SearchViewModel: ObservableObject {
     func follow(user: User, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let body: JSON = [
-            "to_user": Int(user.id) ?? -1
+            "to_user": user.id
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: bodyString, method: .post)

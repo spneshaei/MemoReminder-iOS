@@ -13,9 +13,11 @@ class Memory: Identifiable, Codable {
         case privateStatus = "private"
     }
     
-    var id: String
+    var id: Int
     
+    var creatorUserID = 0
     var creatorUsername = ""
+    var creatorFirstName = ""
     var createdDate = ""
     var creatorProfilePictureURL = ""
     var title = ""
@@ -32,19 +34,17 @@ class Memory: Identifiable, Codable {
     var hasCurrentUserLiked = false
     var commentIDs: [String] = []
     
-    init(id: String) {
+    init(id: Int) {
         self.id = id
-    }
-    
-    convenience init() {
-        self.init(id: UUID().uuidString)
     }
     
     // TODO: Adjust this fields!
     static var sample: Memory {
-        let memory = Memory()
+        let memory = Memory(id: 1)
         memory.title = "A great memory"
+        memory.creatorUserID = 0
         memory.creatorUsername = "seyyedparsa"
+        memory.creatorFirstName = "Seyed Parsa"
         memory.createdDate = "2021 21 21"
         memory.creatorProfilePictureURL = ""
         memory.contents = "This was the best memory ever, ever, ever!!!"
@@ -63,8 +63,10 @@ class Memory: Identifiable, Codable {
     }
     
     static func memoryFromResultJSON(_ result: JSON, currentUserID: Int) -> Memory {
-        let memory = Memory(id: "\(result["id"].stringValue)")
-        memory.creatorUsername = "" // TODO: This should be done after API merge
+        let memory = Memory(id: result["id"].intValue)
+        memory.creatorUserID = result["creator_user"]["id"].intValue
+        memory.creatorUsername = result["creator_user"]["username"].stringValue
+        memory.creatorFirstName = result["creator_user"]["first_name"].stringValue // TODO: Last name!
         memory.title = result["title"].stringValue
         memory.contents = result["text"].stringValue
         let likes = result["likes"].arrayValue

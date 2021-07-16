@@ -101,6 +101,8 @@
 		42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 42D0198C26A1435C00D20808 /* BottomSheet */; };
 		42D0198F26A144C000D20808 /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
 		42D0199026A144C000D20808 /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
+		42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199126A1623B00D20808 /* MemoryViewModel.swift */; };
+		42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199126A1623B00D20808 /* MemoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +174,7 @@
 		42D0198526A01D2C00D20808 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = SOURCE_ROOT; };
 		42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectUserCell.swift; sourceTree = SOURCE_ROOT; };
 		42D0198E26A144C000D20808 /* MainAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAsync.swift; sourceTree = SOURCE_ROOT; };
+		42D0199126A1623B00D20808 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +332,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42D0199126A1623B00D20808 /* MemoryViewModel.swift */,
 				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
 				42D0196E269D4E9100D20808 /* GlobalData.swift */,
 				42D0196B269D45DC00D20808 /* MainAppViewModel.swift */,
@@ -513,6 +517,7 @@
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
 				42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
+				42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				424FDCE8269715AE004051FD /* MemoriesView.swift in Sources */,
@@ -563,6 +568,7 @@
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
 				42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
+				42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */,

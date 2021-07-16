@@ -8,7 +8,7 @@
 import Foundation
 
 class User: Identifiable, Codable {
-    var id: String
+    var id: Int
     
     var username = ""
     var firstName = ""
@@ -21,17 +21,14 @@ class User: Identifiable, Codable {
     var numberOfMemories = 0
     var numberOfLikes = 0
     var numberOfComments = 0
+    var followRequestID = -1
     
-    init(id: String) {
+    init(id: Int) {
         self.id = id
     }
     
-    convenience init() {
-        self.init(id: UUID().uuidString)
-    }
-    
     static var sample: User {
-        let user = User()
+        let user = User(id: 1)
         user.username = "seyyedparsa"
         user.firstName = "Seyed Parsa"
         user.lastName = "Neshaei"
@@ -42,6 +39,7 @@ class User: Identifiable, Codable {
         user.numberOfMemories = 12
         user.numberOfLikes = 125
         user.numberOfComments = 32
+        user.followRequestID = -1 // not used in following acceptance or rejection...
         return user
     }
     
