@@ -16,6 +16,7 @@ struct CommentsView: View {
     @State var memory: Memory
     @State var showActivityIndicatorView = false
     @State var showingLikeErrorAlert = false
+    @State var commentText = ""
     
     // TODO: Unlike a comment?
     func likeComment(comment: Comment) async {
@@ -35,27 +36,78 @@ struct CommentsView: View {
         }
     }
     
+    fileprivate func addCommentToMemoryComments(id: Int) {
+        let comment = Comment(id: id)
+        // TODO: Check for further exploration of comment features
+        comment.hasCurrentUserLiked = false
+        comment.numberOfLikes = 0
+        comment.contents = commentText
+        comment.senderUsername = globalData.username
+        comment.senderFirstName = globalData.firstName
+        comment.senderLastName = globalData.lastName
+        memory.comments.append(comment)
+    }
+    
+    func submitNewComment() async {
+        do {
+            main { showActivityIndicatorView = true }
+            let id = try await viewModel.submitNewComment(text: commentText, on: memory, globalData: globalData)
+            main {
+                addCommentToMemoryComments(id: id)
+                commentText = ""
+                showActivityIndicatorView = false
+            }
+        } catch {
+            main {
+                showingLikeErrorAlert = true
+                showActivityIndicatorView = false
+            }
+        }
+    }
+    
+    // TODO: Refreshing (and also loading here - this one is not good; but refresh is good) comments...?
+    
     var body: some View {
         ZStack {
-            List(memory.comments) { comment in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(comment.senderFirstName) wrote:")
-                            .bold()
-                        Text(comment.contents)
-                    }
-                    Spacer()
-                    Label("\(comment.numberOfLikes)", systemImage: comment.hasCurrentUserLiked ? "heart.fill" : "heart")
-                        .onTapGesture {
-                            print("")
+            VStack {
+                List(memory.comments) { comment in
+                    HStack {
+                        VStack(alignment: .leading, spacing: 5) {
+                            Text("\(comment.senderFirstName) wrote:")
+                                .bold()
+                            Text(comment.contents)
                         }
+                        Spacer()
+                        Label("\(comment.numberOfLikes)", systemImage: comment.hasCurrentUserLiked ? "heart.fill" : "heart")
+                            .onTapGesture {
+                                print("")
+                            }
+                            .padding()
                         
+                    }
                 }
+                .alert("Error in liking the comment. Please try again", isPresented: $showingLikeErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .navigationBarTitle(Text("Comments"))
+                
+                // TODO: Fix non syncing of the send button color to the rest of the app!
+                HStack(spacing: 5) {
+                    TextField("Enter your comment", text: $commentText)
+                        .font(.title3)
+                    Button(action: {
+                        async { await submitNewComment() }
+                    }, label: {
+                        Text("Send")
+                            .padding(.horizontal)
+                    })
+                        .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
+                }
+                .padding()
             }
-            .alert("Error in liking the comment. Please try again", isPresented: $showingLikeErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .navigationBarTitle(Text("Comments"))
+            //            .navigationBarItems(trailing: Button(action: {
+            //
+            //            }, label: { Text("Add").bold() }))
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
@@ -66,6 +118,8 @@ struct CommentsView: View {
 
 struct CommentsView_Previews: PreviewProvider {
     static var previews: some View {
-        CommentsView(memory: Memory.sample)
+        NavigationView {
+            CommentsView(memory: Memory.sample)
+        }
     }
 }
