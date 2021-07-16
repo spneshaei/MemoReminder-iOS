@@ -103,6 +103,8 @@
 		42D0199026A144C000D20808 /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
 		42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199126A1623B00D20808 /* MemoryViewModel.swift */; };
 		42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199126A1623B00D20808 /* MemoryViewModel.swift */; };
+		42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199426A17D1400D20808 /* CommentsViewModel.swift */; };
+		42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199426A17D1400D20808 /* CommentsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +177,7 @@
 		42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectUserCell.swift; sourceTree = SOURCE_ROOT; };
 		42D0198E26A144C000D20808 /* MainAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAsync.swift; sourceTree = SOURCE_ROOT; };
 		42D0199126A1623B00D20808 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
+		42D0199426A17D1400D20808 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +335,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42D0199426A17D1400D20808 /* CommentsViewModel.swift */,
 				42D0199126A1623B00D20808 /* MemoryViewModel.swift */,
 				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
 				42D0196E269D4E9100D20808 /* GlobalData.swift */,
@@ -512,6 +516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42B22C3B2696274300091D30 /* Persistence.swift in Sources */,
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
@@ -563,6 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C362696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42B22C3C2696274300091D30 /* Persistence.swift in Sources */,
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
