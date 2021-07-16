@@ -29,6 +29,7 @@ class Memory: Identifiable, Codable {
     var latitude = 0.0
     var longitude = 0.0
     var numberOfLikes = 0
+    var hasCurrentUserLiked = false
     var commentIDs: [String] = []
     
     init(id: String) {
@@ -56,7 +57,19 @@ class Memory: Identifiable, Codable {
         memory.latitude = 10
         memory.longitude = 20
         memory.numberOfLikes = 5
+        memory.hasCurrentUserLiked = false
         memory.commentIDs = []
+        return memory
+    }
+    
+    static func memoryFromResultJSON(_ result: JSON, currentUserID: Int) -> Memory {
+        let memory = Memory(id: "\(result["id"].stringValue)")
+        memory.creatorUsername = "" // TODO: This should be done after API merge
+        memory.title = result["title"].stringValue
+        memory.contents = result["text"].stringValue
+        let likes = result["likes"].arrayValue
+        memory.numberOfLikes = likes.count
+        memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"].intValue == currentUserID }
         return memory
     }
 }

@@ -84,6 +84,7 @@ class User: Identifiable, Codable {
             main {
                 let json = JSON(parseJSON: result)
                 globalData.loggedIn = true
+                globalData.userID = json["id"].intValue
                 globalData.username = json["username"].stringValue
                 globalData.firstName = json["first_name"].stringValue
                 globalData.lastName = json["last_name"].stringValue

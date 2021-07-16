@@ -17,44 +17,46 @@ struct MemoryView: View {
     }
     
     var body: some View {
-        List {
-            if !memory.imageLink.isEmpty {
-                AsyncImage(url: URL(string: memory.imageLink)!)
-                    .frame(maxHeight: 200)
+        NavigationView {
+            List {
+                if !memory.imageLink.isEmpty {
+                    AsyncImage(url: URL(string: memory.imageLink)!)
+                        .frame(maxHeight: 200)
+                        .listRowSeparator(.hidden)
+                        .onTapGesture(count: 2) {
+                            likeMemory()
+                        }
+                }
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("Description").font(.caption)
+                    Text(memory.contents)
+                }
+                Text("\(memory.numberOfLikes) likes and \(memory.commentIDs.count) comments")
                     .listRowSeparator(.hidden)
-                    .onTapGesture(count: 2) {
-                        likeMemory()
-                    }
-            }
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Description").font(.caption)
-                Text(memory.contents)
-            }
-            Text("\(memory.numberOfLikes) likes and \(memory.commentIDs.count) comments")
-                .listRowSeparator(.hidden)
-            NavigationLink(destination: CommentsView(memory: memory)) {
-                Text("Show comments")
-            }
-            // TODO: Not lat/lon! Real loc!
-            LocationRow(memory: memory)
-            
-            
-        }.navigationBarTitle(Text(memory.title))
-            .navigationBarItems(trailing: HStack(spacing: 15) {
-                Button(action: {
-                    // TODO
-                }) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.red)
+                NavigationLink(destination: CommentsView(memory: memory)) {
+                    Text("Show comments")
                 }
-                Button(action: {
-                    withAnimation {
+                // TODO: Not lat/lon! Real loc!
+                LocationRow(memory: memory)
+                
+                
+            }.navigationBarTitle(Text(memory.title))
+                .navigationBarItems(trailing: HStack(spacing: 15) {
+                    Button(action: {
                         // TODO
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
                     }
-                }) {
-                    Image(systemName: "square.and.pencil")
-                }
+                    Button(action: {
+                        withAnimation {
+                            // TODO
+                        }
+                    }) {
+                        Image(systemName: "square.and.pencil")
+                    }
             })
+        }
     }
 }
 
@@ -71,8 +73,6 @@ struct LocationRow: View {
 
 struct MemoryView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            MemoryView(memory: Memory.sample)
-        }
+        MemoryView(memory: Memory.sample)
     }
 }

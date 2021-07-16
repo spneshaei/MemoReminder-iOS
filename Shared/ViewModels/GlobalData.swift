@@ -15,6 +15,11 @@ class GlobalData: ObservableObject {
             defaults.set(loggedIn, forKey: "GlobalData_loggedIn")
         }
     }
+    @Published var userID: Int {
+        didSet {
+            defaults.set(userID, forKey: "GlobalData_userID")
+        }
+    }
     @Published var username: String {
         didSet {
             defaults.set(username, forKey: "GlobalData_username")
@@ -53,6 +58,7 @@ class GlobalData: ObservableObject {
     
     init() {
         loggedIn = defaults.bool(forKey: "GlobalData_loggedIn")
+        userID = defaults.integer(forKey: "GlobalData_userID")
         username = defaults.string(forKey: "GlobalData_username") ?? ""
         firstName = defaults.string(forKey: "GlobalData_firstName") ?? ""
         lastName = defaults.string(forKey: "GlobalData_lastName") ?? ""

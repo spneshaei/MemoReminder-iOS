@@ -23,11 +23,7 @@ class ProfileViewModel: ObservableObject {
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.myMemories = results.arrayValue.map { result -> Memory in
-                let memory = Memory(id: "\(result["id"].stringValue)")
-                memory.creatorUsername = "" // TODO: This should be done after API merge
-                memory.title = result["title"].stringValue
-                memory.contents = result["text"].stringValue
-                return memory
+                return Memory.memoryFromResultJSON(result, currentUserID: globalData.userID)
             }.filter { $0.creatorUsername == globalData.username }
         }
     }
