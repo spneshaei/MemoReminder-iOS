@@ -22,7 +22,6 @@ struct MemoryCell: View {
     
     var body: some View {
         //        HStack() {
-        //            // TODO: These URLs are only the ending part and not complete
         //            if #available(iOS 15.0, *) {
         //                if !memory.creatorProfilePictureURL.isEmpty {
         //                    AsyncImage(url: URL(string: memory.creatorProfilePictureURL)!)
@@ -53,7 +52,6 @@ struct MemoryCell: View {
                 //                    .aspectRatio(contentMode: .fit)
                 //                    .frame(width: 50)
                 //                    .padding(.all, 20)
-                // TODO: Make the image clipped to circle
             }
             
             VStack(alignment: .leading, spacing: 4) {

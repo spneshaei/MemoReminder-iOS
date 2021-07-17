@@ -32,8 +32,6 @@ class CommentsViewModel: ObservableObject {
         return JSON(parseJSON: resultString)["id"].intValue
     }
     
-    // TODO: Sort of memories in all lists... By what? The current version doesn't seem good
-    
     func likeComment(comment: Comment, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let body: JSON = [

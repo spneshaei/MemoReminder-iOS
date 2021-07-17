@@ -43,15 +43,12 @@ class User: Identifiable, Codable {
         return user
     }
     
-    // TODO: On net disconnection error
-    // TODO: Distinguish validation and repeated account error and...
     enum AuthenticationStatus: Error {
         case invalidData
         case failed
         case success
     }
     
-    // TODO: Email and password validation in client
     static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String) async -> AuthenticationStatus {
         let body: JSON = [
             "username": username,

@@ -69,7 +69,7 @@ class Memory: Identifiable, Codable {
         let memory = Memory(id: result["id"].intValue)
         memory.creatorUserID = result["creator_user"]["id"].intValue
         memory.creatorUsername = result["creator_user"]["username"].stringValue
-        memory.creatorFirstName = result["creator_user"]["first_name"].stringValue // TODO: Last name!
+        memory.creatorFirstName = result["creator_user"]["first_name"].stringValue
         memory.title = result["title"].stringValue
         memory.contents = result["text"].stringValue
         memory.createdDate = result["created"].stringValue

@@ -16,7 +16,7 @@ struct LoginView: View {
     @State var showingAlert = false
     @State var loginStatus: User.AuthenticationStatus = .failed
     
-    var alertTextMessage: String { // TODO: better messages!
+    var alertTextMessage: String {
         switch loginStatus {
         case .failed:
             return "Login failed. Please try again."
@@ -58,9 +58,9 @@ struct LoginView: View {
                                 VStack(spacing: 15){
                                     SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
                                     // Forgot pass
-                                    Text("Forgot Password?")
-                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
+//                                    Text("Forgot Password?")
+//                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
+//                                        .frame(maxWidth: .infinity, alignment: .leading)
                                 }
                             }
                             

@@ -48,7 +48,7 @@ struct SearchUserCell: View {
             }.padding(20)
             Spacer()
             if hasFollowed {
-                Text("Following") // TODO: Unfollow?
+                Text("Following")
                 .font(.system(size: 17, weight: .bold, design: .default))
                 .buttonStyle(.plain)
                 .padding()

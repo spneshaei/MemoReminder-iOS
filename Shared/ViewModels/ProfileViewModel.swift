@@ -30,12 +30,7 @@ class ProfileViewModel: ObservableObject {
         didSet {
             defaults.set(try? encoder.encode(followRequests), forKey: "ProfileViewModel_followRequests")
         }
-        // TODO: Need to clear defaults upon logout!!
-        // TODO: Forgot password!!
     }
-    
-    // TODO: We clear "friends" at the beginning in one of the view models which may not work well with cache loading... fix that
-    // TODO: If we don't want to save all in UserDefaults then what to do?
     
     @Published var shouldShowAcceptSuccessAlert = false
     @Published var shouldShowAcceptErrorAlert = false
@@ -117,9 +112,6 @@ class ProfileViewModel: ObservableObject {
         try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
     }
     
-    // TODO: Can we edit the username / last name (...) / even password how to do that with the provided web API? IMPORTANT.
-    // TODO: Email and... validation
-    // TODO: Suitable error messages
     func editUserDetails(id: Int, firstName: String, username: String, email: String, birthday: Date, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let dateFormatter = DateFormatter()
@@ -131,7 +123,6 @@ class ProfileViewModel: ObservableObject {
             "birthday": dateFormatter.string(from: birthday)
         ]
         guard let bodyString = body.rawString() else { return }
-        // TODO: Is this correct?
         try await Rester.rest(endPoint: "memo-user/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
     }
     
@@ -139,8 +130,6 @@ class ProfileViewModel: ObservableObject {
         guard !isSample else { return }
         try await Rester.rest(endPoint: "logout/?token=\(globalData.token)", body: "", method: .post)
     }
-    
-    // TODO: We don't have reject friend request!
     
     static var sample: ProfileViewModel {
         let viewModel = ProfileViewModel()

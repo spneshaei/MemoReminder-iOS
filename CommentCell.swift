@@ -25,7 +25,6 @@ struct CommentCell: View {
         self._showingLikeErrorAlert = showingLikeErrorAlert
     }
     
-    // TODO: Unlike a comment?
     func likeComment(comment: Comment) async {
         do {
             main { showActivityIndicatorView = true }
@@ -33,8 +32,8 @@ struct CommentCell: View {
             main {
                 comment.numberOfLikes += 1
                 numberOfLikes += 1
-                comment.hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
-                hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
+                comment.hasCurrentUserLiked = true
+                hasCurrentUserLiked = true
                 showActivityIndicatorView = false
             }
         } catch {

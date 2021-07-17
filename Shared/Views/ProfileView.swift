@@ -15,7 +15,6 @@ struct ProfileView: View {
     @State var editMode = false
     @State var firstName = ""
     @State var username = ""
-    // TODO: Change password!
     @State var email = ""
     @State var birthDate = Date()
     @State var showActivityIndicatorView = false
@@ -69,9 +68,6 @@ struct ProfileView: View {
     }
     
     fileprivate func reloadData() async {
-        // TODO: Disable tapping logout or edit while offline to prevent wrong UI texts and birthday and...
-        // TODO: Done button after tap should animate view...
-        // TODO: Accept button in follow requests in dark mode has bad blue color
         populateTextFields()
         do {
             main { showActivityIndicatorView = true }
@@ -92,9 +88,6 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        // TODO: The real big numbers in this page are not shown :(
-        // TODO: Tags and uploading files to memories
-        // TODO: Likes and comments
         NavigationView {
             ZStack {
                 List {
@@ -118,8 +111,6 @@ struct ProfileView: View {
                         }
                     }
                     ThreeStatsView(user: viewModel.user)
-                    // TODO: Misalignment in the stats view... in Simulator
-                    // TODO: Dark Mode!
                     if !viewModel.followRequests.isEmpty {
                         Text("Follow requests").font(.title).bold()
                             .listRowSeparator(.hidden)
@@ -137,7 +128,6 @@ struct ProfileView: View {
                                 EmptyView()
                             }.buttonStyle(PlainButtonStyle())
                                 .listRowSeparator(.hidden)
-                            // TODO: Why the separator is still visible?
                         }
                     }
                     
@@ -151,7 +141,6 @@ struct ProfileView: View {
                 .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                // TODO: Separate alert for logout and loading data
                 //                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
                 //                    Button("OK", role: .cancel) { }
                 //                }
@@ -178,9 +167,6 @@ struct ProfileView: View {
                             async { await logout() }
                         }) {
                             Image(systemName: "arrow.right.circle")
-                            // TODO: Better symbol for logout
-                            // TODO: Confirmation upon log out!
-                            // TODO: withAnimation in many places needed :)
                         }
                     }
                     
@@ -219,14 +205,12 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
-// TODO: No profile pic!
 struct ProfilePictureAndNameView: View {
     var profilePictureURL: String
     @Binding var name: String
     var editMode: Bool
     
     var body: some View {
-        // TODO: Better error handling everywhere (not just failed...)
         HStack(alignment: .center, spacing: 5) {
             if !profilePictureURL.isEmpty {
                 AsyncImage(url: URL(string: profilePictureURL)!)

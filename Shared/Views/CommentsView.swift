@@ -20,7 +20,6 @@ struct CommentsView: View {
     
     fileprivate func addCommentToMemoryComments(id: Int) {
         let comment = Comment(id: id)
-        // TODO: Check for further exploration of comment features
         comment.hasCurrentUserLiked = false
         comment.numberOfLikes = 0
         comment.contents = commentText
@@ -47,8 +46,6 @@ struct CommentsView: View {
         }
     }
     
-    // TODO: Refreshing (and also loading here - this one is not good; but refresh is good) comments...?
-    
     var body: some View {
         ZStack {
             VStack {
@@ -60,7 +57,6 @@ struct CommentsView: View {
                 }
                 .navigationBarTitle(Text("Comments"))
                 
-                // TODO: Fix non syncing of the send button color to the rest of the app!
                 HStack(spacing: 5) {
                     TextField("Enter your comment", text: $commentText)
                         .font(.title3)

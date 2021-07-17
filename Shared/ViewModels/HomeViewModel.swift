@@ -52,12 +52,11 @@ class HomeViewModel: ObservableObject {
 
     
     func addMemory(title: String, contents: String, globalData: GlobalData) async throws {
-        // TODO: Tagging!
         guard !isSample else { return }
         let body: JSON = [
             "title": title,
             "text": contents,
-            "tags": [] // TODO: This!
+            "tags": []
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: bodyString, method: .post)

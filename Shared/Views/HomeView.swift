@@ -116,7 +116,7 @@ struct HomeView: View {
                 //                    Image(systemName: "plus.square")
                 //                }
             })
-            .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) { // TODO: Not very good with keyboard!
+            .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
                 AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped)
             }
         }
@@ -171,12 +171,6 @@ struct AddMemoryView: View {
             ActivityIndicatorView(isVisible: $showActivityIndicator, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
-            // TODO: Prevent activity indicators every second and ... :) maybe smaller?
-            // TODO: Delete mem
-            // TODO: Mem cell should include like count
-            // TODO: Force touch everywhere (?) or menu contexts (like/delete mem)
-            // TODO: Top slider of home page
-            // TODO: Upload files
         }
     }
 }

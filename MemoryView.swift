@@ -9,10 +9,6 @@ import SwiftUI
 import ActivityIndicatorView
 import MapKit
 
-// TODO: Only owner should be able to delete memories
-// TODO: Do we have delete memory??
-// TODO: Created date in memory page!
-
 struct MemoryView: View {
     @EnvironmentObject var globalData: GlobalData
     
@@ -31,8 +27,8 @@ struct MemoryView: View {
             main {
                 memory.numberOfLikes += 1
                 numberOfLikes += 1
-                memory.hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
-                hasCurrentUserLiked = true // TODO: Toggle? (before adding unlike, not needed)
+                memory.hasCurrentUserLiked = true
+                hasCurrentUserLiked = true
                 showActivityIndicatorView = false
             }
         } catch {
@@ -63,11 +59,9 @@ struct MemoryView: View {
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
                 }
-                // TODO: Not lat/lon! Real loc!
                 LocationRow(memory: memory)
                 NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
                     Text("Show on the map")
-                    // TODO: Map doesn't work???
                 }
                 
                 
@@ -77,21 +71,21 @@ struct MemoryView: View {
             }
             .navigationBarTitle(Text(memory.title))
             .navigationBarItems(trailing: HStack(spacing: 15) {
+//                Button(action: {
+//                    // delete memory (and show only when needed!)
+//                }) {
+//                    Image(systemName: "trash")
+//                        .foregroundColor(.red)
+//                }
+                
+//                Button(action: {
+//                    withAnimation {
+//                        // edit memory (and show only when needed!)
+//                    }
+//                }) {
+//                    Image(systemName: "square.and.pencil")
+//                }
                 Button(action: {
-                    // TODO: delete memory (and show only when needed!)
-                }) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.red)
-                }
-                Button(action: {
-                    withAnimation {
-                        // TODO: edit memory (and show only when needed!)
-                    }
-                }) {
-                    Image(systemName: "square.and.pencil")
-                }
-                Button(action: {
-                    // TODO: We don't have unlike!!
                     async { await likeMemory() }
                 }) {
                     Image(systemName: hasCurrentUserLiked ? "heart.fill" : "heart")
@@ -117,8 +111,6 @@ struct MemoryMapView: View {
             .edgesIgnoringSafeArea(.all)
     }
 }
-
-// TODO: Date for everything (comments, memories, ...) in the system!
 
 struct LocationRow: View {
     var memory: Memory

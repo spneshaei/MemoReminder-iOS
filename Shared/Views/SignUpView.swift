@@ -26,7 +26,7 @@ struct SignUpView: View {
     
     @EnvironmentObject var mainAppViewModel: MainAppViewModel
     
-    var alertTextMessage: String { // TODO: better messages!
+    var alertTextMessage: String {
         switch signUpStatus {
         case .failed:
             return "Sign up failed. Please try again."
@@ -128,12 +128,10 @@ struct SignUpView: View {
         async {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"
-            signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email) // TODO: Phone Number and Last Name
+            signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email)
             main { showingAlert = true }
         }
     }
-    
-    // TODO: login and sign up fields verification in the client!
     
     func backToLogin() {
         withAnimation {
