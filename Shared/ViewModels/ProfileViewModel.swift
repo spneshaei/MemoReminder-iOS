@@ -15,6 +15,7 @@ class ProfileViewModel: ObservableObject {
     @Published var shouldShowAcceptSuccessAlert = false
     @Published var shouldShowAcceptErrorAlert = false
     @Published var shouldShowLoadingDataErrorAlert = false
+    @Published var shouldShowEditProfileErrorAlert = false
     
     func loadMyMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
@@ -23,7 +24,7 @@ class ProfileViewModel: ObservableObject {
             let results = JSON(parseJSON: resultString)["results"]
             self.myMemories = results.arrayValue.map { result -> Memory in
                 return Memory.memoryFromResultJSON(result, currentUserID: globalData.userID)
-            }.filter { $0.creatorUsername == globalData.username }
+            }.filter { $0.creatorUserID == globalData.userID }
         }
     }
     
@@ -71,6 +72,24 @@ class ProfileViewModel: ObservableObject {
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
+    }
+    
+    // TODO: Can we edit the username / last name (...) / even password how to do that with the provided web API? IMPORTANT.
+    // TODO: Email and... validation
+    // TODO: Suitable error messages
+    func editUserDetails(id: Int, firstName: String, username: String, email: String, birthday: Date, globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        let body: JSON = [
+            "first_name": firstName,
+            "username": username,
+            "email": email,
+            "birthday": dateFormatter.string(from: birthday)
+        ]
+        guard let bodyString = body.rawString() else { return }
+        // TODO: Is this correct?
+        try await Rester.rest(endPoint: "memo-user/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
     }
     
     func logout(globalData: GlobalData) async throws {
