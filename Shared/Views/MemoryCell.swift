@@ -65,7 +65,8 @@ struct MemoryCell: View {
                         .foregroundColor(.black)
                 }
                 Spacer()
-                Label("\(memory.numberOfLikes)", systemImage: memory.hasCurrentUserLiked ? "heart.fill" : "heart")
+                Label("\(Text("\(memory.numberOfLikes)").bold())", systemImage: memory.hasCurrentUserLiked ? "heart.fill" : "heart")
+                    .foregroundColor(.black)
             }.padding(16)
             Spacer()
         }
