@@ -23,10 +23,6 @@ class Rester {
         case get = "GET", post = "POST", put = "PUT", delete = "DELETE", patch = "PATCH"
     }
     
-    enum MimeType: String {
-        case imageJPG = "image/jpg"
-    }
-    
     fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post) async throws -> String {
         guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
             throw RestError.wrongURLFormat
@@ -34,6 +30,8 @@ class Rester {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.httpBody = Data(body.utf8)
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         if !token.isEmpty {
             request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
         }
