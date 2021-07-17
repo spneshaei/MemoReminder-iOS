@@ -25,6 +25,7 @@ struct SignUpView: View {
     @State var signUpStatus: User.AuthenticationStatus = .failed
     @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
+    @State var showingEmailWrongAlert = false
     
     @EnvironmentObject var mainAppViewModel: MainAppViewModel
     
@@ -94,6 +95,9 @@ struct SignUpView: View {
                                     }
                                 }
                             }
+                            .alert("Your email address is provided in a wrong format. Maybe you've had a typo. Fix the email address and then try again", isPresented: $showingEmailWrongAlert) {
+                                Button("OK", role: .cancel) { }
+                            }
                         }
                         .padding(.horizontal,30)
                         .padding(.vertical,40)
@@ -127,6 +131,10 @@ struct SignUpView: View {
     }
     
     func signUp() {
+        guard isValidEmailAddress(emailAddressString: email) else {
+            showingEmailWrongAlert = true
+            return
+        }
         async {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"

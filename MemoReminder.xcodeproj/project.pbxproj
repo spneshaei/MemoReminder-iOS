@@ -115,6 +115,8 @@
 		42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A126A27E2A00D20808 /* BottomBarItem.swift */; };
 		42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A426A27E4400D20808 /* BarButtonItemView.swift */; };
 		42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A426A27E4400D20808 /* BarButtonItemView.swift */; };
+		42D019A826A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
+		42D019A926A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,7 @@
 		42D0199E26A27E1400D20808 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
 		42D019A126A27E2A00D20808 /* BottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarItem.swift; sourceTree = "<group>"; };
 		42D019A426A27E4400D20808 /* BarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItemView.swift; sourceTree = "<group>"; };
+		42D019A726A2EADE00D20808 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +348,7 @@
 				42B22C6E2696C56800091D30 /* User.swift */,
 				42B22C6B2696C54200091D30 /* Tag.swift */,
 				424FDD1E269A9F67004051FD /* SwiftyJSON.swift */,
+				42D019A726A2EADE00D20808 /* Validator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -590,6 +594,7 @@
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				42D0198026A0000E00D20808 /* SearchView.swift in Sources */,
+				42D019A826A2EADE00D20808 /* Validator.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -647,6 +652,7 @@
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				42D0198126A0000E00D20808 /* SearchView.swift in Sources */,
+				42D019A926A2EADE00D20808 /* Validator.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */,
