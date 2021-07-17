@@ -27,6 +27,7 @@ struct ProfileView: View {
     @State var birthDate = Date()
     @State var newPassword = ""
     @State var showActivityIndicatorView = false
+    @State var showLogoutConfirmationAlert = false
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -166,6 +167,12 @@ struct ProfileView: View {
                 .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
+                .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert) {
+                    Button("Yes", role: .destructive) {
+                        async { await logout() }
+                    }
+                    Button("No", role: .cancel) { }
+                }
                 //                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
                 //                    Button("OK", role: .cancel) { }
                 //                }
@@ -189,7 +196,7 @@ struct ProfileView: View {
                     if !editMode {
                         Button(action: {
                             guard !showActivityIndicatorView else { return }
-                            async { await logout() }
+                            showLogoutConfirmationAlert = true
                         }) {
                             Image(systemName: "arrow.right.circle")
                         }
