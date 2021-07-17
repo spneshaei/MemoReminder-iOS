@@ -8,9 +8,36 @@
 import SwiftUI
 
 class HomeViewModel: ObservableObject {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
+    
     var isSample = false
-    @Published var topMemories: [Memory] = []
-    @Published var friendsMemories: [Memory] = []
+    
+    @Published var topMemories: [Memory] {
+        didSet {
+            defaults.set(try? encoder.encode(topMemories), forKey: "HomeViewModel_topMemories")
+        }
+    }
+    
+    @Published var friendsMemories: [Memory] {
+        didSet {
+            defaults.set(try? encoder.encode(friendsMemories), forKey: "HomeViewModel_friendsMemories")
+        }
+    }
+    
+    init() {
+        if let topMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_topMemories") ?? Data()) {
+            self.topMemories = topMemories
+        } else {
+            self.topMemories = []
+        }
+        if let friendsMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_friendsMemories") ?? Data()) {
+            self.friendsMemories = friendsMemories
+        } else {
+            self.friendsMemories = []
+        }
+    }
     
     func loadTopMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }

@@ -8,16 +8,32 @@
 import SwiftUI
 
 class MemoriesViewModel: ObservableObject {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
+    
     var isSample = false
-    @Published var memories: [Memory] = []
+    
+    @Published var memories: [Memory] {
+        didSet {
+            defaults.set(try? encoder.encode(memories), forKey: "MemoriesViewModel_memories")
+        }
+    }
+    
     @Published var searchPredicate = ""
+    
+    init() {
+        if let memories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "MemoriesViewModel_memories") ?? Data()) {
+            self.memories = memories
+        } else {
+            self.memories = []
+        }
+    }
     
     var filteredMemories: [Memory] {
         searchPredicate.isEmpty ? memories : memories.filter { $0.title.lowercased().contains(searchPredicate.lowercased())
             || $0.contents.lowercased().contains(searchPredicate.lowercased()) || $0.creatorUsername.lowercased().contains(searchPredicate.lowercased()) }
     }
-    
-    
     
     func loadMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }

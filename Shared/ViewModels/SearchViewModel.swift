@@ -8,9 +8,37 @@
 import SwiftUI
 
 class SearchViewModel: ObservableObject {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
+    
     var isSample = false
-    @Published var users: [User] = []
-    @Published var friends: [User] = []
+    
+    @Published var users: [User] {
+        didSet {
+            defaults.set(try? encoder.encode(users), forKey: "SearchViewModel_users")
+        }
+    }
+    
+    @Published var friends: [User] {
+        didSet {
+            defaults.set(try? encoder.encode(friends), forKey: "SearchViewModel_friends")
+        }
+    }
+    
+    init() {
+        if let users = try? decoder.decode([User].self, from: defaults.data(forKey: "SearchViewModel_users") ?? Data()) {
+            self.users = users
+        } else {
+            self.users = []
+        }
+        if let friends = try? decoder.decode([User].self, from: defaults.data(forKey: "SearchViewModel_friends") ?? Data()) {
+            self.friends = friends
+        } else {
+            self.friends = []
+        }
+    }
+    
     @Published var searchPredicate = ""
     @Published var shouldShowFollowedAlert = false
     @Published var showingLoadingUsersErrorAlert = false
