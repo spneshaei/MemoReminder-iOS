@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import URLImage
+import ActivityIndicatorView
 
 @available(iOS 15.0, *)
 struct AsyncSlideshow: View {
@@ -15,9 +17,17 @@ struct AsyncSlideshow: View {
         GeometryReader { geometry in
             ImageSlideshow(numberOfImages: imageURLs.count) {
                 ForEach(imageURLs, id: \.self) { imageURL in
-                    AsyncImage(url: URL(string: imageURL)!)
-                        .scaledToFit()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
+                    if URL(string: imageURL) != nil {
+                        AsyncImage(url: URL(string: imageURL)!) { image in
+                            image
+                        } placeholder: {
+                            ActivityIndicatorView(isVisible: .constant(true), type: .default)
+                                .frame(width: 30.0, height: 30.0)
+                                .foregroundColor(.orange)
+                        }
+                            .scaledToFit()
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                    }
                 }
             }
         }

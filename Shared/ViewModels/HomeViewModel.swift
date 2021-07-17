@@ -20,22 +20,11 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    @Published var friendsMemories: [Memory] {
-        didSet {
-            defaults.set(try? encoder.encode(friendsMemories), forKey: "HomeViewModel_friendsMemories")
-        }
-    }
-    
     init() {
         if let topMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_topMemories") ?? Data()) {
             self.topMemories = topMemories
         } else {
             self.topMemories = []
-        }
-        if let friendsMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_friendsMemories") ?? Data()) {
-            self.friendsMemories = friendsMemories
-        } else {
-            self.friendsMemories = []
         }
     }
     
@@ -66,7 +55,6 @@ class HomeViewModel: ObservableObject {
         let viewModel = HomeViewModel()
         viewModel.isSample = true
         viewModel.topMemories = [Memory.sample, Memory.sample]
-        viewModel.friendsMemories = [Memory.sample, Memory.sample]
         return viewModel
     }
 }

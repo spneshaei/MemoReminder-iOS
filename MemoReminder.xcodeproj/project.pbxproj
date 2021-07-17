@@ -118,6 +118,9 @@
 		42D019A826A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 		42D019A926A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 		42D019AC26A2F89700D20808 /* ImagePickerView in Frameworks */ = {isa = PBXBuildFile; productRef = 42D019AB26A2F89700D20808 /* ImagePickerView */; };
+		42D019B926A31AB500D20808 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = 42D019B826A31AB500D20808 /* Grid */; };
+		42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
+		42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +200,7 @@
 		42D019A126A27E2A00D20808 /* BottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarItem.swift; sourceTree = "<group>"; };
 		42D019A426A27E4400D20808 /* BarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItemView.swift; sourceTree = "<group>"; };
 		42D019A726A2EADE00D20808 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		42D019BA26A31B9700D20808 /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,7 @@
 				42D0197C269FE98100D20808 /* URLImage in Frameworks */,
 				42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */,
 				42D0197E269FE98100D20808 /* URLImageStore in Frameworks */,
+				42D019B926A31AB500D20808 /* Grid in Frameworks */,
 				42B22C5D2696BF2E00091D30 /* ActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +335,7 @@
 		42B22C542696B49000091D30 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				42D019BA26A31B9700D20808 /* HomeTopView.swift */,
 				42D0199A26A27DD700D20808 /* BottomBar */,
 				42D0198526A01D2C00D20808 /* SearchUserCell.swift */,
 				424FDCF92697410F004051FD /* FancyScrollView */,
@@ -403,6 +409,7 @@
 				42D0197D269FE98100D20808 /* URLImageStore */,
 				42D0198C26A1435C00D20808 /* BottomSheet */,
 				42D019AB26A2F89700D20808 /* ImagePickerView */,
+				42D019B826A31AB500D20808 /* Grid */,
 			);
 			productName = "MemoReminder (iOS)";
 			productReference = 42B22C1A2696274300091D30 /* MemoReminder.app */;
@@ -501,6 +508,7 @@
 				42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */,
 				42D0198B26A1435C00D20808 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				42D019AA26A2F89600D20808 /* XCRemoteSwiftPackageReference "ImagePickerView" */,
+				42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 			);
 			productRefGroup = 42B22C1B2696274300091D30 /* Products */;
 			projectDirPath = "";
@@ -599,6 +607,7 @@
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				42D0198026A0000E00D20808 /* SearchView.swift in Sources */,
 				42D019A826A2EADE00D20808 /* Validator.swift in Sources */,
+				42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -657,6 +666,7 @@
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				42D0198126A0000E00D20808 /* SearchView.swift in Sources */,
 				42D019A926A2EADE00D20808 /* Validator.swift in Sources */,
+				42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -1120,6 +1130,14 @@
 				minimumVersion = 0.5.0;
 			};
 		};
+		42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-grid.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1147,6 +1165,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42D019AA26A2F89600D20808 /* XCRemoteSwiftPackageReference "ImagePickerView" */;
 			productName = ImagePickerView;
+		};
+		42D019B826A31AB500D20808 /* Grid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
+			productName = Grid;
 		};
 /* End XCSwiftPackageProductDependency section */
 

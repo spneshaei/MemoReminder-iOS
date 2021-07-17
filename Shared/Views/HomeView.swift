@@ -38,7 +38,7 @@ struct HomeView: View {
     }
     
     var slideshowURLs: [String] {
-        viewModel.friendsMemories
+        viewModel.topMemories
             .filter { !$0.imageLink.isEmpty }
             .map { $0.imageLink }
     }
@@ -66,7 +66,10 @@ struct HomeView: View {
         NavigationView {
             ZStack {
                 List {
-                    AsyncSlideshow(imageURLs: slideshowURLs)
+//                    AsyncSlideshow(imageURLs: slideshowURLs)
+//                        .frame(height: 120)
+//                        .listRowSeparator(.hidden)
+                    HomeTopView(imageURLStrings: slideshowURLs)
                         .frame(height: 120)
                         .listRowSeparator(.hidden)
                     
