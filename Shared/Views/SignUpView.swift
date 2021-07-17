@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var isDarkMode: Bool { colorScheme == .dark }
     
     let dateFormatter: DateFormatter = {
             let formatter = DateFormatter()
@@ -50,7 +52,7 @@ struct SignUpView: View {
 //                        .resizable()
 //                        .frame(width: 60, height: 60)
                     Text("Sign Up")
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: Color.primary))
+                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: isDarkMode ? .black : .white))
                 }
                 .padding(.top,55)
                 // FORM

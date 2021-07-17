@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var isDarkMode: Bool { colorScheme == .dark }
+    
     @EnvironmentObject var globalData: GlobalData
     
     // MARK: - PROPERTIES
@@ -42,7 +45,7 @@ struct LoginView: View {
                         .resizable()
                         .frame(width: 60, height: 60)
                     Text("Welcome to MemoReminder")
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: Color.primary))
+                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: isDarkMode ? .black : .white))
                 }
                 .padding(.top,55)
                 // FORM
