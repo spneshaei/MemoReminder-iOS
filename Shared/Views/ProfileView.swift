@@ -9,14 +9,23 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct ProfileView: View {
+    
     @ObservedObject var viewModel: ProfileViewModel
     @EnvironmentObject var globalData: GlobalData
     @EnvironmentObject var mainAppViewModel: MainAppViewModel
-    @State var editMode = false
+    @State var editMode = false {
+        didSet {
+            if editMode == false {
+                changePasswordMode = false
+            }
+        }
+    }
+    @State var changePasswordMode = false
     @State var firstName = ""
     @State var username = ""
     @State var email = ""
     @State var birthDate = Date()
+    @State var newPassword = ""
     @State var showActivityIndicatorView = false
     
     init(viewModel: ProfileViewModel) {
@@ -39,7 +48,7 @@ struct ProfileView: View {
     fileprivate func doneTapped() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.editUserDetails(id: viewModel.user.id, firstName: firstName, username: username, email: email, birthday: birthDate, globalData: globalData)
+            try await viewModel.editUserDetails(id: viewModel.user.id, firstName: firstName, username: username, email: email, birthday: birthDate, newPassword: newPassword, globalData: globalData)
             main {
                 viewModel.user.username = username
                 viewModel.user.email = email
@@ -65,6 +74,7 @@ struct ProfileView: View {
         email = viewModel.user.email
         firstName = viewModel.user.firstName
         birthDate = dateFormatter.date(from: viewModel.user.birthday) ?? Date()
+        newPassword = ""
     }
     
     fileprivate func reloadData() async {
@@ -108,6 +118,21 @@ struct ProfileView: View {
                         }
                         DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
                             Text("Birthday")
+                        }
+                        Button(action: {
+                            withAnimation { changePasswordMode.toggle() }
+                        }) {
+                            HStack {
+                                Text("Set a new password")
+                                    .foregroundColor(.blue)
+                                Spacer()
+                                Image(systemName: changePasswordMode ? "arrow.up" : "arrow.right")
+                            }
+                        }
+                        if changePasswordMode {
+                            SecureField("Enter your new password", text: $newPassword)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .id(2)
                         }
                     }
                     ThreeStatsView(user: viewModel.user)
