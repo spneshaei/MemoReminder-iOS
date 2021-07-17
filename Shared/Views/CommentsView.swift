@@ -41,8 +41,8 @@ struct CommentsView: View {
             }
         } catch {
             main {
-                showingLikeErrorAlert = true
                 showActivityIndicatorView = false
+                showingLikeErrorAlert = true
             }
         }
     }

@@ -68,6 +68,18 @@ class GlobalData: ObservableObject {
         token = defaults.string(forKey: "GlobalData_token") ?? ""
     }
     
+    func logout() {
+        loggedIn = false
+        userID = 0
+        username = ""
+        firstName = ""
+        lastName = ""
+        email = ""
+        phoneNumber = ""
+        birthday = ""
+        token = ""
+    }
+    
     static var sample: GlobalData {
         GlobalData()
     }

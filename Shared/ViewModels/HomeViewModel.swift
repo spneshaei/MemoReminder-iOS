@@ -12,15 +12,19 @@ class HomeViewModel: ObservableObject {
     @Published var topMemories: [Memory] = []
     @Published var friendsMemories: [Memory] = []
     
-    func loadTopMemories() async {
+    func loadTopMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
+        let resultString = try await Rester.rest(endPoint: "top-post", body: "", method: .get)
+        main {
+            let results = JSON(parseJSON: resultString)["results"]
+            self.topMemories = results.arrayValue.map { result -> Memory in
+                return Memory.memoryFromResultJSON(result, currentUserID: globalData.userID)
+            }
+        }
     }
+
     
-    func loadFriendsMemories() async {
-        guard !isSample else { return }
-    }
-    
-    func sendMemory(title: String, contents: String, globalData: GlobalData) async throws {
+    func addMemory(title: String, contents: String, globalData: GlobalData) async throws {
         // TODO: Tagging!
         guard !isSample else { return }
         let body: JSON = [

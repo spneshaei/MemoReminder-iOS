@@ -9,7 +9,6 @@ import SwiftUI
 import BottomSheet
 import ActivityIndicatorView
 
-@available(iOS 15.0, *)
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @EnvironmentObject var globalData: GlobalData
@@ -18,9 +17,23 @@ struct HomeView: View {
     @State private var memoryContents = "Enter memory details"
     @State var showActivityIndicatorView = false
     @State var showingAddMemoryErrorAlert = false
+    @State var showingLoadingMemoriesErrorAlert = false
     @State var showingAddMemorySuccessAlert = false
     @State var shouldPresentMemorySheet = false
     @State var memoryToShowInMemorySheet = Memory.sample
+    
+    fileprivate func reloadData() async {
+        do {
+            main { showActivityIndicatorView = true }
+            try await viewModel.loadTopMemories(globalData: globalData)
+            main { showActivityIndicatorView = false }
+        } catch {
+            main {
+                showActivityIndicatorView = false
+                showingLoadingMemoriesErrorAlert = true
+            }
+        }
+    }
     
     var slideshowURLs: [String] {
         viewModel.friendsMemories
@@ -32,7 +45,7 @@ struct HomeView: View {
         async {
             do {
                 main { showActivityIndicatorView = true }
-                try await viewModel.sendMemory(title: memoryTitle, contents: memoryContents, globalData: globalData)
+                try await viewModel.addMemory(title: memoryTitle, contents: memoryContents, globalData: globalData)
                 main {
                     showActivityIndicatorView = false
                     showingAddMemorySuccessAlert = true
@@ -75,6 +88,14 @@ struct HomeView: View {
                 .sheet(isPresented: $shouldPresentMemorySheet) {
                     MemoryView(memory: memoryToShowInMemorySheet, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
                 }
+                .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+                .task { await reloadData() }
+                .refreshable { await reloadData() }
                 
             }
             .navigationBarTitle("Home")

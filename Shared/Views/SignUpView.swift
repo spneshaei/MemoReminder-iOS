@@ -24,7 +24,7 @@ struct SignUpView: View {
     @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
     
-    @ObservedObject var mainAppViewModel: MainAppViewModel
+    @EnvironmentObject var mainAppViewModel: MainAppViewModel
     
     var alertTextMessage: String { // TODO: better messages!
         switch signUpStatus {
@@ -144,6 +144,6 @@ struct SignUpView: View {
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
-        SignUpView(mainAppViewModel: .sample)
+        SignUpView()
     }
 }

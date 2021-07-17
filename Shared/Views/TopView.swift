@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct TopView: View {
-    @ObservedObject var viewModel: MainAppViewModel
+    @EnvironmentObject var viewModel: MainAppViewModel
     
     var body: some View {
         switch viewModel.currentView {
         case .login:
-            LoginView(mainAppViewModel: viewModel)
+            LoginView()
                 .erasedToAnyView()
         case .signUp:
-            SignUpView(mainAppViewModel: viewModel)
+            SignUpView()
                 .erasedToAnyView()
         case .mainTabView:
             MainTabView()
@@ -27,6 +27,7 @@ struct TopView: View {
 
 struct TopView_Previews: PreviewProvider {
     static var previews: some View {
-        TopView(viewModel: MainAppViewModel.sample)
+        TopView()
+            .environmentObject(MainAppViewModel.sample)
     }
 }

@@ -27,7 +27,7 @@ struct LoginView: View {
         }
     }
     
-    @ObservedObject var mainAppViewModel: MainAppViewModel
+    @EnvironmentObject var mainAppViewModel: MainAppViewModel
     
     var body: some View {
         ZStack{
@@ -134,7 +134,7 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView(mainAppViewModel: MainAppViewModel.sample)
+        LoginView()
             
     }
 }

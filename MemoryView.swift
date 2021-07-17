@@ -35,8 +35,8 @@ struct MemoryView: View {
             }
         } catch {
             main {
-                showingLikeErrorAlert = true
                 showActivityIndicatorView = false
+                showingLikeErrorAlert = true
             }
         }
     }

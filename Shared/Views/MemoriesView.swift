@@ -21,8 +21,8 @@ struct MemoriesView: View {
             main { showActivityIndicatorView = false }
         } catch {
             main {
-                showingLoadingMemoriesErrorAlert = true
                 showActivityIndicatorView = false
+                showingLoadingMemoriesErrorAlert = true
             }
         }
     }

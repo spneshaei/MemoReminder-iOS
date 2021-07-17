@@ -22,8 +22,8 @@ struct SearchView: View {
             main { showActivityIndicatorView = false }
         } catch {
             main {
-                viewModel.showingLoadingUsersErrorAlert = true
                 showActivityIndicatorView = false
+                viewModel.showingLoadingUsersErrorAlert = true
             }
         }
     }

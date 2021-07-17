@@ -40,6 +40,9 @@ class ProfileViewModel: ObservableObject {
                 user.email = result["email"].stringValue
                 user.phoneNumber = result["phone_number"].stringValue
                 user.birthday = result["birthday_date"].stringValue
+                user.numberOfLikes = result["likes_received_count"].intValue
+                user.numberOfMemories = result["posts_count"].intValue
+                user.numberOfComments = result["comments_received_count"].intValue
                 return user
             }.first ?? User(id: 1)
         }
@@ -70,6 +73,11 @@ class ProfileViewModel: ObservableObject {
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
+    }
+    
+    func logout(globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        try await Rester.rest(endPoint: "logout/?token=\(globalData.token)", body: "", method: .post)
     }
     
     // TODO: We don't have reject friend request!

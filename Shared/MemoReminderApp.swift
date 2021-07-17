@@ -25,8 +25,9 @@ struct MemoReminderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TopView(viewModel: viewModel)
+            TopView()
                 .environmentObject(globalData)
+                .environmentObject(viewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onAppear {
                     viewModel.currentView = globalData.loggedIn ? .mainTabView : .login

@@ -11,6 +11,7 @@ import ActivityIndicatorView
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel
     @EnvironmentObject var globalData: GlobalData
+    @EnvironmentObject var mainAppViewModel: MainAppViewModel
     @State var editMode = false
     @State var birthDate = Date() // TODO: This should be linked to the real birthday
     @State var showActivityIndicatorView = false
@@ -18,6 +19,26 @@ struct ProfileView: View {
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
         UITextView.appearance().backgroundColor = .clear
+    }
+    
+    fileprivate func logout() async {
+        // viewModel.logout(globalData: globalData)
+        do {
+            main { showActivityIndicatorView = true }
+            try await viewModel.logout(globalData: globalData)
+            main {
+                showActivityIndicatorView = false
+                globalData.logout()
+                withAnimation {
+                    mainAppViewModel.currentView = .login
+                }
+            }
+        } catch {
+            main {
+                showActivityIndicatorView = false
+                viewModel.shouldShowLoadingDataErrorAlert = true
+            }
+        }
     }
     
     fileprivate func reloadData() async {
@@ -29,8 +50,8 @@ struct ProfileView: View {
             main { showActivityIndicatorView = false }
         } catch {
             main {
-                viewModel.shouldShowLoadingDataErrorAlert = true
                 showActivityIndicatorView = false
+                viewModel.shouldShowLoadingDataErrorAlert = true
             }
         }
     }
@@ -65,10 +86,12 @@ struct ProfileView: View {
                         }
                     } else {
                         ThreeStatsView(user: viewModel.user)
-                        Text("Follow requests").font(.title).bold()
-                            .listRowSeparator(.hidden)
-                        ForEach(viewModel.followRequests) { user in
-                            AcceptRejectUserCell(user: user, profileViewModel: viewModel)
+                        if !viewModel.followRequests.isEmpty {
+                            Text("Follow requests").font(.title).bold()
+                                .listRowSeparator(.hidden)
+                            ForEach(viewModel.followRequests) { user in
+                                AcceptRejectUserCell(user: user, profileViewModel: viewModel)
+                            }
                         }
                         Text("My created memories").font(.title).bold()
                             .listRowSeparator(.hidden)
@@ -84,7 +107,8 @@ struct ProfileView: View {
                 .alert("Accept failed. Please try again", isPresented: $viewModel.shouldShowAcceptErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                .alert("Loading data failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
+                // TODO: Separate alert for logout and loading data
+                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
                 .task {
@@ -94,16 +118,27 @@ struct ProfileView: View {
                     await reloadData()
                 }
                 .navigationBarTitle("My Profile")
-                .navigationBarItems(trailing: Button(action: {
-                    withAnimation {
-                        editMode.toggle()
+                .navigationBarItems(trailing: HStack {
+                    Button(action: {
+                        async { await logout() }
+                    }) {
+                        Image(systemName: "arrow.right.circle")
+                        // TODO: Better symbol for logout
+                        // TODO: Confirmation upon log out!
+                        // TODO: withAnimation in many places needed :)
                     }
-                }) {
-                    if editMode {
-                        Text("Done")
-                            .fontWeight(.bold)
-                    } else {
-                        Image(systemName: "square.and.pencil")
+                    
+                    Button(action: {
+                        withAnimation {
+                            editMode.toggle()
+                        }
+                    }) {
+                        if editMode {
+                            Text("Done")
+                                .fontWeight(.bold)
+                        } else {
+                            Image(systemName: "square.and.pencil")
+                        }
                     }
                 })
                 
