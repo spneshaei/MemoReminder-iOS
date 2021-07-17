@@ -38,6 +38,10 @@ class Memory: Identifiable, Codable {
         self.id = id
     }
     
+    var createdDateFormatted: String {
+        return createdDate.components(separatedBy: "T").first ?? ""
+    }
+    
     static var sample: Memory {
         let memory = Memory(id: 1)
         memory.title = "A great memory"
@@ -68,6 +72,7 @@ class Memory: Identifiable, Codable {
         memory.creatorFirstName = result["creator_user"]["first_name"].stringValue // TODO: Last name!
         memory.title = result["title"].stringValue
         memory.contents = result["text"].stringValue
+        memory.createdDate = result["created"].stringValue
         let likes = result["likes"].arrayValue
         memory.numberOfLikes = likes.count
         memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"]["id"].intValue == currentUserID }

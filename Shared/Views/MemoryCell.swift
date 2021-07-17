@@ -9,6 +9,9 @@ import SwiftUI
 import URLImage
 
 struct MemoryCell: View {
+    @Environment(\.colorScheme) var colorScheme
+    var isDarkMode: Bool { colorScheme == .dark }
+    
     var memory: Memory
     var shouldShowProfilePicture: Bool
     
@@ -36,7 +39,7 @@ struct MemoryCell: View {
         //            Spacer()
         //        }.padding()
         HStack(alignment: .center) {
-            if URL(string: memory.imageLink) != nil {
+            if shouldShowProfilePicture && URL(string: memory.imageLink) != nil {
                 URLImage(URL(string: memory.imageLink)!) { urlImage in
                     urlImage.resizable()
                 }
@@ -53,24 +56,20 @@ struct MemoryCell: View {
                 // TODO: Make the image clipped to circle
             }
             
-            VStack(alignment: .leading, spacing: 8) {
+            VStack(alignment: .leading, spacing: 4) {
                 Text(memory.title)
                     .font(.system(size: 26, weight: .bold, design: .default))
                     .foregroundColor(.black)
-                Text(memory.createdDate)
+                
+                Text("\(memory.creatorFirstName) \(Text("- \(memory.createdDateFormatted)").font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255)))")
                     .font(.system(size: 16, weight: .bold, design: .default))
-                    .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255))
-                HStack {
-                    Text(memory.creatorUsername)
-                        .font(.system(size: 16, weight: .bold, design: .default))
-                        .foregroundColor(.black)
-                        .padding(.top, 8)
-                }
-            }.padding(20)
+                    .foregroundColor(.black)
+            }.padding(16)
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .center)
-        .background(Color(red: 247/255, green: 207/255, blue: 71/255))
+        .background(isDarkMode ? Color.orange : Color(red: 247/255, green: 207/255, blue: 71/255))
+
         .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
@@ -79,7 +78,11 @@ struct MemoryCell: View {
 
 struct MemoryCell_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryCell(memory: Memory.sample)
+        Group {
+//            MemoryCell(memory: Memory.sample)
+            MemoryCell(memory: Memory.sample)
+                .preferredColorScheme(.dark)
+        }
     }
 }
 

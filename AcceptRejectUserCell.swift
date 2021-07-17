@@ -9,6 +9,9 @@ import SwiftUI
 import URLImage
 
 struct AcceptRejectUserCell: View {
+    @Environment(\.colorScheme) var colorScheme
+    var isDarkMode: Bool { colorScheme == .dark }
+    
     var user: User
     @ObservedObject var profileViewModel: ProfileViewModel
     @EnvironmentObject var globalData: GlobalData
@@ -57,7 +60,7 @@ struct AcceptRejectUserCell: View {
             
         }
         .frame(maxWidth: .infinity, alignment: .center)
-        .background(Color(red: 247/255, green: 207/255, blue: 71/255))
+        .background(isDarkMode ? Color.orange : Color(red: 247/255, green: 207/255, blue: 71/255))
         .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)

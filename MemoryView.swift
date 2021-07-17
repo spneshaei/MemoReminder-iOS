@@ -10,6 +10,8 @@ import ActivityIndicatorView
 import MapKit
 
 // TODO: Only owner should be able to delete memories
+// TODO: Do we have delete memory??
+// TODO: Created date in memory page!
 
 struct MemoryView: View {
     @EnvironmentObject var globalData: GlobalData

@@ -31,9 +31,12 @@ struct MemoriesView: View {
         NavigationView {
             ZStack {
                 List(viewModel.memories) { memory in
-                    NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                    ZStack {
                         MemoryCell(memory: memory)
                             .listRowSeparator(.hidden)
+                        NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                            EmptyView()
+                        }.buttonStyle(PlainButtonStyle())
                     }
                 }
                 .listStyle(PlainListStyle())

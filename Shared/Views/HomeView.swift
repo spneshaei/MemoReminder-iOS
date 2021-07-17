@@ -76,13 +76,12 @@ struct HomeView: View {
                         .listRowSeparator(.hidden)
                     
                     ForEach(viewModel.topMemories) { memory in
-                        NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
-                            MemoryCell(memory: memory)
+                        ZStack {
+                            MemoryCell(memory: memory, shouldShowProfilePicture: false)
                                 .listRowSeparator(.hidden)
-    //                            .onTapGesture {
-    //                                memoryToShowInMemorySheet = memory
-    //                                shouldPresentMemorySheet = true
-    //                            }
+                            NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                                EmptyView()
+                            }.buttonStyle(PlainButtonStyle())
                         }
                     }
                     .listRowSeparator(.hidden)

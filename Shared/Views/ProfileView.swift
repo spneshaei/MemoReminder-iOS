@@ -86,21 +86,25 @@ struct ProfileView: View {
                         }
                     } else {
                         ThreeStatsView(user: viewModel.user)
-                        if !viewModel.followRequests.isEmpty {
-                            Text("Follow requests").font(.title).bold()
-                                .listRowSeparator(.hidden)
-                            ForEach(viewModel.followRequests) { user in
-                                AcceptRejectUserCell(user: user, profileViewModel: viewModel)
-                            }
-                        }
                         // TODO: Misalignment in the stats view... in Simulator
-                        Text("My created memories").font(.title).bold()
+                        // TODO: Dark Mode!
+                    }
+                    if !viewModel.followRequests.isEmpty {
+                        Text("Follow requests").font(.title).bold()
                             .listRowSeparator(.hidden)
-                        ForEach(viewModel.myMemories) { memory in
+                        ForEach(viewModel.followRequests) { user in
+                            AcceptRejectUserCell(user: user, profileViewModel: viewModel)
+                        }
+                    }
+                    Text("My created memories").font(.title).bold()
+                        .listRowSeparator(.hidden)
+                    ForEach(viewModel.myMemories) { memory in
+                        ZStack {
+                            MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                                .listRowSeparator(.hidden)
                             NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
-                                MemoryCell(memory: memory, shouldShowProfilePicture: false)
-                                    .listRowSeparator(.hidden)
-                            }
+                                EmptyView()
+                            }.buttonStyle(PlainButtonStyle())
                         }
                     }
                     
@@ -157,6 +161,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel.sample)
+            .preferredColorScheme(.dark)
             .environmentObject(GlobalData.sample)
     }
 }
