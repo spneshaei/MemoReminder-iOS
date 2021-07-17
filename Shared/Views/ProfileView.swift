@@ -150,7 +150,7 @@ struct ProfileView: View {
                         ZStack {
                             MemoryCell(memory: memory, shouldShowProfilePicture: false)
                                 .listRowSeparator(.hidden)
-                            NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                            NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
                                 EmptyView()
                             }.buttonStyle(PlainButtonStyle())
                                 .listRowSeparator(.hidden)

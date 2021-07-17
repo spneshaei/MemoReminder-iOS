@@ -27,7 +27,7 @@ class Rester {
         case imageJPG = "image/jpg"
     }
     
-    fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post) async throws {
+    fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post) async throws -> String {
         guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
             throw RestError.wrongURLFormat
         }
@@ -46,6 +46,7 @@ class Rester {
                     throw RestError.errorCode(code: httpResponse.statusCode)
                 }
             }
+            return String(data: dataReceived, encoding: .utf8) ?? ""
         } catch {
             throw RestError.networkError
         }
@@ -92,7 +93,8 @@ class Rester {
         return try await rest(endPoint: endPoint, token: token, body: body, method: method)
     }
     
-    static func upload(endPoint: String, body: String, data: Data, method: RestMethod = .post) async throws {
+    // returns url of image uploaded
+    static func upload(endPoint: String, body: String, data: Data, method: RestMethod = .post) async throws -> String {
         return try await upload(endPoint: endPoint, token: token, body: body, data: data, method: method)
     }
 }

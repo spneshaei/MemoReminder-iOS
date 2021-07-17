@@ -79,7 +79,7 @@ struct HomeView: View {
                         ZStack {
                             MemoryCell(memory: memory, shouldShowProfilePicture: false)
                                 .listRowSeparator(.hidden)
-                            NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                            NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
                                 EmptyView()
                             }.buttonStyle(PlainButtonStyle())
                         }
@@ -89,7 +89,7 @@ struct HomeView: View {
                 }
                 .listStyle(PlainListStyle())
                 .sheet(isPresented: $shouldPresentMemorySheet) {
-                    MemoryView(memory: memoryToShowInMemorySheet, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
+                    MemoryView(memory: memoryToShowInMemorySheet, imageLink: memoryToShowInMemorySheet.imageLink, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
                 }
                 .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
                     Button("OK", role: .cancel) { }

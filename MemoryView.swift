@@ -8,6 +8,8 @@
 import SwiftUI
 import ActivityIndicatorView
 import MapKit
+import URLImage
+import ImagePickerView
 
 struct MemoryView: View {
     @EnvironmentObject var globalData: GlobalData
@@ -15,10 +17,45 @@ struct MemoryView: View {
     @StateObject var viewModel = MemoryViewModel()
     
     @State var memory: Memory
+    @State var imageLink: String
     @State var numberOfLikes: Int
     @State var hasCurrentUserLiked: Bool
     @State var showActivityIndicatorView = false
     @State var showingLikeErrorAlert = false
+    @State var showingUploadErrorAlert = false
+    
+    @State var showImagePicker: Bool = false
+    @State var image: UIImage?
+    
+    enum UploadImageState {
+        case notStarted, waitingToTapUpload, uploading
+    }
+    
+    @State var uploadImageState: UploadImageState = .notStarted
+    
+    func uploadPhoto() async {
+        do {
+            main {
+                showActivityIndicatorView = true
+                uploadImageState = .uploading
+            }
+            let imageURL = try await viewModel.upload(memory: memory, image: image ?? UIImage(), globalData: globalData)
+            main {
+                memory.imageLink = imageURL
+                imageLink = imageURL
+                image = nil
+                uploadImageState = .notStarted
+                showActivityIndicatorView = false
+            }
+        } catch {
+            main {
+                image = nil
+                uploadImageState = .notStarted
+                showActivityIndicatorView = false
+                showingUploadErrorAlert = true
+            }
+        }
+    }
     
     func likeMemory() async {
         do {
@@ -42,13 +79,21 @@ struct MemoryView: View {
     var body: some View {
         ZStack {
             List {
-                if !memory.imageLink.isEmpty {
-                    AsyncImage(url: URL(string: memory.imageLink)!)
-                        .frame(maxHeight: 200)
-                        .listRowSeparator(.hidden)
-                        .onTapGesture(count: 2) {
-                            async { await likeMemory() }
-                        }
+                if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
+                    URLImage(URL(string: memory.imageLink)!) { urlImage in
+                        urlImage.resizable()
+                    }
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxHeight: 200)
+                    .listRowSeparator(.hidden)
+                }
+                if (uploadImageState == .waitingToTapUpload || uploadImageState == .uploading) {
+                    if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .listRowSeparator(.hidden)
+                    }
                 }
                 VStack(alignment: .leading, spacing: 5) {
                     Text("Description").font(.caption)
@@ -65,10 +110,11 @@ struct MemoryView: View {
                 NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
                     Text("Show on the map")
                 }
-                
-                
             }
             .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            .alert("Error in uploading the image. Please try again", isPresented: $showingUploadErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
             .navigationBarTitle(Text(memory.title))
@@ -87,6 +133,24 @@ struct MemoryView: View {
 //                }) {
 //                    Image(systemName: "square.and.pencil")
 //                }
+                if imageLink.isEmpty && memory.creatorUserID == globalData.userID && uploadImageState != .uploading {
+                    Button(action: {
+                        if uploadImageState == .waitingToTapUpload {
+                            async { await uploadPhoto() }
+                        } else {
+                            showImagePicker = true
+                            uploadImageState = .waitingToTapUpload
+                        }
+                    }) {
+                        uploadImageState == .waitingToTapUpload ? Text("Upload").bold().erasedToAnyView() : Image(systemName: "arrow.up.circle").erasedToAnyView()
+                    }
+                    .sheet(isPresented: $showImagePicker) {
+                        ImagePickerView(sourceType: .photoLibrary) { image in
+                            self.image = image
+                        }
+                    }
+                }
+                
                 Button(action: {
                     async { await likeMemory() }
                 }) {
@@ -127,6 +191,8 @@ struct LocationRow: View {
 
 struct MemoryView_Previews: PreviewProvider {
     static var previews: some View {
-        MemoryView(memory: Memory.sample, numberOfLikes: Memory.sample.numberOfLikes, hasCurrentUserLiked: Memory.sample.hasCurrentUserLiked)
+        NavigationView {
+            MemoryView(memory: Memory.sample, imageLink: Memory.sample.imageLink, numberOfLikes: Memory.sample.numberOfLikes, hasCurrentUserLiked: Memory.sample.hasCurrentUserLiked)
+        }
     }
 }
