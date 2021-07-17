@@ -13,7 +13,7 @@ struct ProfileView: View {
     @EnvironmentObject var globalData: GlobalData
     @EnvironmentObject var mainAppViewModel: MainAppViewModel
     @State var editMode = false
-    @State var birthDate = Date() // TODO: This should be linked to the real birthday
+    @State var birthDate = Date()
     @State var showActivityIndicatorView = false
     
     init(viewModel: ProfileViewModel) {
@@ -47,7 +47,11 @@ struct ProfileView: View {
             try await viewModel.loadUser(globalData: globalData)
             try await viewModel.loadFollowRequests(globalData: globalData)
             try await viewModel.loadMyMemories(globalData: globalData)
-            main { showActivityIndicatorView = false }
+            main {
+                print("Birthdaaaay: \(viewModel.user.birthday)")
+//                birthDate =
+                showActivityIndicatorView = false
+            }
         } catch {
             main {
                 showActivityIndicatorView = false
@@ -74,11 +78,6 @@ struct ProfileView: View {
                         VStack(alignment: .leading) {
                             Text("EMAIL")
                             TextField(viewModel.user.email, text: $viewModel.user.email)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                        }
-                        VStack(alignment: .leading) {
-                            Text("PHONE NUMBER")
-                            TextField(viewModel.user.phoneNumber, text: $viewModel.user.phoneNumber)
                                 .textFieldStyle(RoundedBorderTextFieldStyle())
                         }
                         DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
