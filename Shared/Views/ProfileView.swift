@@ -93,10 +93,14 @@ struct ProfileView: View {
                                 AcceptRejectUserCell(user: user, profileViewModel: viewModel)
                             }
                         }
+                        // TODO: Misalignment in the stats view... in Simulator
                         Text("My created memories").font(.title).bold()
                             .listRowSeparator(.hidden)
                         ForEach(viewModel.myMemories) { memory in
-                            MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                            NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                                MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                                    .listRowSeparator(.hidden)
+                            }
                         }
                     }
                     
@@ -108,9 +112,9 @@ struct ProfileView: View {
                     Button("OK", role: .cancel) { }
                 }
                 // TODO: Separate alert for logout and loading data
-                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
+//                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
+//                    Button("OK", role: .cancel) { }
+//                }
                 .task {
                     await reloadData()
                 }

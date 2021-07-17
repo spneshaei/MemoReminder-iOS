@@ -107,6 +107,14 @@
 		42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199426A17D1400D20808 /* CommentsViewModel.swift */; };
 		42D0199826A1C2F200D20808 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199726A1C2F200D20808 /* CommentCell.swift */; };
 		42D0199926A1C2F200D20808 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199726A1C2F200D20808 /* CommentCell.swift */; };
+		42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199B26A27DED00D20808 /* BarBuilder.swift */; };
+		42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199B26A27DED00D20808 /* BarBuilder.swift */; };
+		42D0199F26A27E1400D20808 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199E26A27E1400D20808 /* BottomBar.swift */; };
+		42D019A026A27E1400D20808 /* BottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0199E26A27E1400D20808 /* BottomBar.swift */; };
+		42D019A226A27E2A00D20808 /* BottomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A126A27E2A00D20808 /* BottomBarItem.swift */; };
+		42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A126A27E2A00D20808 /* BottomBarItem.swift */; };
+		42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A426A27E4400D20808 /* BarButtonItemView.swift */; };
+		42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A426A27E4400D20808 /* BarButtonItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +189,10 @@
 		42D0199126A1623B00D20808 /* MemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42D0199426A17D1400D20808 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42D0199726A1C2F200D20808 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = SOURCE_ROOT; };
+		42D0199B26A27DED00D20808 /* BarBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarBuilder.swift; sourceTree = "<group>"; };
+		42D0199E26A27E1400D20808 /* BottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBar.swift; sourceTree = "<group>"; };
+		42D019A126A27E2A00D20808 /* BottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarItem.swift; sourceTree = "<group>"; };
+		42D019A426A27E4400D20808 /* BarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +325,7 @@
 		42B22C542696B49000091D30 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				42D0199A26A27DD700D20808 /* BottomBar */,
 				42D0198526A01D2C00D20808 /* SearchUserCell.swift */,
 				424FDCF92697410F004051FD /* FancyScrollView */,
 				424FDCF626972FC5004051FD /* StickyHeader.swift */,
@@ -349,6 +362,17 @@
 				424FDCF026971B4C004051FD /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		42D0199A26A27DD700D20808 /* BottomBar */ = {
+			isa = PBXGroup;
+			children = (
+				42D0199B26A27DED00D20808 /* BarBuilder.swift */,
+				42D0199E26A27E1400D20808 /* BottomBar.swift */,
+				42D019A126A27E2A00D20808 /* BottomBarItem.swift */,
+				42D019A426A27E4400D20808 /* BarButtonItemView.swift */,
+			);
+			path = BottomBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -528,6 +552,7 @@
 				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
+				42D019A226A27E2A00D20808 /* BottomBarItem.swift in Sources */,
 				424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				424FDCE8269715AE004051FD /* MemoriesView.swift in Sources */,
 				424FDD162697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
@@ -540,9 +565,12 @@
 				424FDCEE26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0C2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
+				42D0199F26A27E1400D20808 /* BottomBar.swift in Sources */,
 				42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
+				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
+				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
 				424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C562696B49F00091D30 /* ImageSlideshow.swift in Sources */,
 				424FDD042697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
@@ -581,6 +609,7 @@
 				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
+				42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */,
 				424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */,
 				424FDD172697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
@@ -593,9 +622,12 @@
 				424FDCEF26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0D2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
+				42D019A026A27E1400D20808 /* BottomBar.swift in Sources */,
 				42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
+				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
+				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,
 				424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C572696B49F00091D30 /* ImageSlideshow.swift in Sources */,
 				424FDD052697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,

@@ -27,7 +27,9 @@ struct HomeView: View {
             main { showActivityIndicatorView = true }
             try await viewModel.loadTopMemories(globalData: globalData)
             main { showActivityIndicatorView = false }
-        } catch {
+        } catch (let error) {
+            print("eErr")
+            print(error.localizedDescription)
             main {
                 showActivityIndicatorView = false
                 showingLoadingMemoriesErrorAlert = true
@@ -74,12 +76,14 @@ struct HomeView: View {
                         .listRowSeparator(.hidden)
                     
                     ForEach(viewModel.topMemories) { memory in
-                        MemoryCell(memory: memory)
-                            .listRowSeparator(.hidden)
-                            .onTapGesture {
-                                memoryToShowInMemorySheet = memory
-                                shouldPresentMemorySheet = true
-                            }
+                        NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                            MemoryCell(memory: memory)
+                                .listRowSeparator(.hidden)
+    //                            .onTapGesture {
+    //                                memoryToShowInMemorySheet = memory
+    //                                shouldPresentMemorySheet = true
+    //                            }
+                        }
                     }
                     .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
@@ -91,9 +95,9 @@ struct HomeView: View {
                 .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
+//                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
+//                    Button("OK", role: .cancel) { }
+//                }
                 .task { await reloadData() }
                 .refreshable { await reloadData() }
                 
