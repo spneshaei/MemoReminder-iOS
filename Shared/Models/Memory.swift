@@ -48,7 +48,7 @@ class Memory: Identifiable, Codable {
         memory.creatorUserID = 0
         memory.creatorUsername = "seyyedparsa"
         memory.creatorFirstName = "Seyed Parsa"
-        memory.createdDate = "2021 21 21"
+        memory.createdDate = "2021-21-21"
         memory.creatorProfilePictureURL = ""
         memory.contents = "This was the best memory ever, ever, ever!!!"
         memory.voiceLink = ""

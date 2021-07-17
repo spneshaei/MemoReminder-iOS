@@ -54,6 +54,8 @@ struct MemoryView: View {
                     Text("Description").font(.caption)
                     Text(memory.contents)
                 }
+                Text("Created on \(memory.createdDate)")
+                    .listRowSeparator(.hidden)
                 Text("\(numberOfLikes) likes and \(memory.comments.count) comments")
                     .listRowSeparator(.hidden)
                 NavigationLink(destination: CommentsView(memory: memory)) {
