@@ -54,14 +54,18 @@ struct MemoryCell: View {
                 //                    .padding(.all, 20)
             }
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text(memory.title)
-                    .font(.system(size: 26, weight: .bold, design: .default))
-                    .foregroundColor(.black)
-                
-                Text("\(memory.creatorFirstName) \(Text("- \(memory.createdDateFormatted)").font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255)))")
-                    .font(.system(size: 16, weight: .bold, design: .default))
-                    .foregroundColor(.black)
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(memory.title)
+                        .font(.system(size: 26, weight: .bold, design: .default))
+                        .foregroundColor(.black)
+                    
+                    Text("\(memory.creatorFirstName) \(Text("- \(memory.createdDateFormatted)").font(.system(size: 16, weight: .bold, design: .default)).foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255)))")
+                        .font(.system(size: 16, weight: .bold, design: .default))
+                        .foregroundColor(.black)
+                }
+                Spacer()
+                Label("\(memory.numberOfLikes)", systemImage: memory.hasCurrentUserLiked ? "heart.fill" : "heart")
             }.padding(16)
             Spacer()
         }
