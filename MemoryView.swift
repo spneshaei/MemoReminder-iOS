@@ -106,10 +106,10 @@ struct MemoryView: View {
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
                 }
-                LocationRow(memory: memory)
-                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
-                    Text("Show on the map")
-                }
+//                LocationRow(memory: memory)
+//                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
+//                    Text("Show on the map")
+//                }
             }
             .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
                 Button("OK", role: .cancel) { }
