@@ -45,6 +45,10 @@
 		424FDD1D269A0AF6004051FD /* Rester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1B269A0AF6004051FD /* Rester.swift */; };
 		424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1E269A9F67004051FD /* SwiftyJSON.swift */; };
 		424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1E269A9F67004051FD /* SwiftyJSON.swift */; };
+		429801AB26A3222B00928A03 /* AddMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AA26A3222B00928A03 /* AddMemoryView.swift */; };
+		429801AC26A3222B00928A03 /* AddMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AA26A3222B00928A03 /* AddMemoryView.swift */; };
+		429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AD26A334D700928A03 /* TagsViewModel.swift */; };
+		429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AD26A334D700928A03 /* TagsViewModel.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -161,6 +165,8 @@
 		424FDD1B269A0AF6004051FD /* Rester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rester.swift; sourceTree = SOURCE_ROOT; };
 		424FDD1E269A9F67004051FD /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MemoReminder--iOS--Info.plist"; sourceTree = "<group>"; };
+		429801AA26A3222B00928A03 /* AddMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryView.swift; sourceTree = SOURCE_ROOT; };
+		429801AD26A334D700928A03 /* TagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagsViewModel.swift; path = Shared/Views/TagsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -315,6 +321,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				429801AA26A3222B00928A03 /* AddMemoryView.swift */,
 				42D0199726A1C2F200D20808 /* CommentCell.swift */,
 				42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */,
 				42D01971269D547700D20808 /* TopView.swift */,
@@ -364,6 +371,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				429801AD26A334D700928A03 /* TagsViewModel.swift */,
 				42D0199426A17D1400D20808 /* CommentsViewModel.swift */,
 				42D0199126A1623B00D20808 /* MemoryViewModel.swift */,
 				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
@@ -563,6 +571,7 @@
 				42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42B22C3B2696274300091D30 /* Persistence.swift in Sources */,
+				429801AB26A3222B00928A03 /* AddMemoryView.swift in Sources */,
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
 				42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
@@ -584,6 +593,7 @@
 				42D0199F26A27E1400D20808 /* BottomBar.swift in Sources */,
 				42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
+				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
@@ -622,6 +632,7 @@
 				42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C362696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42B22C3C2696274300091D30 /* Persistence.swift in Sources */,
+				429801AC26A3222B00928A03 /* AddMemoryView.swift in Sources */,
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
 				42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
@@ -643,6 +654,7 @@
 				42D019A026A27E1400D20808 /* BottomBar.swift in Sources */,
 				42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
+				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,

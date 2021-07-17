@@ -11,9 +11,16 @@ class Tag: Identifiable, Codable {
     var id: Int
     
     var name = ""
-    var colorHexCode = ""
+    var color = ""
     
     init(id: Int) {
         self.id = id
+    }
+    
+    static var sample: Tag {
+        let tag = Tag(id: 0)
+        tag.name = "Friends"
+        tag.color = "ffc800"
+        return tag
     }
 }

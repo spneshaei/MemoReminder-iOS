@@ -11,6 +11,7 @@ import ActivityIndicatorView
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @StateObject var tagsViewModel = TagsViewModel()
     @EnvironmentObject var globalData: GlobalData
     @State var isBottomSheetPresented = false
     @State var memoryTitle = ""
@@ -110,7 +111,7 @@ struct HomeView: View {
                     Image(systemName: "magnifyingglass")
                 }
                 
-                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped)) {
+                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped, tagsViewModel: tagsViewModel)) {
                     Image(systemName: "plus.square")
                 }
                 //                Button(action: {
@@ -120,7 +121,7 @@ struct HomeView: View {
                 //                }
             })
             .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
-                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped)
+                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped, tagsViewModel: tagsViewModel)
             }
         }
     }
@@ -144,36 +145,5 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel.sample)
             .environmentObject(GlobalData.sample)
-    }
-}
-
-struct AddMemoryView: View {
-    @Binding var memoryTitle: String
-    @Binding var memoryContents: String
-    @Binding var showActivityIndicator: Bool
-    var addMemoryTapped: () -> Void
-    
-    var body: some View {
-        ZStack {
-            VStack(alignment: .leading) {
-                TextField("Memory Title", text: $memoryTitle).font(.title)
-                TextEditor(text: $memoryContents)
-                
-                Spacer()
-                
-                Button(action: {
-                    addMemoryTapped()
-                }, label: {
-                    Text("Add Memory")
-                        .padding(.horizontal)
-                })
-                    .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
-            }
-                .padding()
-                .navigationBarTitle(Text("Add Memory"))
-            ActivityIndicatorView(isVisible: $showActivityIndicator, type: .equalizer)
-                .frame(width: 100.0, height: 100.0)
-                .foregroundColor(.orange)
-        }
     }
 }
