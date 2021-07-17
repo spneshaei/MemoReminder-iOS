@@ -94,9 +94,9 @@ struct HomeView: View {
                 .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-//                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
-//                    Button("OK", role: .cancel) { }
-//                }
+                //                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
+                //                    Button("OK", role: .cancel) { }
+                //                }
                 .task { await reloadData() }
                 .refreshable { await reloadData() }
                 
@@ -106,35 +106,18 @@ struct HomeView: View {
                 NavigationLink(destination: SearchView()) {
                     Image(systemName: "magnifyingglass")
                 }
-                Button(action: {
-                    isBottomSheetPresented = true
-                }) {
+                
+                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped)) {
                     Image(systemName: "plus.square")
                 }
+                //                Button(action: {
+                //                    isBottomSheetPresented = true
+                //                }) {
+                //                    Image(systemName: "plus.square")
+                //                }
             })
             .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) { // TODO: Not very good with keyboard!
-                ScrollView {
-                    ZStack {
-                        VStack(alignment: .leading) {
-                            Text("Add memory").font(.title).bold()
-                            TextField("Memory Title", text: $memoryTitle).font(.title)
-                            TextEditor(text: $memoryContents)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                addMemoryTapped()
-                            }, label: {
-                                Text("Add Memory")
-                                    .padding(.horizontal)
-                            })
-                                .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
-                        }.padding()
-                        ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
-                            .frame(width: 100.0, height: 100.0)
-                            .foregroundColor(.orange)
-                    }
-                }
+                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped)
             }
         }
     }
@@ -158,5 +141,42 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel.sample)
             .environmentObject(GlobalData.sample)
+    }
+}
+
+struct AddMemoryView: View {
+    @Binding var memoryTitle: String
+    @Binding var memoryContents: String
+    @Binding var showActivityIndicator: Bool
+    var addMemoryTapped: () -> Void
+    
+    var body: some View {
+        ZStack {
+            VStack(alignment: .leading) {
+                TextField("Memory Title", text: $memoryTitle).font(.title)
+                TextEditor(text: $memoryContents)
+                
+                Spacer()
+                
+                Button(action: {
+                    addMemoryTapped()
+                }, label: {
+                    Text("Add Memory")
+                        .padding(.horizontal)
+                })
+                    .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
+            }
+                .padding()
+                .navigationBarTitle(Text("Add Memory"))
+            ActivityIndicatorView(isVisible: $showActivityIndicator, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
+            // TODO: Prevent activity indicators every second and ... :) maybe smaller?
+            // TODO: Delete mem
+            // TODO: Mem cell should include like count
+            // TODO: Force touch everywhere (?) or menu contexts (like/delete mem)
+            // TODO: Top slider of home page
+            // TODO: Upload files
+        }
     }
 }

@@ -8,14 +8,57 @@
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
+    let defaults = UserDefaults.standard
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
+    
     var isSample = false
-    @Published var myMemories: [Memory] = []
-    @Published var user = User(id: 1)
-    @Published var followRequests: [User] = []
+    
+    @Published var myMemories: [Memory] {
+        didSet {
+            defaults.set(try? encoder.encode(myMemories), forKey: "ProfileViewModel_myMemories")
+        }
+    }
+    
+    @Published var user: User {
+        didSet {
+            defaults.set(try? encoder.encode(user), forKey: "ProfileViewModel_user")
+        }
+    }
+    
+    @Published var followRequests: [User] {
+        didSet {
+            defaults.set(try? encoder.encode(followRequests), forKey: "ProfileViewModel_followRequests")
+        }
+        // TODO: Need to clear defaults upon logout!!
+        // TODO: Forgot password!!
+    }
+    
+    // TODO: We clear "friends" at the beginning in one of the view models which may not work well with cache loading... fix that
+    // TODO: If we don't want to save all in UserDefaults then what to do?
+    
     @Published var shouldShowAcceptSuccessAlert = false
     @Published var shouldShowAcceptErrorAlert = false
     @Published var shouldShowLoadingDataErrorAlert = false
     @Published var shouldShowEditProfileErrorAlert = false
+    
+    init() {
+        if let myMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "ProfileViewModel_myMemories") ?? Data()) {
+            self.myMemories = myMemories
+        } else {
+            self.myMemories = []
+        }
+        if let user = try? decoder.decode(User.self, from: defaults.data(forKey: "ProfileViewModel_user") ?? Data()) {
+            self.user = user
+        } else {
+            self.user = User(id: 2)
+        }
+        if let followRequests = try? decoder.decode([User].self, from: defaults.data(forKey: "ProfileViewModel_followRequests") ?? Data()) {
+            self.followRequests = followRequests
+        } else {
+            self.followRequests = []
+        }
+    }
     
     func loadMyMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }

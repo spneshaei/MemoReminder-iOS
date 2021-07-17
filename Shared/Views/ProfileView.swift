@@ -72,6 +72,7 @@ struct ProfileView: View {
         // TODO: Disable tapping logout or edit while offline to prevent wrong UI texts and birthday and...
         // TODO: Done button after tap should animate view...
         // TODO: Accept button in follow requests in dark mode has bad blue color
+        populateTextFields()
         do {
             main { showActivityIndicatorView = true }
             try await viewModel.loadUser(globalData: globalData)
@@ -135,6 +136,8 @@ struct ProfileView: View {
                             NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
                                 EmptyView()
                             }.buttonStyle(PlainButtonStyle())
+                                .listRowSeparator(.hidden)
+                            // TODO: Why the separator is still visible?
                         }
                     }
                     
@@ -216,6 +219,7 @@ struct ProfileView_Previews: PreviewProvider {
     }
 }
 
+// TODO: No profile pic!
 struct ProfilePictureAndNameView: View {
     var profilePictureURL: String
     @Binding var name: String
@@ -227,13 +231,15 @@ struct ProfilePictureAndNameView: View {
             if !profilePictureURL.isEmpty {
                 AsyncImage(url: URL(string: profilePictureURL)!)
             }
-            if editMode {
-                TextField("Enter your name", text: $name)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .font(.title2)
-            } else {
-                Text(name)
-                    .font(.title2)
+            HStack {
+                Text("Welcome,")
+                if editMode {
+                    TextField("Enter your name", text: $name)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                } else {
+                    Text(name)
+                }
+                Spacer()
             }
         }
     }

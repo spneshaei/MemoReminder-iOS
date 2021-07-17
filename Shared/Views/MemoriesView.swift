@@ -37,6 +37,7 @@ struct MemoriesView: View {
                         NavigationLink(destination: MemoryView(memory: memory, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
                             EmptyView()
                         }.buttonStyle(PlainButtonStyle())
+                            .listRowSeparator(.hidden)
                     }
                 }
                 .listStyle(PlainListStyle())
