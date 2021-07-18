@@ -48,7 +48,7 @@ struct HomeView: View {
         async {
             do {
                 main { showActivityIndicatorView = true }
-                try await viewModel.addMemory(title: memoryTitle, contents: memoryContents, globalData: globalData)
+                try await viewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, globalData: globalData)
                 main {
                     showActivityIndicatorView = false
                     showingAddMemorySuccessAlert = true
