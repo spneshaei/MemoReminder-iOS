@@ -21,6 +21,8 @@ class MemoriesViewModel: ObservableObject {
     }
     
     @Published var searchPredicate = ""
+    @Published var isDateSelected = false
+    @Published var selectedDate = Date()
     
     init() {
         if let memories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "MemoriesViewModel_memories") ?? Data()) {
@@ -30,9 +32,26 @@ class MemoriesViewModel: ObservableObject {
         }
     }
     
+    func isSameDay(date1: Date, date2: Date) -> Bool { // https://www.zerotoappstore.com/how-to-check-if-two-dates-are-from-the-same-day-swift.html
+//        let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
+//        if diff.day == 0 {
+//            return true
+//        } else {
+//            return false
+//        }
+        return Calendar.current.isDate(date1, inSameDayAs: date2)
+    }
+    
     var filteredMemories: [Memory] {
-        searchPredicate.isEmpty ? memories : memories.filter { $0.title.lowercased().contains(searchPredicate.lowercased())
+        let filteredMemoriesWithSearchPredicate = searchPredicate.isEmpty ? memories : memories.filter { $0.title.lowercased().contains(searchPredicate.lowercased())
             || $0.contents.lowercased().contains(searchPredicate.lowercased()) || $0.creatorUsername.lowercased().contains(searchPredicate.lowercased()) }
+        if isDateSelected {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM-dd"
+            return filteredMemoriesWithSearchPredicate.filter { isSameDay(date1: selectedDate, date2: dateFormatter.date(from: $0.createdDate.components(separatedBy: "T").first ?? "") ?? Date(timeIntervalSince1970: 1) ) }
+        } else {
+            return filteredMemoriesWithSearchPredicate
+        }
     }
     
     var aYearAgoMemories: [Memory] {

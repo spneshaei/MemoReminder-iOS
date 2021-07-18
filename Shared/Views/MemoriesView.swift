@@ -13,6 +13,7 @@ struct MemoriesView: View {
     @ObservedObject var viewModel: MemoriesViewModel
     @State var showActivityIndicatorView = false
     @State var showingLoadingMemoriesErrorAlert = false
+    @State var isNavigationLinkToSetDateActive = false
     
     fileprivate func reloadData() async {
         do {
@@ -30,7 +31,7 @@ struct MemoriesView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                List(viewModel.memories) { memory in
+                List(viewModel.filteredMemories) { memory in
                     ZStack {
                         MemoryCell(memory: memory)
                             .listRowSeparator(.hidden)
@@ -56,7 +57,26 @@ struct MemoriesView: View {
                     .frame(width: 100.0, height: 100.0)
                     .foregroundColor(.orange)
             }
+            .navigationBarItems(trailing: NavigationLink(destination: SelectDateView(memoriesViewModel: viewModel), isActive: $isNavigationLinkToSetDateActive) {
+                Button(action: {
+                    isNavigationLinkToSetDateActive = true
+                }) { Image(systemName: viewModel.isDateSelected ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
+            })
         }
+    }
+}
+
+struct SelectDateView: View {
+    @ObservedObject var memoriesViewModel: MemoriesViewModel
+    
+    var body: some View {
+        Form {
+            Toggle("Filter based on date", isOn: $memoriesViewModel.isDateSelected)
+            if memoriesViewModel.isDateSelected {
+                DatePicker("Select date", selection: $memoriesViewModel.selectedDate, displayedComponents: .date)
+            }
+        }
+        .navigationBarTitle("Filter Memories")
     }
 }
 
