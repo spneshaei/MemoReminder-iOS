@@ -62,12 +62,11 @@ struct SearchUserCell: View {
                             main { searchViewModel.followingErrorAlert = true }
                         }
                     }
-                }, label: { Text("FOLLOW").bold().foregroundColor(.blue) })
+                }, label: { Text("FOLLOW").bold().foregroundColor(isDarkMode ? Color(red: 0.05, green: 0.05, blue: 0.95) : .blue) })
                 .font(.system(size: 17, weight: .bold, design: .default))
                 .buttonStyle(.bordered)
                 .padding()
             }
-            
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .background(isDarkMode ? Color.orange : Color(red: 247/255, green: 207/255, blue: 71/255))
@@ -81,6 +80,7 @@ struct SearchUserCell: View {
 struct UserCell_Previews: PreviewProvider {
     static var previews: some View {
         SearchUserCell(user: User.sample, searchViewModel: .sample)
+            .preferredColorScheme(.dark)
             .environmentObject(GlobalData.sample)
     }
 }

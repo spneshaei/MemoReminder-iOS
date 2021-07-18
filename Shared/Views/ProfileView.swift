@@ -167,12 +167,12 @@ struct ProfileView: View {
                 .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert) {
-                    Button("Yes", role: .destructive) {
-                        async { await logout() }
-                    }
-                    Button("No", role: .cancel) { }
-                }
+//                .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert) {
+//                    Button("Yes", role: .destructive) {
+//                        async { await logout() }
+//                    }
+//                    Button("No", role: .cancel) { }
+//                }
                 //                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
                 //                    Button("OK", role: .cancel) { }
                 //                }
@@ -198,7 +198,13 @@ struct ProfileView: View {
                             guard !showActivityIndicatorView else { return }
                             showLogoutConfirmationAlert = true
                         }) {
-                            Image(systemName: "arrow.right.circle")
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                        }
+                        .confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert, titleVisibility: .visible) {
+                            Button("Yes", role: .destructive) {
+                                async { await logout() }
+                            }
+                            Button("No", role: .cancel) { }
                         }
                     }
                     
