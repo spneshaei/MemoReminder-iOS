@@ -53,7 +53,7 @@ struct SearchUserCell: View {
                 .buttonStyle(.plain)
                 .padding()
             } else {
-                Button("FOLLOW") {
+                Button(action: {
                     async {
                         do {
                             try await searchViewModel.follow(user: user, globalData: globalData)
@@ -62,7 +62,7 @@ struct SearchUserCell: View {
                             main { searchViewModel.followingErrorAlert = true }
                         }
                     }
-                }
+                }, label: { Text("FOLLOW").bold().foregroundColor(.blue) })
                 .font(.system(size: 17, weight: .bold, design: .default))
                 .buttonStyle(.bordered)
                 .padding()

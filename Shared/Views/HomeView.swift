@@ -19,7 +19,6 @@ struct HomeView: View {
     @State var showActivityIndicatorView = false
     @State var showingLoadingMemoriesErrorAlert = false
     @State var shouldPresentMemorySheet = false
-    @State var memoryToShowInMemorySheet = Memory.sample
     
     fileprivate func reloadData() async {
         do {
@@ -71,9 +70,9 @@ struct HomeView: View {
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 .listStyle(PlainListStyle())
-                .sheet(isPresented: $shouldPresentMemorySheet) {
-                    MemoryView(memory: memoryToShowInMemorySheet, imageLink: memoryToShowInMemorySheet.imageLink, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
-                }
+//                .sheet(isPresented: $shouldPresentMemorySheet) {
+//                    MemoryView(memory: memoryToShowInMemorySheet, imageLink: memoryToShowInMemorySheet.imageLink, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
+//                }
                 //                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
                 //                    Button("OK", role: .cancel) { }
                 //                }
@@ -97,7 +96,7 @@ struct HomeView: View {
                 //                }
             })
             .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
-                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: .sample, tagsViewModel: tagsViewModel)
+                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel)
             }
         }
     }
