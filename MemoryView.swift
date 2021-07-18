@@ -24,7 +24,9 @@ struct MemoryView: View {
     @State var showingLikeErrorAlert = false
     @State var showingUploadErrorAlert = false
     
-    @State var showImagePicker: Bool = false
+    @State var showImagePicker = false
+    @State var showImageSourcePicker = false
+    @State var imageSourceSelection: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
     
     enum UploadImageState {
@@ -142,14 +144,24 @@ struct MemoryView: View {
                         if uploadImageState == .waitingToTapUpload {
                             async { await uploadPhoto() }
                         } else {
-                            showImagePicker = true
+                            showImageSourcePicker = true
                             uploadImageState = .waitingToTapUpload
                         }
                     }) {
                         uploadImageState == .waitingToTapUpload ? Text("Upload").bold().erasedToAnyView() : Image(systemName: "arrow.up.circle").erasedToAnyView()
                     }
+                    .confirmationDialog("Where do you want to select memory's photo from?", isPresented: $showImageSourcePicker, titleVisibility: .visible) {
+                        Button("Camera") {
+                            imageSourceSelection = .camera
+                            showImagePicker = true
+                        }
+                        Button("Photo Library") {
+                            imageSourceSelection = .photoLibrary
+                            showImagePicker = true
+                        }
+                    }
                     .sheet(isPresented: $showImagePicker) {
-                        ImagePickerView(sourceType: .photoLibrary) { image in
+                        ImagePickerView(sourceType: imageSourceSelection) { image in
                             self.image = image
                         }
                     }
