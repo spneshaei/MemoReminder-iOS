@@ -9,12 +9,33 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct AddMemoryView: View {
+    @EnvironmentObject var globalData: GlobalData
+    @Environment(\.presentationMode) var mode
     @State var isTagViewOpeningLinkActive = false
     @Binding var memoryTitle: String
     @Binding var memoryContents: String
     @Binding var showActivityIndicator: Bool
-    var addMemoryTapped: () -> Void
+    @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var tagsViewModel: TagsViewModel
+    @State var showActivityIndicatorView = false
+    @State var showingAddMemoryErrorAlert = false
+    
+    fileprivate func addMemoryTapped() {
+        async {
+            do {
+                main { showActivityIndicatorView = true }
+                try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, globalData: globalData)
+                main {
+                    showActivityIndicatorView = false
+                    memoryTitle = ""
+                    memoryContents = "Enter memory details"
+                }
+            } catch {
+                showActivityIndicatorView = false
+                showingAddMemoryErrorAlert = true
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -47,6 +68,9 @@ struct AddMemoryView: View {
                 
                 
             }
+            .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
             .navigationBarTitle(Text("Add Memory"))
             .navigationBarItems(trailing: Button(action: { addMemoryTapped() }, label: { Text("Submit").bold() }))
             .padding()
@@ -62,7 +86,7 @@ struct AddMemoryView_Previews: PreviewProvider {
     static var previews: some View {
         let memory = Memory.sample
         return NavigationView {
-            AddMemoryView(memoryTitle: .constant(memory.title), memoryContents: .constant(memory.contents), showActivityIndicator: .constant(false), addMemoryTapped: { }, tagsViewModel: .sample)
+            AddMemoryView(memoryTitle: .constant(memory.title), memoryContents: .constant(memory.contents), showActivityIndicator: .constant(false), homeViewModel: .sample, tagsViewModel: .sample)
         }
         .preferredColorScheme(.dark)
     }

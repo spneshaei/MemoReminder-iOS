@@ -17,9 +17,7 @@ struct HomeView: View {
     @State var memoryTitle = ""
     @State private var memoryContents = "Enter memory details"
     @State var showActivityIndicatorView = false
-    @State var showingAddMemoryErrorAlert = false
     @State var showingLoadingMemoriesErrorAlert = false
-    @State var showingAddMemorySuccessAlert = false
     @State var shouldPresentMemorySheet = false
     @State var memoryToShowInMemorySheet = Memory.sample
     
@@ -42,25 +40,6 @@ struct HomeView: View {
         viewModel.topMemories
             .filter { !$0.imageLink.isEmpty }
             .map { $0.imageLink }
-    }
-    
-    fileprivate func addMemoryTapped() {
-        async {
-            do {
-                main { showActivityIndicatorView = true }
-                try await viewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, globalData: globalData)
-                main {
-                    showActivityIndicatorView = false
-                    showingAddMemorySuccessAlert = true
-                    isBottomSheetPresented = false
-                    memoryTitle = ""
-                    memoryContents = "Enter memory details"
-                }
-            } catch {
-                showActivityIndicatorView = false
-                showingAddMemoryErrorAlert = true
-            }
-        }
     }
     
     var body: some View {
@@ -95,9 +74,6 @@ struct HomeView: View {
                 .sheet(isPresented: $shouldPresentMemorySheet) {
                     MemoryView(memory: memoryToShowInMemorySheet, imageLink: memoryToShowInMemorySheet.imageLink, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
                 }
-                .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
                 //                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
                 //                    Button("OK", role: .cancel) { }
                 //                }
@@ -111,7 +87,7 @@ struct HomeView: View {
                     Image(systemName: "magnifyingglass")
                 }
                 
-                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped, tagsViewModel: tagsViewModel)) {
+                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel)) {
                     Image(systemName: "plus.square")
                 }
                 //                Button(action: {
@@ -121,7 +97,7 @@ struct HomeView: View {
                 //                }
             })
             .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
-                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, addMemoryTapped: addMemoryTapped, tagsViewModel: tagsViewModel)
+                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: .sample, tagsViewModel: tagsViewModel)
             }
         }
     }
