@@ -39,6 +39,7 @@ struct AddTagView: View {
         ZStack {
             Form {
                 TextField("Tag name", text: $tagName)
+                    .autocapitalization(.none)
                 ColorPicker("Color", selection: $tagColor)
             }
             .navigationBarTitle(Text("Add Tag"))

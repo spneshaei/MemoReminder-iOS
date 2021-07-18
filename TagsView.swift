@@ -39,6 +39,7 @@ struct TagsView: View {
                             self.mode.wrappedValue.dismiss()
                         }
                         .listRowSeparator(.hidden)
+                        .padding(2)
                 }
                 .task { async { await reloadData() }}
                 .refreshable { async { await reloadData() }}
