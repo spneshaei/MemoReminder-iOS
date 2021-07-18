@@ -5,6 +5,7 @@ import SwiftUI
 struct Chips: View {
     let title: String
     let hexColor: String
+    let onTap: () -> Void
     @State var isSelected: Bool = true
     
     var color: Color {
@@ -33,6 +34,7 @@ struct Chips: View {
                     .stroke(Color.blue, lineWidth: 1.5)
                 
             ).onTapGesture {
+                onTap()
 //                isSelected.toggle() // toggle select - not selected
             }
     }

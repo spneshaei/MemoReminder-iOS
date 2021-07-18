@@ -9,7 +9,7 @@ struct ChipsContent: View {
         return GeometryReader { geo in
             ZStack(alignment: .topLeading, content: {
                 ForEach(viewModel.selectedTags) { chipsData in //loop to render all chips
-                    Chips(title: chipsData.name, hexColor: chipsData.color)
+                    Chips(title: chipsData.name, hexColor: chipsData.color, onTap: { })
                         .padding(.all, 5)
                         .alignmentGuide(.leading) { dimension in  //update leading width for available width
                             if (abs(width - dimension.width) > geo.size.width) {

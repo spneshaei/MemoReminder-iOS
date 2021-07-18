@@ -32,30 +32,33 @@ struct TagsView: View {
     var body: some View {
         ZStack {
             VStack {
-                List(viewModel.unselectedTags) { tag in
-                    Chips(title: tag.name, hexColor: tag.color)
-                        .onTapGesture {
-                            viewModel.selectedTags.append(tag)
-                            self.mode.wrappedValue.dismiss()
+                List {
+                    Text("Tap on a tag chip to select it")
+                    ForEach(viewModel.unselectedTags) { tag in
+                        HStack {
+                            Chips(title: tag.name, hexColor: tag.color, onTap: {
+                                viewModel.selectedTags.append(tag)
+                                self.mode.wrappedValue.dismiss()
+                            })
+                            .listRowSeparator(.hidden)
+                            .padding(2)
                         }
-                        .listRowSeparator(.hidden)
-                        .padding(2)
+                    }
                 }
                 .task { async { await reloadData() }}
                 .refreshable { async { await reloadData() }}
-                
-                NavigationLink(destination: AddTagView(viewModel: viewModel), isActive: $isAddTagViewOpeningLinkActive) {
-                    Button(action: {
-                        isAddTagViewOpeningLinkActive = true
-                    }, label: {
-                        Text("Add a new tag")
-                            .padding(.horizontal)
-                    })
-                        .buttonStyle(AddMemoryButton(colors: [Color(red: 0.22, green: 0.22, blue: 0.70), Color(red: 0.32, green: 0.32, blue: 1)])).clipShape(Capsule())
-                        .scaleEffect(0.84)
-                }
             }
             .navigationBarTitle("Select a tag")
+            .navigationBarItems(trailing: NavigationLink(destination: AddTagView(viewModel: viewModel), isActive: $isAddTagViewOpeningLinkActive) {
+                Button(action: {
+                    isAddTagViewOpeningLinkActive = true
+                }, label: {
+                    Image(systemName: "plus")
+                        .padding(.horizontal)
+                })
+//                    .buttonStyle(AddMemoryButton(colors: [Color(red: 0.22, green: 0.22, blue: 0.70), Color(red: 0.32, green: 0.32, blue: 1)])).clipShape(Capsule())
+//                    .scaleEffect(0.84)
+            })
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
