@@ -23,6 +23,7 @@ struct MemoryView: View {
     @State var showActivityIndicatorView = false
     @State var showingLikeErrorAlert = false
     @State var showingUploadErrorAlert = false
+    @State var shouldEditMemoryErrorAlert = false
     
     @State var showImagePicker = false
     @State var showImageSourcePicker = false
@@ -79,6 +80,22 @@ struct MemoryView: View {
         }
     }
     
+    fileprivate func doneTapped() async {
+        do {
+            main { showActivityIndicatorView = true }
+            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, globalData: globalData)
+            main {
+                showActivityIndicatorView = false
+                withAnimation { editMode = false }
+            }
+        } catch {
+            main {
+                showActivityIndicatorView = false
+                shouldEditMemoryErrorAlert = true
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             List {
@@ -99,8 +116,13 @@ struct MemoryView: View {
                     }
                 }
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("Description").font(.caption)
-                    Text(memory.contents)
+                    if editMode {
+                        TextField("Enter memory description", text: $memory.contents)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    } else {
+                        Text("Description").font(.caption)
+                        Text(memory.contents)
+                    }
                 }
                 if let date = memory.createdDate.components(separatedBy: "T").first {
                     Text("Created on \(date)")
@@ -119,6 +141,9 @@ struct MemoryView: View {
 //                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
 //                    Text("Show on the map")
 //                }
+            }
+            .alert("Error in editing the memory. Please try again", isPresented: $shouldEditMemoryErrorAlert) {
+                Button("OK", role: .cancel) { }
             }
             .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
                 Button("OK", role: .cancel) { }
@@ -176,12 +201,22 @@ struct MemoryView: View {
                     Image(systemName: hasCurrentUserLiked ? "heart.fill" : "heart")
                 }
                 
-                if editMode {
-                    Text("Done")
-                        .fontWeight(.bold)
-                } else {
-                    Image(systemName: "square.and.pencil")
-                        .foregroundColor(.accentColor)
+                Button(action: {
+                    guard !showActivityIndicatorView else { return }
+                    if editMode == false {
+                        withAnimation {
+                            editMode = true
+                        }
+                    } else {
+                        async { await doneTapped() }
+                    }
+                }) {
+                    if editMode {
+                        Text("Done")
+                            .fontWeight(.bold)
+                    } else {
+                        Image(systemName: "square.and.pencil")
+                    }
                 }
             })
             

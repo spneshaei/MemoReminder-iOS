@@ -58,7 +58,7 @@ struct ProfileView: View {
                 dateFormatter.dateFormat = "YYYY-MM-dd"
                 viewModel.user.birthday = dateFormatter.string(from: birthDate)
                 showActivityIndicatorView = false
-                editMode = false
+                withAnimation { editMode = false }
             }
         } catch {
             main {
