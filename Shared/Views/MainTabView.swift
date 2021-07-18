@@ -23,7 +23,7 @@ struct MainTabView: View {
     var body: some View {
         VStack {
             if selectedIndex == 0 {
-                HomeView(viewModel: homeViewModel)
+                HomeView(viewModel: homeViewModel, memoriesViewModel: memoriesViewModel)
             } else if selectedIndex == 1 {
                 MemoriesView(viewModel: memoriesViewModel)
             } else if selectedIndex == 2 {

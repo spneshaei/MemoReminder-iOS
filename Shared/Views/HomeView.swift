@@ -11,6 +11,7 @@ import ActivityIndicatorView
 
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
+    @ObservedObject var memoriesViewModel: MemoriesViewModel
     @StateObject var tagsViewModel = TagsViewModel()
     @EnvironmentObject var globalData: GlobalData
     @State var isBottomSheetPresented = false
@@ -24,6 +25,7 @@ struct HomeView: View {
         do {
             main { showActivityIndicatorView = true }
             try await viewModel.loadTopMemories(globalData: globalData)
+            try await memoriesViewModel.loadMemories(globalData: globalData)
             main { showActivityIndicatorView = false }
         } catch (let error) {
             print("eErr")
@@ -52,22 +54,21 @@ struct HomeView: View {
                         .frame(height: 120)
                         .listRowSeparator(.hidden)
                     
+                    if !memoriesViewModel.aYearAgoMemories.isEmpty {
+                        Text("A year ago, these days!")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .listRowSeparator(.hidden)
+                        
+                        MemoryListInHomeView(memories: memoriesViewModel.aYearAgoMemories)
+                    }
+                    
                     Text("Explore top memories")
                         .font(.title2)
                         .fontWeight(.bold)
                         .listRowSeparator(.hidden)
                     
-                    ForEach(viewModel.topMemories) { memory in
-                        ZStack {
-                            MemoryCell(memory: memory, shouldShowProfilePicture: false)
-                                .listRowSeparator(.hidden)
-                            NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
-                                EmptyView()
-                            }.buttonStyle(PlainButtonStyle())
-                        }
-                    }
-                    .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                    MemoryListInHomeView(memories: viewModel.topMemories)
                 }
                 .listStyle(PlainListStyle())
 //                .sheet(isPresented: $shouldPresentMemorySheet) {
@@ -118,7 +119,25 @@ struct AddMemoryButton: ButtonStyle {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(viewModel: HomeViewModel.sample)
+        HomeView(viewModel: HomeViewModel.sample, memoriesViewModel: .sample)
             .environmentObject(GlobalData.sample)
+    }
+}
+
+struct MemoryListInHomeView: View {
+    @State var memories: [Memory]
+    
+    var body: some View {
+        ForEach(memories) { memory in
+            ZStack {
+                MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                    .listRowSeparator(.hidden)
+                NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                    EmptyView()
+                }.buttonStyle(PlainButtonStyle())
+            }
+            .listRowSeparator(.hidden)
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+        }
     }
 }

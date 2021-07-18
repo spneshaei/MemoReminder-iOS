@@ -33,6 +33,7 @@ struct SearchView: View {
             List(viewModel.filteredUsers) { user in
                 SearchUserCell(user: user, searchViewModel: viewModel)
             }
+            .listStyle(.plain)
             .searchable(text: $viewModel.searchPredicate)
             .navigationTitle(Text("Search all users"))
             .alert("Error in loading users", isPresented: $viewModel.showingLoadingUsersErrorAlert) {

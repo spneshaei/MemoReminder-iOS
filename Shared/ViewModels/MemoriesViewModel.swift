@@ -35,6 +35,18 @@ class MemoriesViewModel: ObservableObject {
             || $0.contents.lowercased().contains(searchPredicate.lowercased()) || $0.creatorUsername.lowercased().contains(searchPredicate.lowercased()) }
     }
     
+    var aYearAgoMemories: [Memory] {
+        let exactlyAYearAgo = Calendar.current.date(byAdding: .year, value: -1, to: Date()) ?? Date(timeIntervalSince1970: 1)
+        let aWeekBefore = Calendar.current.date(byAdding: .day, value: -7, to: exactlyAYearAgo) ?? Date(timeIntervalSince1970: 1)
+        let aWeekAfter = Calendar.current.date(byAdding: .day, value: 7, to: exactlyAYearAgo) ?? Date(timeIntervalSince1970: 1)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YYYY-MM-dd"
+        return memories.filter {
+            let date = dateFormatter.date(from: $0.createdDate.components(separatedBy: "T").first ?? "") ?? Date()
+            return aWeekBefore <= date && date <= aWeekAfter
+        }
+    }
+    
     func loadMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
