@@ -12,6 +12,8 @@ struct MemoryCell: View {
     @Environment(\.colorScheme) var colorScheme
     var isDarkMode: Bool { colorScheme == .dark }
     
+    @State var seeComments = false
+    
     var memory: Memory
     var shouldShowProfilePicture: Bool
     
@@ -76,11 +78,13 @@ struct MemoryCell: View {
         .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
-        .contextMenu {
-            NavigationLink(destination: CommentsView(memory: memory)) {
-                Label("See comments", systemImage: "quote.bubble")
-            }
-        }
+//        .contextMenu {
+//            Button {
+//                seeCommentsCallback(memory)
+//            } label: {
+//                Label("See comments", systemImage: "quote.bubble")
+//            }
+//        }
     }
 }
 
