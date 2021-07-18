@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct TagsView: View {
     @Environment(\.presentationMode) var mode
@@ -13,6 +14,7 @@ struct TagsView: View {
     @ObservedObject var viewModel: TagsViewModel
     @State var showActivityIndicatorView = false
     @State var showingLoadingTagsErrorAlert = false
+    @State var isAddTagViewOpeningLinkActive = false
     
     fileprivate func reloadData() async {
         do {
@@ -28,16 +30,36 @@ struct TagsView: View {
     }
     
     var body: some View {
-        List(viewModel.unselectedTags) { tag in
-            Chips(title: tag.name, hexColor: tag.color)
-                .onTapGesture {
-                    viewModel.selectedTags.append(tag)
-                    self.mode.wrappedValue.dismiss()
+        ZStack {
+            VStack {
+                List(viewModel.unselectedTags) { tag in
+                    Chips(title: tag.name, hexColor: tag.color)
+                        .onTapGesture {
+                            viewModel.selectedTags.append(tag)
+                            self.mode.wrappedValue.dismiss()
+                        }
+                        .listRowSeparator(.hidden)
                 }
-                .listRowSeparator(.hidden)
+                .task { async { await reloadData() }}
+                .refreshable { async { await reloadData() }}
+                
+                NavigationLink(destination: AddTagView(viewModel: viewModel), isActive: $isAddTagViewOpeningLinkActive) {
+                    Button(action: {
+                        isAddTagViewOpeningLinkActive = true
+                    }, label: {
+                        Text("Add a new tag")
+                            .padding(.horizontal)
+                    })
+                        .buttonStyle(AddMemoryButton(colors: [Color(red: 0.22, green: 0.22, blue: 0.70), Color(red: 0.32, green: 0.32, blue: 1)])).clipShape(Capsule())
+                        .scaleEffect(0.84)
+                }
+            }
+            .navigationBarTitle("Select a tag")
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }
-        .task { async { await reloadData() }}
-        .refreshable { async { await reloadData() }}
     }
 }
 
@@ -45,6 +67,7 @@ struct TagsView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             TagsView(viewModel: .sample)
+                .environmentObject(GlobalData.sample)
         }
     }
 }

@@ -23,7 +23,7 @@ class TagsViewModel: ObservableObject {
     }
     
     var unselectedTags: [Tag] {
-        allTags.filter {tag in !selectedTags.contains { selectedTag in tag.id == selectedTag.id } }
+        allTags.filter { tag in !selectedTags.contains { selectedTag in tag.id == selectedTag.id } }
     }
     
     init() {
@@ -45,6 +45,24 @@ class TagsViewModel: ObservableObject {
                 tag.color = result["color"].stringValue.deletingPrefix("#")
                 return tag
             }
+        }
+    }
+    
+    func addTag(name: String, color: CGColor, globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let uiColor = UIColor(cgColor: color)
+        let body: JSON = [
+            "name": name,
+            "color": uiColor.toHexString()
+        ]
+        guard let bodyString = body.rawString() else { return }
+        let resultString = try await Rester.rest(endPoint: "tag/?token=\(globalData.token)", body: bodyString, method: .post)
+        main {
+            let result = JSON(parseJSON: resultString)
+            let tag = Tag(id: result["id"].intValue)
+            tag.name = result["name"].stringValue
+            tag.color = result["color"].stringValue.deletingPrefix("#")
+            self.allTags.append(tag)
         }
     }
     

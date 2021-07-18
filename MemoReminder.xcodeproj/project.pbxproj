@@ -61,6 +61,10 @@
 		429801C226A3ECA800928A03 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C026A3ECA800928A03 /* TagsView.swift */; };
 		429801C426A3F22900928A03 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C326A3F22900928A03 /* StringExtensions.swift */; };
 		429801C526A3F22900928A03 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C326A3F22900928A03 /* StringExtensions.swift */; };
+		429801C726A3F47000928A03 /* AddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C626A3F47000928A03 /* AddTagView.swift */; };
+		429801C826A3F47000928A03 /* AddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C626A3F47000928A03 /* AddTagView.swift */; };
+		429801CA26A3F82B00928A03 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C926A3F82B00928A03 /* UIColorHex.swift */; };
+		429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C926A3F82B00928A03 /* UIColorHex.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -185,6 +189,8 @@
 		429801BD26A3E68F00928A03 /* ColorComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponents.swift; sourceTree = "<group>"; };
 		429801C026A3ECA800928A03 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = SOURCE_ROOT; };
 		429801C326A3F22900928A03 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		429801C626A3F47000928A03 /* AddTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagView.swift; sourceTree = SOURCE_ROOT; };
+		429801C926A3F82B00928A03 /* UIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -348,6 +354,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				429801C626A3F47000928A03 /* AddTagView.swift */,
 				429801C026A3ECA800928A03 /* TagsView.swift */,
 				429801AA26A3222B00928A03 /* AddMemoryView.swift */,
 				42D0199726A1C2F200D20808 /* CommentCell.swift */,
@@ -396,6 +403,7 @@
 				42D019A726A2EADE00D20808 /* Validator.swift */,
 				429801BD26A3E68F00928A03 /* ColorComponents.swift */,
 				429801C326A3F22900928A03 /* StringExtensions.swift */,
+				429801C926A3F82B00928A03 /* UIColorHex.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -627,6 +635,7 @@
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
 				42D0199F26A27E1400D20808 /* BottomBar.swift in Sources */,
 				42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
+				429801CA26A3F82B00928A03 /* UIColorHex.swift in Sources */,
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
@@ -646,6 +655,7 @@
 				424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C512696A83E00091D30 /* SignUpView.swift in Sources */,
+				429801C726A3F47000928A03 /* AddTagView.swift in Sources */,
 				42B22C392696274300091D30 /* ContentView.swift in Sources */,
 				42D0198626A01D2C00D20808 /* SearchUserCell.swift in Sources */,
 				42D0196F269D4E9100D20808 /* GlobalData.swift in Sources */,
@@ -694,6 +704,7 @@
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
 				42D019A026A27E1400D20808 /* BottomBar.swift in Sources */,
 				42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
+				429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */,
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
@@ -713,6 +724,7 @@
 				424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C522696A83E00091D30 /* SignUpView.swift in Sources */,
+				429801C826A3F47000928A03 /* AddTagView.swift in Sources */,
 				42B22C3A2696274300091D30 /* ContentView.swift in Sources */,
 				42D0198726A01D2C00D20808 /* SearchUserCell.swift in Sources */,
 				42D01970269D4E9100D20808 /* GlobalData.swift in Sources */,
