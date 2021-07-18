@@ -49,6 +49,18 @@
 		429801AC26A3222B00928A03 /* AddMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AA26A3222B00928A03 /* AddMemoryView.swift */; };
 		429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AD26A334D700928A03 /* TagsViewModel.swift */; };
 		429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AD26A334D700928A03 /* TagsViewModel.swift */; };
+		429801B526A3579D00928A03 /* Chips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801B426A3579D00928A03 /* Chips.swift */; };
+		429801B626A3579D00928A03 /* Chips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801B426A3579D00928A03 /* Chips.swift */; };
+		429801B826A3586900928A03 /* ChipsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801B726A3586900928A03 /* ChipsContent.swift */; };
+		429801B926A3586900928A03 /* ChipsContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801B726A3586900928A03 /* ChipsContent.swift */; };
+		429801BB26A3598F00928A03 /* ColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801BA26A3598F00928A03 /* ColorHex.swift */; };
+		429801BC26A3598F00928A03 /* ColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801BA26A3598F00928A03 /* ColorHex.swift */; };
+		429801BE26A3E68F00928A03 /* ColorComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801BD26A3E68F00928A03 /* ColorComponents.swift */; };
+		429801BF26A3E68F00928A03 /* ColorComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801BD26A3E68F00928A03 /* ColorComponents.swift */; };
+		429801C126A3ECA800928A03 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C026A3ECA800928A03 /* TagsView.swift */; };
+		429801C226A3ECA800928A03 /* TagsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C026A3ECA800928A03 /* TagsView.swift */; };
+		429801C426A3F22900928A03 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C326A3F22900928A03 /* StringExtensions.swift */; };
+		429801C526A3F22900928A03 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C326A3F22900928A03 /* StringExtensions.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -167,6 +179,12 @@
 		424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MemoReminder--iOS--Info.plist"; sourceTree = "<group>"; };
 		429801AA26A3222B00928A03 /* AddMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryView.swift; sourceTree = SOURCE_ROOT; };
 		429801AD26A334D700928A03 /* TagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagsViewModel.swift; path = Shared/Views/TagsViewModel.swift; sourceTree = SOURCE_ROOT; };
+		429801B426A3579D00928A03 /* Chips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chips.swift; sourceTree = "<group>"; };
+		429801B726A3586900928A03 /* ChipsContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipsContent.swift; sourceTree = "<group>"; };
+		429801BA26A3598F00928A03 /* ColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHex.swift; sourceTree = "<group>"; };
+		429801BD26A3E68F00928A03 /* ColorComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorComponents.swift; sourceTree = "<group>"; };
+		429801C026A3ECA800928A03 /* TagsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsView.swift; sourceTree = SOURCE_ROOT; };
+		429801C326A3F22900928A03 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -264,6 +282,15 @@
 			path = FancyScrollView;
 			sourceTree = "<group>";
 		};
+		429801B326A3569800928A03 /* Chips */ = {
+			isa = PBXGroup;
+			children = (
+				429801B426A3579D00928A03 /* Chips.swift */,
+				429801B726A3586900928A03 /* ChipsContent.swift */,
+			);
+			path = Chips;
+			sourceTree = "<group>";
+		};
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +348,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				429801C026A3ECA800928A03 /* TagsView.swift */,
 				429801AA26A3222B00928A03 /* AddMemoryView.swift */,
 				42D0199726A1C2F200D20808 /* CommentCell.swift */,
 				42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */,
@@ -342,6 +370,7 @@
 		42B22C542696B49000091D30 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				429801B326A3569800928A03 /* Chips */,
 				42D019BA26A31B9700D20808 /* HomeTopView.swift */,
 				42D0199A26A27DD700D20808 /* BottomBar */,
 				42D0198526A01D2C00D20808 /* SearchUserCell.swift */,
@@ -356,6 +385,7 @@
 		42B22C642696C38900091D30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				429801BA26A3598F00928A03 /* ColorHex.swift */,
 				42D0198E26A144C000D20808 /* MainAsync.swift */,
 				424FDD1B269A0AF6004051FD /* Rester.swift */,
 				42B22C652696C39B00091D30 /* Memory.swift */,
@@ -364,6 +394,8 @@
 				42B22C6B2696C54200091D30 /* Tag.swift */,
 				424FDD1E269A9F67004051FD /* SwiftyJSON.swift */,
 				42D019A726A2EADE00D20808 /* Validator.swift */,
+				429801BD26A3E68F00928A03 /* ColorComponents.swift */,
+				429801C326A3F22900928A03 /* StringExtensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -575,13 +607,16 @@
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
 				42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
+				429801B826A3586900928A03 /* ChipsContent.swift in Sources */,
 				42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				42D019A226A27E2A00D20808 /* BottomBarItem.swift in Sources */,
 				424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
+				429801C426A3F22900928A03 /* StringExtensions.swift in Sources */,
 				424FDCE8269715AE004051FD /* MemoriesView.swift in Sources */,
 				424FDD162697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
 				424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */,
+				429801BE26A3E68F00928A03 /* ColorComponents.swift in Sources */,
 				42B22C5F2696C02400091D30 /* MainTabView.swift in Sources */,
 				42D0199826A1C2F200D20808 /* CommentCell.swift in Sources */,
 				424FDD082697410F004051FD /* BlurView.swift in Sources */,
@@ -595,6 +630,7 @@
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
+				429801B526A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
 				424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */,
@@ -615,8 +651,10 @@
 				42D0196F269D4E9100D20808 /* GlobalData.swift in Sources */,
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
+				429801BB26A3598F00928A03 /* ColorHex.swift in Sources */,
 				42D0198026A0000E00D20808 /* SearchView.swift in Sources */,
 				42D019A826A2EADE00D20808 /* Validator.swift in Sources */,
+				429801C126A3ECA800928A03 /* TagsView.swift in Sources */,
 				42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
@@ -636,13 +674,16 @@
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
 				42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
+				429801B926A3586900928A03 /* ChipsContent.swift in Sources */,
 				42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */,
 				424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
+				429801C526A3F22900928A03 /* StringExtensions.swift in Sources */,
 				424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */,
 				424FDD172697410F004051FD /* ScrollDownHeaderBehavior.swift in Sources */,
 				424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */,
+				429801BF26A3E68F00928A03 /* ColorComponents.swift in Sources */,
 				42B22C602696C02400091D30 /* MainTabView.swift in Sources */,
 				42D0199926A1C2F200D20808 /* CommentCell.swift in Sources */,
 				424FDD092697410F004051FD /* BlurView.swift in Sources */,
@@ -656,6 +697,7 @@
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
+				429801B626A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,
 				424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */,
@@ -676,8 +718,10 @@
 				42D01970269D4E9100D20808 /* GlobalData.swift in Sources */,
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
+				429801BC26A3598F00928A03 /* ColorHex.swift in Sources */,
 				42D0198126A0000E00D20808 /* SearchView.swift in Sources */,
 				42D019A926A2EADE00D20808 /* Validator.swift in Sources */,
+				429801C226A3ECA800928A03 /* TagsView.swift in Sources */,
 				42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,

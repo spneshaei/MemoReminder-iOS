@@ -18,9 +18,9 @@ class Tag: Identifiable, Codable {
     }
     
     static var sample: Tag {
-        let tag = Tag(id: 0)
-        tag.name = "Friends"
-        tag.color = "ffc800"
+        let tag = Tag(id: Int.random(in: 1...100))
+        tag.name = ["friends", "history", "family", "university", "development course", "fun", "joke", "meme"].randomElement()!
+        tag.color = ["ffd800", "00ff00"].randomElement()!
         return tag
     }
 }
