@@ -181,6 +181,7 @@ struct MemoryView: View {
                         .fontWeight(.bold)
                 } else {
                     Image(systemName: "square.and.pencil")
+                        .foregroundColor(.accentColor)
                 }
             })
             
@@ -219,6 +220,7 @@ struct MemoryView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             MemoryView(memory: Memory.sample, imageLink: Memory.sample.imageLink, numberOfLikes: Memory.sample.numberOfLikes, hasCurrentUserLiked: Memory.sample.hasCurrentUserLiked)
+                .environmentObject(GlobalData.sample)
         }
     }
 }
