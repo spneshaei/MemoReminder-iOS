@@ -48,9 +48,9 @@ class MemoriesViewModel: ObservableObject {
         if isDateSelected {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"
-            return filteredMemoriesWithSearchPredicate.filter { isSameDay(date1: selectedDate, date2: dateFormatter.date(from: $0.createdDate.components(separatedBy: "T").first ?? "") ?? Date(timeIntervalSince1970: 1) ) }
+            return filteredMemoriesWithSearchPredicate.filter { isSameDay(date1: selectedDate, date2: dateFormatter.date(from: $0.createdDate.components(separatedBy: "T").first ?? "") ?? Date(timeIntervalSince1970: 1) ) }.reversed()
         } else {
-            return filteredMemoriesWithSearchPredicate
+            return filteredMemoriesWithSearchPredicate.reversed()
         }
     }
     

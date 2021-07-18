@@ -28,6 +28,7 @@ struct MemoryView: View {
     @State var showImageSourcePicker = false
     @State var imageSourceSelection: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
+    @State var editMode = false
     
     enum UploadImageState {
         case notStarted, waitingToTapUpload, uploading
@@ -101,9 +102,11 @@ struct MemoryView: View {
                     Text("Description").font(.caption)
                     Text(memory.contents)
                 }
-                Text("Created on \(memory.createdDate)")
-                    .listRowSeparator(.hidden)
-                Text("\(numberOfLikes) likes and \(memory.comments.count) comments")
+                if let date = memory.createdDate.components(separatedBy: "T").first {
+                    Text("Created on \(date)")
+                        .listRowSeparator(.hidden)
+                }
+                Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
                     .listRowSeparator(.hidden)
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
@@ -171,6 +174,13 @@ struct MemoryView: View {
                     async { await likeMemory() }
                 }) {
                     Image(systemName: hasCurrentUserLiked ? "heart.fill" : "heart")
+                }
+                
+                if editMode {
+                    Text("Done")
+                        .fontWeight(.bold)
+                } else {
+                    Image(systemName: "square.and.pencil")
                 }
             })
             

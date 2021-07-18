@@ -26,6 +26,7 @@ struct AddMemoryView: View {
                 main { showActivityIndicatorView = true }
                 try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, globalData: globalData)
                 main {
+                    mode.wrappedValue.dismiss()
                     showActivityIndicatorView = false
                     memoryTitle = ""
                     memoryContents = "Enter memory details"
