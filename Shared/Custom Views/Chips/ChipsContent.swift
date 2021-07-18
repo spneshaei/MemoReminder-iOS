@@ -2,13 +2,13 @@
 
 import SwiftUI
 struct ChipsContent: View {
-    @ObservedObject var viewModel: TagsViewModel
+    @State var selectedTags: [Tag]
     var body: some View {
         var width = CGFloat.zero
         var height = CGFloat.zero
         return GeometryReader { geo in
             ZStack(alignment: .topLeading, content: {
-                ForEach(viewModel.selectedTags) { chipsData in //loop to render all chips
+                ForEach(selectedTags) { chipsData in //loop to render all chips
                     Chips(title: chipsData.name, hexColor: chipsData.color, onTap: { })
                         .padding(.all, 5)
                         .alignmentGuide(.leading) { dimension in  //update leading width for available width
@@ -18,7 +18,7 @@ struct ChipsContent: View {
                             }
                             
                             let result = width
-                            if chipsData.id == viewModel.selectedTags.count - 1 {
+                            if chipsData.id == selectedTags.count - 1 {
                                 width = 0
                             } else {
                                 width -= dimension.width
@@ -27,7 +27,7 @@ struct ChipsContent: View {
                         }
                         .alignmentGuide(.top) { dimension in //update chips height origin wrt past chip
                             let result = height
-                            if chipsData.id == viewModel.selectedTags.count - 1 {
+                            if chipsData.id == selectedTags.count - 1 {
                                 height = 0
                             }
                             return result

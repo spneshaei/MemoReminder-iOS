@@ -106,6 +106,10 @@ struct MemoryView: View {
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
                 }
+                ScrollView {
+                    ChipsContent(selectedTags: memory.tags)
+                }
+                .frame(minHeight: 150)
 //                LocationRow(memory: memory)
 //                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
 //                    Text("Show on the map")

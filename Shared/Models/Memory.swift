@@ -25,7 +25,7 @@ class Memory: Identifiable, Codable {
     var voiceLink = ""
     var imageLink = ""
     var videoLink = ""
-    var tagIDs: [String] = []
+    var tags: [Tag] = []
     var usernamesInvolved: [String] = []
     var privacyStatus: PrivacyStatus = .publicStatus
     var latitude = 0.0
@@ -54,7 +54,7 @@ class Memory: Identifiable, Codable {
         memory.voiceLink = ""
         memory.imageLink = ""
         memory.videoLink = ""
-        memory.tagIDs = []
+        memory.tags = []
         memory.usernamesInvolved = ["seyyedparsa"]
         memory.privacyStatus = .publicStatus
         memory.latitude = 10
@@ -78,6 +78,12 @@ class Memory: Identifiable, Codable {
         let likes = result["likes"].arrayValue
         memory.numberOfLikes = likes.count
         memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"]["id"].intValue == currentUserID }
+        memory.tags = result["tags"].arrayValue.map { tagJSON in
+            let tag = Tag(id: tagJSON["id"].intValue)
+            tag.name = tagJSON["name"].stringValue
+            tag.color = tagJSON["color"].stringValue
+            return tag
+        }
         memory.comments = result["comments"].arrayValue.map { commentJSON in
             let comment = Comment(id: commentJSON["id"].intValue)
             let commentUser = commentJSON["memo_user"]

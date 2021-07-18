@@ -63,7 +63,7 @@ struct AddMemoryView: View {
                 }
                 
                 ScrollView {
-                    ChipsContent(viewModel: tagsViewModel)
+                    ChipsContent(selectedTags: tagsViewModel.selectedTags)
                 }
                 
                 
