@@ -76,6 +76,20 @@ struct MemoryCell: View {
         .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
+        .contextMenu {
+            if !memory.hasCurrentUserLiked {
+                Button {
+                    // TODO: A
+                } label: {
+                    Label("Like memory", systemImage: "heart")
+                }
+            }
+            Button {
+                // TODO: B
+            } label: {
+                Label("See comments", systemImage: "quote.bubble")
+            }
+        }
     }
 }
 

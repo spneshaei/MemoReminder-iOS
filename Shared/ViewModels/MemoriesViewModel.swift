@@ -46,6 +46,15 @@ class MemoriesViewModel: ObservableObject {
         }
     }
     
+    func likeMemory(memory: Memory, globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let body: JSON = [
+            "post": memory.id
+        ]
+        guard let bodyString = body.rawString() else { return }
+        try await Rester.rest(endPoint: "post-like/?token=\(globalData.token)", body: bodyString, method: .post)
+    }
+    
     static var sample: MemoriesViewModel {
         let viewModel = MemoriesViewModel()
         viewModel.isSample = true

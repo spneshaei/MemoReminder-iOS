@@ -36,7 +36,7 @@ struct TagsView: View {
                     Text("Tap on a tag chip to select it")
                     ForEach(viewModel.unselectedTags) { tag in
                         HStack {
-                            Chips(title: tag.name, hexColor: tag.color, onTap: {
+                            Chips(id: tag.id, title: tag.name, hexColor: tag.color, onTap: { _ in
                                 viewModel.selectedTags.append(tag)
                                 self.mode.wrappedValue.dismiss()
                             })

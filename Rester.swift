@@ -5,7 +5,7 @@
 //  Created by Seyyed Parsa Neshaei on 7/10/21.
 //
 
-import Foundation
+import UIKit
 
 class Rester {
     static let session = URLSession.shared
@@ -24,6 +24,11 @@ class Rester {
     }
     
     fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post) async throws -> String {
+//        guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
+//            throw RestError.wrongURLFormat
+//        }
+//        var imageData :NSData = UIImageJPEGRepresentation(data, 1.0) as! NSData
+        
         guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
             throw RestError.wrongURLFormat
         }
@@ -48,6 +53,10 @@ class Rester {
         } catch {
             throw RestError.networkError
         }
+        
+        
+        
+        
 //        let boundary = "Boundary-\(UUID().uuidString)"
 //        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
 //        let body = NSMutableData()

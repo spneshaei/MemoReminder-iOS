@@ -63,7 +63,9 @@ struct AddMemoryView: View {
                 }
                 
                 ScrollView {
-                    ChipsContent(selectedTags: tagsViewModel.selectedTags)
+                    ChipsContent(selectedTags: tagsViewModel.selectedTags) { id in
+                        tagsViewModel.selectedTags.removeAll { $0.id == id }
+                    }
                 }
                 
                 

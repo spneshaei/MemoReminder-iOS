@@ -107,7 +107,7 @@ struct MemoryView: View {
                     Text("Show comments")
                 }
                 ScrollView {
-                    ChipsContent(selectedTags: memory.tags)
+                    ChipsContent(selectedTags: memory.tags) { _ in }
                 }
                 .frame(minHeight: 150)
 //                LocationRow(memory: memory)
