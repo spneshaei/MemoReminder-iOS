@@ -196,26 +196,30 @@ struct MemoryView: View {
                 }
                 
                 Button(action: {
-                    async { await likeMemory() }
+                    if !hasCurrentUserLiked {
+                        async { await likeMemory() }
+                    }
                 }) {
                     Image(systemName: hasCurrentUserLiked ? "heart.fill" : "heart")
                 }
                 
-                Button(action: {
-                    guard !showActivityIndicatorView else { return }
-                    if editMode == false {
-                        withAnimation {
-                            editMode = true
+                if memory.creatorUserID == globalData.userID {
+                    Button(action: {
+                        guard !showActivityIndicatorView else { return }
+                        if editMode == false {
+                            withAnimation {
+                                editMode = true
+                            }
+                        } else {
+                            async { await doneTapped() }
                         }
-                    } else {
-                        async { await doneTapped() }
-                    }
-                }) {
-                    if editMode {
-                        Text("Done")
-                            .fontWeight(.bold)
-                    } else {
-                        Image(systemName: "square.and.pencil")
+                    }) {
+                        if editMode {
+                            Text("Done")
+                                .fontWeight(.bold)
+                        } else {
+                            Image(systemName: "square.and.pencil")
+                        }
                     }
                 }
             })
