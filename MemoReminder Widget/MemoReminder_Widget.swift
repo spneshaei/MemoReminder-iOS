@@ -61,7 +61,7 @@ struct MemoReminder_WidgetEntryView : View {
                         printer("stage4")
                         HStack {
                             VStack(alignment: .leading, spacing: 5) {
-                                Text(hottestMemory.createdDate).font(.caption2)
+                                Text(hottestMemory.createdDate.components(separatedBy: "T").first ?? hottestMemory.createdDate).font(.caption2)
                                 Text(hottestMemory.title).font(.title3).bold()
                                 Spacer()
                                 Text(hottestMemory.creatorFirstName).font(.footnote)

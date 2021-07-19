@@ -89,6 +89,8 @@
 		42A0FD4F26A577A5002BC56A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0FD4E26A577A5002BC56A /* Alamofire */; };
 		42A0FD5126A5884F002BC56A /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD5026A5884F002BC56A /* PagingView.swift */; };
 		42A0FD5226A5884F002BC56A /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD5026A5884F002BC56A /* PagingView.swift */; };
+		42A0FD5426A5A49F002BC56A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD5326A5A49F002BC56A /* Intents.intentdefinition */; };
+		42A0FD5526A5A49F002BC56A /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD5326A5A49F002BC56A /* Intents.intentdefinition */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -249,6 +251,8 @@
 		42A0FD4326A5544F002BC56A /* MemoReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemoReminder.entitlements; sourceTree = "<group>"; };
 		42A0FD4426A554A9002BC56A /* MemoReminder WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MemoReminder WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		42A0FD5026A5884F002BC56A /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
+		42A0FD5326A5A49F002BC56A /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
+		42A0FD5626A5A4C3002BC56A /* MemoReminder--macOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MemoReminder--macOS--Info.plist"; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -387,6 +391,8 @@
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
+				42A0FD5626A5A4C3002BC56A /* MemoReminder--macOS--Info.plist */,
+				42A0FD5326A5A49F002BC56A /* Intents.intentdefinition */,
 				42A0FD4426A554A9002BC56A /* MemoReminder WidgetExtension.entitlements */,
 				42A0FD4326A5544F002BC56A /* MemoReminder.entitlements */,
 				424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */,
@@ -756,6 +762,7 @@
 			files = (
 				42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
+				42A0FD5426A5A49F002BC56A /* Intents.intentdefinition in Sources */,
 				42B22C3B2696274300091D30 /* Persistence.swift in Sources */,
 				429801AB26A3222B00928A03 /* AddMemoryView.swift in Sources */,
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
@@ -830,6 +837,7 @@
 			files = (
 				42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C362696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
+				42A0FD5526A5A49F002BC56A /* Intents.intentdefinition in Sources */,
 				42B22C3C2696274300091D30 /* Persistence.swift in Sources */,
 				429801AC26A3222B00928A03 /* AddMemoryView.swift in Sources */,
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
@@ -1194,6 +1202,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MemoReminder--macOS--Info.plist";
+				INFOPLIST_KEY_CFBundleExecutable = MemoReminder;
+				INFOPLIST_KEY_CFBundleName = MemoReminder;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1223,6 +1235,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MemoReminder--macOS--Info.plist";
+				INFOPLIST_KEY_CFBundleExecutable = MemoReminder;
+				INFOPLIST_KEY_CFBundleName = MemoReminder;
+				INFOPLIST_KEY_CFBundleVersion = 1;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

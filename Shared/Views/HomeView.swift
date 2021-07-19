@@ -8,6 +8,7 @@
 import SwiftUI
 import BottomSheet
 import ActivityIndicatorView
+import Intents
 
 struct HomeView: View {
     @EnvironmentObject var quickActions: QuickActionService
@@ -77,6 +78,12 @@ struct HomeView: View {
         return result
     }
     
+    func donateViewHottestMemoryShortcut() {
+        let intent = ViewHottestMemoriesIntent()
+        let interaction = INInteraction(intent: intent, response: nil)
+        interaction.donate(completion: nil)
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -130,6 +137,7 @@ struct HomeView: View {
 //                handleQuickAction()
 //            }
 //            .onAppear(perform: handleQuickAction)
+            .onAppear(perform: donateViewHottestMemoryShortcut)
             .navigationBarTitle("Home")
             .navigationBarItems(trailing: HStack(spacing: 20) {
                 NavigationLink(destination: SearchView(), isActive: $isSearchViewPresented) {
