@@ -67,6 +67,8 @@
 		429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C926A3F82B00928A03 /* UIColorHex.swift */; };
 		42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
 		42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
+		42A0FD1E26A53F5D002BC56A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* FilterView.swift */; };
+		42A0FD1F26A53F5D002BC56A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* FilterView.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -194,6 +196,7 @@
 		429801C626A3F47000928A03 /* AddTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagView.swift; sourceTree = SOURCE_ROOT; };
 		429801C926A3F82B00928A03 /* UIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
 		42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddMemoryViewModel.swift; path = Shared/Views/AddMemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
+		42A0FD1D26A53F5D002BC56A /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -373,6 +376,7 @@
 				42B22C4D2696A6F900091D30 /* LoginView.swift */,
 				42B22C502696A83E00091D30 /* SignUpView.swift */,
 				424FDCE7269715AE004051FD /* MemoriesView.swift */,
+				42A0FD1D26A53F5D002BC56A /* FilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -656,6 +660,7 @@
 				42B22C372696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C692696C50900091D30 /* Comment.swift in Sources */,
 				424FDCF726972FC5004051FD /* StickyHeader.swift in Sources */,
+				42A0FD1E26A53F5D002BC56A /* FilterView.swift in Sources */,
 				42B22C592696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
 				424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
@@ -726,6 +731,7 @@
 				42B22C382696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C6A2696C50900091D30 /* Comment.swift in Sources */,
 				424FDCF826972FC5004051FD /* StickyHeader.swift in Sources */,
+				42A0FD1F26A53F5D002BC56A /* FilterView.swift in Sources */,
 				42B22C5A2696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
 				424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,

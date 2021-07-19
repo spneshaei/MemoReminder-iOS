@@ -22,6 +22,12 @@ class MemoriesViewModel: ObservableObject {
     
     @Published var searchPredicate = ""
     @Published var isDateSelected = false
+    @Published var showOnlyMyOwnMemories = false
+    
+    var hasFilter: Bool {
+        return isDateSelected || showOnlyMyOwnMemories
+    }
+    
     @Published var selectedDate = Date()
     
     init() {
@@ -42,9 +48,12 @@ class MemoriesViewModel: ObservableObject {
         return Calendar.current.isDate(date1, inSameDayAs: date2)
     }
     
-    var filteredMemories: [Memory] {
-        let filteredMemoriesWithSearchPredicate = searchPredicate.isEmpty ? memories : memories.filter { $0.title.lowercased().contains(searchPredicate.lowercased())
+    func filteredMemories(globalData: GlobalData) -> [Memory] {
+        var filteredMemoriesWithSearchPredicate = searchPredicate.isEmpty ? memories : memories.filter { $0.title.lowercased().contains(searchPredicate.lowercased())
             || $0.contents.lowercased().contains(searchPredicate.lowercased()) || $0.creatorUsername.lowercased().contains(searchPredicate.lowercased()) }
+        if showOnlyMyOwnMemories {
+            filteredMemoriesWithSearchPredicate = filteredMemoriesWithSearchPredicate.filter { $0.creatorUserID == globalData.userID }
+        }
         if isDateSelected {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"
