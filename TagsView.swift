@@ -14,6 +14,7 @@ struct TagsView: View {
     @ObservedObject var viewModel: TagsViewModel
     @State var showActivityIndicatorView = false
     @State var showingLoadingTagsErrorAlert = false
+    @State var showingDeletingTagsErrorAlert = false
     @State var isAddTagViewOpeningLinkActive = false
     
     fileprivate func reloadData() async {
@@ -25,6 +26,42 @@ struct TagsView: View {
             main {
                 showActivityIndicatorView = false
                 showingLoadingTagsErrorAlert = true
+            }
+        }
+    }
+    
+    fileprivate func remove(tags: [Tag]) async {
+        do {
+            main { showActivityIndicatorView = true }
+            for tag in tags {
+                try await viewModel.remove(tag: tag, globalData: globalData)
+            }
+            main { showActivityIndicatorView = false }
+        } catch {
+            main {
+                showActivityIndicatorView = false
+                showingDeletingTagsErrorAlert = true
+            }
+        }
+    }
+    
+    fileprivate func onSwipeToDelete(_ offsets: IndexSet) {
+        async {
+            let offsetsArray = Array(offsets)
+            var tagsToRemove: [Tag] = []
+            for index in offsetsArray {
+                if viewModel.unselectedTags.count > index {
+                    tagsToRemove.append(viewModel.unselectedTags[index])
+                }
+            }
+            await remove(tags: tagsToRemove)
+            main {
+                viewModel.allTags.removeAll { tag in
+                    tagsToRemove.contains { innerTag in
+                        innerTag.id == tag.id
+                    }
+                }
+                
             }
         }
     }
@@ -44,9 +81,16 @@ struct TagsView: View {
                             .padding(2)
                         }
                     }
+                    .onDelete(perform: onSwipeToDelete)
                 }
                 .task { async { await reloadData() }}
                 .refreshable { async { await reloadData() }}
+            }
+            .alert("Error in deleting. Please try again", isPresented: $showingDeletingTagsErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            .alert("Error in loading tags. Please pull to refresh to try again", isPresented: $showingLoadingTagsErrorAlert) {
+                Button("OK", role: .cancel) { }
             }
             .navigationBarTitle("Select a tag")
             .navigationBarItems(trailing: NavigationLink(destination: AddTagView(viewModel: viewModel), isActive: $isAddTagViewOpeningLinkActive) {

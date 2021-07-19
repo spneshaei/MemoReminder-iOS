@@ -34,6 +34,11 @@ class TagsViewModel: ObservableObject {
         }
     }
     
+    func remove(tag: Tag, globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        try await Rester.rest(endPoint: "tag/\(tag.id)/?token=\(globalData.token)", body: "", method: .delete)
+    }
+    
     func loadTags(globalData: GlobalData) async throws {
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "tag/?token=\(globalData.token)", body: "", method: .get)
