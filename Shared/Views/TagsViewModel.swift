@@ -8,7 +8,7 @@
 import SwiftUI
 
 class TagsViewModel: ObservableObject {
-    let defaults = UserDefaults.standard
+    let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     

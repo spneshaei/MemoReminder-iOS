@@ -8,7 +8,7 @@
 import SwiftUI
 
 class GlobalData: ObservableObject {
-    let defaults = UserDefaults.standard
+    let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     
     @Published var loggedIn: Bool {
         didSet {
