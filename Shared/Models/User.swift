@@ -21,6 +21,7 @@ class User: Identifiable, Codable {
     var numberOfMemories = 0
     var numberOfLikes = 0
     var numberOfComments = 0
+    var followings: [User] = []
     var followRequestID = -1
     
     init(id: Int) {
@@ -39,6 +40,7 @@ class User: Identifiable, Codable {
         user.numberOfMemories = 12
         user.numberOfLikes = 125
         user.numberOfComments = 32
+        user.followings = []
         user.followRequestID = -1 // not used in following acceptance or rejection...
         return user
     }
