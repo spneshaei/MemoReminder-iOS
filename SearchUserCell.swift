@@ -16,14 +16,16 @@ struct SearchUserCell: View {
     @ObservedObject var searchViewModel: SearchViewModel
     @EnvironmentObject var globalData: GlobalData
     var shouldShowProfilePicture: Bool
+    var shouldSelectUsers = false
     
     var hasFollowed: Bool {
         searchViewModel.friends.contains { $0.username == user.username }
     }
     
-    init(user: User, searchViewModel: SearchViewModel, shouldShowProfilePicture: Bool = true) {
+    init(user: User, searchViewModel: SearchViewModel, shouldSelectUsers: Bool = false, shouldShowProfilePicture: Bool = true) {
         self.user = user
         self.searchViewModel = searchViewModel
+        self.shouldSelectUsers = shouldSelectUsers
         self.shouldShowProfilePicture = shouldShowProfilePicture
     }
     
@@ -47,25 +49,27 @@ struct SearchUserCell: View {
                     .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255))
             }.padding(20)
             Spacer()
-            if hasFollowed {
-                Text("Following")
-                .font(.system(size: 17, weight: .bold, design: .default))
-                .buttonStyle(.plain)
-                .padding()
-            } else {
-                Button(action: {
-                    async {
-                        do {
-                            try await searchViewModel.follow(user: user, globalData: globalData)
-                            main { searchViewModel.shouldShowFollowedAlert = true }
-                        } catch {
-                            main { searchViewModel.followingErrorAlert = true }
+            if !shouldSelectUsers {
+                if hasFollowed {
+                    Text("Following")
+                    .font(.system(size: 17, weight: .bold, design: .default))
+                    .buttonStyle(.plain)
+                    .padding()
+                } else {
+                    Button(action: {
+                        async {
+                            do {
+                                try await searchViewModel.follow(user: user, globalData: globalData)
+                                main { searchViewModel.shouldShowFollowedAlert = true }
+                            } catch {
+                                main { searchViewModel.followingErrorAlert = true }
+                            }
                         }
-                    }
-                }, label: { Text("FOLLOW").bold().foregroundColor(isDarkMode ? Color(red: 0.05, green: 0.05, blue: 0.95) : .blue) })
-                .font(.system(size: 17, weight: .bold, design: .default))
-                .buttonStyle(.bordered)
-                .padding()
+                    }, label: { Text("FOLLOW").bold().foregroundColor(isDarkMode ? Color(red: 0.05, green: 0.05, blue: 0.95) : .blue) })
+                    .font(.system(size: 17, weight: .bold, design: .default))
+                    .buttonStyle(.bordered)
+                    .padding()
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .center)

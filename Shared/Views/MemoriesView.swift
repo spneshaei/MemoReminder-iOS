@@ -48,7 +48,7 @@ struct MemoriesView: View {
                 .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                .navigationBarTitle("Memories")
+                .navigationBarTitle("Memories Feed")
                 //                .sheet(isPresented: $shouldPresentMemorySheet) {
                 //                    MemoryView(memory: memoryToShowInMemorySheet)
                 //                }

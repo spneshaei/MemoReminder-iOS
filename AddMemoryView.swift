@@ -12,11 +12,13 @@ struct AddMemoryView: View {
     @EnvironmentObject var globalData: GlobalData
     @Environment(\.presentationMode) var mode
     @State var isTagViewOpeningLinkActive = false
+    @State var isMentionViewOpeningLinkActive = false
     @Binding var memoryTitle: String
     @Binding var memoryContents: String
     @Binding var showActivityIndicator: Bool
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var tagsViewModel: TagsViewModel
+    @ObservedObject var viewModel: AddMemoryViewModel
     @State var showActivityIndicatorView = false
     @State var showingAddMemoryErrorAlert = false
     
@@ -24,7 +26,7 @@ struct AddMemoryView: View {
         async {
             do {
                 main { showActivityIndicatorView = true }
-                try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, globalData: globalData)
+                try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, mentionedUsers: viewModel.mentionedUsers, globalData: globalData)
                 main {
                     mode.wrappedValue.dismiss()
                     showActivityIndicatorView = false
@@ -51,23 +53,39 @@ struct AddMemoryView: View {
 //                Text(tagsViewModel.selectedTags.isEmpty ? "No tags selected" : (tagsViewModel.selectedTags.count == 1 ? "Selected Tag: \(tagsViewModel.selectedTags.first!.name)" : "Selected Tags: \(2)"))
 //                    .padding()
                 
-                NavigationLink(destination: TagsView(viewModel: tagsViewModel), isActive: $isTagViewOpeningLinkActive) {
-                    Button(action: {
-                        isTagViewOpeningLinkActive = true
-                    }, label: {
-                        Text("Add Tag")
-                            .padding(.horizontal)
-                    })
-                        .buttonStyle(AddMemoryButton(colors: [Color(red: 0.22, green: 0.22, blue: 0.70), Color(red: 0.32, green: 0.32, blue: 1)])).clipShape(Capsule())
-                        .scaleEffect(0.84)
-                        
-                }
-                
-                ScrollView {
-                    ChipsContent(selectedTags: tagsViewModel.selectedTags) { id in
-                        tagsViewModel.selectedTags.removeAll { $0.id == id }
+                HStack {
+                    Text(viewModel.mentionedUsers.count == 0 ? "No user is mentioned" : "\(viewModel.mentionedUsers.count) \(viewModel.mentionedUsers.count == 1 ? "user is" : "users are") mentioned")
+                    Spacer()
+                    NavigationLink(destination: SearchView(shouldSelectUsers: true, usersSelected: $viewModel.mentionedUsers), isActive: $isMentionViewOpeningLinkActive) {
+                        Button(action: { isMentionViewOpeningLinkActive = true }) {
+                            Label("Add", systemImage: "plus")
+                        }
                     }
                 }
+                
+                HStack {
+                    Text("")
+                }
+                
+                HStack {
+                    Text(tagsViewModel.selectedTags.count == 0 ? "No tag is set" : "\(tagsViewModel.selectedTags.count) \(tagsViewModel.selectedTags.count == 1 ? "tag is" : "tags are") set")
+                    Spacer()
+                    NavigationLink(destination: TagsView(viewModel: tagsViewModel), isActive: $isTagViewOpeningLinkActive) {
+                        Button(action: { isTagViewOpeningLinkActive = true }) {
+                            Label("Add", systemImage: "plus")
+                        }
+                    }
+                }
+                
+                HStack {
+                    Text("")
+                }
+                
+                
+                ChipsContent(selectedTags: tagsViewModel.selectedTags) { id in
+                    tagsViewModel.selectedTags.removeAll { $0.id == id }
+                }
+                
                 
                 
             }
@@ -89,7 +107,7 @@ struct AddMemoryView_Previews: PreviewProvider {
     static var previews: some View {
         let memory = Memory.sample
         return NavigationView {
-            AddMemoryView(memoryTitle: .constant(memory.title), memoryContents: .constant(memory.contents), showActivityIndicator: .constant(false), homeViewModel: .sample, tagsViewModel: .sample)
+            AddMemoryView(memoryTitle: .constant(memory.title), memoryContents: .constant(memory.contents), showActivityIndicator: .constant(false), homeViewModel: .sample, tagsViewModel: .sample, viewModel: .sample)
         }
         .preferredColorScheme(.dark)
     }

@@ -13,6 +13,7 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     @ObservedObject var memoriesViewModel: MemoriesViewModel
     @StateObject var tagsViewModel = TagsViewModel()
+    @StateObject var addMemoryViewModel = AddMemoryViewModel()
     @EnvironmentObject var globalData: GlobalData
     @State var isBottomSheetPresented = false
     @State var memoryTitle = ""
@@ -87,7 +88,7 @@ struct HomeView: View {
                     Image(systemName: "magnifyingglass")
                 }
                 
-                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel)) {
+                NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)) {
                     Image(systemName: "plus.square")
                 }
                 //                Button(action: {
@@ -97,7 +98,7 @@ struct HomeView: View {
                 //                }
             })
             .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
-                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel)
+                AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)
             }
         }
     }

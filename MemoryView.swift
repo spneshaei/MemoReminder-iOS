@@ -128,6 +128,9 @@ struct MemoryView: View {
                     Text("Created on \(date)")
                         .listRowSeparator(.hidden)
                 }
+                NavigationLink(destination: Text("Hi")) {
+                    Text("**\(2)** people are tagged")
+                }
                 Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
                     .listRowSeparator(.hidden)
                 NavigationLink(destination: CommentsView(memory: memory)) {

@@ -65,6 +65,8 @@
 		429801C826A3F47000928A03 /* AddTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C626A3F47000928A03 /* AddTagView.swift */; };
 		429801CA26A3F82B00928A03 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C926A3F82B00928A03 /* UIColorHex.swift */; };
 		429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C926A3F82B00928A03 /* UIColorHex.swift */; };
+		42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
+		42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -191,6 +193,7 @@
 		429801C326A3F22900928A03 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		429801C626A3F47000928A03 /* AddTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagView.swift; sourceTree = SOURCE_ROOT; };
 		429801C926A3F82B00928A03 /* UIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
+		42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddMemoryViewModel.swift; path = Shared/Views/AddMemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -411,6 +414,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */,
 				429801AD26A334D700928A03 /* TagsViewModel.swift */,
 				42D0199426A17D1400D20808 /* CommentsViewModel.swift */,
 				42D0199126A1623B00D20808 /* MemoryViewModel.swift */,
@@ -639,6 +643,7 @@
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
+				42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				429801B526A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
@@ -708,6 +713,7 @@
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
+				42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				429801B626A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,

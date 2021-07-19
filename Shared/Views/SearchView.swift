@@ -9,11 +9,20 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct SearchView: View {
+    @Environment(\.presentationMode) var mode
     @EnvironmentObject var globalData: GlobalData
     
     @StateObject var viewModel = SearchViewModel()
+    @Binding var usersSelected: [User]
     
     @State var showActivityIndicatorView = false
+
+    var shouldSelectUsers = false
+    
+    init(shouldSelectUsers: Bool = false, usersSelected: Binding<[User]> = .constant([])) {
+        self.shouldSelectUsers = shouldSelectUsers
+        self._usersSelected = usersSelected
+    }
     
     fileprivate func reloadData() async {
         do {
@@ -31,11 +40,25 @@ struct SearchView: View {
     var body: some View {
         ZStack {
             List(viewModel.filteredUsers) { user in
-                SearchUserCell(user: user, searchViewModel: viewModel)
+                SearchUserCell(user: user, searchViewModel: viewModel, shouldSelectUsers: shouldSelectUsers)
+                    .opacity(shouldSelectUsers ? (usersSelected.contains(where: { $0.id == user.id }) ? 0.65 : 1) : 1)
+                    .onTapGesture {
+                        if shouldSelectUsers {
+                            if usersSelected.contains(where: { $0.id == user.id }) {
+                                viewModel.showingPreviouslyMentionedUserErrorAlert = true
+                            } else {
+                                usersSelected.append(user)
+                                self.mode.wrappedValue.dismiss()
+                            }
+                        }
+                    }
             }
             .listStyle(.plain)
             .searchable(text: $viewModel.searchPredicate)
             .navigationTitle(Text("Search all users"))
+            .alert("This user has been previously mentioned", isPresented: $viewModel.showingPreviouslyMentionedUserErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
             .alert("Error in loading users", isPresented: $viewModel.showingLoadingUsersErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
