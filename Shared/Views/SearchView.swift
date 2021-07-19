@@ -69,13 +69,14 @@ struct SearchView: View {
             }
             .task { await reloadData() }
             .refreshable { await reloadData() }
-            .navigationBarItems(trailing: NavigationLink(destination: UsersFilterView(searchViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
-                if !viewModel.shouldShowPredeterminedUsers {
-                    Button(action: {
-                        isNavigationLinkToFilterActive = true
-                    }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
-                }
-            })
+            // TODO: Next comment block :(
+//            .navigationBarItems(trailing: NavigationLink(destination: UsersFilterView(searchViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
+//                if !viewModel.shouldShowPredeterminedUsers {
+//                    Button(action: {
+//                        isNavigationLinkToFilterActive = true
+//                    }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
+//                }
+//            })
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
