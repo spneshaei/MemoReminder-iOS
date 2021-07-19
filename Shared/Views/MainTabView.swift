@@ -56,6 +56,11 @@ struct MainTabView: View {
             handleQuickAction()
         }
         .onAppear(perform: handleQuickAction)
+        .onOpenURL { url in
+            if url.absoluteString.hasSuffix("open-most-top") {
+                selectedIndex = 0
+            }
+        }
 //        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
 //                    .onEnded({ value in
 //            if value.translation.width < 0 && selectedIndex != 2 {

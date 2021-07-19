@@ -12,15 +12,15 @@ struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
     }
-
+    
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let entry = SimpleEntry(date: Date())
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
-
+        
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 1000 {
@@ -28,7 +28,7 @@ struct Provider: TimelineProvider {
             let entry = SimpleEntry(date: entryDate)
             entries.append(entry)
         }
-
+        
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
@@ -48,44 +48,47 @@ struct MemoReminder_WidgetEntryView : View {
         print(string)
         return EmptyView()
     }
-
+    
     var body: some View {
-//        Text(entry.date, style: .time)
-        printer("stage1")
-        if let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") {
-            printer("stage2")
-            if let topMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_topMemories") ?? Data()) {
-                printer("stage3")
-                if let hottestMemory = topMemories.first {
-                    printer("stage4")
-                    HStack {
-                        VStack(alignment: .leading, spacing: 5) {
-                            Text(hottestMemory.createdDate).font(.caption2)
-                            Text(hottestMemory.title).font(.title3).bold()
+        //        Text(entry.date, style: .time)
+        Group {
+            printer("stage1")
+            if let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") {
+                printer("stage2")
+                if let topMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_topMemories") ?? Data()) {
+                    printer("stage3")
+                    if let hottestMemory = topMemories.first {
+                        printer("stage4")
+                        HStack {
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(hottestMemory.createdDate).font(.caption2)
+                                Text(hottestMemory.title).font(.title3).bold()
+                                Spacer()
+                                Text(hottestMemory.creatorFirstName).font(.footnote)
+                            }
+                            .padding(.vertical)
+                            .padding(.horizontal)
                             Spacer()
-                            Text(hottestMemory.creatorFirstName).font(.footnote)
                         }
-                        .padding(.vertical)
-                        .padding(.horizontal)
-                        Spacer()
+                        .background(Color.orange)
+                    } else {
+                        Text("Login to continue")
                     }
-                    .background(Color.orange)
                 } else {
                     Text("Login to continue")
                 }
             } else {
                 Text("Login to continue")
             }
-        } else {
-            Text("Login to continue")
         }
+        .widgetURL(URL(string: "memoreminder://open-most-top")!)
     }
 }
 
 @main
 struct MemoReminder_Widget: Widget {
     let kind: String = "MemoReminder_Widget"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             MemoReminder_WidgetEntryView(entry: entry)
