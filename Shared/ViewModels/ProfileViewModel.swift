@@ -70,18 +70,7 @@ class ProfileViewModel: ObservableObject {
         guard !isSample else { return }
         let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get)
         main {
-            let result = JSON(parseJSON: resultString)
-            let user = User(id: result["id"].intValue)
-            user.username = result["username"].stringValue
-            user.firstName = result["first_name"].stringValue
-            user.lastName = result["last_name"].stringValue
-            user.email = result["email"].stringValue
-            user.phoneNumber = result["phone_number"].stringValue
-            user.birthday = result["birthday_date"].stringValue
-            user.numberOfLikes = result["likes_received_count"].intValue
-            user.numberOfMemories = result["posts_count"].intValue
-            user.numberOfComments = result["comments_received_count"].intValue
-            self.user = user
+            self.user = User.loadFromJSON(jsonString: resultString)
         }
     }
     

@@ -22,6 +22,7 @@ class SearchViewModel: ObservableObject {
         self.shouldShowPredeterminedUsers = true
         self.users = []
         self.friends = []
+        self.currentUser = User(id: 0)
     }
     
     @Published var users: [User] {
@@ -36,6 +37,12 @@ class SearchViewModel: ObservableObject {
         }
     }
     
+    @Published var currentUser: User {
+        didSet {
+            defaults.set(try? encoder.encode(currentUser), forKey: "ProfileViewModel_user")
+        }
+    }
+    
     init() {
         if let users = try? decoder.decode([User].self, from: defaults.data(forKey: "SearchViewModel_users") ?? Data()) {
             self.users = users
@@ -46,6 +53,11 @@ class SearchViewModel: ObservableObject {
             self.friends = friends
         } else {
             self.friends = []
+        }
+        if let currentUser = try? decoder.decode(User.self, from: defaults.data(forKey: "ProfileViewModel_user") ?? Data()) {
+            self.currentUser = currentUser
+        } else {
+            self.currentUser = User(id: 0)
         }
     }
     
@@ -68,12 +80,20 @@ class SearchViewModel: ObservableObject {
             var result = searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
                 || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
             if showOnlyTheUsersIFollow {
-                // TODO: Filter!
+                result = result.filter { currentUser.followingIDs.contains($0.id) }
             }
             if showOnlyTheUsersInMyContacts {
                 // TODO: Filter!
             }
             return result
+        }
+    }
+    
+    func loadUser(globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get)
+        main {
+            self.currentUser = User.loadFromJSON(jsonString: resultString)
         }
     }
     
