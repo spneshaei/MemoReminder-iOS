@@ -87,6 +87,8 @@
 		42A0FD4B26A563B5002BC56A /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196E269D4E9100D20808 /* GlobalData.swift */; };
 		42A0FD4C26A563C1002BC56A /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
 		42A0FD4F26A577A5002BC56A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0FD4E26A577A5002BC56A /* Alamofire */; };
+		42A0FD5126A5884F002BC56A /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD5026A5884F002BC56A /* PagingView.swift */; };
+		42A0FD5226A5884F002BC56A /* PagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD5026A5884F002BC56A /* PagingView.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -246,6 +248,7 @@
 		42A0FD3526A54CAD002BC56A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42A0FD4326A5544F002BC56A /* MemoReminder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MemoReminder.entitlements; sourceTree = "<group>"; };
 		42A0FD4426A554A9002BC56A /* MemoReminder WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "MemoReminder WidgetExtension.entitlements"; sourceTree = "<group>"; };
+		42A0FD5026A5884F002BC56A /* PagingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingView.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -477,6 +480,7 @@
 				424FDCF626972FC5004051FD /* StickyHeader.swift */,
 				42B22C552696B49F00091D30 /* ImageSlideshow.swift */,
 				42B22C582696BB2D00091D30 /* AsyncSlideshow.swift */,
+				42A0FD5026A5884F002BC56A /* PagingView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -784,6 +788,7 @@
 				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
+				42A0FD5126A5884F002BC56A /* PagingView.swift in Sources */,
 				429801B526A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
@@ -857,6 +862,7 @@
 				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
 				42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
+				42A0FD5226A5884F002BC56A /* PagingView.swift in Sources */,
 				429801B626A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,

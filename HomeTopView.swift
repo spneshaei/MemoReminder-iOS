@@ -25,7 +25,13 @@ struct HomeTopView: View {
     var body: some View {
         ScrollView {
             Grid(imageURLs, id: \.self) { imageURL in
-                URLImage(imageURL) { image in image }
+                AsyncImage(url: imageURL) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    Color.purple.opacity(0)
+                }
             }
         }
         .gridStyle(

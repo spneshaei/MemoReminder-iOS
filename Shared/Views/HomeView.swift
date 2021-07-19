@@ -24,6 +24,7 @@ struct HomeView: View {
     @State var shouldPresentMemorySheet = false
     @State var isSearchViewPresented = false
     @State var isDeepLinkToHottestMemoryActive = false
+    @State var currentTopSliderImageIndex = 0
     
     fileprivate func reloadData() async {
         do {
@@ -41,9 +42,19 @@ struct HomeView: View {
         }
     }
     
-    var slideshowURLs: [String] {
+    var topMemoriesWithImages: [Memory] {
         viewModel.topMemories
             .filter { !$0.imageLink.isEmpty }
+    }
+    
+    func topMemoriesWithImages(index: Int) -> Memory? {
+        let topMemoriesWithImages = self.topMemoriesWithImages
+        guard topMemoriesWithImages.count > index else { return nil }
+        return topMemoriesWithImages[index]
+    }
+    
+    var slideshowURLs: [String] {
+        topMemoriesWithImages
             .map { $0.imageLink }
     }
     
@@ -56,6 +67,16 @@ struct HomeView: View {
         }
     }
     
+    var slideshowURLObjects: [URL] {
+        var result: [URL] = []
+        for string in slideshowURLs {
+            if let url = URL(string: string) {
+                result.append(url)
+            }
+        }
+        return result
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -64,9 +85,19 @@ struct HomeView: View {
 //                    AsyncSlideshow(imageURLs: slideshowURLs)
 //                        .frame(height: 120)
 //                        .listRowSeparator(.hidden)
-                    HomeTopView(imageURLStrings: slideshowURLs)
-                        .frame(height: 120)
-                        .listRowSeparator(.hidden)
+//                    HomeTopView(imageURLStrings: slideshowURLs)
+//                        .frame(height: 120)
+//                        .listRowSeparator(.hidden)
+                    
+//                    AsyncSlideshow(imageURLs: slideshowURLs)
+//                        .frame(height: 120)
+//                        .listRowSeparator(.hidden)
+                    
+                    if let topMemoryWithImage = topMemoriesWithImages(index: currentTopSliderImageIndex) {
+                        NavigationLink(destination: MemoryView(memory: topMemoryWithImage, imageLink: topMemoryWithImage.imageLink, numberOfLikes: topMemoryWithImage.numberOfLikes, hasCurrentUserLiked: topMemoryWithImage.hasCurrentUserLiked)) {
+                            AsyncImagesPagingView(imageURLs: slideshowURLObjects, index: $currentTopSliderImageIndex)
+                        }
+                    }
                     
                     if !memoriesViewModel.aYearAgoMemories.isEmpty {
                         Text("A year ago, these days!")

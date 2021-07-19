@@ -40,6 +40,7 @@ struct MemoriesView: View {
                         }.buttonStyle(PlainButtonStyle())
                             .listRowSeparator(.hidden)
                     }
+                    .listRowSeparator(.hidden)
                 }
                 .listStyle(PlainListStyle())
                 .searchable(text: $viewModel.searchPredicate)

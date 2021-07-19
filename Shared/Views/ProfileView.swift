@@ -155,6 +155,7 @@ struct ProfileView: View {
                             }.buttonStyle(PlainButtonStyle())
                                 .listRowSeparator(.hidden)
                         }
+                        .listRowSeparator(.hidden)
                     }
                     
                 }
