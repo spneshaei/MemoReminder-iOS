@@ -13,6 +13,8 @@ struct PagingView<Content>: View where Content: View {
     @Binding var index: Int
     let maxIndex: Int
     let content: () -> Content
+    
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
 
     @State private var offset = CGFloat.zero
     @State private var dragging = false
@@ -53,6 +55,9 @@ struct PagingView<Content>: View where Content: View {
             .clipped()
 
             PageControl(index: $index, maxIndex: maxIndex)
+                .onReceive(self.timer) { _ in
+                    self.index = (self.index + 1) % (maxIndex + 1)
+                }
         }
     }
 
