@@ -53,7 +53,6 @@ class SearchViewModel: ObservableObject {
     @Published var shouldShowFollowedAlert = false
     @Published var showingLoadingUsersErrorAlert = false
     @Published var followingErrorAlert = false
-    @Published var showingPreviouslyMentionedUserErrorAlert = false
     
     var filteredUsers: [User] {
         shouldShowPredeterminedUsers ? predeterminedUsers : (searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())

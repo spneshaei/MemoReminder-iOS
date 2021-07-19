@@ -46,7 +46,7 @@ struct SearchView: View {
                     .onTapGesture {
                         if shouldSelectUsers {
                             if usersSelected.contains(where: { $0.id == user.id }) {
-                                viewModel.showingPreviouslyMentionedUserErrorAlert = true
+                                usersSelected.removeAll { user.id == $0.id }
                             } else {
                                 usersSelected.append(user)
                                 self.mode.wrappedValue.dismiss()
@@ -57,9 +57,6 @@ struct SearchView: View {
             .listStyle(.plain)
             .searchable(text: $viewModel.searchPredicate)
             .navigationTitle(Text(viewModel.shouldShowPredeterminedUsers ? "Mentioned users" : "Search all users"))
-            .alert("This user has been previously mentioned", isPresented: $viewModel.showingPreviouslyMentionedUserErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
             .alert("Error in loading users", isPresented: $viewModel.showingLoadingUsersErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
