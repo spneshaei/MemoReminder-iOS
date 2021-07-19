@@ -115,12 +115,15 @@ struct HomeView: View {
                         MemoryListInHomeView(memories: memoriesViewModel.aYearAgoMemories)
                     }
                     
-                    Text("Explore top memories")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .listRowSeparator(.hidden)
+                    if !viewModel.topMemories.isEmpty {
+                        Text("Explore top memories")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .listRowSeparator(.hidden)
+                        
+                        MemoryListInHomeView(memories: viewModel.topMemories)
+                    }
                     
-                    MemoryListInHomeView(memories: viewModel.topMemories)
                 }
                 .listStyle(PlainListStyle())
 //                .sheet(isPresented: $shouldPresentMemorySheet) {
