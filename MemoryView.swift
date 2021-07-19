@@ -12,6 +12,7 @@ import URLImage
 import ImagePickerView
 
 struct MemoryView: View {
+    @Environment(\.presentationMode) var mode
     @EnvironmentObject var globalData: GlobalData
     
     @StateObject var viewModel = MemoryViewModel()
@@ -30,6 +31,8 @@ struct MemoryView: View {
     @State var imageSourceSelection: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
     @State var editMode = false
+    @State var showDeleteMemoryConfirmationAlert = false
+    @State var showDeleteMemoryErrorAlert = false
     
     enum UploadImageState {
         case notStarted, waitingToTapUpload, uploading
@@ -96,6 +99,23 @@ struct MemoryView: View {
         }
     }
     
+    fileprivate func deleteMemory() async {
+        main { showActivityIndicatorView = true }
+        do {
+            try await viewModel.deleteMemory(memory: memory, globalData: globalData)
+            main {
+                showActivityIndicatorView = false
+                self.mode.wrappedValue.dismiss()
+            }
+        } catch {
+            main {
+                showActivityIndicatorView = false
+                showDeleteMemoryErrorAlert = true
+            }
+        }
+        
+    }
+    
     var body: some View {
         ZStack {
             List {
@@ -129,7 +149,7 @@ struct MemoryView: View {
                         .listRowSeparator(.hidden)
                 }
                 NavigationLink(destination: Text("Hi")) {
-                    Text("**\(2)** people are tagged")
+                    Text("**\(2)** people are tagged") // TODO: Here!
                 }
                 Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
                     .listRowSeparator(.hidden)
@@ -145,6 +165,9 @@ struct MemoryView: View {
 //                    Text("Show on the map")
 //                }
             }
+            .alert("Error in deleting the memory. Please try again", isPresented: $showDeleteMemoryErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
             .alert("Error in editing the memory. Please try again", isPresented: $shouldEditMemoryErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
@@ -156,12 +179,20 @@ struct MemoryView: View {
             }
             .navigationBarTitle(Text(memory.title))
             .navigationBarItems(trailing: HStack(spacing: 15) {
-//                Button(action: {
-//                    // delete memory (and show only when needed!)
-//                }) {
-//                    Image(systemName: "trash")
-//                        .foregroundColor(.red)
-//                }
+                if memory.creatorUserID == globalData.userID && !showActivityIndicatorView {
+                    Button(action: {
+                        showDeleteMemoryConfirmationAlert = true
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .confirmationDialog("Are you sure you want to delete the \(memory.title) memory?", isPresented: $showDeleteMemoryConfirmationAlert, titleVisibility: .visible) {
+                        Button("Yes", role: .destructive) {
+                            async { await deleteMemory() }
+                        }
+                        Button("No", role: .cancel) { }
+                    }
+                }
                 
 //                Button(action: {
 //                    withAnimation {

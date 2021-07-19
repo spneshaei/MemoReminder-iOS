@@ -199,6 +199,7 @@ struct ProfileView: View {
                             showLogoutConfirmationAlert = true
                         }) {
                             Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .foregroundColor(.red)
                         }
                         .confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert, titleVisibility: .visible) {
                             Button("Yes", role: .destructive) {

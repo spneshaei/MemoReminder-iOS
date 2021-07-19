@@ -10,6 +10,11 @@ import SwiftUI
 class MemoryViewModel: ObservableObject {
     var isSample = false // Not used! ...
     
+    func deleteMemory(memory: Memory, globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        try await Rester.rest(endPoint: "post/\(memory.id)/?token=\(globalData.token)", body: "", method: .delete)
+    }
+    
     func likeMemory(memory: Memory, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let body: JSON = [
