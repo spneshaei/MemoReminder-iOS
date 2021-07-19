@@ -16,6 +16,7 @@ struct SearchView: View {
     @Binding var usersSelected: [User]
     
     @State var showActivityIndicatorView = false
+    @State var isNavigationLinkToFilterActive = false
 
     var shouldSelectUsers = false
     
@@ -66,12 +67,15 @@ struct SearchView: View {
             .alert("Your follow request has been sent; when accepted, the user will be displayed as \"Following\" in this list.", isPresented: $viewModel.shouldShowFollowedAlert) {
                 Button("OK", role: .cancel) { }
             }
-            .task {
-                await reloadData()
-            }
-            .refreshable {
-                await reloadData()
-            }
+            .task { await reloadData() }
+            .refreshable { await reloadData() }
+            .navigationBarItems(trailing: NavigationLink(destination: UsersFilterView(searchViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
+                if !viewModel.shouldShowPredeterminedUsers {
+                    Button(action: {
+                        isNavigationLinkToFilterActive = true
+                    }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
+                }
+            })
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)

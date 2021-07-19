@@ -67,8 +67,8 @@
 		429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801C926A3F82B00928A03 /* UIColorHex.swift */; };
 		42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
 		42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
-		42A0FD1E26A53F5D002BC56A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* FilterView.swift */; };
-		42A0FD1F26A53F5D002BC56A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* FilterView.swift */; };
+		42A0FD1E26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* MemoriesFilterView.swift */; };
+		42A0FD1F26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* MemoriesFilterView.swift */; };
 		42A0FD2126A542EA002BC56A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2026A542EA002BC56A /* AppDelegate.swift */; };
 		42A0FD2226A542EA002BC56A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2026A542EA002BC56A /* AppDelegate.swift */; };
 		42A0FD2426A54428002BC56A /* QuickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2326A54428002BC56A /* QuickAction.swift */; };
@@ -118,6 +118,8 @@
 		42A0FD8E26A5C438002BC56A /* Rester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1B269A0AF6004051FD /* Rester.swift */; };
 		42A0FD8F26A5C43C002BC56A /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
 		42A0FD9026A5C43D002BC56A /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
+		42A0FD9226A5E57C002BC56A /* UsersFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */; };
+		42A0FD9326A5E57C002BC56A /* UsersFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -282,7 +284,7 @@
 		429801C626A3F47000928A03 /* AddTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTagView.swift; sourceTree = SOURCE_ROOT; };
 		429801C926A3F82B00928A03 /* UIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
 		42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddMemoryViewModel.swift; path = Shared/Views/AddMemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
-		42A0FD1D26A53F5D002BC56A /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		42A0FD1D26A53F5D002BC56A /* MemoriesFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesFilterView.swift; sourceTree = "<group>"; };
 		42A0FD2026A542EA002BC56A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42A0FD2326A54428002BC56A /* QuickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAction.swift; sourceTree = "<group>"; };
 		42A0FD2A26A54CAA002BC56A /* MemoReminder WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MemoReminder WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -306,6 +308,7 @@
 		42A0FD6D26A5A78B002BC56A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		42A0FD6F26A5A78B002BC56A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42A0FD7E26A5A82E002BC56A /* ViewHottestMemoriesIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHottestMemoriesIntentHandler.swift; sourceTree = "<group>"; };
+		42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFilterView.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -549,6 +552,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */,
 				429801C626A3F47000928A03 /* AddTagView.swift */,
 				429801C026A3ECA800928A03 /* TagsView.swift */,
 				429801AA26A3222B00928A03 /* AddMemoryView.swift */,
@@ -565,7 +569,7 @@
 				42B22C4D2696A6F900091D30 /* LoginView.swift */,
 				42B22C502696A83E00091D30 /* SignUpView.swift */,
 				424FDCE7269715AE004051FD /* MemoriesView.swift */,
-				42A0FD1D26A53F5D002BC56A /* FilterView.swift */,
+				42A0FD1D26A53F5D002BC56A /* MemoriesFilterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -961,6 +965,7 @@
 				429801B826A3586900928A03 /* ChipsContent.swift in Sources */,
 				42A0FD2126A542EA002BC56A /* AppDelegate.swift in Sources */,
 				42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */,
+				42A0FD9226A5E57C002BC56A /* UsersFilterView.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				42A0FD2426A54428002BC56A /* QuickAction.swift in Sources */,
 				42D019A226A27E2A00D20808 /* BottomBarItem.swift in Sources */,
@@ -998,7 +1003,7 @@
 				42B22C372696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C692696C50900091D30 /* Comment.swift in Sources */,
 				424FDCF726972FC5004051FD /* StickyHeader.swift in Sources */,
-				42A0FD1E26A53F5D002BC56A /* FilterView.swift in Sources */,
+				42A0FD1E26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */,
 				42B22C592696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
 				424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
@@ -1036,6 +1041,7 @@
 				429801B926A3586900928A03 /* ChipsContent.swift in Sources */,
 				42A0FD2226A542EA002BC56A /* AppDelegate.swift in Sources */,
 				42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */,
+				42A0FD9326A5E57C002BC56A /* UsersFilterView.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				42A0FD2526A54428002BC56A /* QuickAction.swift in Sources */,
 				42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */,
@@ -1073,7 +1079,7 @@
 				42B22C382696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C6A2696C50900091D30 /* Comment.swift in Sources */,
 				424FDCF826972FC5004051FD /* StickyHeader.swift in Sources */,
-				42A0FD1F26A53F5D002BC56A /* FilterView.swift in Sources */,
+				42A0FD1F26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */,
 				42B22C5A2696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
 				424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,

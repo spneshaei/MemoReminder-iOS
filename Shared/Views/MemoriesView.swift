@@ -58,7 +58,7 @@ struct MemoriesView: View {
                     .frame(width: 100.0, height: 100.0)
                     .foregroundColor(.orange)
             }
-            .navigationBarItems(trailing: NavigationLink(destination: FilterView(memoriesViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
+            .navigationBarItems(trailing: NavigationLink(destination: MemoriesFilterView(memoriesViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
                 Button(action: {
                     isNavigationLinkToFilterActive = true
                 }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }

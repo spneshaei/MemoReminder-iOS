@@ -54,9 +54,27 @@ class SearchViewModel: ObservableObject {
     @Published var showingLoadingUsersErrorAlert = false
     @Published var followingErrorAlert = false
     
+    @Published var showOnlyTheUsersIFollow = false
+    @Published var showOnlyTheUsersInMyContacts = false
+    
+    var hasFilter: Bool {
+        return showOnlyTheUsersIFollow || showOnlyTheUsersInMyContacts
+    }
+    
     var filteredUsers: [User] {
-        shouldShowPredeterminedUsers ? predeterminedUsers : (searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
-            || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) })
+        if shouldShowPredeterminedUsers {
+            return predeterminedUsers
+        } else {
+            var result = searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
+                || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
+            if showOnlyTheUsersIFollow {
+                // TODO: Filter!
+            }
+            if showOnlyTheUsersInMyContacts {
+                // TODO: Filter!
+            }
+            return result
+        }
     }
     
     func loadUsers(globalData: GlobalData) async throws {
