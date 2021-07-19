@@ -30,8 +30,9 @@ struct HomeView: View {
     fileprivate func reloadData() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.loadTopMemories(globalData: globalData)
             try await memoriesViewModel.loadMemories(globalData: globalData)
+            try await viewModel.loadTopMemories(globalData: globalData)
+            try await viewModel.loadMentionedMemories(globalData: globalData)
             main { showActivityIndicatorView = false }
         } catch (let error) {
             print("eErr")
@@ -122,6 +123,15 @@ struct HomeView: View {
                             .listRowSeparator(.hidden)
                         
                         MemoryListInHomeView(memories: viewModel.topMemories)
+                    }
+                    
+                    if !viewModel.mentionedMemories.isEmpty {
+                        Text("You where mentioned in")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .listRowSeparator(.hidden)
+                        
+                        MemoryListInHomeView(memories: viewModel.mentionedMemories)
                     }
                     
                 }

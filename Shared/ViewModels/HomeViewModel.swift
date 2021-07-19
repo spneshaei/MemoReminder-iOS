@@ -20,11 +20,33 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    @Published var mentionedMemories: [Memory] {
+        didSet {
+            defaults.set(try? encoder.encode(topMemories), forKey: "HomeViewModel_mentionedMemories")
+        }
+    }
+    
     init() {
         if let topMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_topMemories") ?? Data()) {
             self.topMemories = topMemories
         } else {
             self.topMemories = []
+        }
+        if let mentionedMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_mentionedMemories") ?? Data()) {
+            self.mentionedMemories = mentionedMemories
+        } else {
+            self.mentionedMemories = []
+        }
+    }
+    
+    func loadMentionedMemories(globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let resultString = try await Rester.rest(endPoint: "tagged-post/?token=\(globalData.token)", body: "", method: .get)
+        main {
+            let results = JSON(parseJSON: resultString)["results"]
+            self.mentionedMemories = results.arrayValue.map { result -> Memory in
+                return Memory.memoryFromResultJSON(result, currentUserID: globalData.userID)
+            }
         }
     }
     
