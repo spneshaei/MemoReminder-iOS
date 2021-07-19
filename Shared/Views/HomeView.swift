@@ -10,6 +10,7 @@ import BottomSheet
 import ActivityIndicatorView
 
 struct HomeView: View {
+    @EnvironmentObject var quickActions: QuickActionService
     @ObservedObject var viewModel: HomeViewModel
     @ObservedObject var memoriesViewModel: MemoriesViewModel
     @StateObject var tagsViewModel = TagsViewModel()
@@ -21,6 +22,7 @@ struct HomeView: View {
     @State var showActivityIndicatorView = false
     @State var showingLoadingMemoriesErrorAlert = false
     @State var shouldPresentMemorySheet = false
+    @State var isSearchViewPresented = false
     
     fileprivate func reloadData() async {
         do {
@@ -42,6 +44,15 @@ struct HomeView: View {
         viewModel.topMemories
             .filter { !$0.imageLink.isEmpty }
             .map { $0.imageLink }
+    }
+    
+    fileprivate func handleQuickAction() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if let action = quickActions.action, action == .search {
+                quickActions.action = nil
+                isSearchViewPresented = true
+            }
+        }
     }
     
     var body: some View {
@@ -82,10 +93,14 @@ struct HomeView: View {
                 .refreshable { await reloadData() }
                 
             }
+//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+//                handleQuickAction()
+//            }
+//            .onAppear(perform: handleQuickAction)
             .navigationBarTitle("Home")
             .navigationBarItems(trailing: HStack(spacing: 20) {
-                NavigationLink(destination: SearchView()) {
-                    Image(systemName: "magnifyingglass")
+                NavigationLink(destination: SearchView(), isActive: $isSearchViewPresented) {
+                    Button(action: { isSearchViewPresented = true }) { Image(systemName: "magnifyingglass") }
                 }
                 
                 NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)) {
@@ -122,6 +137,7 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView(viewModel: HomeViewModel.sample, memoriesViewModel: .sample)
             .environmentObject(GlobalData.sample)
+            .environmentObject(QuickActionService())
     }
 }
 

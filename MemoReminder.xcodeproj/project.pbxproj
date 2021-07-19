@@ -69,6 +69,10 @@
 		42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */; };
 		42A0FD1E26A53F5D002BC56A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* FilterView.swift */; };
 		42A0FD1F26A53F5D002BC56A /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD1D26A53F5D002BC56A /* FilterView.swift */; };
+		42A0FD2126A542EA002BC56A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2026A542EA002BC56A /* AppDelegate.swift */; };
+		42A0FD2226A542EA002BC56A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2026A542EA002BC56A /* AppDelegate.swift */; };
+		42A0FD2426A54428002BC56A /* QuickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2326A54428002BC56A /* QuickAction.swift */; };
+		42A0FD2526A54428002BC56A /* QuickAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD2326A54428002BC56A /* QuickAction.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -197,6 +201,8 @@
 		429801C926A3F82B00928A03 /* UIColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHex.swift; sourceTree = "<group>"; };
 		42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddMemoryViewModel.swift; path = Shared/Views/AddMemoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42A0FD1D26A53F5D002BC56A /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		42A0FD2026A542EA002BC56A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		42A0FD2326A54428002BC56A /* QuickAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickAction.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -321,6 +327,8 @@
 				42B22C642696C38900091D30 /* Models */,
 				42B22C542696B49000091D30 /* Custom Views */,
 				42B22C122696274200091D30 /* MemoReminderApp.swift */,
+				42A0FD2026A542EA002BC56A /* AppDelegate.swift */,
+				42A0FD2326A54428002BC56A /* QuickAction.swift */,
 				42B22C532696B48300091D30 /* Views */,
 				42B22C132696274200091D30 /* ContentView.swift */,
 				42B22C142696274200091D30 /* Persistence.swift */,
@@ -624,8 +632,10 @@
 				42B22C792696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD142697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				429801B826A3586900928A03 /* ChipsContent.swift in Sources */,
+				42A0FD2126A542EA002BC56A /* AppDelegate.swift in Sources */,
 				42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
+				42A0FD2426A54428002BC56A /* QuickAction.swift in Sources */,
 				42D019A226A27E2A00D20808 /* BottomBarItem.swift in Sources */,
 				424FDD062697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				429801C426A3F22900928A03 /* StringExtensions.swift in Sources */,
@@ -695,8 +705,10 @@
 				42B22C7A2696E6EE00091D30 /* MemoryCell.swift in Sources */,
 				424FDD152697410F004051FD /* ScrollUpHeaderBehavior.swift in Sources */,
 				429801B926A3586900928A03 /* ChipsContent.swift in Sources */,
+				42A0FD2226A542EA002BC56A /* AppDelegate.swift in Sources */,
 				42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
+				42A0FD2526A54428002BC56A /* QuickAction.swift in Sources */,
 				42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */,
 				424FDD072697410F004051FD /* View+hideNavigationBarWithoutLosingSwipeBack.swift in Sources */,
 				429801C526A3F22900928A03 /* StringExtensions.swift in Sources */,

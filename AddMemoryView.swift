@@ -47,7 +47,6 @@ struct AddMemoryView: View {
                     .font(.title2)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 TextEditor(text: $memoryContents)
-                
                 Spacer()
                 
 //                Text(tagsViewModel.selectedTags.isEmpty ? "No tags selected" : (tagsViewModel.selectedTags.count == 1 ? "Selected Tag: \(tagsViewModel.selectedTags.first!.name)" : "Selected Tags: \(2)"))

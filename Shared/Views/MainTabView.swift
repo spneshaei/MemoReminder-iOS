@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @EnvironmentObject var quickActions: QuickActionService
     @State private var selectedIndex = 0
     
     let items: [BottomBarItem] = [
@@ -20,17 +21,41 @@ struct MainTabView: View {
     @StateObject var memoriesViewModel = MemoriesViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
     
+    fileprivate func handleQuickAction() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            if let action = quickActions.action {
+                switch action {
+                case .home:
+                    quickActions.action = nil
+                    selectedIndex = 0
+                case .memories:
+                    quickActions.action = nil
+                    selectedIndex = 1
+                case .profile:
+                    quickActions.action = nil
+                    selectedIndex = 2
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
-            if selectedIndex == 0 {
+            if selectedIndex == 0 || quickActions.action == .home {
                 HomeView(viewModel: homeViewModel, memoriesViewModel: memoriesViewModel)
-            } else if selectedIndex == 1 {
+            } else if selectedIndex == 1 || quickActions.action == .memories {
                 MemoriesView(viewModel: memoriesViewModel)
-            } else if selectedIndex == 2 {
+            } else if selectedIndex == 2 || quickActions.action == .profile {
                 ProfileView(viewModel: profileViewModel)
             }
             BottomBar(selectedIndex: $selectedIndex, items: items)
         }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            handleQuickAction()
+        }
+        .onAppear(perform: handleQuickAction)
 //        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
 //                    .onEnded({ value in
 //            if value.translation.width < 0 && selectedIndex != 2 {
@@ -66,5 +91,6 @@ struct MainTabView: View {
 struct MainTabView_Previews: PreviewProvider {
     static var previews: some View {
         MainTabView()
+            .environmentObject(QuickActionService())
     }
 }
