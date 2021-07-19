@@ -41,12 +41,21 @@ struct MemoryCell: View {
         //        }.padding()
         HStack(alignment: .center) {
             if shouldShowProfilePicture && URL(string: memory.imageLink) != nil {
-                URLImage(URL(string: memory.imageLink)!) { urlImage in
-                    urlImage.resizable()
+                AsyncImage(url: URL(string: memory.imageLink)) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {
+                    Color.purple.opacity(0)
                 }
-                .aspectRatio(contentMode: .fit)
                 .frame(width: 50)
-                .padding(.all, 20)
+                .padding()
+//                URLImage(URL(string: memory.imageLink)!) { urlImage in
+//                    urlImage.resizable()
+//                }
+//                .aspectRatio(contentMode: .fit)
+//                .frame(width: 50)
+//                .padding(.all, 20)
                 //                AsyncImage(url: URL(string: memory.imageLink)) { asyncImage in
                 ////                    image.resizable()
                 //                    asyncImage.resizable()

@@ -33,7 +33,7 @@ struct MemoriesView: View {
             ZStack {
                 List(viewModel.filteredMemories(globalData: globalData)) { memory in
                     ZStack {
-                        MemoryCell(memory: memory)
+                        MemoryCell(memory: memory, shouldShowProfilePicture: false)
                             .listRowSeparator(.hidden)
                         NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
                             EmptyView()

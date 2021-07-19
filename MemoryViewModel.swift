@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Alamofire
 
 class MemoryViewModel: ObservableObject {
     var isSample = false // Not used! ...
@@ -24,10 +25,25 @@ class MemoryViewModel: ObservableObject {
         try await Rester.rest(endPoint: "post-like/?token=\(globalData.token)", body: bodyString, method: .post)
     }
     
-    func upload(memory: Memory, image: UIImage, globalData: GlobalData) async throws -> String {
-        guard !isSample else { return "" }
-        let resultString = try await Rester.upload(endPoint: "post-file/?token=\(globalData.token)&post=\(memory.id)", body: "", data: image.pngData() ?? Data(), method: .post)
-        return JSON(parseJSON: resultString)["file"].stringValue
+    // https://stackoverflow.com/questions/54268856/upload-image-to-my-server-via-php-using-swift
+    func upload(memory: Memory, image: UIImage, globalData: GlobalData, completion: @escaping (String?) -> Void) {
+        guard !isSample else {
+            completion(nil)
+            return
+        }
+        let imgData = image.jpegData(compressionQuality: 1)!
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).jpg", mimeType: "image/jpg")
+//            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
+        }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
+            .responseString { response in
+                print("Upload response status code: \(String(describing: response.response?.statusCode)) - Result: \(String(describing: response.value))")
+                completion(response.value)
+            }
+        
+        //        guard !isSample else { return "" }
+        //        let resultString = try await Rester.upload(endPoint: "post-file/?token=\(globalData.token)&post=\(memory.id)", body: "", data: image.pngData() ?? Data(), method: .post)
+        //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
     func editMemoryDetails(id: Int, contents: String, globalData: GlobalData) async throws {

@@ -40,26 +40,32 @@ struct MemoryView: View {
     
     @State var uploadImageState: UploadImageState = .notStarted
     
-    func uploadPhoto() async {
-        do {
+    func uploadPhoto() {
+        let concurrentQueue = DispatchQueue(label: "MemoReminderUploadPhoto", attributes: .concurrent)
+        concurrentQueue.async {
             main {
                 showActivityIndicatorView = true
                 uploadImageState = .uploading
             }
-            let imageURL = try await viewModel.upload(memory: memory, image: image ?? UIImage(), globalData: globalData)
-            main {
-                memory.imageLink = imageURL
-                imageLink = imageURL
-                image = nil
-                uploadImageState = .notStarted
-                showActivityIndicatorView = false
-            }
-        } catch {
-            main {
-                image = nil
-                uploadImageState = .notStarted
-                showActivityIndicatorView = false
-                showingUploadErrorAlert = true
+            viewModel.upload(memory: memory, image: image ?? UIImage(), globalData: globalData) { r in
+                if let resultString = r {
+                    let result = JSON(parseJSON: resultString)
+                    let imageURL = result["file"].stringValue
+                    main {
+                        memory.imageLink = imageURL
+                        imageLink = imageURL
+                        image = nil
+                        uploadImageState = .notStarted
+                        showActivityIndicatorView = false
+                    }
+                } else {
+                    main {
+                        image = nil
+                        uploadImageState = .notStarted
+                        showActivityIndicatorView = false
+                        showingUploadErrorAlert = true
+                    }
+                }
             }
         }
     }
@@ -120,12 +126,31 @@ struct MemoryView: View {
         ZStack {
             List {
                 if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
-                    URLImage(URL(string: memory.imageLink)!) { urlImage in
-                        urlImage.resizable()
+                    //                    NavigationLink(destination: AsyncImage(url: URL(string: memory.imageLink)) {image in image.resizable().scaledToFill()}.navigationBarTitle("Image").edgesIgnoringSafeArea(.all)) {
+                    HStack {
+                        Spacer()
+                        AsyncImage(url: URL(string: memory.imageLink)) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                        } placeholder: {
+                            Color.purple.opacity(0)
+                        }
+                        .frame(maxHeight: 200)
+                        //                        .cornerRadius(20)
+                        //                        AsyncImage(url: URL(string: memory.imageLink)!)
+                        //                            .aspectRatio(contentMode: .fit)
+                        //                            .frame(maxHeight: 200)
+                        //                        URLImage(URL(string: memory.imageLink)!) { urlImage in
+                        //                            urlImage.resizable()
+                        //                        }
+                        //                        .aspectRatio(contentMode: .fit)
+                        //                        .frame(maxHeight: 200)
+                        Spacer()
                     }
-                    .aspectRatio(contentMode: .fit)
                     .frame(maxHeight: 200)
-                    .listRowSeparator(.hidden)
+                    Text("").listRowSeparator(.hidden)
+                    //                    }
                 }
                 if (uploadImageState == .waitingToTapUpload || uploadImageState == .uploading) {
                     if let image = image {
@@ -133,6 +158,7 @@ struct MemoryView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .listRowSeparator(.hidden)
+                        Text("").listRowSeparator(.hidden)
                     }
                 }
                 VStack(alignment: .leading, spacing: 5) {
@@ -160,10 +186,10 @@ struct MemoryView: View {
                     ChipsContent(selectedTags: memory.tags) { _ in }
                 }
                 .frame(minHeight: 150)
-//                LocationRow(memory: memory)
-//                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
-//                    Text("Show on the map")
-//                }
+                //                LocationRow(memory: memory)
+                //                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
+                //                    Text("Show on the map")
+                //                }
             }
             .alert("Error in deleting the memory. Please try again", isPresented: $showDeleteMemoryErrorAlert) {
                 Button("OK", role: .cancel) { }
@@ -194,17 +220,17 @@ struct MemoryView: View {
                     }
                 }
                 
-//                Button(action: {
-//                    withAnimation {
-//                        // edit memory (and show only when needed!)
-//                    }
-//                }) {
-//                    Image(systemName: "square.and.pencil")
-//                }
+                //                Button(action: {
+                //                    withAnimation {
+                //                        // edit memory (and show only when needed!)
+                //                    }
+                //                }) {
+                //                    Image(systemName: "square.and.pencil")
+                //                }
                 if imageLink.isEmpty && memory.creatorUserID == globalData.userID && uploadImageState != .uploading {
                     Button(action: {
                         if uploadImageState == .waitingToTapUpload {
-                            async { await uploadPhoto() }
+                            uploadPhoto()
                         } else {
                             showImageSourcePicker = true
                             uploadImageState = .waitingToTapUpload

@@ -86,6 +86,7 @@
 		42A0FD4A26A563AA002BC56A /* Rester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1B269A0AF6004051FD /* Rester.swift */; };
 		42A0FD4B26A563B5002BC56A /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0196E269D4E9100D20808 /* GlobalData.swift */; };
 		42A0FD4C26A563C1002BC56A /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
+		42A0FD4F26A577A5002BC56A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 42A0FD4E26A577A5002BC56A /* Alamofire */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -302,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D019AC26A2F89700D20808 /* ImagePickerView in Frameworks */,
+				42A0FD4F26A577A5002BC56A /* Alamofire in Frameworks */,
 				42D0197C269FE98100D20808 /* URLImage in Frameworks */,
 				42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */,
 				42D0197E269FE98100D20808 /* URLImageStore in Frameworks */,
@@ -568,6 +570,7 @@
 				42D0198C26A1435C00D20808 /* BottomSheet */,
 				42D019AB26A2F89700D20808 /* ImagePickerView */,
 				42D019B826A31AB500D20808 /* Grid */,
+				42A0FD4E26A577A5002BC56A /* Alamofire */,
 			);
 			productName = "MemoReminder (iOS)";
 			productReference = 42B22C1A2696274300091D30 /* MemoReminder.app */;
@@ -670,6 +673,7 @@
 				42D0198B26A1435C00D20808 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				42D019AA26A2F89600D20808 /* XCRemoteSwiftPackageReference "ImagePickerView" */,
 				42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
+				42A0FD4D26A577A5002BC56A /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 42B22C1B2696274300091D30 /* Products */;
 			projectDirPath = "";
@@ -1389,6 +1393,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		42A0FD4D26A577A5002BC56A /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		42B22C5B2696BF2E00091D30 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/ActivityIndicatorView.git";
@@ -1432,6 +1444,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		42A0FD4E26A577A5002BC56A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42A0FD4D26A577A5002BC56A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		42B22C5C2696BF2E00091D30 /* ActivityIndicatorView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 42B22C5B2696BF2E00091D30 /* XCRemoteSwiftPackageReference "ActivityIndicatorView" */;
