@@ -14,6 +14,16 @@ class SearchViewModel: ObservableObject {
     
     var isSample = false
     
+    @Published var shouldShowPredeterminedUsers = false
+    @Published var predeterminedUsers: [User] = []
+    
+    init(predeterminedUsers: [User]) {
+        self.predeterminedUsers = predeterminedUsers
+        self.shouldShowPredeterminedUsers = true
+        self.users = []
+        self.friends = []
+    }
+    
     @Published var users: [User] {
         didSet {
             defaults.set(try? encoder.encode(users), forKey: "SearchViewModel_users")
@@ -46,8 +56,8 @@ class SearchViewModel: ObservableObject {
     @Published var showingPreviouslyMentionedUserErrorAlert = false
     
     var filteredUsers: [User] {
-        searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
-            || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
+        shouldShowPredeterminedUsers ? predeterminedUsers : (searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
+            || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) })
     }
     
     func loadUsers(globalData: GlobalData) async throws {

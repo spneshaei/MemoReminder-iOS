@@ -59,11 +59,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                if let memory = viewModel.topMemories.first {
-                    NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked), isActive: $isDeepLinkToHottestMemoryActive) {
-                        EmptyView()
-                    }.buttonStyle(PlainButtonStyle())
-                }
+                
                 List {
 //                    AsyncSlideshow(imageURLs: slideshowURLs)
 //                        .frame(height: 120)
@@ -120,6 +116,12 @@ struct HomeView: View {
             })
             .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
                 AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)
+            }
+            
+            if let memory = viewModel.topMemories.first {
+                NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked), isActive: $isDeepLinkToHottestMemoryActive) {
+                    EmptyView()
+                }.buttonStyle(PlainButtonStyle())
             }
         }
         .onOpenURL { url in

@@ -148,8 +148,8 @@ struct MemoryView: View {
                     Text("Created on \(date)")
                         .listRowSeparator(.hidden)
                 }
-                NavigationLink(destination: Text("Hi")) {
-                    Text("**\(2)** people are tagged") // TODO: Here!
+                NavigationLink(destination: SearchView(viewModel: SearchViewModel(predeterminedUsers: memory.usersMentioned))) {
+                    Text(memory.usersMentioned.count == 0 ? "No user is mentioned" : "\(memory.usersMentioned.count) \(memory.usersMentioned.count == 1 ? "user is" : "users are") mentioned")
                 }
                 Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
                     .listRowSeparator(.hidden)
