@@ -287,7 +287,13 @@ struct MemoryView: View {
                 Button("OK", role: .cancel) { }
             }
             .navigationBarTitle(Text(memory.title))
-            .navigationBarItems(trailing: HStack(spacing: 15) {
+            .navigationBarItems(leading: HStack {
+                if editMode {
+                    Button(action: {
+                        withAnimation { editMode = false }
+                    }) { Text("Cancel").bold() }
+                }
+            }, trailing: HStack(spacing: 15) {
                 if memory.creatorUserID == globalData.userID && !showActivityIndicatorView {
                     Button(action: {
                         showDeleteMemoryConfirmationAlert = true

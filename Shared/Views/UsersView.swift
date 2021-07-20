@@ -17,6 +17,7 @@ struct UsersView: View {
     
     @State var showActivityIndicatorView = false
     @State var isNavigationLinkToFilterActive = false
+    @State var shouldNavigateToFindContactsPage = false
 
     var shouldSelectUsers = false
     
@@ -37,6 +38,10 @@ struct UsersView: View {
                 viewModel.showingLoadingUsersErrorAlert = true
             }
         }
+    }
+    
+    fileprivate func navigateToFindContactsPage() {
+        
     }
     
     var body: some View {
@@ -69,6 +74,12 @@ struct UsersView: View {
             }
             .task { await reloadData() }
             .refreshable { await reloadData() }
+            .navigationBarItems(trailing: NavigationLink(destination: Text("hi"), isActive: $shouldNavigateToFindContactsPage) {
+                Button(action: { navigateToFindContactsPage() }) {
+                    Image(systemName: "wand.and.stars")
+                }
+            })
+            
             // TODO: Next comment block :(
 //            .navigationBarItems(trailing: NavigationLink(destination: UsersFilterView(searchViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
 //                if !viewModel.shouldShowPredeterminedUsers {
