@@ -43,6 +43,8 @@ struct MemoryView: View {
     
     @State var uploadImageState: UploadImageState = .notStarted
     
+    @State var cityCountryName = "Loading location details..."
+    
     func uploadPhoto() {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadPhoto", attributes: .concurrent)
         concurrentQueue.async {
@@ -149,18 +151,31 @@ struct MemoryView: View {
         }
     }
     
+    fileprivate func fetchLocationName() {
+        CLLocation(latitude: memory.latitude, longitude: memory.longitude).fetchCityAndCountry { city, country, error in
+            guard let city = city, let country = country, error == nil else { return }
+            main { cityCountryName = city + ", " + country }
+        }
+    }
+    
     var body: some View {
-        let latitudeBinding = Binding<String>(get: { String(memory.latitude) }, set: { memory.latitude = Double($0) ?? 0.0})
-        let longitudeBinding = Binding<String>(get: { String(memory.longitude) }, set: { memory.longitude = Double($0) ?? 0.0})
+        let latitudeBinding = Binding<String>(get: { String(memory.latitude) }, set: {
+            memory.latitude = Double($0) ?? 0.0
+            fetchLocationName()
+        })
+        let longitudeBinding = Binding<String>(get: { String(memory.longitude) }, set: {
+            memory.longitude = Double($0) ?? 0.0
+            fetchLocationName()
+        })
         let followingsOnlyBinding = Binding<Bool>(get: { memory.privacyStatus == .privateStatus }, set: { memory.privacyStatus = $0 ? .privateStatus : .publicStatus })
         
         return ZStack {
             List {
                 // TODO: This:
-//                if uploadImageState == .uploading {
-//                    ProgressView("Uploading - \(Double(round(100 * viewModel.uploadAmount) / 100))%", value: viewModel.uploadAmount, total: 100)
-//                        .listRowSeparator(.hidden)
-//                }
+                //                if uploadImageState == .uploading {
+                //                    ProgressView("Uploading - \(Double(round(100 * viewModel.uploadAmount) / 100))%", value: viewModel.uploadAmount, total: 100)
+                //                        .listRowSeparator(.hidden)
+                //                }
                 if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
                     //                    NavigationLink(destination: AsyncImage(url: URL(string: memory.imageLink)) {image in image.resizable().scaledToFill()}.navigationBarTitle("Image").edgesIgnoringSafeArea(.all)) {
                     Group {
@@ -265,17 +280,23 @@ struct MemoryView: View {
                     }
                 } else {
                     if memory.latitude != 0 || memory.longitude != 0 {
-                        LocationRow(memory: memory)
-                            .listRowSeparator(.hidden)
-                        Button(action:
-                                { showChooseMapConfirmationDialog = true }) {
-                            Text("Show on the map")
+                        Group {
+                            LocationRow(memory: memory)
+                                .listRowSeparator(.hidden)
+                            HStack(spacing: 5) {
+                                Image(systemName: "location.fill")
+                                Text(cityCountryName)
+                            }
+                            Button(action:
+                                    { showChooseMapConfirmationDialog = true }) {
+                                Text("Show on the map")
+                            }
+                                    .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
+                                        Button("Apple Maps") { showAppleMaps() }
+                                        Button("Google Maps") { showGoogleMaps() }
+                                        Button("Cancel", role: .cancel) { }
+                                    }
                         }
-                                .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
-                                    Button("Apple Maps") { showAppleMaps() }
-                                    Button("Google Maps") { showGoogleMaps() }
-                                    Button("Cancel", role: .cancel) { }
-                                }
                     }
                 }
                 if editMode {
@@ -395,6 +416,7 @@ struct MemoryView: View {
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
         }
+        .onAppear(perform: fetchLocationName)
     }
 }
 
@@ -428,5 +450,11 @@ struct MemoryView_Previews: PreviewProvider {
             MemoryView(memory: Memory.sample, imageLink: Memory.sample.imageLink, numberOfLikes: Memory.sample.numberOfLikes, hasCurrentUserLiked: Memory.sample.hasCurrentUserLiked)
                 .environmentObject(GlobalData.sample)
         }
+    }
+}
+
+extension CLLocation {
+    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
     }
 }
