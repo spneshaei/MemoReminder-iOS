@@ -51,6 +51,32 @@ class MemoryViewModel: ObservableObject {
         //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
+    func upload(memory: Memory, fileURL: URL, globalData: GlobalData, completion: @escaping (String?) -> Void) {
+        guard !isSample else {
+            completion(nil)
+            return
+        }
+        guard let imgData = try? Data(contentsOf: fileURL) else {
+            completion(nil)
+            return
+        }
+        AF.upload(multipartFormData: { multipartFormData in
+            multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).jpg", mimeType: "image/jpg")
+//            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
+        }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
+            .uploadProgress { [weak self] progress in
+                self?.uploadAmount = progress.fractionCompleted * 100
+            }
+            .responseString { response in
+                print("Upload response status code: \(String(describing: response.response?.statusCode)) - Result: \(String(describing: response.value))")
+                completion(response.value)
+            }
+        
+        //        guard !isSample else { return "" }
+        //        let resultString = try await Rester.upload(endPoint: "post-file/?token=\(globalData.token)&post=\(memory.id)", body: "", data: image.pngData() ?? Data(), method: .post)
+        //        return JSON(parseJSON: resultString)["file"].stringValue
+    }
+    
     func editMemoryDetails(id: Int, contents: String, latitude: Double, longitude: Double, privacyStatus: Memory.PrivacyStatus, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let body: JSON = [

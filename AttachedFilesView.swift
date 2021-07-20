@@ -30,6 +30,34 @@ struct AttachedFilesView: View {
     @State var showImagePicker = false
     @State var showActivityIndicatorView = false
     @State var showingUploadErrorAlert = false
+    @State var isSelectingFileSheetPresented = false
+    
+    func upload(fileURL: URL) {
+        let concurrentQueue = DispatchQueue(label: "MemoReminderUploadFileAsAttachment", attributes: .concurrent)
+        concurrentQueue.async {
+            main {
+                showActivityIndicatorView = true
+                uploadFileState = .uploading
+            }
+            memoryViewModel.upload(memory: memory, fileURL: fileURL, globalData: globalData) { r in
+                if let resultString = r {
+                    let result = JSON(parseJSON: resultString)
+                    let fileURL = result["file"].stringValue
+                    main {
+                        memory.attachedFileURLs.append(fileURL)
+                        uploadFileState = .notStarted
+                        showActivityIndicatorView = false
+                    }
+                } else {
+                    main {
+                        uploadFileState = .notStarted
+                        showActivityIndicatorView = false
+                        showingUploadErrorAlert = true
+                    }
+                }
+            }
+        }
+    }
     
     func upload(image: UIImage) {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadPhotoAsAttachment", attributes: .concurrent)
@@ -81,8 +109,7 @@ struct AttachedFilesView: View {
                 }
                 Button("Select from the Files") {
                     fileSourceSelection = .files
-                    // TODO: Files
-    //                showImagePicker = true
+                    isSelectingFileSheetPresented = true
                 }
                 Button("Select from the Photos") {
                     fileSourceSelection = .photoLibrary
@@ -100,6 +127,10 @@ struct AttachedFilesView: View {
             }
             .alert("Error in uploading the attachment. Please try again", isPresented: $showingUploadErrorAlert) {
                 Button("OK", role: .cancel) { }
+            }
+            .fileImporter(isPresented: $isSelectingFileSheetPresented, allowedContentTypes: [], allowsMultipleSelection: false) { result in
+                guard let url = try? result.get().first else { return }
+                upload(fileURL: url)
             }
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
