@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class NotificationRemindersViewModel: ObservableObject {
+class RemindersViewModel: ObservableObject {
     let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
@@ -28,8 +28,8 @@ class NotificationRemindersViewModel: ObservableObject {
         }
     }
     
-    static var sample: NotificationRemindersViewModel {
-        let viewModel = NotificationRemindersViewModel()
+    static var sample: RemindersViewModel {
+        let viewModel = RemindersViewModel()
         viewModel.reminders = [.sample]
         return viewModel
     }

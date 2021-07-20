@@ -45,6 +45,8 @@
 		424FDD1D269A0AF6004051FD /* Rester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1B269A0AF6004051FD /* Rester.swift */; };
 		424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1E269A9F67004051FD /* SwiftyJSON.swift */; };
 		424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDD1E269A9F67004051FD /* SwiftyJSON.swift */; };
+		4279997726A71B0D001B8B8D /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4279997626A71B0D001B8B8D /* AddReminderView.swift */; };
+		4279997826A71B0D001B8B8D /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4279997626A71B0D001B8B8D /* AddReminderView.swift */; };
 		429801AB26A3222B00928A03 /* AddMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AA26A3222B00928A03 /* AddMemoryView.swift */; };
 		429801AC26A3222B00928A03 /* AddMemoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AA26A3222B00928A03 /* AddMemoryView.swift */; };
 		429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429801AD26A334D700928A03 /* TagsViewModel.swift */; };
@@ -208,10 +210,10 @@
 		42E69D4C26A6E14F00F8670D /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */; };
 		42E69D5126A6EAC200F8670D /* VoiceRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */; };
 		42E69D5226A6EAC200F8670D /* VoiceRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */; };
-		42E69D5726A70D9800F8670D /* NotificationRemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5626A70D9800F8670D /* NotificationRemindersView.swift */; };
-		42E69D5826A70D9800F8670D /* NotificationRemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5626A70D9800F8670D /* NotificationRemindersView.swift */; };
-		42E69D5A26A710B500F8670D /* NotificationRemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5926A710B500F8670D /* NotificationRemindersViewModel.swift */; };
-		42E69D5B26A710B500F8670D /* NotificationRemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5926A710B500F8670D /* NotificationRemindersViewModel.swift */; };
+		42E69D5726A70D9800F8670D /* RemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5626A70D9800F8670D /* RemindersView.swift */; };
+		42E69D5826A70D9800F8670D /* RemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5626A70D9800F8670D /* RemindersView.swift */; };
+		42E69D5A26A710B500F8670D /* RemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5926A710B500F8670D /* RemindersViewModel.swift */; };
+		42E69D5B26A710B500F8670D /* RemindersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5926A710B500F8670D /* RemindersViewModel.swift */; };
 		42E69D5D26A7113600F8670D /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5C26A7113600F8670D /* Reminder.swift */; };
 		42E69D5E26A7113600F8670D /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5C26A7113600F8670D /* Reminder.swift */; };
 		42E69D6026A7132A00F8670D /* NotificationReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5F26A7132A00F8670D /* NotificationReminderCell.swift */; };
@@ -293,6 +295,7 @@
 		424FDD1B269A0AF6004051FD /* Rester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rester.swift; sourceTree = SOURCE_ROOT; };
 		424FDD1E269A9F67004051FD /* SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		424FDD3A269B13F1004051FD /* MemoReminder--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MemoReminder--iOS--Info.plist"; sourceTree = "<group>"; };
+		4279997626A71B0D001B8B8D /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 		429801AA26A3222B00928A03 /* AddMemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemoryView.swift; sourceTree = SOURCE_ROOT; };
 		429801AD26A334D700928A03 /* TagsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TagsViewModel.swift; path = Shared/Views/TagsViewModel.swift; sourceTree = SOURCE_ROOT; };
 		429801B426A3579D00928A03 /* Chips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chips.swift; sourceTree = "<group>"; };
@@ -375,8 +378,8 @@
 		42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttachedFilesViewModel.swift; path = Shared/Views/AttachedFilesViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordView.swift; sourceTree = "<group>"; };
 		42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordViewModel.swift; sourceTree = SOURCE_ROOT; };
-		42E69D5626A70D9800F8670D /* NotificationRemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRemindersView.swift; sourceTree = "<group>"; };
-		42E69D5926A710B500F8670D /* NotificationRemindersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationRemindersViewModel.swift; path = Shared/Views/NotificationRemindersViewModel.swift; sourceTree = SOURCE_ROOT; };
+		42E69D5626A70D9800F8670D /* RemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersView.swift; sourceTree = "<group>"; };
+		42E69D5926A710B500F8670D /* RemindersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RemindersViewModel.swift; path = Shared/Views/RemindersViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42E69D5C26A7113600F8670D /* Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = Shared/ViewModels/Reminder.swift; sourceTree = SOURCE_ROOT; };
 		42E69D5F26A7132A00F8670D /* NotificationReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationReminderCell.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -598,7 +601,8 @@
 				42B22C5E2696C02400091D30 /* MainTabView.swift */,
 				424FDCF326971C3D004051FD /* ProfileView.swift */,
 				42B22C612696C05700091D30 /* HomeView.swift */,
-				42E69D5626A70D9800F8670D /* NotificationRemindersView.swift */,
+				42E69D5626A70D9800F8670D /* RemindersView.swift */,
+				4279997626A71B0D001B8B8D /* AddReminderView.swift */,
 				42D0197F26A0000E00D20808 /* UsersView.swift */,
 				42B22C782696E6EE00091D30 /* MemoryCell.swift */,
 				42B22C4D2696A6F900091D30 /* LoginView.swift */,
@@ -648,7 +652,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				42E69D5926A710B500F8670D /* NotificationRemindersViewModel.swift */,
+				42E69D5926A710B500F8670D /* RemindersViewModel.swift */,
 				42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */,
 				42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */,
 				42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */,
@@ -1038,7 +1042,7 @@
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
 				42D0199F26A27E1400D20808 /* BottomBar.swift in Sources */,
 				42E69D6026A7132A00F8670D /* NotificationReminderCell.swift in Sources */,
-				42E69D5A26A710B500F8670D /* NotificationRemindersViewModel.swift in Sources */,
+				42E69D5A26A710B500F8670D /* RemindersViewModel.swift in Sources */,
 				42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
 				429801CA26A3F82B00928A03 /* UIColorHex.swift in Sources */,
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
@@ -1060,6 +1064,7 @@
 				42B22C372696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C692696C50900091D30 /* Comment.swift in Sources */,
 				424FDCF726972FC5004051FD /* StickyHeader.swift in Sources */,
+				4279997726A71B0D001B8B8D /* AddReminderView.swift in Sources */,
 				42A0FD1E26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */,
 				42B22C592696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
 				424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
@@ -1079,7 +1084,7 @@
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */,
-				42E69D5726A70D9800F8670D /* NotificationRemindersView.swift in Sources */,
+				42E69D5726A70D9800F8670D /* RemindersView.swift in Sources */,
 				424FDD1C269A0AF6004051FD /* Rester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1124,7 +1129,7 @@
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
 				42D019A026A27E1400D20808 /* BottomBar.swift in Sources */,
 				42E69D6126A7132A00F8670D /* NotificationReminderCell.swift in Sources */,
-				42E69D5B26A710B500F8670D /* NotificationRemindersViewModel.swift in Sources */,
+				42E69D5B26A710B500F8670D /* RemindersViewModel.swift in Sources */,
 				42D0198A26A1312700D20808 /* AcceptRejectUserCell.swift in Sources */,
 				429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */,
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
@@ -1146,6 +1151,7 @@
 				42B22C382696274300091D30 /* MemoReminderApp.swift in Sources */,
 				42B22C6A2696C50900091D30 /* Comment.swift in Sources */,
 				424FDCF826972FC5004051FD /* StickyHeader.swift in Sources */,
+				4279997826A71B0D001B8B8D /* AddReminderView.swift in Sources */,
 				42A0FD1F26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */,
 				42B22C5A2696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
 				424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
@@ -1165,7 +1171,7 @@
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */,
-				42E69D5826A70D9800F8670D /* NotificationRemindersView.swift in Sources */,
+				42E69D5826A70D9800F8670D /* RemindersView.swift in Sources */,
 				424FDD1D269A0AF6004051FD /* Rester.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

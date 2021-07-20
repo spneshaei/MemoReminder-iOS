@@ -210,7 +210,7 @@ struct ProfileView: View {
                             Button("No", role: .cancel) { }
                         }
                         
-                        NavigationLink(destination: NotificationRemindersView(), isActive: $isNavigationToNotificationSchedulingViewActive) {
+                        NavigationLink(destination: RemindersView(), isActive: $isNavigationToNotificationSchedulingViewActive) {
                             Button(action: {
                                 isNavigationToNotificationSchedulingViewActive = true
                             }) {

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct NotificationRemindersView: View {
-    @StateObject var viewModel = NotificationRemindersViewModel()
+struct RemindersView: View {
+    @StateObject var viewModel = RemindersViewModel()
     
     @State var isNavigationToAddReminderViewActive = false
     
@@ -31,7 +31,7 @@ struct NotificationRemindersView: View {
         .listStyle(.plain)
         .navigationBarTitle("Reminders")
         .navigationBarItems(trailing: HStack(spacing: 20) {
-            NavigationLink(destination: Text("hi"), isActive: $isNavigationToAddReminderViewActive) {
+            NavigationLink(destination: AddReminderView(remindersViewModel: viewModel), isActive: $isNavigationToAddReminderViewActive) {
                 Button(action: {
                     isNavigationToAddReminderViewActive = true
                 }) {
@@ -46,7 +46,7 @@ struct NotificationRemindersView: View {
 struct NotificationSchedulingView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            NotificationRemindersView()
+            RemindersView()
                 .preferredColorScheme(.dark)
         }
     }
