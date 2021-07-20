@@ -152,6 +152,7 @@ struct MemoryView: View {
     var body: some View {
         let latitudeBinding = Binding<String>(get: { String(memory.latitude) }, set: { memory.latitude = Double($0) ?? 0.0})
         let longitudeBinding = Binding<String>(get: { String(memory.longitude) }, set: { memory.longitude = Double($0) ?? 0.0})
+        let followingsOnlyBinding = Binding<Bool>(get: { memory.privacyStatus == .privateStatus }, set: { memory.privacyStatus = $0 ? .privateStatus : .publicStatus })
         
         return ZStack {
             List {
@@ -258,6 +259,11 @@ struct MemoryView: View {
                                 Button("Cancel", role: .cancel) { }
                             }
                     }
+                }
+                if editMode {
+                    Toggle("Show the memory only for followings", isOn: followingsOnlyBinding)
+                        .listRowSeparator(.hidden)
+                    Text("When on, the memory will not be shown on the home tab's feed for other people.").font(.footnote)
                 }
                 ScrollView {
                     ChipsContent(selectedTags: memory.tags) { _ in }

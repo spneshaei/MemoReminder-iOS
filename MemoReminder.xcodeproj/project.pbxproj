@@ -196,6 +196,7 @@
 		42D019B926A31AB500D20808 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = 42D019B826A31AB500D20808 /* Grid */; };
 		42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
 		42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
+		42E69D3926A6895A00F8670D /* SwiftLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 42E69D3826A6895A00F8670D /* SwiftLocation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,6 +385,7 @@
 				42D019AC26A2F89700D20808 /* ImagePickerView in Frameworks */,
 				42A0FD4F26A577A5002BC56A /* Alamofire in Frameworks */,
 				42D0197C269FE98100D20808 /* URLImage in Frameworks */,
+				42E69D3926A6895A00F8670D /* SwiftLocation in Frameworks */,
 				42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */,
 				42D0197E269FE98100D20808 /* URLImageStore in Frameworks */,
 				42D019B926A31AB500D20808 /* Grid in Frameworks */,
@@ -716,6 +718,7 @@
 				42D019AB26A2F89700D20808 /* ImagePickerView */,
 				42D019B826A31AB500D20808 /* Grid */,
 				42A0FD4E26A577A5002BC56A /* Alamofire */,
+				42E69D3826A6895A00F8670D /* SwiftLocation */,
 			);
 			productName = "MemoReminder (iOS)";
 			productReference = 42B22C1A2696274300091D30 /* MemoReminder.app */;
@@ -825,6 +828,7 @@
 				42D019AA26A2F89600D20808 /* XCRemoteSwiftPackageReference "ImagePickerView" */,
 				42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 				42A0FD4D26A577A5002BC56A /* XCRemoteSwiftPackageReference "Alamofire" */,
+				42E69D3726A6895A00F8670D /* XCRemoteSwiftPackageReference "SwiftLocation" */,
 			);
 			productRefGroup = 42B22C1B2696274300091D30 /* Products */;
 			projectDirPath = "";
@@ -1816,6 +1820,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		42E69D3726A6895A00F8670D /* XCRemoteSwiftPackageReference "SwiftLocation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftLocation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1853,6 +1865,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
 			productName = Grid;
+		};
+		42E69D3826A6895A00F8670D /* SwiftLocation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42E69D3726A6895A00F8670D /* XCRemoteSwiftPackageReference "SwiftLocation" */;
+			productName = SwiftLocation;
 		};
 /* End XCSwiftPackageProductDependency section */
 
