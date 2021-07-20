@@ -11,6 +11,8 @@ import Alamofire
 class MemoryViewModel: ObservableObject {
     var isSample = false // Not used! ...
     
+    @Published var uploadAmount = 0.0
+    
     func deleteMemory(memory: Memory, globalData: GlobalData) async throws {
         guard !isSample else { return }
         try await Rester.rest(endPoint: "post/\(memory.id)/?token=\(globalData.token)", body: "", method: .delete)
@@ -36,6 +38,9 @@ class MemoryViewModel: ObservableObject {
             multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).jpg", mimeType: "image/jpg")
 //            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
         }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
+            .uploadProgress { [weak self] progress in
+                self?.uploadAmount = progress.fractionCompleted * 100
+            }
             .responseString { response in
                 print("Upload response status code: \(String(describing: response.response?.statusCode)) - Result: \(String(describing: response.value))")
                 completion(response.value)

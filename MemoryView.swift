@@ -156,31 +156,38 @@ struct MemoryView: View {
         
         return ZStack {
             List {
+                // TODO: This:
+//                if uploadImageState == .uploading {
+//                    ProgressView("Uploading - \(Double(round(100 * viewModel.uploadAmount) / 100))%", value: viewModel.uploadAmount, total: 100)
+//                        .listRowSeparator(.hidden)
+//                }
                 if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
                     //                    NavigationLink(destination: AsyncImage(url: URL(string: memory.imageLink)) {image in image.resizable().scaledToFill()}.navigationBarTitle("Image").edgesIgnoringSafeArea(.all)) {
-                    HStack {
-                        Spacer()
-                        AsyncImage(url: URL(string: memory.imageLink)) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                        } placeholder: {
-                            Color.purple.opacity(0)
+                    Group {
+                        HStack {
+                            Spacer()
+                            AsyncImage(url: URL(string: memory.imageLink)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                Color.purple.opacity(0)
+                            }
+                            .frame(maxHeight: 200)
+                            //                        .cornerRadius(20)
+                            //                        AsyncImage(url: URL(string: memory.imageLink)!)
+                            //                            .aspectRatio(contentMode: .fit)
+                            //                            .frame(maxHeight: 200)
+                            //                        URLImage(URL(string: memory.imageLink)!) { urlImage in
+                            //                            urlImage.resizable()
+                            //                        }
+                            //                        .aspectRatio(contentMode: .fit)
+                            //                        .frame(maxHeight: 200)
+                            Spacer()
                         }
                         .frame(maxHeight: 200)
-                        //                        .cornerRadius(20)
-                        //                        AsyncImage(url: URL(string: memory.imageLink)!)
-                        //                            .aspectRatio(contentMode: .fit)
-                        //                            .frame(maxHeight: 200)
-                        //                        URLImage(URL(string: memory.imageLink)!) { urlImage in
-                        //                            urlImage.resizable()
-                        //                        }
-                        //                        .aspectRatio(contentMode: .fit)
-                        //                        .frame(maxHeight: 200)
-                        Spacer()
+                        Text("").listRowSeparator(.hidden)
                     }
-                    .frame(maxHeight: 200)
-                    Text("").listRowSeparator(.hidden)
                     //                    }
                 }
                 if (uploadImageState == .waitingToTapUpload || uploadImageState == .uploading) {
@@ -205,13 +212,15 @@ struct MemoryView: View {
                     Text("Created on \(date)")
                         .listRowSeparator(.hidden)
                 }
-                NavigationLink(destination: UsersView(viewModel: UsersViewModel(predeterminedUsers: memory.usersMentioned))) {
-                    Text(memory.usersMentioned.count == 0 ? "No user is mentioned" : "\(memory.usersMentioned.count) \(memory.usersMentioned.count == 1 ? "user is" : "users are") mentioned")
-                }
-                Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
-                    .listRowSeparator(.hidden)
-                NavigationLink(destination: CommentsView(memory: memory)) {
-                    Text("Show comments")
+                Group {
+                    NavigationLink(destination: UsersView(viewModel: UsersViewModel(predeterminedUsers: memory.usersMentioned))) {
+                        Text(memory.usersMentioned.count == 0 ? "No user is mentioned" : "\(memory.usersMentioned.count) \(memory.usersMentioned.count == 1 ? "user is" : "users are") mentioned")
+                    }
+                    Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
+                        .listRowSeparator(.hidden)
+                    NavigationLink(destination: CommentsView(memory: memory)) {
+                        Text("Show comments")
+                    }
                 }
                 if editMode {
                     HStack {
@@ -253,11 +262,11 @@ struct MemoryView: View {
                                 { showChooseMapConfirmationDialog = true }) {
                             Text("Show on the map")
                         }
-                            .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
-                                Button("Apple Maps") { showAppleMaps() }
-                                Button("Google Maps") { showGoogleMaps() }
-                                Button("Cancel", role: .cancel) { }
-                            }
+                                .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
+                                    Button("Apple Maps") { showAppleMaps() }
+                                    Button("Google Maps") { showGoogleMaps() }
+                                    Button("Cancel", role: .cancel) { }
+                                }
                     }
                 }
                 if editMode {
