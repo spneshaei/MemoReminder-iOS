@@ -154,7 +154,7 @@ struct HomeView: View {
             .navigationBarTitle("Home")
             .navigationBarItems(trailing: HStack(spacing: 20) {
                 NavigationLink(destination: SearchView(), isActive: $isSearchViewPresented) {
-                    Button(action: { isSearchViewPresented = true }) { Image(systemName: "magnifyingglass") }
+                    Button(action: { isSearchViewPresented = true }) { Image(systemName: "person.crop.circle.badge.plus") }
                 }
                 
                 NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)) {

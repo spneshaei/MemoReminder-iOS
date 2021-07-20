@@ -73,6 +73,9 @@ class Memory: Identifiable, Codable {
         memory.title = result["title"].stringValue
         memory.contents = result["text"].stringValue
         memory.createdDate = result["created"].stringValue
+        memory.latitude = result["lat"].doubleValue
+        memory.longitude = result["lon"].doubleValue
+        memory.privacyStatus = result["mode"].stringValue == "private" ? .privateStatus : .publicStatus
         let postFiles = result["post_files"].arrayValue
         memory.imageLink = postFiles.first { $0.stringValue.lowercased().hasSuffix("png") || $0.stringValue.lowercased().hasSuffix("jpg") }?.stringValue ?? ""
         let likes = result["likes"].arrayValue
