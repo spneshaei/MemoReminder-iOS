@@ -104,22 +104,41 @@ struct HomeView: View {
                         }
                     }
                     
-                    if !memoriesViewModel.aYearAgoMemories.isEmpty {
-                        Text("A year ago, these days!")
-                            .font(.title2)
-                            .fontWeight(.bold)
+                    if !viewModel.nearReminders.isEmpty {
+                        Group {
+                            Text("Don't forget!")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .listRowSeparator(.hidden)
+                            
+                            ForEach(viewModel.nearReminders) { reminder in
+                                NotificationReminderCell(reminder: reminder)
+                                    .listRowSeparator(.hidden)
+                            }
                             .listRowSeparator(.hidden)
-                        
-                        MemoryListInHomeView(memories: memoriesViewModel.aYearAgoMemories)
+                        }
+                    }
+                    
+                    if !memoriesViewModel.aYearAgoMemories.isEmpty {
+                        Group {
+                            Text("A year ago, these days!")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .listRowSeparator(.hidden)
+                            
+                            MemoryListInHomeView(memories: memoriesViewModel.aYearAgoMemories)
+                        }
                     }
                     
                     if !viewModel.topMemories.isEmpty {
-                        Text("Explore top memories")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .listRowSeparator(.hidden)
-                        
-                        MemoryListInHomeView(memories: viewModel.topMemories)
+                        Group {
+                            Text("Explore top memories")
+                                .font(.title2)
+                                .fontWeight(.bold)
+                                .listRowSeparator(.hidden)
+                            
+                            MemoryListInHomeView(memories: viewModel.topMemories)
+                        }
                     }
                     
                     if !viewModel.mentionedMemories.isEmpty {

@@ -31,7 +31,7 @@ struct AddReminderView: View {
                 print(error)
             } else {
                 print("Notification successful!")
-                mode.wrappedValue.dismiss()
+                main { mode.wrappedValue.dismiss() }
             }
         })
     }

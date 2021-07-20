@@ -26,6 +26,27 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    @Published var reminders: [Reminder] {
+        didSet {
+            defaults.set(try? encoder.encode(reminders), forKey: "NotificationRemindersViewModel_reminders")
+        }
+    }
+    
+    var nearReminders: [Reminder] {
+        let currentDate = Date()
+        let fifteenMinutesLater = currentDate.addingTimeInterval(15 * 60)
+        if !reminders.isEmpty {
+            let f = DateFormatter()
+            f.dateStyle = .medium
+            f.timeStyle = .medium
+            print("Now: \(f.string(from: Date()))")
+            print("That: \(f.string(from: reminders[0].date))")
+        }
+        return reminders
+            .filter { $0.date < fifteenMinutesLater && $0.date > currentDate }
+            .sorted { $0.date < $1.date }
+    }
+    
     init() {
         if let topMemories = try? decoder.decode([Memory].self, from: defaults.data(forKey: "HomeViewModel_topMemories") ?? Data()) {
             self.topMemories = topMemories
@@ -36,6 +57,11 @@ class HomeViewModel: ObservableObject {
             self.mentionedMemories = mentionedMemories
         } else {
             self.mentionedMemories = []
+        }
+        if let reminders = try? decoder.decode([Reminder].self, from: defaults.data(forKey: "NotificationRemindersViewModel_reminders") ?? Data()) {
+            self.reminders = reminders
+        } else {
+            self.reminders = []
         }
     }
     
