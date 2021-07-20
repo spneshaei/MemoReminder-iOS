@@ -93,9 +93,6 @@ struct HomeView: View {
 //                    AsyncSlideshow(imageURLs: slideshowURLs)
 //                        .frame(height: 120)
 //                        .listRowSeparator(.hidden)
-//                    HomeTopView(imageURLStrings: slideshowURLs)
-//                        .frame(height: 120)
-//                        .listRowSeparator(.hidden)
                     
 //                    AsyncSlideshow(imageURLs: slideshowURLs)
 //                        .frame(height: 120)

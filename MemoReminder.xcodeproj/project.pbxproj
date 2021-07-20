@@ -193,9 +193,6 @@
 		42D019A826A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 		42D019A926A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 		42D019AC26A2F89700D20808 /* ImagePickerView in Frameworks */ = {isa = PBXBuildFile; productRef = 42D019AB26A2F89700D20808 /* ImagePickerView */; };
-		42D019B926A31AB500D20808 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = 42D019B826A31AB500D20808 /* Grid */; };
-		42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
-		42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
 		42E69D3926A6895A00F8670D /* SwiftLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 42E69D3826A6895A00F8670D /* SwiftLocation */; };
 		42E69D3C26A69FE400F8670D /* SwiftyContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */; };
 		42E69D3D26A69FE400F8670D /* SwiftyContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */; };
@@ -363,7 +360,6 @@
 		42D019A126A27E2A00D20808 /* BottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarItem.swift; sourceTree = "<group>"; };
 		42D019A426A27E4400D20808 /* BarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItemView.swift; sourceTree = "<group>"; };
 		42D019A726A2EADE00D20808 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
-		42D019BA26A31B9700D20808 /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = SOURCE_ROOT; };
 		42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyContacts.swift; sourceTree = "<group>"; };
 		42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSuggestionsView.swift; sourceTree = SOURCE_ROOT; };
 		42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsSuggestionsViewModel.swift; path = Shared/Views/ContactsSuggestionsViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -409,7 +405,6 @@
 				42E69D3926A6895A00F8670D /* SwiftLocation in Frameworks */,
 				42D0198D26A1435C00D20808 /* BottomSheet in Frameworks */,
 				42D0197E269FE98100D20808 /* URLImageStore in Frameworks */,
-				42D019B926A31AB500D20808 /* Grid in Frameworks */,
 				42B22C5D2696BF2E00091D30 /* ActivityIndicatorView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,7 +599,6 @@
 			isa = PBXGroup;
 			children = (
 				429801B326A3569800928A03 /* Chips */,
-				42D019BA26A31B9700D20808 /* HomeTopView.swift */,
 				42D0199A26A27DD700D20808 /* BottomBar */,
 				42D0198526A01D2C00D20808 /* SearchUserCell.swift */,
 				424FDCF92697410F004051FD /* FancyScrollView */,
@@ -752,7 +746,6 @@
 				42D0197D269FE98100D20808 /* URLImageStore */,
 				42D0198C26A1435C00D20808 /* BottomSheet */,
 				42D019AB26A2F89700D20808 /* ImagePickerView */,
-				42D019B826A31AB500D20808 /* Grid */,
 				42A0FD4E26A577A5002BC56A /* Alamofire */,
 				42E69D3826A6895A00F8670D /* SwiftLocation */,
 			);
@@ -862,7 +855,6 @@
 				42D0197A269FE98100D20808 /* XCRemoteSwiftPackageReference "url-image" */,
 				42D0198B26A1435C00D20808 /* XCRemoteSwiftPackageReference "bottom-sheet" */,
 				42D019AA26A2F89600D20808 /* XCRemoteSwiftPackageReference "ImagePickerView" */,
-				42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 				42A0FD4D26A577A5002BC56A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				42E69D3726A6895A00F8670D /* XCRemoteSwiftPackageReference "SwiftLocation" */,
 			);
@@ -1065,7 +1057,6 @@
 				42D0198026A0000E00D20808 /* UsersView.swift in Sources */,
 				42D019A826A2EADE00D20808 /* Validator.swift in Sources */,
 				429801C126A3ECA800928A03 /* TagsView.swift in Sources */,
-				42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */,
 				424FDCF426971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6C2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD1F269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -1148,7 +1139,6 @@
 				42D0198126A0000E00D20808 /* UsersView.swift in Sources */,
 				42D019A926A2EADE00D20808 /* Validator.swift in Sources */,
 				429801C226A3ECA800928A03 /* TagsView.swift in Sources */,
-				42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */,
 				424FDCF526971C3D004051FD /* ProfileView.swift in Sources */,
 				42B22C6D2696C54200091D30 /* Tag.swift in Sources */,
 				424FDD20269A9F67004051FD /* SwiftyJSON.swift in Sources */,
@@ -1862,14 +1852,6 @@
 				minimumVersion = 0.5.0;
 			};
 		};
-		42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/spacenation/swiftui-grid.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		42E69D3726A6895A00F8670D /* XCRemoteSwiftPackageReference "SwiftLocation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/malcommac/SwiftLocation.git";
@@ -1910,11 +1892,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 42D019AA26A2F89600D20808 /* XCRemoteSwiftPackageReference "ImagePickerView" */;
 			productName = ImagePickerView;
-		};
-		42D019B826A31AB500D20808 /* Grid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 42D019B726A31AB500D20808 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
-			productName = Grid;
 		};
 		42E69D3826A6895A00F8670D /* SwiftLocation */ = {
 			isa = XCSwiftPackageProductDependency;

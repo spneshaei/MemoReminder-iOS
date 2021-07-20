@@ -28,6 +28,7 @@ struct ProfileView: View {
     @State var newPassword = ""
     @State var showActivityIndicatorView = false
     @State var showLogoutConfirmationAlert = false
+    @State var isNavigationToNotificationSchedulingViewActive = false
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -207,6 +208,14 @@ struct ProfileView: View {
                                 async { await logout() }
                             }
                             Button("No", role: .cancel) { }
+                        }
+                        
+                        NavigationLink(destination: Text("hi"), isActive: $isNavigationToNotificationSchedulingViewActive) {
+                            Button(action: {
+                                isNavigationToNotificationSchedulingViewActive = true
+                            }) {
+                                Image(systemName: "clock")
+                            }
                         }
                     }
                     
