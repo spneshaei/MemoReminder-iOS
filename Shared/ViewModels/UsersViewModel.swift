@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class SearchViewModel: ObservableObject {
+class UsersViewModel: ObservableObject {
     let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
@@ -129,8 +129,8 @@ class SearchViewModel: ObservableObject {
         try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: bodyString, method: .post)
     }
     
-    static var sample: SearchViewModel {
-        let viewModel = SearchViewModel()
+    static var sample: UsersViewModel {
+        let viewModel = UsersViewModel()
         viewModel.isSample = true
         viewModel.users = [User.sample, User.sample]
         viewModel.friends = []

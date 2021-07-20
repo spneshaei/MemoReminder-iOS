@@ -165,10 +165,10 @@
 		42D01973269D547700D20808 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D01971269D547700D20808 /* TopView.swift */; };
 		42D0197C269FE98100D20808 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = 42D0197B269FE98100D20808 /* URLImage */; };
 		42D0197E269FE98100D20808 /* URLImageStore in Frameworks */ = {isa = PBXBuildFile; productRef = 42D0197D269FE98100D20808 /* URLImageStore */; };
-		42D0198026A0000E00D20808 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0197F26A0000E00D20808 /* SearchView.swift */; };
-		42D0198126A0000E00D20808 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0197F26A0000E00D20808 /* SearchView.swift */; };
-		42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* SearchViewModel.swift */; };
-		42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* SearchViewModel.swift */; };
+		42D0198026A0000E00D20808 /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0197F26A0000E00D20808 /* UsersView.swift */; };
+		42D0198126A0000E00D20808 /* UsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0197F26A0000E00D20808 /* UsersView.swift */; };
+		42D0198326A011CB00D20808 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* UsersViewModel.swift */; };
+		42D0198426A011CB00D20808 /* UsersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198226A011CB00D20808 /* UsersViewModel.swift */; };
 		42D0198626A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
 		42D0198726A01D2C00D20808 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198526A01D2C00D20808 /* SearchUserCell.swift */; };
 		42D0198926A1312700D20808 /* AcceptRejectUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */; };
@@ -336,8 +336,8 @@
 		42D0196B269D45DC00D20808 /* MainAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAppViewModel.swift; sourceTree = "<group>"; };
 		42D0196E269D4E9100D20808 /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		42D01971269D547700D20808 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
-		42D0197F26A0000E00D20808 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		42D0198226A011CB00D20808 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		42D0197F26A0000E00D20808 /* UsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersView.swift; sourceTree = "<group>"; };
+		42D0198226A011CB00D20808 /* UsersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersViewModel.swift; sourceTree = "<group>"; };
 		42D0198526A01D2C00D20808 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = SOURCE_ROOT; };
 		42D0198826A1312700D20808 /* AcceptRejectUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptRejectUserCell.swift; sourceTree = SOURCE_ROOT; };
 		42D0198E26A144C000D20808 /* MainAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainAsync.swift; sourceTree = SOURCE_ROOT; };
@@ -566,7 +566,7 @@
 				42B22C5E2696C02400091D30 /* MainTabView.swift */,
 				424FDCF326971C3D004051FD /* ProfileView.swift */,
 				42B22C612696C05700091D30 /* HomeView.swift */,
-				42D0197F26A0000E00D20808 /* SearchView.swift */,
+				42D0197F26A0000E00D20808 /* UsersView.swift */,
 				42B22C782696E6EE00091D30 /* MemoryCell.swift */,
 				42B22C4D2696A6F900091D30 /* LoginView.swift */,
 				42B22C502696A83E00091D30 /* SignUpView.swift */,
@@ -618,7 +618,7 @@
 				429801AD26A334D700928A03 /* TagsViewModel.swift */,
 				42D0199426A17D1400D20808 /* CommentsViewModel.swift */,
 				42D0199126A1623B00D20808 /* MemoryViewModel.swift */,
-				42D0198226A011CB00D20808 /* SearchViewModel.swift */,
+				42D0198226A011CB00D20808 /* UsersViewModel.swift */,
 				42D0196E269D4E9100D20808 /* GlobalData.swift */,
 				42D0196B269D45DC00D20808 /* MainAppViewModel.swift */,
 				42B22C752696DFF400091D30 /* HomeViewModel.swift */,
@@ -992,7 +992,7 @@
 				429801CA26A3F82B00928A03 /* UIColorHex.swift in Sources */,
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
-				42D0198326A011CB00D20808 /* SearchViewModel.swift in Sources */,
+				42D0198326A011CB00D20808 /* UsersViewModel.swift in Sources */,
 				42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				42A0FD5126A5884F002BC56A /* PagingView.swift in Sources */,
 				429801B526A3579D00928A03 /* Chips.swift in Sources */,
@@ -1019,7 +1019,7 @@
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				429801BB26A3598F00928A03 /* ColorHex.swift in Sources */,
-				42D0198026A0000E00D20808 /* SearchView.swift in Sources */,
+				42D0198026A0000E00D20808 /* UsersView.swift in Sources */,
 				42D019A826A2EADE00D20808 /* Validator.swift in Sources */,
 				429801C126A3ECA800928A03 /* TagsView.swift in Sources */,
 				42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */,
@@ -1068,7 +1068,7 @@
 				429801CB26A3F82B00928A03 /* UIColorHex.swift in Sources */,
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
-				42D0198426A011CB00D20808 /* SearchViewModel.swift in Sources */,
+				42D0198426A011CB00D20808 /* UsersViewModel.swift in Sources */,
 				42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				42A0FD5226A5884F002BC56A /* PagingView.swift in Sources */,
 				429801B626A3579D00928A03 /* Chips.swift in Sources */,
@@ -1095,7 +1095,7 @@
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				429801BC26A3598F00928A03 /* ColorHex.swift in Sources */,
-				42D0198126A0000E00D20808 /* SearchView.swift in Sources */,
+				42D0198126A0000E00D20808 /* UsersView.swift in Sources */,
 				42D019A926A2EADE00D20808 /* Validator.swift in Sources */,
 				429801C226A3ECA800928A03 /* TagsView.swift in Sources */,
 				42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */,

@@ -13,7 +13,7 @@ struct SearchUserCell: View {
     var isDarkMode: Bool { colorScheme == .dark }
     
     var user: User
-    @ObservedObject var searchViewModel: SearchViewModel
+    @ObservedObject var searchViewModel: UsersViewModel
     @EnvironmentObject var globalData: GlobalData
     var shouldShowProfilePicture: Bool
     var shouldSelectUsers = false
@@ -22,7 +22,7 @@ struct SearchUserCell: View {
         searchViewModel.friends.contains { $0.username == user.username }
     }
     
-    init(user: User, searchViewModel: SearchViewModel, shouldSelectUsers: Bool = false, shouldShowProfilePicture: Bool = true) {
+    init(user: User, searchViewModel: UsersViewModel, shouldSelectUsers: Bool = false, shouldShowProfilePicture: Bool = true) {
         self.user = user
         self.searchViewModel = searchViewModel
         self.shouldSelectUsers = shouldSelectUsers

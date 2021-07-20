@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UsersFilterView: View {
-    @ObservedObject var searchViewModel: SearchViewModel
+    @ObservedObject var searchViewModel: UsersViewModel
     
     var body: some View {
         Form {

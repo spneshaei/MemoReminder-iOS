@@ -7,6 +7,8 @@
 
 import SwiftUI
 import ActivityIndicatorView
+import SwiftLocation
+import MapKit
 
 struct AddMemoryView: View {
     @EnvironmentObject var globalData: GlobalData
@@ -21,12 +23,13 @@ struct AddMemoryView: View {
     @ObservedObject var viewModel: AddMemoryViewModel
     @State var showActivityIndicatorView = false
     @State var showingAddMemoryErrorAlert = false
+    @State var showOnlyForFollowings = false
+    @State var saveTheCurrentLocationInMemory = false
     
-    fileprivate func addMemoryTapped() {
+    fileprivate func addMemoryToServer(location: CLLocation? = nil) {
         async {
             do {
-                main { showActivityIndicatorView = true }
-                try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, mentionedUsers: viewModel.mentionedUsers, globalData: globalData)
+                try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, mentionedUsers: viewModel.mentionedUsers, latitude: location?.coordinate.latitude ?? 0.0, longitude: location?.coordinate.longitude ?? 0.0, privacyStatus: showOnlyForFollowings ? .privateStatus : .publicStatus, globalData: globalData)
                 main {
                     mode.wrappedValue.dismiss()
                     showActivityIndicatorView = false
@@ -37,6 +40,17 @@ struct AddMemoryView: View {
                 showActivityIndicatorView = false
                 showingAddMemoryErrorAlert = true
             }
+        }
+    }
+    
+    fileprivate func addMemoryTapped() {
+        main { showActivityIndicatorView = true }
+        if saveTheCurrentLocationInMemory {
+            SwiftLocation.gpsLocation().then { location in
+                addMemoryToServer(location: location.location)
+            }
+        } else {
+            addMemoryToServer()
         }
     }
     
@@ -52,10 +66,19 @@ struct AddMemoryView: View {
 //                Text(tagsViewModel.selectedTags.isEmpty ? "No tags selected" : (tagsViewModel.selectedTags.count == 1 ? "Selected Tag: \(tagsViewModel.selectedTags.first!.name)" : "Selected Tags: \(2)"))
 //                    .padding()
                 
+                Group {
+                    Toggle("Show only for followings", isOn: $showOnlyForFollowings)
+                    Toggle("Save the current location in memory", isOn: $saveTheCurrentLocationInMemory)
+                }
+                
+                HStack {
+                    Text("")
+                }
+                
                 HStack {
                     Text(viewModel.mentionedUsers.count == 0 ? "No user is mentioned" : "\(viewModel.mentionedUsers.count) \(viewModel.mentionedUsers.count == 1 ? "user is" : "users are") mentioned")
                     Spacer()
-                    NavigationLink(destination: SearchView(shouldSelectUsers: true, usersSelected: $viewModel.mentionedUsers), isActive: $isMentionViewOpeningLinkActive) {
+                    NavigationLink(destination: UsersView(shouldSelectUsers: true, usersSelected: $viewModel.mentionedUsers), isActive: $isMentionViewOpeningLinkActive) {
                         Button(action: { isMentionViewOpeningLinkActive = true }) {
                             Label("Add", systemImage: "plus")
                         }

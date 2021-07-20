@@ -62,13 +62,16 @@ class HomeViewModel: ObservableObject {
     }
 
     
-    func addMemory(title: String, contents: String, tags: [Tag], mentionedUsers: [User], globalData: GlobalData) async throws {
+    func addMemory(title: String, contents: String, tags: [Tag], mentionedUsers: [User], latitude: Double, longitude: Double, privacyStatus: Memory.PrivacyStatus, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let body: JSON = [
             "title": title,
             "text": contents,
             "tags": tags.map { $0.id },
-            "tagged_people": mentionedUsers.map { $0.id }
+            "tagged_people": mentionedUsers.map { $0.id },
+            "lat": latitude,
+            "lon": longitude,
+            "mode": privacyStatus == .privateStatus ? "private" : "public"
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: bodyString, method: .post)

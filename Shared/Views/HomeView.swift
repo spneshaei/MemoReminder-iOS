@@ -153,7 +153,7 @@ struct HomeView: View {
             .onAppear(perform: donateViewHottestMemoryShortcut)
             .navigationBarTitle("Home")
             .navigationBarItems(trailing: HStack(spacing: 20) {
-                NavigationLink(destination: SearchView(), isActive: $isSearchViewPresented) {
+                NavigationLink(destination: UsersView(), isActive: $isSearchViewPresented) {
                     Button(action: { isSearchViewPresented = true }) { Image(systemName: "person.crop.circle.badge.plus") }
                 }
                 

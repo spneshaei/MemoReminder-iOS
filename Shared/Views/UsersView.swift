@@ -8,11 +8,11 @@
 import SwiftUI
 import ActivityIndicatorView
 
-struct SearchView: View {
+struct UsersView: View {
     @Environment(\.presentationMode) var mode
     @EnvironmentObject var globalData: GlobalData
     
-    @ObservedObject var viewModel = SearchViewModel()
+    @ObservedObject var viewModel = UsersViewModel()
     @Binding var usersSelected: [User]
     
     @State var showActivityIndicatorView = false
@@ -20,7 +20,7 @@ struct SearchView: View {
 
     var shouldSelectUsers = false
     
-    init(shouldSelectUsers: Bool = false, usersSelected: Binding<[User]> = .constant([]), viewModel: SearchViewModel = SearchViewModel()) {
+    init(shouldSelectUsers: Bool = false, usersSelected: Binding<[User]> = .constant([]), viewModel: UsersViewModel = UsersViewModel()) {
         self.shouldSelectUsers = shouldSelectUsers
         self._usersSelected = usersSelected
         self.viewModel = viewModel
@@ -87,7 +87,7 @@ struct SearchView: View {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView()
+        UsersView()
             .environmentObject(GlobalData.sample)
     }
 }

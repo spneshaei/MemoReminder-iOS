@@ -95,7 +95,7 @@ struct MemoryView: View {
     fileprivate func doneTapped() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, latitude: memory.latitude, longitude: memory.longitude, globalData: globalData)
+            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, latitude: memory.latitude, longitude: memory.longitude, privacyStatus: memory.privacyStatus, globalData: globalData)
             main {
                 showActivityIndicatorView = false
                 withAnimation { editMode = false }
@@ -205,7 +205,7 @@ struct MemoryView: View {
                     Text("Created on \(date)")
                         .listRowSeparator(.hidden)
                 }
-                NavigationLink(destination: SearchView(viewModel: SearchViewModel(predeterminedUsers: memory.usersMentioned))) {
+                NavigationLink(destination: UsersView(viewModel: UsersViewModel(predeterminedUsers: memory.usersMentioned))) {
                     Text(memory.usersMentioned.count == 0 ? "No user is mentioned" : "\(memory.usersMentioned.count) \(memory.usersMentioned.count == 1 ? "user is" : "users are") mentioned")
                 }
                 Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
