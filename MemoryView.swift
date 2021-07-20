@@ -93,7 +93,7 @@ struct MemoryView: View {
     fileprivate func doneTapped() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, globalData: globalData)
+            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, latitude, memory.latitude, longitude: memory.longitude, globalData: globalData)
             main {
                 showActivityIndicatorView = false
                 withAnimation { editMode = false }
@@ -138,8 +138,15 @@ struct MemoryView: View {
         }
     }
     
+    func setMemoryLocationDataToCurrentLocation() {
+        
+    }
+    
     var body: some View {
-        ZStack {
+        let latitudeBinding = Binding<String>(get: { String(memory.latitude) }, set: { memory.latitude = Double($0) ?? 0.0})
+        let longitudeBinding = Binding<String>(get: { String(memory.longitude) }, set: { memory.longitude = Double($0) ?? 0.0})
+        
+        return ZStack {
             List {
                 if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
                     //                    NavigationLink(destination: AsyncImage(url: URL(string: memory.imageLink)) {image in image.resizable().scaledToFill()}.navigationBarTitle("Image").edgesIgnoringSafeArea(.all)) {
@@ -198,14 +205,26 @@ struct MemoryView: View {
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
                 }
-                if memory.latitude != 0 || memory.longitude != 0 {
-                    LocationRow(memory: memory)
-                        .onTapGesture { showChooseMapConfirmationDialog = true }
-                        .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
-                            Button("Apple Maps") { showAppleMaps() }
-                            Button("Google Maps") { showGoogleMaps() }
-                            Button("Cancel", role: .cancel) { }
-                        }
+                if editMode {
+                    HStack {
+                        Text("Latitude:")
+                        TextField("Enter latitude", text: latitudeBinding)
+                    }
+                    HStack {
+                        Text("Latitude:")
+                        TextField("Enter latitude", text: longitudeBinding)
+                    }
+                    Button("Set to current location") { setMemoryLocationDataToCurrentLocation() }
+                } else {
+                    if memory.latitude != 0 || memory.longitude != 0 {
+                        LocationRow(memory: memory)
+                            .onTapGesture { showChooseMapConfirmationDialog = true }
+                            .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
+                                Button("Apple Maps") { showAppleMaps() }
+                                Button("Google Maps") { showGoogleMaps() }
+                                Button("Cancel", role: .cancel) { }
+                            }
+                    }
                 }
                 ScrollView {
                     ChipsContent(selectedTags: memory.tags) { _ in }
