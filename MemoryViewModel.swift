@@ -61,7 +61,7 @@ class MemoryViewModel: ObservableObject {
             return
         }
         AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).jpg", mimeType: "image/jpg")
+            multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
 //            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
         }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in

@@ -89,10 +89,10 @@ struct AttachedFilesView: View {
     var body: some View {
         ZStack {
             List {
-                if uploadFileState == .uploading {
-                    ProgressView("Uploading - \(Double(round(100 * memoryViewModel.uploadAmount) / 100))%", value: memoryViewModel.uploadAmount, total: 100)
-                        .listRowSeparator(.hidden)
-                }
+//                if uploadFileState == .uploading {
+//                    ProgressView("Uploading - \(Double(round(100 * memoryViewModel.uploadAmount) / 100))%", value: memoryViewModel.uploadAmount, total: 100)
+//                        .listRowSeparator(.hidden)
+//                }
                 ForEach(memory.attachedFileURLs, id: \.self) {  attachedFileURL in
                     if let _ = URL(string: attachedFileURL) {
                         AttachmentCell(url: attachedFileURL)
@@ -113,7 +113,7 @@ struct AttachedFilesView: View {
                     // TODO: Voice
     //                showImagePicker = true
                 }
-                Button("Select from the Files") {
+                Button("Select PDF from the Files") {
                     fileSourceSelection = .files
                     isSelectingFileSheetPresented = true
                 }
@@ -134,7 +134,7 @@ struct AttachedFilesView: View {
             .alert("Error in uploading the attachment. Please try again", isPresented: $showingUploadErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
-            .fileImporter(isPresented: $isSelectingFileSheetPresented, allowedContentTypes: [], allowsMultipleSelection: false) { result in
+            .fileImporter(isPresented: $isSelectingFileSheetPresented, allowedContentTypes: [.pdf], allowsMultipleSelection: false) { result in
                 guard let url = try? result.get().first else { return }
                 upload(fileURL: url)
             }
