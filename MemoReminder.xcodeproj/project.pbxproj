@@ -203,6 +203,10 @@
 		42E69D4026A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */; };
 		42E69D4226A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */; };
 		42E69D4326A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */; };
+		42E69D4526A6B66D00F8670D /* AttachedFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */; };
+		42E69D4626A6B66D00F8670D /* AttachedFilesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */; };
+		42E69D4826A6B67D00F8670D /* AttachedFilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */; };
+		42E69D4926A6B67D00F8670D /* AttachedFilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -359,6 +363,8 @@
 		42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyContacts.swift; sourceTree = "<group>"; };
 		42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSuggestionsView.swift; sourceTree = SOURCE_ROOT; };
 		42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsSuggestionsViewModel.swift; path = Shared/Views/ContactsSuggestionsViewModel.swift; sourceTree = SOURCE_ROOT; };
+		42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachedFilesView.swift; sourceTree = SOURCE_ROOT; };
+		42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttachedFilesViewModel.swift; path = Shared/Views/AttachedFilesViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -563,6 +569,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */,
 				42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */,
 				42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */,
 				429801C626A3F47000928A03 /* AddTagView.swift */,
@@ -625,6 +632,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */,
 				42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */,
 				42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */,
 				429801AD26A334D700928A03 /* TagsViewModel.swift */,
@@ -979,6 +987,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */,
+				42E69D4526A6B66D00F8670D /* AttachedFilesView.swift in Sources */,
 				42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42A0FD5426A5A49F002BC56A /* Intents.intentdefinition in Sources */,
 				42E69D3F26A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */,
@@ -1023,6 +1032,7 @@
 				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
 				424FDD122697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C562696B49F00091D30 /* ImageSlideshow.swift in Sources */,
+				42E69D4826A6B67D00F8670D /* AttachedFilesViewModel.swift in Sources */,
 				424FDD042697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
 				42B22C662696C39B00091D30 /* Memory.swift in Sources */,
 				42D0198F26A144C000D20808 /* MainAsync.swift in Sources */,
@@ -1058,6 +1068,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */,
+				42E69D4626A6B66D00F8670D /* AttachedFilesView.swift in Sources */,
 				42B22C362696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42A0FD5526A5A49F002BC56A /* Intents.intentdefinition in Sources */,
 				42E69D4026A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */,
@@ -1102,6 +1113,7 @@
 				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,
 				424FDD132697410F004051FD /* HeaderScrollView.swift in Sources */,
 				42B22C572696B49F00091D30 /* ImageSlideshow.swift in Sources */,
+				42E69D4926A6B67D00F8670D /* AttachedFilesViewModel.swift in Sources */,
 				424FDD052697410F004051FD /* HeaderScrollViewTitle.swift in Sources */,
 				42B22C672696C39B00091D30 /* Memory.swift in Sources */,
 				42D0199026A144C000D20808 /* MainAsync.swift in Sources */,

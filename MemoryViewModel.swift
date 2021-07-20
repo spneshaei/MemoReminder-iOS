@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 
 class MemoryViewModel: ObservableObject {
-    var isSample = false // Not used! ...
+    var isSample = false
     
     @Published var uploadAmount = 0.0
     
@@ -61,5 +61,10 @@ class MemoryViewModel: ObservableObject {
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "post/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
+    }
+    
+    static var sample: MemoryViewModel {
+        let viewModel = MemoryViewModel()
+        return viewModel
     }
 }
