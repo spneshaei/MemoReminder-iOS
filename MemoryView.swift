@@ -274,7 +274,7 @@ struct MemoryView: View {
                         .listRowSeparator(.hidden)
                     Text("When on, the memory will not be shown on the home tab's feed for other people.").font(.footnote)
                 }
-                NavigationLink(destination: AttachedFilesView(memoryViewModel: viewModel)) {
+                NavigationLink(destination: AttachedFilesView(memory: memory, memoryViewModel: viewModel)) {
                     HStack {
                         Image(systemName: "paperclip")
                         Text("Attached Files")

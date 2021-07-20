@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SafariServices
 
 struct AttachedFilesView: View {
     @State var memory: Memory
@@ -23,7 +24,9 @@ struct AttachedFilesView: View {
 }
 
 struct AttachmentCell: View {
-    var url: String
+    @State var url: String
+    
+    @State var showSafari = false // https://stackoverflow.com/questions/56518029/how-do-i-use-sfsafariviewcontroller-with-swiftui
     
     var imageSystemName: String {
         if url.hasSuffix("png") || url.hasSuffix("jpg") {
@@ -50,12 +53,33 @@ struct AttachmentCell: View {
     }
     
     var body: some View {
-        HStack {
-            Image(systemName: imageSystemName)
-            Text(textName)
-            Spacer()
+        Button(action: {
+            showSafari = true
+        }) {
+            HStack {
+                Image(systemName: imageSystemName)
+                Text(textName)
+                Spacer()
+            }
+        }
+        .sheet(isPresented: $showSafari) {
+            if let url = URL(string: url) {
+                SafariView(url: url)
+            }
         }
     }
+}
+
+struct SafariView: UIViewControllerRepresentable {
+    let url: URL
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+        return SFSafariViewController(url: url)
+    }
+
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
+    }
+
 }
 
 struct AttachedFilesView_Previews: PreviewProvider {
