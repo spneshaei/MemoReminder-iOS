@@ -51,7 +51,9 @@ class MemoryViewModel: ObservableObject {
         //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
-    func upload(memory: Memory, fileURL: URL, globalData: GlobalData, completion: @escaping (String?) -> Void) {
+    // TODO: Make the next function better (no Bool as input, duplicate code,...)
+    // if isVoice = false, it's PDF
+    func upload(memory: Memory, fileURL: URL, globalData: GlobalData, isVoice: Bool = false, completion: @escaping (String?) -> Void) {
         guard !isSample else {
             completion(nil)
             return
@@ -61,7 +63,11 @@ class MemoryViewModel: ObservableObject {
             return
         }
         AF.upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
+            if isVoice {
+                multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).m4a", mimeType: "audio/mp4")
+            } else {
+                multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
+            }
 //            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
         }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in

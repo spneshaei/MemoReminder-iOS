@@ -31,6 +31,7 @@ struct AttachedFilesView: View {
     @State var showActivityIndicatorView = false
     @State var showingUploadErrorAlert = false
     @State var isSelectingFileSheetPresented = false
+    @State var isNavigationToVoiceRecordViewActive = false
     
     func upload(fileURL: URL) {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadFileAsAttachment", attributes: .concurrent)
@@ -107,11 +108,13 @@ struct AttachedFilesView: View {
                     }
                 }
             })
+            NavigationLink(destination: VoiceRecordView(memory: memory, memoryViewModel: memoryViewModel), isActive: $isNavigationToVoiceRecordViewActive) {
+                EmptyView()
+            }
             .confirmationDialog("Select the appropriate option", isPresented: $showFileSourcePicker, titleVisibility: .visible) {
                 Button("Record a voice file") {
                     fileSourceSelection = .voice
-                    // TODO: Voice
-    //                showImagePicker = true
+                    isNavigationToVoiceRecordViewActive = true
                 }
                 Button("Select PDF from the Files") {
                     fileSourceSelection = .files
@@ -156,7 +159,7 @@ struct AttachmentCell: View {
             return "photo"
         } else if url.hasSuffix("mp4") || url.hasSuffix("mov") {
             return "film"
-        } else if url.hasSuffix("aac") || url.hasSuffix("mp3") {
+        } else if url.hasSuffix("m4a") || url.hasSuffix("mp3") {
             return "waveform"
         } else {
             return "doc"
@@ -168,7 +171,7 @@ struct AttachmentCell: View {
             return "Photo"
         } else if url.hasSuffix("mp4") || url.hasSuffix("mov") {
             return "Video"
-        } else if url.hasSuffix("aac") || url.hasSuffix("mp3") {
+        } else if url.hasSuffix("m4a") || url.hasSuffix("mp3") {
             return "Voice"
         } else {
             return "File"

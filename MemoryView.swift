@@ -222,6 +222,15 @@ struct MemoryView: View {
                         Text("Show comments")
                     }
                 }
+                
+                NavigationLink(destination: AttachedFilesView(memory: memory, memoryViewModel: viewModel)) {
+                    HStack {
+                        Image(systemName: "paperclip")
+                        Text("Attached Files")
+                        Spacer()
+                    }
+                }
+                
                 if editMode {
                     HStack {
                         Text("Latitude:")
@@ -273,13 +282,6 @@ struct MemoryView: View {
                     Toggle("Show the memory only for followings", isOn: followingsOnlyBinding)
                         .listRowSeparator(.hidden)
                     Text("When on, the memory will not be shown on the home tab's feed for other people.").font(.footnote)
-                }
-                NavigationLink(destination: AttachedFilesView(memory: memory, memoryViewModel: viewModel)) {
-                    HStack {
-                        Image(systemName: "paperclip")
-                        Text("Attached Files")
-                        Spacer()
-                    }
                 }
                 ScrollView {
                     ChipsContent(selectedTags: memory.tags) { _ in }

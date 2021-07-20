@@ -209,6 +209,8 @@
 		42E69D4926A6B67D00F8670D /* AttachedFilesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */; };
 		42E69D4B26A6E14F00F8670D /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */; };
 		42E69D4C26A6E14F00F8670D /* VoiceRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */; };
+		42E69D5126A6EAC200F8670D /* VoiceRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */; };
+		42E69D5226A6EAC200F8670D /* VoiceRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,6 +370,7 @@
 		42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachedFilesView.swift; sourceTree = SOURCE_ROOT; };
 		42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AttachedFilesViewModel.swift; path = Shared/Views/AttachedFilesViewModel.swift; sourceTree = SOURCE_ROOT; };
 		42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordView.swift; sourceTree = "<group>"; };
+		42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecordViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -505,7 +508,6 @@
 		42B22C0A2696274100091D30 = {
 			isa = PBXGroup;
 			children = (
-				42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */,
 				42A0FD5626A5A4C3002BC56A /* MemoReminder--macOS--Info.plist */,
 				42A0FD5326A5A49F002BC56A /* Intents.intentdefinition */,
 				42A0FD4426A554A9002BC56A /* MemoReminder WidgetExtension.entitlements */,
@@ -573,6 +575,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */,
 				42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */,
 				42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */,
 				42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */,
@@ -636,6 +639,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D5026A6EAC200F8670D /* VoiceRecordViewModel.swift */,
 				42E69D4726A6B67D00F8670D /* AttachedFilesViewModel.swift */,
 				42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */,
 				42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */,
@@ -1004,6 +1008,7 @@
 				42A0FD2126A542EA002BC56A /* AppDelegate.swift in Sources */,
 				42D0199226A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42A0FD9226A5E57C002BC56A /* UsersFilterView.swift in Sources */,
+				42E69D5126A6EAC200F8670D /* VoiceRecordViewModel.swift in Sources */,
 				42B22C762696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				42A0FD2426A54428002BC56A /* QuickAction.swift in Sources */,
 				42D019A226A27E2A00D20808 /* BottomBarItem.swift in Sources */,
@@ -1086,6 +1091,7 @@
 				42A0FD2226A542EA002BC56A /* AppDelegate.swift in Sources */,
 				42D0199326A1623B00D20808 /* MemoryViewModel.swift in Sources */,
 				42A0FD9326A5E57C002BC56A /* UsersFilterView.swift in Sources */,
+				42E69D5226A6EAC200F8670D /* VoiceRecordViewModel.swift in Sources */,
 				42B22C772696DFF400091D30 /* HomeViewModel.swift in Sources */,
 				42A0FD2526A54428002BC56A /* QuickAction.swift in Sources */,
 				42D019A326A27E2A00D20808 /* BottomBarItem.swift in Sources */,
