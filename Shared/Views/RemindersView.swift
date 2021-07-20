@@ -12,6 +12,7 @@ struct RemindersView: View {
     @StateObject var viewModel = RemindersViewModel()
     
     @State var isNavigationToAddReminderViewActive = false
+    @State var isDeleteSheetPresented = false
     
     func deleteReminders(at offsets: IndexSet) {
         viewModel.reminders.remove(atOffsets: offsets)
@@ -31,7 +32,21 @@ struct RemindersView: View {
         }
         .listStyle(.plain)
         .navigationBarTitle("Reminders")
+        .confirmationDialog("Are you sure you want to delete all previously fired reminders?", isPresented: $isDeleteSheetPresented, titleVisibility: .visible) {
+            Button("Yes", role: .destructive) {
+//                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
+                viewModel.reminders = []
+            }
+            Button("No", role: .cancel) { }
+        }
         .navigationBarItems(trailing: HStack(spacing: 20) {
+            Button(action: {
+                isDeleteSheetPresented = true
+            }) {
+                Image(systemName: "trash")
+                    .foregroundColor(.red)
+            }
+            
             NavigationLink(destination: AddReminderView(remindersViewModel: viewModel), isActive: $isNavigationToAddReminderViewActive) {
                 Button(action: {
                     isNavigationToAddReminderViewActive = true
@@ -39,6 +54,7 @@ struct RemindersView: View {
                     Image(systemName: "plus")
                 }
             }
+            
             EditButton()
         })
         .onAppear {

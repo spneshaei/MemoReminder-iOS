@@ -111,7 +111,7 @@ struct AttachedFilesView: View {
             NavigationLink(destination: VoiceRecordView(memory: memory, memoryViewModel: memoryViewModel), isActive: $isNavigationToVoiceRecordViewActive) {
                 EmptyView()
             }
-            .confirmationDialog("Select the appropriate option", isPresented: $showFileSourcePicker, titleVisibility: .visible) {
+            .confirmationDialog("Select the appropriate action", isPresented: $showFileSourcePicker, titleVisibility: .visible) {
                 Button("Record a voice file") {
                     fileSourceSelection = .voice
                     isNavigationToVoiceRecordViewActive = true
@@ -128,6 +128,7 @@ struct AttachedFilesView: View {
                     fileSourceSelection = .camera
                     showImagePicker = true
                 }
+                Button("Cancel", role: .cancel) { }
             }
             .sheet(isPresented: $showImagePicker) {
                 ImagePickerView(sourceType: fileSourceSelection == .photoLibrary ? .photoLibrary : .camera) { image in
