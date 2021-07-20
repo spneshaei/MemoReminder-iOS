@@ -25,6 +25,7 @@ struct MemoryView: View {
     @State var showingLikeErrorAlert = false
     @State var showingUploadErrorAlert = false
     @State var shouldEditMemoryErrorAlert = false
+    @State var showChooseMapConfirmationDialog = false
     
     @State var showImagePicker = false
     @State var showImageSourcePicker = false
@@ -122,6 +123,21 @@ struct MemoryView: View {
         
     }
     
+    // https://medium.com/swift-productions/launch-google-to-show-route-swift-580aca80cf88
+    func showAppleMaps() {
+        let coordinate = CLLocationCoordinate2DMake(memory.latitude, memory.longitude)
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
+        mapItem.name = memory.title
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    // https://medium.com/swift-productions/launch-google-to-show-route-swift-580aca80cf88
+    func showGoogleMaps() {
+        if let url = URL(string: "comgooglemaps://?daddr=\(memory.latitude),\(memory.longitude))&directionsmode=driving&zoom=14&views=traffic") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     var body: some View {
         ZStack {
             List {
@@ -181,6 +197,15 @@ struct MemoryView: View {
                     .listRowSeparator(.hidden)
                 NavigationLink(destination: CommentsView(memory: memory)) {
                     Text("Show comments")
+                }
+                if memory.latitude != 0 || memory.longitude != 0 {
+                    LocationRow(memory: memory)
+                        .onTapGesture { showChooseMapConfirmationDialog = true }
+                        .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
+                            Button("Apple Maps") { showAppleMaps() }
+                            Button("Google Maps") { showGoogleMaps() }
+                            Button("Cancel", role: .cancel) { }
+                        }
                 }
                 ScrollView {
                     ChipsContent(selectedTags: memory.tags) { _ in }
