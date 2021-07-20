@@ -13,6 +13,18 @@ struct AttachedFilesView: View {
     @StateObject var viewModel = AttachedFilesViewModel()
     @ObservedObject var memoryViewModel: MemoryViewModel
     
+    enum UploadFileState {
+        case notStarted, uploading
+    }
+    
+    enum FileSourceSelection {
+        case files, voice, photoLibrary, camera
+    }
+    
+    @State var uploadFileState: UploadFileState = .notStarted
+    @State var fileSourceSelection: FileSourceSelection = .files
+    @State var showFileSourcePicker = false
+    
     var body: some View {
         List(memory.attachedFileURLs, id: \.self) { attachedFileURL in
             if let _ = URL(string: attachedFileURL) {
@@ -20,6 +32,31 @@ struct AttachedFilesView: View {
             }
         }
         .navigationBarTitle("Attached Files")
+        .navigationBarItems(trailing: Button(action: { showFileSourcePicker = true }) {
+            Image(systemName: "plus")
+        })
+        .confirmationDialog("Select the appropriate option", isPresented: $showFileSourcePicker, titleVisibility: .visible) {
+            Button("Record a voice file") {
+                fileSourceSelection = .voice
+                // TODO: Voice
+//                showImagePicker = true
+            }
+            Button("Select from the Files") {
+                fileSourceSelection = .files
+                // TODO: Files
+//                showImagePicker = true
+            }
+            Button("Select from the Photos") {
+                fileSourceSelection = .photoLibrary
+                // TODO: Photos
+//                showImagePicker = true
+            }
+            Button("Take a new photo") {
+                fileSourceSelection = .camera
+                // TODO: Camera
+//                showImagePicker = true
+            }
+        }
     }
 }
 
