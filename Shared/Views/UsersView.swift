@@ -18,6 +18,8 @@ struct UsersView: View {
     @State var showActivityIndicatorView = false
     @State var isNavigationLinkToFilterActive = false
     @State var shouldNavigateToFindContactsPage = false
+    
+    @StateObject var contactsSuggestionViewModel = ContactsSuggestionsViewModel()
 
     var shouldSelectUsers = false
     
@@ -41,7 +43,24 @@ struct UsersView: View {
     }
     
     fileprivate func navigateToFindContactsPage() {
-        
+        requestAccess { response in
+            if response {
+                print("Contacts Acess Granted")
+                fetchContacts { result in
+                    switch result {
+                        case .success(let contacts):
+                            // Do your thing here with [CNContacts] array
+                            contactsSuggestionViewModel.contacts = contacts
+                            shouldNavigateToFindContactsPage = true
+                        case .failure(let error):
+                            // TODO: Do something with the error...
+                            break
+                    }
+                }
+            } else {
+                print("Contacts Acess Denied")
+            }
+        }
     }
     
     var body: some View {
@@ -74,7 +93,7 @@ struct UsersView: View {
             }
             .task { await reloadData() }
             .refreshable { await reloadData() }
-            .navigationBarItems(trailing: NavigationLink(destination: Text("hi"), isActive: $shouldNavigateToFindContactsPage) {
+            .navigationBarItems(trailing: NavigationLink(destination: ContactsSuggestionsView(viewModel: contactsSuggestionViewModel, searchViewModel: viewModel), isActive: $shouldNavigateToFindContactsPage) {
                 Button(action: { navigateToFindContactsPage() }) {
                     Image(systemName: "wand.and.stars")
                 }

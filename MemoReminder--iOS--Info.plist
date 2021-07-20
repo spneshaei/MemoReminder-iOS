@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSContactsUsageDescription</key>
+	<string>MemoReminder needs access to your contacts to provide intelligent suggestions</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>MemoReminder needs access to your location to provide geo-tagging on memories</string>
 	<key>NSLocationUsageDescription</key>

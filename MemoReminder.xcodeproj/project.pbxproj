@@ -197,6 +197,12 @@
 		42D019BB26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
 		42D019BC26A31B9700D20808 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019BA26A31B9700D20808 /* HomeTopView.swift */; };
 		42E69D3926A6895A00F8670D /* SwiftLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 42E69D3826A6895A00F8670D /* SwiftLocation */; };
+		42E69D3C26A69FE400F8670D /* SwiftyContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */; };
+		42E69D3D26A69FE400F8670D /* SwiftyContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */; };
+		42E69D3F26A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */; };
+		42E69D4026A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */; };
+		42E69D4226A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */; };
+		42E69D4326A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -350,6 +356,9 @@
 		42D019A426A27E4400D20808 /* BarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItemView.swift; sourceTree = "<group>"; };
 		42D019A726A2EADE00D20808 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		42D019BA26A31B9700D20808 /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = SOURCE_ROOT; };
+		42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyContacts.swift; sourceTree = "<group>"; };
+		42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSuggestionsView.swift; sourceTree = SOURCE_ROOT; };
+		42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsSuggestionsViewModel.swift; path = Shared/Views/ContactsSuggestionsViewModel.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,6 +563,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */,
 				42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */,
 				429801C626A3F47000928A03 /* AddTagView.swift */,
 				429801C026A3ECA800928A03 /* TagsView.swift */,
@@ -595,6 +605,7 @@
 		42B22C642696C38900091D30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D3A26A69F4A00F8670D /* SwiftyContacts */,
 				429801BA26A3598F00928A03 /* ColorHex.swift */,
 				42D0198E26A144C000D20808 /* MainAsync.swift */,
 				424FDD1B269A0AF6004051FD /* Rester.swift */,
@@ -614,6 +625,7 @@
 		42B22C742696DFB500091D30 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */,
 				42A0FC0426A52655002BC56A /* AddMemoryViewModel.swift */,
 				429801AD26A334D700928A03 /* TagsViewModel.swift */,
 				42D0199426A17D1400D20808 /* CommentsViewModel.swift */,
@@ -637,6 +649,14 @@
 				42D019A426A27E4400D20808 /* BarButtonItemView.swift */,
 			);
 			path = BottomBar;
+			sourceTree = "<group>";
+		};
+		42E69D3A26A69F4A00F8670D /* SwiftyContacts */ = {
+			isa = PBXGroup;
+			children = (
+				42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */,
+			);
+			path = SwiftyContacts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -961,6 +981,7 @@
 				42D0199526A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42A0FD5426A5A49F002BC56A /* Intents.intentdefinition in Sources */,
+				42E69D3F26A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */,
 				42B22C3B2696274300091D30 /* Persistence.swift in Sources */,
 				429801AB26A3222B00928A03 /* AddMemoryView.swift in Sources */,
 				424FDD1926974473004051FD /* CommentsView.swift in Sources */,
@@ -984,6 +1005,7 @@
 				424FDD082697410F004051FD /* BlurView.swift in Sources */,
 				42D01972269D547700D20808 /* TopView.swift in Sources */,
 				424FDD0A2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
+				42E69D3C26A69FE400F8670D /* SwiftyContacts.swift in Sources */,
 				424FDCEE26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0C2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C622696C05700091D30 /* HomeView.swift in Sources */,
@@ -995,6 +1017,7 @@
 				42D0198326A011CB00D20808 /* UsersViewModel.swift in Sources */,
 				42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				42A0FD5126A5884F002BC56A /* PagingView.swift in Sources */,
+				42E69D4226A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */,
 				429801B526A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0E2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199C26A27DED00D20808 /* BarBuilder.swift in Sources */,
@@ -1037,6 +1060,7 @@
 				42D0199626A17D1400D20808 /* CommentsViewModel.swift in Sources */,
 				42B22C362696274300091D30 /* MemoReminder.xcdatamodeld in Sources */,
 				42A0FD5526A5A49F002BC56A /* Intents.intentdefinition in Sources */,
+				42E69D4026A6A11100F8670D /* ContactsSuggestionsView.swift in Sources */,
 				42B22C3C2696274300091D30 /* Persistence.swift in Sources */,
 				429801AC26A3222B00928A03 /* AddMemoryView.swift in Sources */,
 				424FDD1A26974473004051FD /* CommentsView.swift in Sources */,
@@ -1060,6 +1084,7 @@
 				424FDD092697410F004051FD /* BlurView.swift in Sources */,
 				42D01973269D547700D20808 /* TopView.swift in Sources */,
 				424FDD0B2697410F004051FD /* AppleMusicStyleScrollView.swift in Sources */,
+				42E69D3D26A69FE400F8670D /* SwiftyContacts.swift in Sources */,
 				424FDCEF26971A59004051FD /* MemoryView.swift in Sources */,
 				424FDD0D2697410F004051FD /* BackButton.swift in Sources */,
 				42B22C632696C05700091D30 /* HomeView.swift in Sources */,
@@ -1071,6 +1096,7 @@
 				42D0198426A011CB00D20808 /* UsersViewModel.swift in Sources */,
 				42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				42A0FD5226A5884F002BC56A /* PagingView.swift in Sources */,
+				42E69D4326A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */,
 				429801B626A3579D00928A03 /* Chips.swift in Sources */,
 				424FDD0F2697410F004051FD /* FancyScrollView.swift in Sources */,
 				42D0199D26A27DED00D20808 /* BarBuilder.swift in Sources */,
