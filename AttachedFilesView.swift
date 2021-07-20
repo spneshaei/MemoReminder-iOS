@@ -7,8 +7,11 @@
 
 import SwiftUI
 import SafariServices
+import ImagePickerView
+import ActivityIndicatorView
 
 struct AttachedFilesView: View {
+    @EnvironmentObject var globalData: GlobalData
     @State var memory: Memory
     @StateObject var viewModel = AttachedFilesViewModel()
     @ObservedObject var memoryViewModel: MemoryViewModel
@@ -24,38 +27,84 @@ struct AttachedFilesView: View {
     @State var uploadFileState: UploadFileState = .notStarted
     @State var fileSourceSelection: FileSourceSelection = .files
     @State var showFileSourcePicker = false
+    @State var showImagePicker = false
+    @State var showActivityIndicatorView = false
+    @State var showingUploadErrorAlert = false
     
-    var body: some View {
-        List(memory.attachedFileURLs, id: \.self) { attachedFileURL in
-            if let _ = URL(string: attachedFileURL) {
-                AttachmentCell(url: attachedFileURL)
+    func upload(image: UIImage) {
+        let concurrentQueue = DispatchQueue(label: "MemoReminderUploadPhotoAsAttachment", attributes: .concurrent)
+        concurrentQueue.async {
+            main {
+                showActivityIndicatorView = true
+                uploadFileState = .uploading
+            }
+            memoryViewModel.upload(memory: memory, image: image, globalData: globalData) { r in
+                if let resultString = r {
+                    let result = JSON(parseJSON: resultString)
+                    let imageURL = result["file"].stringValue
+                    main {
+                        memory.attachedFileURLs.append(imageURL)
+                        uploadFileState = .notStarted
+                        showActivityIndicatorView = false
+                    }
+                } else {
+                    main {
+                        uploadFileState = .notStarted
+                        showActivityIndicatorView = false
+                        showingUploadErrorAlert = true
+                    }
+                }
             }
         }
-        .navigationBarTitle("Attached Files")
-        .navigationBarItems(trailing: Button(action: { showFileSourcePicker = true }) {
-            Image(systemName: "plus")
-        })
-        .confirmationDialog("Select the appropriate option", isPresented: $showFileSourcePicker, titleVisibility: .visible) {
-            Button("Record a voice file") {
-                fileSourceSelection = .voice
-                // TODO: Voice
-//                showImagePicker = true
+    }
+    
+    var body: some View {
+        ZStack {
+            List(memory.attachedFileURLs, id: \.self) { attachedFileURL in
+                if let _ = URL(string: attachedFileURL) {
+                    AttachmentCell(url: attachedFileURL)
+                }
             }
-            Button("Select from the Files") {
-                fileSourceSelection = .files
-                // TODO: Files
-//                showImagePicker = true
+            .navigationBarTitle("Attached Files")
+            .navigationBarItems(trailing: HStack {
+                if uploadFileState == .notStarted {
+                    Button(action: { showFileSourcePicker = true }) {
+                        Image(systemName: "plus")
+                    }
+                }
+            })
+            .confirmationDialog("Select the appropriate option", isPresented: $showFileSourcePicker, titleVisibility: .visible) {
+                Button("Record a voice file") {
+                    fileSourceSelection = .voice
+                    // TODO: Voice
+    //                showImagePicker = true
+                }
+                Button("Select from the Files") {
+                    fileSourceSelection = .files
+                    // TODO: Files
+    //                showImagePicker = true
+                }
+                Button("Select from the Photos") {
+                    fileSourceSelection = .photoLibrary
+                    showImagePicker = true
+                }
+                Button("Take a new photo") {
+                    fileSourceSelection = .camera
+                    showImagePicker = true
+                }
             }
-            Button("Select from the Photos") {
-                fileSourceSelection = .photoLibrary
-                // TODO: Photos
-//                showImagePicker = true
+            .sheet(isPresented: $showImagePicker) {
+                ImagePickerView(sourceType: fileSourceSelection == .photoLibrary ? .photoLibrary : .camera) { image in
+                    upload(image: image)
+                }
             }
-            Button("Take a new photo") {
-                fileSourceSelection = .camera
-                // TODO: Camera
-//                showImagePicker = true
+            .alert("Error in uploading the attachment. Please try again", isPresented: $showingUploadErrorAlert) {
+                Button("OK", role: .cancel) { }
             }
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }
     }
 }
@@ -122,5 +171,6 @@ struct SafariView: UIViewControllerRepresentable {
 struct AttachedFilesView_Previews: PreviewProvider {
     static var previews: some View {
         AttachedFilesView(memory: .sample, memoryViewModel: .sample)
+            .environmentObject(GlobalData.sample)
     }
 }
