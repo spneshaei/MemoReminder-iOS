@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct RemindersView: View {
     @StateObject var viewModel = RemindersViewModel()
@@ -40,6 +41,16 @@ struct RemindersView: View {
             }
             EditButton()
         })
+        .onAppear {
+            // https://www.hackingwithswift.com/books/ios-swiftui/scheduling-local-notifications
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("All set!")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
