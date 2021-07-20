@@ -10,6 +10,7 @@ import ActivityIndicatorView
 import MapKit
 import URLImage
 import ImagePickerView
+import SwiftLocation
 
 struct MemoryView: View {
     @Environment(\.presentationMode) var mode
@@ -34,6 +35,7 @@ struct MemoryView: View {
     @State var editMode = false
     @State var showDeleteMemoryConfirmationAlert = false
     @State var showDeleteMemoryErrorAlert = false
+    @State var isLoadingLocation = false
     
     enum UploadImageState {
         case notStarted, waitingToTapUpload, uploading
@@ -93,7 +95,7 @@ struct MemoryView: View {
     fileprivate func doneTapped() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, latitude, memory.latitude, longitude: memory.longitude, globalData: globalData)
+            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, latitude: memory.latitude, longitude: memory.longitude, globalData: globalData)
             main {
                 showActivityIndicatorView = false
                 withAnimation { editMode = false }
@@ -139,7 +141,12 @@ struct MemoryView: View {
     }
     
     func setMemoryLocationDataToCurrentLocation() {
-        
+        isLoadingLocation = true
+        SwiftLocation.gpsLocation().then {
+            memory.latitude = $0.location?.coordinate.latitude ?? 0.0
+            memory.longitude = $0.location?.coordinate.longitude ?? 0.0
+            isLoadingLocation = false
+        }
     }
     
     var body: some View {
@@ -208,17 +215,43 @@ struct MemoryView: View {
                 if editMode {
                     HStack {
                         Text("Latitude:")
+                            .listRowSeparator(.hidden)
                         TextField("Enter latitude", text: latitudeBinding)
+                            .listRowSeparator(.hidden)
                     }
+                    .listRowSeparator(.hidden)
                     HStack {
-                        Text("Latitude:")
+                        Text("Longitude:")
+                            .listRowSeparator(.hidden)
                         TextField("Enter latitude", text: longitudeBinding)
+                            .listRowSeparator(.hidden)
                     }
-                    Button("Set to current location") { setMemoryLocationDataToCurrentLocation() }
+                    .listRowSeparator(.hidden)
+                    Button(action: {
+                        if !isLoadingLocation {
+                            setMemoryLocationDataToCurrentLocation()
+                        }
+                    }) {
+                        HStack {
+                            if isLoadingLocation {
+                                ActivityIndicatorView(isVisible: $isLoadingLocation, type: .default)
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                Image(systemName: "location.fill.viewfinder")
+                                    .frame(width: 20, height: 20)
+                            }
+                            Text("Set to the current location")
+                            Spacer()
+                        }
+                    }
                 } else {
                     if memory.latitude != 0 || memory.longitude != 0 {
                         LocationRow(memory: memory)
-                            .onTapGesture { showChooseMapConfirmationDialog = true }
+                            .listRowSeparator(.hidden)
+                        Button(action:
+                                { showChooseMapConfirmationDialog = true }) {
+                            Text("Show on the map")
+                        }
                             .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
                                 Button("Apple Maps") { showAppleMaps() }
                                 Button("Google Maps") { showGoogleMaps() }

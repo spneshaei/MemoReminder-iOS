@@ -46,10 +46,12 @@ class MemoryViewModel: ObservableObject {
         //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
-    func editMemoryDetails(id: Int, contents: String, globalData: GlobalData) async throws {
+    func editMemoryDetails(id: Int, contents: String, latitude: Double, longitude: Double, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let body: JSON = [
-            "text": contents
+            "text": contents,
+            "lat": latitude,
+            "lon": longitude
         ]
         guard let bodyString = body.rawString() else { return }
         try await Rester.rest(endPoint: "post/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
