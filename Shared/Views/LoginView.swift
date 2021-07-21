@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct LoginView: View {
     @Environment(\.colorScheme) var colorScheme
