@@ -32,6 +32,7 @@ struct AttachedFilesView: View {
     @State var showingUploadErrorAlert = false
     @State var isSelectingFileSheetPresented = false
     @State var isNavigationToVoiceRecordViewActive = false
+    @State var isDeleteAllDownloadedFilesConfirmationDialogVisible = false
     
     func upload(fileURL: URL) {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadFileAsAttachment", attributes: .concurrent)
@@ -87,6 +88,28 @@ struct AttachedFilesView: View {
         }
     }
     
+    // https://stackoverflow.com/questions/50014062/remove-all-files-from-within-documentdirectory-in-swift
+    func clearAllFiles() {
+        let fileManager = FileManager.default
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        
+        print("Directory: \(paths)")
+        
+        do
+        {
+            let fileName = try fileManager.contentsOfDirectory(atPath: paths)
+            
+            for file in fileName {
+                // For each file in the directory, create full path and delete the file
+                let filePath = URL(fileURLWithPath: paths).appendingPathComponent(file).absoluteURL
+                try fileManager.removeItem(at: filePath)
+            }
+        }catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     var body: some View {
         ZStack {
             List {
@@ -104,10 +127,20 @@ struct AttachedFilesView: View {
             .navigationBarItems(trailing: HStack {
                 if uploadFileState == .notStarted {
                     Button(action: { showFileSourcePicker = true }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    Button(action: { showFileSourcePicker = true }) {
                         Image(systemName: "plus")
                     }
                 }
             })
+            .confirmationDialog("Are you sure you want to delete all the downloaded files?", isPresented: $isDeleteAllDownloadedFilesConfirmationDialogVisible, titleVisibility: .visible) {
+                Button("Yes", role: .destructive) {
+                    clearAllFiles()
+                }
+                Button("No", role: .cancel) { }
+            }
             NavigationLink(destination: VoiceRecordView(memory: memory, memoryViewModel: memoryViewModel), isActive: $isNavigationToVoiceRecordViewActive) {
                 EmptyView()
             }
