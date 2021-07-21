@@ -197,6 +197,13 @@
 		42D019A826A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 		42D019A926A2EADE00D20808 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D019A726A2EADE00D20808 /* Validator.swift */; };
 		42D019AC26A2F89700D20808 /* ImagePickerView in Frameworks */ = {isa = PBXBuildFile; productRef = 42D019AB26A2F89700D20808 /* ImagePickerView */; };
+		42E05DE726A807AF008D7B56 /* AttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DE626A807AF008D7B56 /* AttachmentCell.swift */; };
+		42E05DE826A807AF008D7B56 /* AttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DE626A807AF008D7B56 /* AttachmentCell.swift */; };
+		42E05DED26A8090E008D7B56 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DEC26A8090E008D7B56 /* Attachment.swift */; };
+		42E05DEE26A8090E008D7B56 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DEC26A8090E008D7B56 /* Attachment.swift */; };
+		42E05DEF26A80D85008D7B56 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DEC26A8090E008D7B56 /* Attachment.swift */; };
+		42E05DF026A80D86008D7B56 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DEC26A8090E008D7B56 /* Attachment.swift */; };
+		42E05DF126A80D96008D7B56 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E05DEC26A8090E008D7B56 /* Attachment.swift */; };
 		42E69D3926A6895A00F8670D /* SwiftLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 42E69D3826A6895A00F8670D /* SwiftLocation */; };
 		42E69D3C26A69FE400F8670D /* SwiftyContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */; };
 		42E69D3D26A69FE400F8670D /* SwiftyContacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */; };
@@ -374,6 +381,8 @@
 		42D019A126A27E2A00D20808 /* BottomBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomBarItem.swift; sourceTree = "<group>"; };
 		42D019A426A27E4400D20808 /* BarButtonItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItemView.swift; sourceTree = "<group>"; };
 		42D019A726A2EADE00D20808 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		42E05DE626A807AF008D7B56 /* AttachmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentCell.swift; sourceTree = "<group>"; };
+		42E05DEC26A8090E008D7B56 /* Attachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		42E69D3B26A69FE400F8670D /* SwiftyContacts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyContacts.swift; sourceTree = "<group>"; };
 		42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsSuggestionsView.swift; sourceTree = SOURCE_ROOT; };
 		42E69D4126A6A12000F8670D /* ContactsSuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ContactsSuggestionsViewModel.swift; path = Shared/Views/ContactsSuggestionsViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -592,6 +601,7 @@
 				42E69D5F26A7132A00F8670D /* NotificationReminderCell.swift */,
 				42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */,
 				42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */,
+				42E05DE626A807AF008D7B56 /* AttachmentCell.swift */,
 				42E69D3E26A6A11100F8670D /* ContactsSuggestionsView.swift */,
 				42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */,
 				429801C626A3F47000928A03 /* AddTagView.swift */,
@@ -641,6 +651,7 @@
 				42D0198E26A144C000D20808 /* MainAsync.swift */,
 				424FDD1B269A0AF6004051FD /* Rester.swift */,
 				42B22C652696C39B00091D30 /* Memory.swift */,
+				42E05DEC26A8090E008D7B56 /* Attachment.swift */,
 				42B22C682696C50900091D30 /* Comment.swift */,
 				42B22C6E2696C56800091D30 /* User.swift */,
 				42B22C6B2696C54200091D30 /* Tag.swift */,
@@ -962,6 +973,7 @@
 				42A0FD4526A555BF002BC56A /* Memory.swift in Sources */,
 				42A0FD4926A5638D002BC56A /* User.swift in Sources */,
 				42A0FD4626A5567D002BC56A /* Comment.swift in Sources */,
+				42E05DF126A80D96008D7B56 /* Attachment.swift in Sources */,
 				42A0FD4826A5577A002BC56A /* SwiftyJSON.swift in Sources */,
 				42A0FD4C26A563C1002BC56A /* MainAsync.swift in Sources */,
 				42A0FD3226A54CAA002BC56A /* MemoReminder_Widget.swift in Sources */,
@@ -978,6 +990,7 @@
 				42A0FD7F26A5A82E002BC56A /* ViewHottestMemoriesIntentHandler.swift in Sources */,
 				42A0FD8526A5C40C002BC56A /* User.swift in Sources */,
 				42A0FD8926A5C426002BC56A /* SwiftyJSON.swift in Sources */,
+				42E05DEF26A80D85008D7B56 /* Attachment.swift in Sources */,
 				42A0FD8D26A5C438002BC56A /* Rester.swift in Sources */,
 				42A0FD8726A5C411002BC56A /* Comment.swift in Sources */,
 				42A0FD8326A5C408002BC56A /* Tag.swift in Sources */,
@@ -996,6 +1009,7 @@
 				42A0FD8026A5A82E002BC56A /* ViewHottestMemoriesIntentHandler.swift in Sources */,
 				42A0FD8626A5C40D002BC56A /* User.swift in Sources */,
 				42A0FD8A26A5C427002BC56A /* SwiftyJSON.swift in Sources */,
+				42E05DF026A80D86008D7B56 /* Attachment.swift in Sources */,
 				42A0FD8E26A5C438002BC56A /* Rester.swift in Sources */,
 				42A0FD8826A5C412002BC56A /* Comment.swift in Sources */,
 				42A0FD8426A5C409002BC56A /* Tag.swift in Sources */,
@@ -1036,6 +1050,7 @@
 				424FDCF126971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				429801BE26A3E68F00928A03 /* ColorComponents.swift in Sources */,
 				42B22C5F2696C02400091D30 /* MainTabView.swift in Sources */,
+				42E05DED26A8090E008D7B56 /* Attachment.swift in Sources */,
 				42D0199826A1C2F200D20808 /* CommentCell.swift in Sources */,
 				424FDD082697410F004051FD /* BlurView.swift in Sources */,
 				42D01972269D547700D20808 /* TopView.swift in Sources */,
@@ -1082,6 +1097,7 @@
 				424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196C269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				429801BB26A3598F00928A03 /* ColorHex.swift in Sources */,
+				42E05DE726A807AF008D7B56 /* AttachmentCell.swift in Sources */,
 				42E69D4B26A6E14F00F8670D /* VoiceRecordView.swift in Sources */,
 				42D0198026A0000E00D20808 /* UsersView.swift in Sources */,
 				42D019A826A2EADE00D20808 /* Validator.swift in Sources */,
@@ -1124,6 +1140,7 @@
 				424FDCF226971B4C004051FD /* ProfileViewModel.swift in Sources */,
 				429801BF26A3E68F00928A03 /* ColorComponents.swift in Sources */,
 				42B22C602696C02400091D30 /* MainTabView.swift in Sources */,
+				42E05DEE26A8090E008D7B56 /* Attachment.swift in Sources */,
 				42D0199926A1C2F200D20808 /* CommentCell.swift in Sources */,
 				424FDD092697410F004051FD /* BlurView.swift in Sources */,
 				42D01973269D547700D20808 /* TopView.swift in Sources */,
@@ -1170,6 +1187,7 @@
 				424FDCEC269715F5004051FD /* MemoriesViewModel.swift in Sources */,
 				42D0196D269D45DC00D20808 /* MainAppViewModel.swift in Sources */,
 				429801BC26A3598F00928A03 /* ColorHex.swift in Sources */,
+				42E05DE826A807AF008D7B56 /* AttachmentCell.swift in Sources */,
 				42E69D4C26A6E14F00F8670D /* VoiceRecordView.swift in Sources */,
 				42D0198126A0000E00D20808 /* UsersView.swift in Sources */,
 				42D019A926A2EADE00D20808 /* Validator.swift in Sources */,

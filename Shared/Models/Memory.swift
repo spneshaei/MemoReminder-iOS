@@ -33,7 +33,7 @@ class Memory: Identifiable, Codable {
     var numberOfLikes = 0
     var hasCurrentUserLiked = false
     var comments: [Comment] = []
-    var attachedFileURLs: [String] = []
+    var attachments: [Attachment] = []
     
     init(id: Int) {
         self.id = id
@@ -56,7 +56,7 @@ class Memory: Identifiable, Codable {
         memory.privacyStatus = result["mode"].stringValue == "private" ? .privateStatus : .publicStatus
         let postFiles = result["post_files"].arrayValue
         memory.imageLink = postFiles.first { $0.stringValue.lowercased().hasSuffix("png") || $0.stringValue.lowercased().hasSuffix("jpg") }?.stringValue ?? ""
-        memory.attachedFileURLs = postFiles.map { $0.stringValue }
+        memory.attachments = postFiles.map { Attachment(memory: memory, url: $0.stringValue) }
         let likes = result["likes"].arrayValue
         memory.numberOfLikes = likes.count
         memory.hasCurrentUserLiked = likes.contains { like in like["memo_user"]["id"].intValue == currentUserID }
@@ -108,7 +108,7 @@ class Memory: Identifiable, Codable {
         memory.numberOfLikes = 5
         memory.hasCurrentUserLiked = false
         memory.comments = [Comment.sample]
-        memory.attachedFileURLs = []
+        memory.attachments = []
         return memory
     }
 }

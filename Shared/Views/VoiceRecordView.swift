@@ -40,7 +40,7 @@ struct VoiceRecordView: View {
                     let result = JSON(parseJSON: resultString)
                     let fileURL = result["file"].stringValue
                     main {
-                        memory.attachedFileURLs.append(fileURL)
+                        memory.attachments.append(Attachment(memory: memory, url: fileURL))
                         showActivityIndicatorView = false
                         mode.wrappedValue.dismiss()
                         recordingStatus = .notStarted

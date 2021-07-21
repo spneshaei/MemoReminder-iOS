@@ -46,7 +46,7 @@ struct AttachedFilesView: View {
                     let result = JSON(parseJSON: resultString)
                     let fileURL = result["file"].stringValue
                     main {
-                        memory.attachedFileURLs.append(fileURL)
+                        memory.attachments.append(Attachment(memory: memory, url: fileURL))
                         uploadFileState = .notStarted
                         showActivityIndicatorView = false
                     }
@@ -73,7 +73,7 @@ struct AttachedFilesView: View {
                     let result = JSON(parseJSON: resultString)
                     let imageURL = result["file"].stringValue
                     main {
-                        memory.attachedFileURLs.append(imageURL)
+                        memory.attachments.append(Attachment(memory: memory, url: imageURL))
                         uploadFileState = .notStarted
                         showActivityIndicatorView = false
                     }
@@ -117,9 +117,9 @@ struct AttachedFilesView: View {
 //                    ProgressView("Uploading - \(Double(round(100 * memoryViewModel.uploadAmount) / 100))%", value: memoryViewModel.uploadAmount, total: 100)
 //                        .listRowSeparator(.hidden)
 //                }
-                ForEach(memory.attachedFileURLs, id: \.self) {  attachedFileURL in
-                    if let _ = URL(string: attachedFileURL) {
-                        AttachmentCell(url: attachedFileURL)
+                ForEach(memory.attachments) {  attachment in
+                    if let _ = URL(string: attachment.url) {
+                        AttachmentCell(url: attachment.url)
                     }
                 }
             }
@@ -179,53 +179,6 @@ struct AttachedFilesView: View {
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
-        }
-    }
-}
-
-struct AttachmentCell: View {
-    @State var url: String
-    
-    @State var showSafari = false // https://stackoverflow.com/questions/56518029/how-do-i-use-sfsafariviewcontroller-with-swiftui
-    
-    var imageSystemName: String {
-        if url.hasSuffix("png") || url.hasSuffix("jpg") {
-            return "photo"
-        } else if url.hasSuffix("mp4") || url.hasSuffix("mov") {
-            return "film"
-        } else if url.hasSuffix("m4a") || url.hasSuffix("mp3") {
-            return "waveform"
-        } else {
-            return "doc"
-        }
-    }
-    
-    var textName: String {
-        if url.hasSuffix("png") || url.hasSuffix("jpg") {
-            return "Photo"
-        } else if url.hasSuffix("mp4") || url.hasSuffix("mov") {
-            return "Video"
-        } else if url.hasSuffix("m4a") || url.hasSuffix("mp3") {
-            return "Voice"
-        } else {
-            return "File"
-        }
-    }
-    
-    var body: some View {
-        Button(action: {
-            showSafari = true
-        }) {
-            HStack {
-                Image(systemName: imageSystemName)
-                Text(textName)
-                Spacer()
-            }
-        }
-        .sheet(isPresented: $showSafari) {
-            if let url = URL(string: url) {
-                SafariView(url: url)
-            }
         }
     }
 }
