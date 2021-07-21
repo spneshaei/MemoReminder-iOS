@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct SignUpView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -26,6 +27,7 @@ struct SignUpView: View {
     @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
     @State var showingEmailWrongAlert = false
+    @State var showActivityIndicatorView = false
     
     @EnvironmentObject var mainAppViewModel: MainAppViewModel
     
@@ -127,19 +129,29 @@ struct SignUpView: View {
                 
             }
             .offset(x:40)
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }.edgesIgnoringSafeArea(.all)
     }
     
     func signUp() {
+        guard !showActivityIndicatorView else { return }
         guard isValidEmailAddress(emailAddressString: email) else {
             showingEmailWrongAlert = true
             return
         }
+        showActivityIndicatorView = true
         async {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"
             signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email)
-            main { showingAlert = true }
+            main {
+                showActivityIndicatorView = false
+                showingAlert = true
+                
+            }
         }
     }
     

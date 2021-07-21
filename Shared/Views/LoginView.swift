@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ActivityIndicatorView
 
 struct LoginView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -18,6 +19,7 @@ struct LoginView: View {
     @State var password = "";
     @State var showingAlert = false
     @State var loginStatus: User.AuthenticationStatus = .failed
+    @State var showActivityIndicatorView = false
     
     var alertTextMessage: String {
         switch loginStatus {
@@ -110,10 +112,16 @@ struct LoginView: View {
                 
             }
             .offset(x:40)
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }.edgesIgnoringSafeArea(.all)
     }
     
     func login() {
+        guard !showActivityIndicatorView else { return }
+        showActivityIndicatorView = true
         async {
             loginStatus = await User.login(username: username, password: password, globalData: globalData)
             if loginStatus == .success {
@@ -121,9 +129,13 @@ struct LoginView: View {
                     withAnimation {
                         mainAppViewModel.currentView = .mainTabView
                     }
+                    showActivityIndicatorView = false
                 }
             } else {
-                main { showingAlert = true }
+                main {
+                    showActivityIndicatorView = false
+                    showingAlert = true
+                }
             }
         }
     }
