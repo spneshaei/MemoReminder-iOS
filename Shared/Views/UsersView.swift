@@ -50,8 +50,10 @@ struct UsersView: View {
                     switch result {
                         case .success(let contacts):
                             // Do your thing here with [CNContacts] array
-                            contactsSuggestionViewModel.contacts = contacts
-                            shouldNavigateToFindContactsPage = true
+                            main {
+                                contactsSuggestionViewModel.contacts = contacts
+                                shouldNavigateToFindContactsPage = true
+                            }
                         case .failure(let error):
                             // TODO: Do something with the error...
                             break

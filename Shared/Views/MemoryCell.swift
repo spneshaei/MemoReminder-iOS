@@ -82,9 +82,10 @@ struct MemoryCell: View {
             Spacer()
         }
         .frame(maxWidth: .infinity, alignment: .center)
-        .background(isDarkMode ? Color.orange : Color(red: 247/255, green: 207/255, blue: 71/255))
+        .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
+        .listRowBackground(isDarkMode ? Color.black : Color.white)
 
-        .opacity(0.8)
+//        .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
 //        .contextMenu {

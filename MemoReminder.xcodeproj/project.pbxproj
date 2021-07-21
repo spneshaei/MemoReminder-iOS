@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4200A7B626A7DA3A0061EA8D /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200A7B526A7DA3A0061EA8D /* SidebarList.swift */; };
+		4200A7B726A7DA3A0061EA8D /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200A7B526A7DA3A0061EA8D /* SidebarList.swift */; };
 		424FDCE8269715AE004051FD /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCE7269715AE004051FD /* MemoriesView.swift */; };
 		424FDCE9269715AE004051FD /* MemoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCE7269715AE004051FD /* MemoriesView.swift */; };
 		424FDCEB269715F5004051FD /* MemoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424FDCEA269715F5004051FD /* MemoriesViewModel.swift */; };
@@ -275,6 +277,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4200A7B526A7DA3A0061EA8D /* SidebarList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarList.swift; sourceTree = SOURCE_ROOT; };
 		424FDCE7269715AE004051FD /* MemoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesView.swift; sourceTree = "<group>"; };
 		424FDCEA269715F5004051FD /* MemoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoriesViewModel.swift; sourceTree = "<group>"; };
 		424FDCED26971A59004051FD /* MemoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryView.swift; sourceTree = SOURCE_ROOT; };
@@ -585,6 +588,7 @@
 		42B22C532696B48300091D30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4200A7B526A7DA3A0061EA8D /* SidebarList.swift */,
 				42E69D5F26A7132A00F8670D /* NotificationReminderCell.swift */,
 				42E69D4A26A6E14F00F8670D /* VoiceRecordView.swift */,
 				42E69D4426A6B66D00F8670D /* AttachedFilesView.swift */,
@@ -1067,6 +1071,7 @@
 				4279997726A71B0D001B8B8D /* AddReminderView.swift in Sources */,
 				42A0FD1E26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */,
 				42B22C592696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
+				4200A7B626A7DA3A0061EA8D /* SidebarList.swift in Sources */,
 				424FDD102697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4E2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C512696A83E00091D30 /* SignUpView.swift in Sources */,
@@ -1154,6 +1159,7 @@
 				4279997826A71B0D001B8B8D /* AddReminderView.swift in Sources */,
 				42A0FD1F26A53F5D002BC56A /* MemoriesFilterView.swift in Sources */,
 				42B22C5A2696BB2D00091D30 /* AsyncSlideshow.swift in Sources */,
+				4200A7B726A7DA3A0061EA8D /* SidebarList.swift in Sources */,
 				424FDD112697410F004051FD /* View+navigationAllowSpipeBackWhenHidden.swift in Sources */,
 				42B22C4F2696A6F900091D30 /* LoginView.swift in Sources */,
 				42B22C522696A83E00091D30 /* SignUpView.swift in Sources */,

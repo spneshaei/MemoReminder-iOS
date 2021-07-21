@@ -9,6 +9,8 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct ProfileView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var isDarkMode: Bool { colorScheme == .dark }
     
     @ObservedObject var viewModel: ProfileViewModel
     @EnvironmentObject var globalData: GlobalData
@@ -100,148 +102,148 @@ struct ProfileView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                List {
-                    ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $firstName, editMode: editMode)
-                        .listRowSeparator(editMode ? .visible : .hidden)
-                    if editMode {
-                        VStack(alignment: .leading) {
-                            Text("Username")
-                            TextField(username, text: $username)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .id(0) // For SDK Bug!
-                        }
-                        VStack(alignment: .leading) {
-                            Text("Email")
-                            TextField(email, text: $email)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .id(1) // SDK Bug!
-                        }
-                        DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
-                            Text("Birthday")
-                        }
-                        Button(action: {
-                            withAnimation { changePasswordMode.toggle() }
-                        }) {
-                            HStack {
-                                Text("Set a new password")
-                                    .foregroundColor(.blue)
-                                Spacer()
-                                Image(systemName: changePasswordMode ? "arrow.up" : "arrow.right")
-                            }
-                        }
-                        if changePasswordMode {
-                            SecureField("Enter your new password", text: $newPassword)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
-                                .id(2)
+        ZStack {
+            List {
+                ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $firstName, editMode: editMode)
+                    .listRowSeparator(editMode ? .visible : .hidden)
+                if editMode {
+                    VStack(alignment: .leading) {
+                        Text("Username")
+                        TextField(username, text: $username)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .id(0) // For SDK Bug!
+                    }
+                    VStack(alignment: .leading) {
+                        Text("Email")
+                        TextField(email, text: $email)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .id(1) // SDK Bug!
+                    }
+                    DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                        Text("Birthday")
+                    }
+                    Button(action: {
+                        withAnimation { changePasswordMode.toggle() }
+                    }) {
+                        HStack {
+                            Text("Set a new password")
+                                .foregroundColor(.blue)
+                            Spacer()
+                            Image(systemName: changePasswordMode ? "arrow.up" : "arrow.right")
                         }
                     }
-                    ThreeStatsView(user: viewModel.user)
-                    if !viewModel.followRequests.isEmpty {
-                        Text("Follow requests").font(.title).bold()
+                    if changePasswordMode {
+                        SecureField("Enter your new password", text: $newPassword)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .id(2)
+                    }
+                }
+                ThreeStatsView(user: viewModel.user)
+                if !viewModel.followRequests.isEmpty {
+                    Text("Follow requests").font(.title).bold()
+                        .listRowSeparator(.hidden)
+                    ForEach(viewModel.followRequests) { user in
+                        AcceptRejectUserCell(user: user, profileViewModel: viewModel)
+                    }
+                }
+                Text("My created memories").font(.title).bold()
+                    .listRowSeparator(.hidden)
+                ForEach(viewModel.myMemories) { memory in
+                    ZStack {
+                        MemoryCell(memory: memory, shouldShowProfilePicture: false)
                             .listRowSeparator(.hidden)
-                        ForEach(viewModel.followRequests) { user in
-                            AcceptRejectUserCell(user: user, profileViewModel: viewModel)
+                        NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                            EmptyView()
                         }
-                    }
-                    Text("My created memories").font(.title).bold()
-                        .listRowSeparator(.hidden)
-                    ForEach(viewModel.myMemories) { memory in
-                        ZStack {
-                            MemoryCell(memory: memory, shouldShowProfilePicture: false)
-                                .listRowSeparator(.hidden)
-                            NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
-                                EmptyView()
-                            }.buttonStyle(PlainButtonStyle())
-                                .listRowSeparator(.hidden)
-                        }
+                        .buttonStyle(PlainButtonStyle())
                         .listRowSeparator(.hidden)
                     }
-                    
+                    .listRowBackground(isDarkMode ? Color.black : Color.white)
+                    .listRowSeparator(.hidden)
                 }
-                .alert("Accept was successful", isPresented: $viewModel.shouldShowAcceptSuccessAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-                .alert("Accept failed. Please try again", isPresented: $viewModel.shouldShowAcceptErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-                .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
+                
+            }
+            .alert("Accept was successful", isPresented: $viewModel.shouldShowAcceptSuccessAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            .alert("Accept failed. Please try again", isPresented: $viewModel.shouldShowAcceptErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
 //                .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert) {
 //                    Button("Yes", role: .destructive) {
 //                        async { await logout() }
 //                    }
 //                    Button("No", role: .cancel) { }
 //                }
-                //                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
-                //                    Button("OK", role: .cancel) { }
-                //                }
-                .task {
-                    await reloadData()
-                }
-                .refreshable {
-                    await reloadData()
-                }
-                .navigationBarTitle("My Profile")
-                .navigationBarItems(leading: Group {
-                    if editMode {
-                        Button(action: {
-                            withAnimation { editMode = false }
-                            populateTextFields()
-                        }) {
-                            Text("Cancel").bold()
-                        }
+            //                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
+            //                    Button("OK", role: .cancel) { }
+            //                }
+            .task {
+                await reloadData()
+            }
+            .refreshable {
+                await reloadData()
+            }
+            .navigationBarTitle("My Profile")
+            .navigationBarItems(leading: Group {
+                if editMode {
+                    Button(action: {
+                        withAnimation { editMode = false }
+                        populateTextFields()
+                    }) {
+                        Text("Cancel").bold()
                     }
-                }, trailing: HStack(spacing: 10) {
-                    if !editMode {
-                        Button(action: {
-                            guard !showActivityIndicatorView else { return }
-                            showLogoutConfirmationAlert = true
-                        }) {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                                .foregroundColor(.red)
-                        }
-                        .confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert, titleVisibility: .visible) {
-                            Button("Yes", role: .destructive) {
-                                async { await logout() }
-                            }
-                            Button("No", role: .cancel) { }
-                        }
-                        
-                        NavigationLink(destination: RemindersView(), isActive: $isNavigationToNotificationSchedulingViewActive) {
-                            Button(action: {
-                                isNavigationToNotificationSchedulingViewActive = true
-                            }) {
-                                Image(systemName: "clock")
-                            }
-                        }
-                    }
-                    
+                }
+            }, trailing: HStack(spacing: 10) {
+                if !editMode {
                     Button(action: {
                         guard !showActivityIndicatorView else { return }
-                        if editMode == false {
-                            withAnimation {
-                                editMode = true
-                            }
-                        } else {
-                            async { await doneTapped() }
-                        }
+                        showLogoutConfirmationAlert = true
                     }) {
-                        if editMode {
-                            Text("Done")
-                                .fontWeight(.bold)
-                        } else {
-                            Image(systemName: "square.and.pencil")
+                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                            .foregroundColor(.red)
+                    }
+                    .confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert, titleVisibility: .visible) {
+                        Button("Yes", role: .destructive) {
+                            async { await logout() }
+                        }
+                        Button("No", role: .cancel) { }
+                    }
+                    
+                    NavigationLink(destination: RemindersView(), isActive: $isNavigationToNotificationSchedulingViewActive) {
+                        Button(action: {
+                            isNavigationToNotificationSchedulingViewActive = true
+                        }) {
+                            Image(systemName: "clock")
                         }
                     }
-                })
+                }
                 
-                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
-                    .frame(width: 100.0, height: 100.0)
-                    .foregroundColor(.orange)
-            }
+                Button(action: {
+                    guard !showActivityIndicatorView else { return }
+                    if editMode == false {
+                        withAnimation {
+                            editMode = true
+                        }
+                    } else {
+                        async { await doneTapped() }
+                    }
+                }) {
+                    if editMode {
+                        Text("Done")
+                            .fontWeight(.bold)
+                    } else {
+                        Image(systemName: "square.and.pencil")
+                    }
+                }
+            })
+            
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }
     }
 }
