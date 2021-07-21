@@ -158,7 +158,7 @@ struct ProfileView: View {
                         .buttonStyle(PlainButtonStyle())
                         .listRowSeparator(.hidden)
                     }
-                    .listRowBackground(isDarkMode ? Color.black : Color.white)
+//                    .listRowBackground(isDarkMode ? Color.black : Color.white)
                     .listRowSeparator(.hidden)
                 }
                 
