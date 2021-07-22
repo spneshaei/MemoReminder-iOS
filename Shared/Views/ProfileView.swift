@@ -175,7 +175,7 @@ struct ProfileView: View {
                         Text("Cancel").bold()
                     }
                 }
-            }, trailing: HStack(spacing: 10) {
+            }, trailing: HStack(spacing: 15) {
                 if !editMode {
                     Button(action: {
                         guard !showActivityIndicatorView else { return }

@@ -29,6 +29,7 @@ struct AddMemoryView: View {
     
     fileprivate func addMemoryToServer(location: CLLocation? = nil) {
         guard !memoryTitle.isEmpty else {
+            showActivityIndicatorView = false
             showingNoTitleEnteredErrorAlert = true
             return
         }
@@ -49,6 +50,7 @@ struct AddMemoryView: View {
     }
     
     fileprivate func addMemoryTapped() {
+        guard !showActivityIndicatorView else { return }
         main { showActivityIndicatorView = true }
         if saveTheCurrentLocationInMemory {
             SwiftLocation.gpsLocation().then { location in
