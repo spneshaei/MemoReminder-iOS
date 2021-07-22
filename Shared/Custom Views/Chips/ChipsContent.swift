@@ -1,7 +1,25 @@
 // https://prafullkumar77.medium.com/swiftui-building-chips-with-autolayout-container-dbca53bbb848
 
 import SwiftUI
+
 struct ChipsContent: View {
+    @State var selectedTags: [Tag]
+    @State var onTap: (Int) -> Void
+    
+    var body: some View {
+        return ScrollView(.horizontal) {
+            HStack {
+                ForEach(selectedTags) { tag in
+                    Chips(id: tag.id, title: tag.name, hexColor: tag.color, onTap: onTap)
+                        .padding(.all, 5)
+                }
+                Spacer()
+            }
+        }
+    }
+}
+
+struct OldChipsContent: View {
     @State var selectedTags: [Tag]
     @State var onTap: (Int) -> Void
     var body: some View {

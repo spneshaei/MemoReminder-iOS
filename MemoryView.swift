@@ -304,9 +304,7 @@ struct MemoryView: View {
                         .listRowSeparator(.hidden)
                     Text("When on, the memory will not be shown on the home tab's feed for other people.").font(.footnote)
                 }
-                ScrollView {
-                    ChipsContent(selectedTags: memory.tags) { _ in }
-                }
+                ChipsContent(selectedTags: memory.tags) { _ in }
                 .frame(minHeight: 150)
                 //                LocationRow(memory: memory)
                 //                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {

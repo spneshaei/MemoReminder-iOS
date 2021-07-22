@@ -180,6 +180,7 @@ struct HomeView: View {
             NavigationLink(destination: AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)) {
                 Image(systemName: "plus.square")
             }
+            .keyboardShortcut("n")
             //                Button(action: {
             //                    isBottomSheetPresented = true
             //                }) {
