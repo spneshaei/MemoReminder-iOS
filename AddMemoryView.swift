@@ -25,8 +25,13 @@ struct AddMemoryView: View {
     @State var showingAddMemoryErrorAlert = false
     @State var showOnlyForFollowings = false
     @State var saveTheCurrentLocationInMemory = false
+    @State var showingNoTitleEnteredErrorAlert = false
     
     fileprivate func addMemoryToServer(location: CLLocation? = nil) {
+        guard !memoryTitle.isEmpty else {
+            showingNoTitleEnteredErrorAlert = true
+            return
+        }
         async {
             do {
                 try await homeViewModel.addMemory(title: memoryTitle, contents: memoryContents, tags: tagsViewModel.selectedTags, mentionedUsers: viewModel.mentionedUsers, latitude: location?.coordinate.latitude ?? 0.0, longitude: location?.coordinate.longitude ?? 0.0, privacyStatus: showOnlyForFollowings ? .privateStatus : .publicStatus, globalData: globalData)
@@ -62,54 +67,48 @@ struct AddMemoryView: View {
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                 TextEditor(text: $memoryContents)
                 Spacer()
-                
-//                Text(tagsViewModel.selectedTags.isEmpty ? "No tags selected" : (tagsViewModel.selectedTags.count == 1 ? "Selected Tag: \(tagsViewModel.selectedTags.first!.name)" : "Selected Tags: \(2)"))
-//                    .padding()
-                
                 Group {
                     Toggle("Show only for followings", isOn: $showOnlyForFollowings)
                     Toggle("Save the current location in memory", isOn: $saveTheCurrentLocationInMemory)
-                }
-                
-                HStack {
-                    Text("")
-                }
-                
-                HStack {
-                    Text(viewModel.mentionedUsers.count == 0 ? "No user is mentioned" : "\(viewModel.mentionedUsers.count) \(viewModel.mentionedUsers.count == 1 ? "user is" : "users are") mentioned")
-                    Spacer()
-                    NavigationLink(destination: UsersView(shouldSelectUsers: true, usersSelected: $viewModel.mentionedUsers), isActive: $isMentionViewOpeningLinkActive) {
-                        Button(action: { isMentionViewOpeningLinkActive = true }) {
-                            Label("Add", systemImage: "plus")
-                        }
+                    HStack {
+                        Text("")
                     }
                 }
-                
-                HStack {
-                    Text("")
-                }
-                
-                HStack {
-                    Text(tagsViewModel.selectedTags.count == 0 ? "No tag is set" : "\(tagsViewModel.selectedTags.count) \(tagsViewModel.selectedTags.count == 1 ? "tag is" : "tags are") set")
-                    Spacer()
-                    NavigationLink(destination: TagsView(viewModel: tagsViewModel), isActive: $isTagViewOpeningLinkActive) {
-                        Button(action: { isTagViewOpeningLinkActive = true }) {
-                            Label("Add", systemImage: "plus")
+                Group {
+                    HStack {
+                        Text(viewModel.mentionedUsers.count == 0 ? "No user is mentioned" : "\(viewModel.mentionedUsers.count) \(viewModel.mentionedUsers.count == 1 ? "user is" : "users are") mentioned")
+                        Spacer()
+                        NavigationLink(destination: UsersView(shouldSelectUsers: true, usersSelected: $viewModel.mentionedUsers), isActive: $isMentionViewOpeningLinkActive) {
+                            Button(action: { isMentionViewOpeningLinkActive = true }) {
+                                Label("Add", systemImage: "plus")
+                            }
                         }
                     }
+                    
+                    HStack {
+                        Text("")
+                    }
                 }
-                
-                HStack {
-                    Text("")
+                Group {
+                    HStack {
+                        Text(tagsViewModel.selectedTags.count == 0 ? "No tag is set" : "\(tagsViewModel.selectedTags.count) \(tagsViewModel.selectedTags.count == 1 ? "tag is" : "tags are") set")
+                        Spacer()
+                        NavigationLink(destination: TagsView(viewModel: tagsViewModel), isActive: $isTagViewOpeningLinkActive) {
+                            Button(action: { isTagViewOpeningLinkActive = true }) {
+                                Label("Add", systemImage: "plus")
+                            }
+                        }
+                    }
+                    HStack {
+                        Text("")
+                    }
                 }
-                
-                
                 ChipsContent(selectedTags: tagsViewModel.selectedTags) { id in
                     tagsViewModel.selectedTags.removeAll { $0.id == id }
                 }
-                
-                
-                
+            }
+            .alert("Please enter a title for the memory", isPresented: $showingNoTitleEnteredErrorAlert) {
+                Button("OK", role: .cancel) { }
             }
             .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
                 Button("OK", role: .cancel) { }
