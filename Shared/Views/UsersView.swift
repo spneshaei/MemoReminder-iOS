@@ -87,12 +87,6 @@ struct UsersView: View {
             .alert("Error in loading users", isPresented: $viewModel.showingLoadingUsersErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
-            .alert("Error in following the user. Please try again", isPresented: $viewModel.followingErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .alert("Your follow request has been sent; when accepted, the user will be displayed as \"Following\" in this list.", isPresented: $viewModel.shouldShowFollowedAlert) {
-                Button("OK", role: .cancel) { }
-            }
             .task { await reloadData() }
             .refreshable { await reloadData() }
             .navigationBarItems(trailing: NavigationLink(destination: ContactsSuggestionsView(viewModel: contactsSuggestionViewModel, searchViewModel: viewModel), isActive: $shouldNavigateToFindContactsPage) {
@@ -113,6 +107,12 @@ struct UsersView: View {
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
+                .alert("Your follow request has been sent; when accepted, the user will be displayed as \"Following\" in this list.", isPresented: $viewModel.shouldShowFollowedAlert) {
+                    Button("OK", role: .cancel) { }
+                }
+        }
+        .alert("Error in following the user. Please try again", isPresented: $viewModel.followingErrorAlert) {
+            Button("OK", role: .cancel) { }
         }
     }
 }

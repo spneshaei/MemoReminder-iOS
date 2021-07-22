@@ -181,6 +181,9 @@ struct MemoryView: View {
                     Group {
                         HStack {
                             Spacer()
+                                .alert("Error in editing the memory. Please try again", isPresented: $shouldEditMemoryErrorAlert) {
+                                    Button("OK", role: .cancel) { }
+                                }
                             AsyncImage(url: URL(string: memory.imageLink)) { image in
                                 image
                                     .resizable()
@@ -233,6 +236,9 @@ struct MemoryView: View {
                     }
                     Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
                         .listRowSeparator(.hidden)
+                        .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
                     NavigationLink(destination: CommentsView(memory: memory)) {
                         Text("Show comments")
                     }
@@ -306,21 +312,15 @@ struct MemoryView: View {
                 }
                 ChipsContent(selectedTags: memory.tags) { _ in }
                 .frame(minHeight: 150)
+                .alert("Error in uploading the image. Please try again", isPresented: $showingUploadErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
                 //                LocationRow(memory: memory)
                 //                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
                 //                    Text("Show on the map")
                 //                }
             }
             .alert("Error in deleting the memory. Please try again", isPresented: $showDeleteMemoryErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .alert("Error in editing the memory. Please try again", isPresented: $shouldEditMemoryErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .alert("Error in uploading the image. Please try again", isPresented: $showingUploadErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
             .navigationBarTitle(Text(memory.title))

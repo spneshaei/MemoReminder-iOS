@@ -65,6 +65,9 @@ struct AddMemoryView: View {
                 TextField("Memory Title", text: $memoryTitle)
                     .font(.title2)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .alert("Please enter a title for the memory", isPresented: $showingNoTitleEnteredErrorAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
                 TextEditor(text: $memoryContents)
                 Spacer()
                 Group {
@@ -106,9 +109,6 @@ struct AddMemoryView: View {
                 ChipsContent(selectedTags: tagsViewModel.selectedTags) { id in
                     tagsViewModel.selectedTags.removeAll { $0.id == id }
                 }
-            }
-            .alert("Please enter a title for the memory", isPresented: $showingNoTitleEnteredErrorAlert) {
-                Button("OK", role: .cancel) { }
             }
             .alert("Error while adding memory. Please try again", isPresented: $showingAddMemoryErrorAlert) {
                 Button("OK", role: .cancel) { }

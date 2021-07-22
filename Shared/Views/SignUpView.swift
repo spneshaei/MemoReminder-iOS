@@ -13,10 +13,10 @@ struct SignUpView: View {
     var isDarkMode: Bool { colorScheme == .dark }
     
     let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter
-        }()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
     
     //MARK: - PROPERTIES
     @State var username = "";
@@ -53,9 +53,9 @@ struct SignUpView: View {
                 
                 // LOGO & WELCOME
                 VStack(alignment: .leading, spacing: 30){
-//                    Image("logo-4")
-//                        .resizable()
-//                        .frame(width: 60, height: 60)
+                    //                    Image("logo-4")
+                    //                        .resizable()
+                    //                        .frame(width: 60, height: 60)
                     Text("Sign Up")
                         .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: isDarkMode ? .black : .white))
                 }
@@ -63,60 +63,60 @@ struct SignUpView: View {
                 // FORM
                 VStack {
                     
-//                    HStack {
+                    //                    HStack {
+                    
+                    VStack(alignment: .leading){
+                        VStack(spacing: 20) {
+                            SFInputComponent(inputTitle: "Name", username: $name, isSecure: false)
+                            // Username
+                            SFInputComponent(inputTitle: "Username", username: $username, isSecure: false)
+                            // Password
+                            SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
+                            SFInputComponent(inputTitle: "Email", username: $email, isSecure: false)
+                            DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                                Text("Birthday")
+                                    .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
+                            }
+                        }
+                        .alert("The \(emptyFieldName) field is empty.", isPresented: $showingEmptyFieldAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
                         
-                        VStack(alignment: .leading){
-                            VStack(spacing: 20) {
-                                SFInputComponent(inputTitle: "Name", username: $name, isSecure: false)
-                                // Username
-                                SFInputComponent(inputTitle: "Username", username: $username, isSecure: false)
-                                // Password
-                                SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
-                                SFInputComponent(inputTitle: "Email", username: $email, isSecure: false)
-                                DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
-                                    Text("Birthday")
-                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
-                                }
-                            }
-                            
-                            // Login btn
-                            Button(action: {
-                                signUp()
-                            }){
-                                Text("SIGN UP")
-                                    .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
-                                    .modifier(SFButton())
-                                    .background(Color("yellow"))
-                                    .cornerRadius(10)
-                            }
-                            .padding(.top,30)
-                            .alert(alertTextMessage, isPresented: $showingAlert) {
-                                Button("OK", role: .cancel) {
-                                    if signUpStatus == .success {
-                                        withAnimation {
-                                            mainAppViewModel.currentView = .login
-                                        }
+                        // Login btn
+                        Button(action: {
+                            signUp()
+                        }){
+                            Text("SIGN UP")
+                                .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
+                                .modifier(SFButton())
+                                .background(Color("yellow"))
+                                .cornerRadius(10)
+                        }
+                        .padding(.top,30)
+                        .alert(alertTextMessage, isPresented: $showingAlert) {
+                            Button("OK", role: .cancel) {
+                                if signUpStatus == .success {
+                                    withAnimation {
+                                        mainAppViewModel.currentView = .login
                                     }
                                 }
                             }
-                            .alert("The \(emptyFieldName) field is empty.", isPresented: $showingEmptyFieldAlert) {
-                                Button("OK", role: .cancel) { }
-                            }
-                            .alert("Your email address is provided in a wrong format. Maybe you've had a typo. Fix the email address and then try again", isPresented: $showingEmailWrongAlert) {
-                                Button("OK", role: .cancel) { }
-                            }
                         }
-                        .padding(.horizontal,30)
-                        .padding(.vertical,40)
-                        
-                        
-//                    }
+                    }
+                    .padding(.horizontal,30)
+                    .padding(.vertical,40)
+                    
+                    
+                    //                    }
                 }
                 .background(Color("card"))
                 .cornerRadius(10)
                 .padding(.top,20)
                 .shadow(radius: 20.0)
                 .offset(x: -25.0, y: 0.0)
+                .alert("Your email address is provided in a wrong format. Maybe you've had a typo. Fix the email address and then try again", isPresented: $showingEmailWrongAlert) {
+                    Button("OK", role: .cancel) { }
+                }
                 
                 
                 Spacer()

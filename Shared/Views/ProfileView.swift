@@ -139,6 +139,9 @@ struct ProfileView: View {
                     }
                 }
                 ThreeStatsView(user: viewModel.user)
+                    .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
                 if !viewModel.followRequests.isEmpty {
                     Text("Follow requests").font(.title).bold()
                         .listRowSeparator(.hidden)
@@ -158,35 +161,19 @@ struct ProfileView: View {
                         .buttonStyle(PlainButtonStyle())
                         .listRowSeparator(.hidden)
                     }
-//                    .listRowBackground(isDarkMode ? Color.black : Color.white)
+                    //                    .listRowBackground(isDarkMode ? Color.black : Color.white)
                     .listRowSeparator(.hidden)
                 }
+                .alert("Accept was successful", isPresented: $viewModel.shouldShowAcceptSuccessAlert) {
+                    Button("OK", role: .cancel) { }
+                }
                 
-            }
-            .alert("Accept was successful", isPresented: $viewModel.shouldShowAcceptSuccessAlert) {
-                Button("OK", role: .cancel) { }
             }
             .alert("Accept failed. Please try again", isPresented: $viewModel.shouldShowAcceptErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
-            .alert("Editing profile details failed. Please try again", isPresented: $viewModel.shouldShowEditProfileErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-//                .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert) {
-//                    Button("Yes", role: .destructive) {
-//                        async { await logout() }
-//                    }
-//                    Button("No", role: .cancel) { }
-//                }
-            //                .alert("Network operation failed. Please try again", isPresented: $viewModel.shouldShowLoadingDataErrorAlert) {
-            //                    Button("OK", role: .cancel) { }
-            //                }
-            .task {
-                await reloadData()
-            }
-            .refreshable {
-                await reloadData()
-            }
+            .task { await reloadData() }
+            .refreshable { await reloadData() }
             .navigationBarTitle("My Profile")
             .navigationBarItems(leading: Group {
                 if editMode {

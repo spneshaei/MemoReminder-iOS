@@ -82,12 +82,12 @@ struct TagsView: View {
                         }
                     }
                     .onDelete(perform: onSwipeToDelete)
+                    .alert("Error in deleting. Please try again", isPresented: $showingDeletingTagsErrorAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
                 }
                 .task { async { await reloadData() }}
                 .refreshable { async { await reloadData() }}
-            }
-            .alert("Error in deleting. Please try again", isPresented: $showingDeletingTagsErrorAlert) {
-                Button("OK", role: .cancel) { }
             }
             .alert("Error in loading tags. Please pull to refresh to try again", isPresented: $showingLoadingTagsErrorAlert) {
                 Button("OK", role: .cancel) { }
