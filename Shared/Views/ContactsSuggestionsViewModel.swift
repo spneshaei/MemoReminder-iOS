@@ -28,7 +28,7 @@ class ContactsSuggestionsViewModel: ObservableObject {
     
     func loadUsers(firstName: String, globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "memo-user/?first_name__contains=\(firstName)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "memo-user/?first_name__contains=\(firstName)", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.usersLoaded.append(contentsOf: results.arrayValue.map { result -> User in

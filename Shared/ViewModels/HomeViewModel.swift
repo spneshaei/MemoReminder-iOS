@@ -60,7 +60,7 @@ class HomeViewModel: ObservableObject {
     
     func loadMentionedMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "tagged-post/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "tagged-post/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.mentionedMemories = results.arrayValue.map { result -> Memory in
@@ -71,7 +71,7 @@ class HomeViewModel: ObservableObject {
     
     func loadTopMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "top-post", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "top-post", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.topMemories = results.arrayValue.map { result -> Memory in
@@ -93,7 +93,7 @@ class HomeViewModel: ObservableObject {
             "mode": privacyStatus == .privateStatus ? "private" : "public"
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: bodyString, method: .post)
+        try await Rester.rest(endPoint: "post/", body: bodyString, method: .post, globalData: globalData)
     }
     
     static var sample: HomeViewModel {

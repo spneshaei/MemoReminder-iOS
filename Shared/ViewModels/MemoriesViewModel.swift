@@ -77,7 +77,7 @@ class MemoriesViewModel: ObservableObject {
     
     func loadMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "post/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.memories = results.arrayValue.map { result -> Memory in

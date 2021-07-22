@@ -67,7 +67,7 @@ class User: Identifiable, Codable {
         return user
     }
     
-    static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String) async -> AuthenticationStatus {
+    static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String, globalData: GlobalData) async -> AuthenticationStatus {
         let body: JSON = [
             "username": username,
             "first_name": firstName,
@@ -79,7 +79,7 @@ class User: Identifiable, Codable {
         ]
         guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
         do {
-            try await Rester.rest(endPoint: "memo-user/", body: bodyString, method: .post)
+            try await Rester.rest(endPoint: "memo-user/", body: bodyString, method: .post, globalData: globalData)
             return .success
         } catch {
             return .failed
@@ -93,7 +93,7 @@ class User: Identifiable, Codable {
         ]
         guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
         do {
-            let result = try await Rester.rest(endPoint: "login/", body: bodyString, method: .post)
+            let result = try await Rester.rest(endPoint: "login/", body: bodyString, method: .post, globalData: globalData)
             main {
                 let json = JSON(parseJSON: result)
                 globalData.loggedIn = true

@@ -47,7 +47,7 @@ struct LoginView: View {
                         .resizable()
                         .frame(width: 60, height: 60)
                     Text("Welcome to MemoReminder")
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: isDarkMode ? .black : .white))
+                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
                 }
                 .padding(.top,55)
                 // FORM

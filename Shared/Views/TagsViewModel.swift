@@ -36,12 +36,12 @@ class TagsViewModel: ObservableObject {
     
     func remove(tag: Tag, globalData: GlobalData) async throws {
         guard !isSample else { return }
-        try await Rester.rest(endPoint: "tag/\(tag.id)/?token=\(globalData.token)", body: "", method: .delete)
+        try await Rester.rest(endPoint: "tag/\(tag.id)/", body: "", method: .delete, globalData: globalData)
     }
     
     func loadTags(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "tag/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "tag/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.allTags = results.arrayValue.map { result -> Tag in
@@ -61,7 +61,7 @@ class TagsViewModel: ObservableObject {
             "color": uiColor.toHexString()
         ]
         guard let bodyString = body.rawString() else { return }
-        let resultString = try await Rester.rest(endPoint: "tag/?token=\(globalData.token)", body: bodyString, method: .post)
+        let resultString = try await Rester.rest(endPoint: "tag/", body: bodyString, method: .post, globalData: globalData)
         main {
             let result = JSON(parseJSON: resultString)
             let tag = Tag(id: result["id"].intValue)

@@ -15,7 +15,7 @@ class MemoryViewModel: ObservableObject {
     
     func deleteMemory(memory: Memory, globalData: GlobalData) async throws {
         guard !isSample else { return }
-        try await Rester.rest(endPoint: "post/\(memory.id)/?token=\(globalData.token)", body: "", method: .delete)
+        try await Rester.rest(endPoint: "post/\(memory.id)/", body: "", method: .delete, globalData: globalData)
     }
     
     func likeMemory(memory: Memory, globalData: GlobalData) async throws {
@@ -24,7 +24,7 @@ class MemoryViewModel: ObservableObject {
             "post": memory.id
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "post-like/?token=\(globalData.token)", body: bodyString, method: .post)
+        try await Rester.rest(endPoint: "post-like/", body: bodyString, method: .post, globalData: globalData)
     }
     
     // https://stackoverflow.com/questions/54268856/upload-image-to-my-server-via-php-using-swift
@@ -92,7 +92,7 @@ class MemoryViewModel: ObservableObject {
             "mode": privacyStatus.rawValue
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "post/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
+        try await Rester.rest(endPoint: "post/\(id)/", body: bodyString, method: .patch, globalData: globalData)
     }
     
     static var sample: MemoryViewModel {

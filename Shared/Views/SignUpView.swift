@@ -9,6 +9,8 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct SignUpView: View {
+    @EnvironmentObject var globalData: GlobalData
+    
     @Environment(\.colorScheme) var colorScheme
     var isDarkMode: Bool { colorScheme == .dark }
     
@@ -57,7 +59,7 @@ struct SignUpView: View {
                     //                        .resizable()
                     //                        .frame(width: 60, height: 60)
                     Text("Sign Up")
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: isDarkMode ? .black : .white))
+                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
                 }
                 .padding(.top,55)
                 // FORM
@@ -84,7 +86,7 @@ struct SignUpView: View {
                         
                         // Login btn
                         Button(action: {
-                            signUp()
+                            signUp(globalData: globalData)
                         }){
                             Text("SIGN UP")
                                 .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
@@ -165,7 +167,7 @@ struct SignUpView: View {
         return true
     }
     
-    func signUp() {
+    func signUp(globalData: GlobalData) {
         guard !showActivityIndicatorView else { return }
         guard areAllFieldsValid else { return }
         guard isValidEmailAddress(emailAddressString: email) else {
@@ -176,7 +178,7 @@ struct SignUpView: View {
         async {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd"
-            signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email)
+            signUpStatus = await User.signUp(username: username, firstName: name, lastName: "L", birthday: dateFormatter.string(from: birthDate), password: password, phoneNumber: "09111111111", email: email, globalData: globalData)
             main {
                 showActivityIndicatorView = false
                 showingAlert = true
@@ -194,5 +196,6 @@ struct SignUpView: View {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         SignUpView()
+            .environmentObject(GlobalData.sample)
     }
 }

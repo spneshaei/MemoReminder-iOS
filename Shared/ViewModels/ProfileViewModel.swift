@@ -57,7 +57,7 @@ class ProfileViewModel: ObservableObject {
     
     func loadMyMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "post/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.myMemories = results.arrayValue.map { result -> Memory in
@@ -68,7 +68,7 @@ class ProfileViewModel: ObservableObject {
     
     func loadUser(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get, globalData: globalData)
         main {
             self.user = User.loadFromJSON(jsonString: resultString)
         }
@@ -76,7 +76,7 @@ class ProfileViewModel: ObservableObject {
     
     func loadFollowRequests(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "friend-request/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.followRequests = results.arrayValue.map { result -> User in
@@ -98,7 +98,7 @@ class ProfileViewModel: ObservableObject {
             "status": "accepted"
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
+        try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/", body: bodyString, method: .patch, globalData: globalData)
     }
     
     func editUserDetails(id: Int, firstName: String, email: String, birthday: Date, newPassword: String, globalData: GlobalData) async throws {
@@ -121,12 +121,12 @@ class ProfileViewModel: ObservableObject {
             ]
         }
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "memo-user/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
+        try await Rester.rest(endPoint: "memo-user/\(id)/", body: bodyString, method: .patch, globalData: globalData)
     }
     
     func logout(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        try await Rester.rest(endPoint: "logout/?token=\(globalData.token)", body: "", method: .post)
+        try await Rester.rest(endPoint: "logout/", body: "", method: .post, globalData: globalData)
     }
     
     static var sample: ProfileViewModel {

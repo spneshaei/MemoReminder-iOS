@@ -91,7 +91,7 @@ class UsersViewModel: ObservableObject {
     
     func loadUser(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get, globalData: globalData)
         main {
             self.currentUser = User.loadFromJSON(jsonString: resultString)
         }
@@ -99,7 +99,7 @@ class UsersViewModel: ObservableObject {
     
     func loadUsers(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "memo-user/", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "memo-user/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.friends = []
@@ -126,7 +126,7 @@ class UsersViewModel: ObservableObject {
             "to_user": user.id
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: bodyString, method: .post)
+        try await Rester.rest(endPoint: "friend-request/", body: bodyString, method: .post, globalData: globalData)
     }
     
     static var sample: UsersViewModel {
