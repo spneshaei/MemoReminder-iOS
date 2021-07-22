@@ -26,6 +26,8 @@ struct SignUpView: View {
     @State var signUpStatus: User.AuthenticationStatus = .failed
     @State var showingAlert = false
     @State private var birthDate = Date(timeIntervalSince1970: 1183104000)
+    @State private var emptyFieldName = ""
+    @State private var showingEmptyFieldAlert = false
     @State var showingEmailWrongAlert = false
     @State var showActivityIndicatorView = false
     
@@ -97,6 +99,9 @@ struct SignUpView: View {
                                     }
                                 }
                             }
+                            .alert("The \(emptyFieldName) field is empty.", isPresented: $showingEmptyFieldAlert) {
+                                Button("OK", role: .cancel) { }
+                            }
                             .alert("Your email address is provided in a wrong format. Maybe you've had a typo. Fix the email address and then try again", isPresented: $showingEmailWrongAlert) {
                                 Button("OK", role: .cancel) { }
                             }
@@ -136,8 +141,33 @@ struct SignUpView: View {
         }.edgesIgnoringSafeArea(.all)
     }
     
+    var areAllFieldsValid: Bool {
+        guard !username.isEmpty else {
+            emptyFieldName = "username"
+            showingEmptyFieldAlert = true
+            return false
+        }
+        guard !password.isEmpty else {
+            emptyFieldName = "password"
+            showingEmptyFieldAlert = true
+            return false
+        }
+        guard !name.isEmpty else {
+            emptyFieldName = "name"
+            showingEmptyFieldAlert = true
+            return false
+        }
+        guard !email.isEmpty else {
+            emptyFieldName = "email"
+            showingEmptyFieldAlert = true
+            return false
+        }
+        return true
+    }
+    
     func signUp() {
         guard !showActivityIndicatorView else { return }
+        guard areAllFieldsValid else { return }
         guard isValidEmailAddress(emailAddressString: email) else {
             showingEmailWrongAlert = true
             return
