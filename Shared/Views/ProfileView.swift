@@ -24,7 +24,6 @@ struct ProfileView: View {
     }
     @State var changePasswordMode = false
     @State var firstName = ""
-    @State var username = ""
     @State var email = ""
     @State var birthDate = Date()
     @State var newPassword = ""
@@ -52,9 +51,8 @@ struct ProfileView: View {
     fileprivate func doneTapped() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.editUserDetails(id: viewModel.user.id, firstName: firstName, username: username, email: email, birthday: birthDate, newPassword: newPassword, globalData: globalData)
+            try await viewModel.editUserDetails(id: viewModel.user.id, firstName: firstName, email: email, birthday: birthDate, newPassword: newPassword, globalData: globalData)
             main {
-                viewModel.user.username = username
                 viewModel.user.email = email
                 viewModel.user.firstName = firstName
                 let dateFormatter = DateFormatter()
@@ -74,7 +72,6 @@ struct ProfileView: View {
     fileprivate func populateTextFields() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
-        username = viewModel.user.username
         email = viewModel.user.email
         firstName = viewModel.user.firstName
         birthDate = dateFormatter.date(from: viewModel.user.birthday) ?? Date()
@@ -107,12 +104,6 @@ struct ProfileView: View {
                 ProfilePictureAndNameView(profilePictureURL: viewModel.user.profilePictureURL, name: $firstName, editMode: editMode)
                     .listRowSeparator(editMode ? .visible : .hidden)
                 if editMode {
-                    VStack(alignment: .leading) {
-                        Text("Username")
-                        TextField(username, text: $username)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .id(0) // For SDK Bug!
-                    }
                     VStack(alignment: .leading) {
                         Text("Email")
                         TextField(email, text: $email)

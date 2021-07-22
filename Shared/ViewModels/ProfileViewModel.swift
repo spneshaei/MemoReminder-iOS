@@ -101,7 +101,7 @@ class ProfileViewModel: ObservableObject {
         try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
     }
     
-    func editUserDetails(id: Int, firstName: String, username: String, email: String, birthday: Date, newPassword: String, globalData: GlobalData) async throws {
+    func editUserDetails(id: Int, firstName: String, email: String, birthday: Date, newPassword: String, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
@@ -109,14 +109,12 @@ class ProfileViewModel: ObservableObject {
         if newPassword.isEmpty {
             body = [
                 "first_name": firstName,
-                "username": username,
                 "email": email,
                 "birthday": dateFormatter.string(from: birthday)
             ]
         } else {
             body = [
                 "first_name": firstName,
-                "username": username,
                 "email": email,
                 "birthday": dateFormatter.string(from: birthday),
                 "password": newPassword
