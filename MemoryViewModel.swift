@@ -37,7 +37,7 @@ class MemoryViewModel: ObservableObject {
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).jpg", mimeType: "image/jpg")
 //            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
-        }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
+        }, to: "\(Rester.server)/post-file/?post=\(memory.id)", headers: ["Memouser-Token": globalData.token, "Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in
                 self?.uploadAmount = progress.fractionCompleted * 100
             }
@@ -69,7 +69,7 @@ class MemoryViewModel: ObservableObject {
                 multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
             }
 //            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
-        }, to: "\(Rester.server)/post-file/?token=\(globalData.token)&post=\(memory.id)", headers: ["Authorization": "token \(Rester.token)"])
+        }, to: "\(Rester.server)/post-file/?post=\(memory.id)", headers: ["Memouser-Token": globalData.token, "Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in
                 self?.uploadAmount = progress.fractionCompleted * 100
             }

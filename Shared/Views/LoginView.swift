@@ -39,79 +39,81 @@ struct LoginView: View {
             Image("login-4")
                 .resizable()
             
-            VStack(alignment: .leading, spacing: 30){
-                
-                // LOGO & WELCOME
+            ScrollView {
                 VStack(alignment: .leading, spacing: 30){
-                    Image("logo-4")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                    Text("Welcome to MemoReminder")
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
-                }
-                .padding(.top,55)
-                // FORM
-                VStack {
                     
-//                    HStack {
-                        
-                        VStack(alignment: .leading){
-                            VStack(spacing: 20) {
-                                // Username
-                                SFInputComponent(inputTitle: "Username", username: $username, isSecure: false)
-                                // Password
-                                VStack(spacing: 15){
-                                    SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
-                                    // Forgot pass
-//                                    Text("Forgot Password?")
-//                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
-//                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                            }
-                            
-                            // Login btn
-                            Button(action: { login() }){
-                                Text("LOGIN")
-                                    .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
-                                    .modifier(SFButton())
-                                    .background(Color("yellow"))
-                                    .cornerRadius(10)
-                            }
-                            .padding(.top,30)
-                            .alert(alertTextMessage, isPresented: $showingAlert) {
-                                Button("OK", role: .cancel) { }
-                            }
-                            
-                        }
-                        .padding(.horizontal,30)
-                        .padding(.vertical,40)
-                        
-                        
-//                    }
-                }
-                .background(Color("card"))
-                .cornerRadius(10)
-                .padding(.top,20)
-                .shadow(radius: 20.0)
-                .offset(x: -25.0, y: 0.0)
-                
-                
-                Spacer()
-                // SIGN UP
-                Button(action: { goToSignUp() }) {
-                    HStack{
-                        Text("New?")
-                        Text("Sign up")
-                            .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 18, fontColor: Color.primary))
-                        Text("for a new account.")
+                    // LOGO & WELCOME
+                    VStack(alignment: .leading, spacing: 30){
+                        Image("MemoReminderIcon")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                        Text("Welcome to MemoReminder")
+                            .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
                     }
-                    .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 18, fontColor: Color.primary))
-                    .foregroundColor(.primary)
+                    .padding(.top,55)
+                    // FORM
+                    VStack {
+                        
+    //                    HStack {
+                            
+                            VStack(alignment: .leading){
+                                VStack(spacing: 20) {
+                                    // Username
+                                    SFInputComponent(inputTitle: "Username", username: $username, isSecure: false)
+                                    // Password
+                                    VStack(spacing: 15){
+                                        SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
+                                        // Forgot pass
+    //                                    Text("Forgot Password?")
+    //                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
+    //                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                    }
+                                }
+                                
+                                // Login btn
+                                Button(action: { login() }){
+                                    Text("LOGIN")
+                                        .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
+                                        .modifier(SFButton())
+                                        .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
+                                        .cornerRadius(10)
+                                }
+                                .padding(.top,30)
+                                .alert(alertTextMessage, isPresented: $showingAlert) {
+                                    Button("OK", role: .cancel) { }
+                                }
+                                
+                            }
+                            .padding(.horizontal,30)
+                            .padding(.vertical,40)
+                            
+                            
+    //                    }
+                    }
+                    .background(Color("card"))
+                    .cornerRadius(10)
+                    .padding(.top,20)
+                    .shadow(radius: 20.0)
+                    .offset(x: -25.0, y: 0.0)
+                    
+                    
+                    Spacer()
+                    // SIGN UP
+                    Button(action: { goToSignUp() }) {
+                        HStack{
+                            Text("New?")
+                            Text("Sign up")
+                                .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 18, fontColor: Color.primary))
+                            Text("for a new account.")
+                        }
+                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 18, fontColor: Color.primary))
+                        .foregroundColor(.primary)
+                    }
+                    .padding(.bottom, 30)
+                    
                 }
-                .padding(.bottom, 30)
-                
+                .offset(x:40)
             }
-            .offset(x:40)
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
@@ -150,7 +152,7 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            
+            .preferredColorScheme(.dark)
     }
 }
 
