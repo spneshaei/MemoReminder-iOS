@@ -26,7 +26,7 @@ struct MemoReminderApp: App {
     private let quickActionService = QuickActionService()
     
     init() {
-        Rester.server = "http://memoreminder.ir/api/v1"
+        Rester.server = "https://memoreminder.ir/api/v1"
     }
 
     var body: some Scene {
