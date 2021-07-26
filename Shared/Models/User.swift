@@ -36,12 +36,12 @@ class User: Identifiable, Codable {
         user.email = "spn@spn.spn"
         user.birthday = "1943/23/12"
         user.phoneNumber = "12345678911"
-        user.profilePictureURL = "" // adjust this!
+        user.profilePictureURL = ""
         user.numberOfMemories = 12
         user.numberOfLikes = 125
         user.numberOfComments = 32
         user.followingIDs = []
-        user.followRequestID = -1 // not used in following acceptance or rejection...
+        user.followRequestID = -1
         return user
     }
     

@@ -29,14 +29,13 @@ struct Chips: View {
             .padding(.all, 10)
             .foregroundColor(isSelected ? .white : .blue)
             .background(color)
-            .cornerRadius(40)  //rounded Corner
+            .cornerRadius(40)
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
                     .stroke(Color.blue, lineWidth: 1.5)
                 
             ).onTapGesture {
                 onTap(id)
-//                isSelected.toggle() // toggle select - not selected
             }
     }
 }

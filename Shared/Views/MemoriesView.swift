@@ -53,10 +53,6 @@ struct MemoriesView: View {
                 Button("OK", role: .cancel) { }
             }
             .navigationBarTitle("Memories Feed")
-            //                .sheet(isPresented: $shouldPresentMemorySheet) {
-            //                    MemoryView(memory: memoryToShowInMemorySheet)
-            //                }
-            
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)

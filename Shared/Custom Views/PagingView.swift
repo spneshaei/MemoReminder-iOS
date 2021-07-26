@@ -111,7 +111,6 @@ struct AsyncImagesPagingView: View {
                 }
             }
         }
-//        .aspectRatio(4/3, contentMode: .fit)
         .frame(height: 200)
     }
 }

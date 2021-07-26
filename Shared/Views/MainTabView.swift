@@ -69,38 +69,7 @@ struct MainTabView: View {
                 HomeView(viewModel: homeViewModel, memoriesViewModel: memoriesViewModel)
                 Text("Select a memory to show its details")
             }
-            
-            
         }
-//        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-//                    .onEnded({ value in
-//            if value.translation.width < 0 && selectedIndex != 2 {
-//                withAnimation {
-//                    selectedIndex += 1
-//                }
-//            }
-//
-//            if value.translation.width > 0 && selectedIndex != 0 {
-//                withAnimation {
-//                    selectedIndex -= 1
-//                }
-//            }
-//        }))
-        
-        //        TabView {
-        //            HomeView(viewModel: homeViewModel)
-        //                .tabItem {
-        //                    Label("Home", systemImage: "house")
-        //                }
-        //            MemoriesView(viewModel: memoriesViewModel)
-        //                .tabItem {
-        //                    Label("Memories", systemImage: "list.bullet")
-        //                }
-        //            ProfileView(viewModel: profileViewModel)
-        //                .tabItem {
-        //                    Label("Profile", systemImage: "person")
-        //                }
-        //        }
     }
 }
 

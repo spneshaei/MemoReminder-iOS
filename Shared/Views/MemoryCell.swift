@@ -23,22 +23,6 @@ struct MemoryCell: View {
     }
     
     var body: some View {
-        //        HStack() {
-        //            if #available(iOS 15.0, *) {
-        //                if !memory.creatorProfilePictureURL.isEmpty {
-        //                    AsyncImage(url: URL(string: memory.creatorProfilePictureURL)!)
-        //                }
-        //            } else {
-        //                // Fallback on earlier versions
-        //            }
-        //            VStack(alignment: .leading, spacing: 5) {
-        //                Text(memory.title)
-        //                    .font(.title2)
-        //                Text("\(memory.creatorUsername) - \(memory.createdDate)")
-        //                    .font(.body)
-        //            }.padding()
-        //            Spacer()
-        //        }.padding()
         HStack(alignment: .center) {
             if shouldShowProfilePicture && URL(string: memory.imageLink) != nil {
                 AsyncImage(url: URL(string: memory.imageLink)) { image in
@@ -50,19 +34,6 @@ struct MemoryCell: View {
                 }
                 .frame(width: 50)
                 .padding()
-//                URLImage(URL(string: memory.imageLink)!) { urlImage in
-//                    urlImage.resizable()
-//                }
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width: 50)
-//                .padding(.all, 20)
-                //                AsyncImage(url: URL(string: memory.imageLink)) { asyncImage in
-                ////                    image.resizable()
-                //                    asyncImage.resizable()
-                //                }
-                //                    .aspectRatio(contentMode: .fit)
-                //                    .frame(width: 50)
-                //                    .padding(.all, 20)
             }
             
             HStack {
@@ -84,25 +55,15 @@ struct MemoryCell: View {
         .frame(maxWidth: .infinity, alignment: .center)
         .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
         .listRowBackground(isDarkMode ? Color.black : Color.white)
-
-//        .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
         .accessibility(hint: Text("Open memory \(memory.title)"))
-//        .contextMenu {
-//            Button {
-//                seeCommentsCallback(memory)
-//            } label: {
-//                Label("See comments", systemImage: "quote.bubble")
-//            }
-//        }
     }
 }
 
 struct MemoryCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-//            MemoryCell(memory: Memory.sample)
             MemoryCell(memory: Memory.sample)
                 .preferredColorScheme(.dark)
         }

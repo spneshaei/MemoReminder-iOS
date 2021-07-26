@@ -132,7 +132,7 @@ struct HomeView: View {
                     }
                 }
                 if !viewModel.mentionedMemories.isEmpty {
-                    Text("You where mentioned in")
+                    Text("You were mentioned in")
                         .font(.title2)
                         .fontWeight(.bold)
                         .listRowSeparator(.hidden)
@@ -162,11 +162,6 @@ struct HomeView: View {
                 Image(systemName: "plus.square")
             }
             .keyboardShortcut("n")
-            //                Button(action: {
-            //                    isBottomSheetPresented = true
-            //                }) {
-            //                    Image(systemName: "plus.square")
-            //                }
         })
         .onOpenURL { url in
             if url.absoluteString.hasSuffix("open-most-top") {

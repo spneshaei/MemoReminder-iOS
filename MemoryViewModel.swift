@@ -36,7 +36,6 @@ class MemoryViewModel: ObservableObject {
         let imgData = image.jpegData(compressionQuality: 1)!
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).jpg", mimeType: "image/jpg")
-//            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
         }, to: "\(Rester.server)/post-file/?post=\(memory.id)", headers: ["Memouser-Token": globalData.token, "Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in
                 self?.uploadAmount = progress.fractionCompleted * 100
@@ -45,10 +44,6 @@ class MemoryViewModel: ObservableObject {
                 print("Upload response status code: \(String(describing: response.response?.statusCode)) - Result: \(String(describing: response.value))")
                 completion(response.value)
             }
-        
-        //        guard !isSample else { return "" }
-        //        let resultString = try await Rester.upload(endPoint: "post-file/?token=\(globalData.token)&post=\(memory.id)", body: "", data: image.pngData() ?? Data(), method: .post)
-        //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
     // if isVoice = false, it's PDF
@@ -67,7 +62,6 @@ class MemoryViewModel: ObservableObject {
             } else {
                 multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).pdf", mimeType: "application/pdf")
             }
-//            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
         }, to: "\(Rester.server)/post-file/?post=\(memory.id)", headers: ["Memouser-Token": globalData.token, "Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in
                 self?.uploadAmount = progress.fractionCompleted * 100
@@ -76,10 +70,6 @@ class MemoryViewModel: ObservableObject {
                 print("Upload response status code: \(String(describing: response.response?.statusCode)) - Result: \(String(describing: response.value))")
                 completion(response.value)
             }
-        
-        //        guard !isSample else { return "" }
-        //        let resultString = try await Rester.upload(endPoint: "post-file/?token=\(globalData.token)&post=\(memory.id)", body: "", data: image.pngData() ?? Data(), method: .post)
-        //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
     func upload(memory: Memory, data imgData: Data, globalData: GlobalData, isVoice: Bool = false, completion: @escaping (String?) -> Void) {
@@ -89,7 +79,6 @@ class MemoryViewModel: ObservableObject {
         }
         AF.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imgData, withName: "file", fileName: "\(UUID().uuidString).mov", mimeType: "video/quicktime")
-//            multipartFormData.append(Data("token \(Rester.token)".utf8), withName: "Authorization")
         }, to: "\(Rester.server)/post-file/?post=\(memory.id)", headers: ["Memouser-Token": globalData.token, "Authorization": "token \(Rester.token)"])
             .uploadProgress { [weak self] progress in
                 self?.uploadAmount = progress.fractionCompleted * 100
@@ -98,10 +87,6 @@ class MemoryViewModel: ObservableObject {
                 print("Upload response status code: \(String(describing: response.response?.statusCode)) - Result: \(String(describing: response.value))")
                 completion(response.value)
             }
-        
-        //        guard !isSample else { return "" }
-        //        let resultString = try await Rester.upload(endPoint: "post-file/?token=\(globalData.token)&post=\(memory.id)", body: "", data: image.pngData() ?? Data(), method: .post)
-        //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
     

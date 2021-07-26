@@ -38,13 +38,7 @@ class MemoriesViewModel: ObservableObject {
         }
     }
     
-    func isSameDay(date1: Date, date2: Date) -> Bool { // https://www.zerotoappstore.com/how-to-check-if-two-dates-are-from-the-same-day-swift.html
-//        let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
-//        if diff.day == 0 {
-//            return true
-//        } else {
-//            return false
-//        }
+    func isSameDay(date1: Date, date2: Date) -> Bool {
         return Calendar.current.isDate(date1, inSameDayAs: date2)
     }
     

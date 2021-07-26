@@ -28,10 +28,9 @@ struct ImageSlideshow<Content: View>: View {
                     // 3
                     self.content
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading) // 4
-                .offset(x: CGFloat(self.currentIndex) * -geometry.size.width, y: 0) // 5
+                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
+                .offset(x: CGFloat(self.currentIndex) * -geometry.size.width, y: 0)
                 .onReceive(self.timer) { _ in
-                    // 7
                     self.currentIndex = (self.currentIndex + 1) % 3
                 }
                 HStack(spacing: 3) {

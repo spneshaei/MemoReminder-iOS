@@ -22,7 +22,7 @@ class HomeViewModel: ObservableObject {
     
     @Published var mentionedMemories: [Memory] {
         didSet {
-            defaults.set(try? encoder.encode(topMemories), forKey: "HomeViewModel_mentionedMemories")
+            defaults.set(try? encoder.encode(mentionedMemories), forKey: "HomeViewModel_mentionedMemories")
         }
     }
     

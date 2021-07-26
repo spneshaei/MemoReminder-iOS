@@ -51,15 +51,12 @@ struct UsersView: View {
                 fetchContacts { result in
                     switch result {
                         case .success(let contacts):
-                            // Do your thing here with [CNContacts] array
                             main {
                                 contactsSuggestionViewModel.contacts = contacts
                                 shouldNavigateToFindContactsPage = true
                             }
                         case .failure(_):
-                            main {
-                                shouldShowContactsLoadingErrorAlert = true
-                            }
+                            main { shouldShowContactsLoadingErrorAlert = true }
                     }
                 }
             } else {

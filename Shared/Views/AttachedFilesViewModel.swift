@@ -8,6 +8,6 @@
 import SwiftUI
 
 class AttachedFilesViewModel: ObservableObject {
-    var isSample = false // Not used! ...
+    var isSample = false
     
 }

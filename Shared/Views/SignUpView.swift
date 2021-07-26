@@ -20,7 +20,6 @@ struct SignUpView: View {
         return formatter
     }()
     
-    //MARK: - PROPERTIES
     @State var username = "";
     @State var password = "";
     @State var name = "";
@@ -53,45 +52,32 @@ struct SignUpView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 25){
-                    
-                    // LOGO & WELCOME
                     VStack(alignment: .leading, spacing: 30){
-                        //                    Image("logo-4")
-                        //                        .resizable()
-                        //                        .frame(width: 60, height: 60)
                         Text("Sign Up")
-                            .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
+                            .modifier(CustomTextViewModifier(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
                     }
                     .padding(.top,70)
-                    // FORM
                     VStack {
-                        
-                        //                    HStack {
-                        
                         VStack(alignment: .leading){
                             VStack(spacing: 20) {
-                                SFInputComponent(inputTitle: "Name", username: $name, isSecure: false)
-                                // Username
-                                SFInputComponent(inputTitle: "Username", username: $username, isSecure: false)
-                                // Password
-                                SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
-                                SFInputComponent(inputTitle: "Email", username: $email, isSecure: false)
+                                AuthenticationInputComponentView(inputTitle: "Name", username: $name, isSecure: false)
+                                AuthenticationInputComponentView(inputTitle: "Username", username: $username, isSecure: false)
+                                AuthenticationInputComponentView(inputTitle: "Password", username: $password, isSecure: true)
+                                AuthenticationInputComponentView(inputTitle: "Email", username: $email, isSecure: false)
                                 DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
                                     Text("Birthday")
-                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
+                                        .modifier(CustomTextViewModifier(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
                                 }
                             }
                             .alert("The \(emptyFieldName) field is empty.", isPresented: $showingEmptyFieldAlert) {
                                 Button("OK", role: .cancel) { }
                             }
-                            
-                            // Login btn
                             Button(action: {
                                 signUp(globalData: globalData)
                             }){
                                 Text("SIGN UP")
-                                    .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
-                                    .modifier(SFButton())
+                                    .modifier(CustomTextViewModifier(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
+                                    .modifier(AuthenticationCustomButtonViewModifier())
                                     .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
                                     .cornerRadius(10)
                             }
@@ -108,9 +94,6 @@ struct SignUpView: View {
                         }
                         .padding(.horizontal,30)
                         .padding(.vertical,40)
-                        
-                        
-                        //                    }
                     }
                     .background(Color("card"))
                     .cornerRadius(10)
@@ -121,20 +104,17 @@ struct SignUpView: View {
                         Button("OK", role: .cancel) { }
                     }
                     
-                    
                     Spacer()
-                    // SIGN UP
                     Button(action: { backToLogin() }) {
                         HStack{
                             Text("Already have an account?")
                             Text("Log in")
-                                .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 18, fontColor: Color.primary))
+                                .modifier(CustomTextViewModifier(fontName: "MavenPro-Bold", fontSize: 18, fontColor: Color.primary))
                         }
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 18, fontColor: Color.primary))
+                        .modifier(CustomTextViewModifier(fontName: "MavenPro-Regular", fontSize: 18, fontColor: Color.primary))
                         .foregroundColor(.primary)
                     }
                     .padding(.bottom, 30)
-                    
                 }
                 .offset(x:40)
             }

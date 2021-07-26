@@ -44,9 +44,8 @@ struct MemoReminderApp: App {
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase {
             case .active:
-                guard let shortcutItem = appDelegate.shortcutItem else { return }
+                guard appDelegate.shortcutItem != nil else { return }
                 openURL(URL(string: "memoreminder://open-most-top")!)
-//                quickActionService.action = QuickAction(rawValue: shortcutItem.type)
             default:
                 return
             }

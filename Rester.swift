@@ -24,11 +24,6 @@ class Rester {
     }
     
     fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post, globalData: GlobalData) async throws -> String {
-//        guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
-//            throw RestError.wrongURLFormat
-//        }
-//        var imageData :NSData = UIImageJPEGRepresentation(data, 1.0) as! NSData
-        
         guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
             throw RestError.wrongURLFormat
         }
@@ -56,19 +51,6 @@ class Rester {
         } catch {
             throw RestError.networkError
         }
-        
-        
-        
-        
-//        let boundary = "Boundary-\(UUID().uuidString)"
-//        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-//        let body = NSMutableData()
-//        let boundaryPrefix = " — \(boundary)\r\n"
-//        for (key, value) in params {
-//            body.appendString(boundaryPrefix)
-//            body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-//            body.appendString("\(value)\r\n")
-//        }
     }
     
     fileprivate static func rest(endPoint: String, token: String, body: String = "", method: RestMethod = .get, globalData: GlobalData) async throws -> String {

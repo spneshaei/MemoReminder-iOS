@@ -117,10 +117,6 @@ struct AttachedFilesView: View {
     var body: some View {
         ZStack {
             List {
-//                if uploadFileState == .uploading {
-//                    ProgressView("Uploading - \(Double(round(100 * memoryViewModel.uploadAmount) / 100))%", value: memoryViewModel.uploadAmount, total: 100)
-//                        .listRowSeparator(.hidden)
-//                }
                 ForEach(memory.attachedFileURLs, id: \.self) {  attachedFileURL in
                     if let _ = URL(string: attachedFileURL) {
                         AttachmentCell(url: attachedFileURL)

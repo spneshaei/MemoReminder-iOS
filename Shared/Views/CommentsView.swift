@@ -72,9 +72,6 @@ struct CommentsView: View {
                     .padding()
                 }
             }
-            //            .navigationBarItems(trailing: Button(action: {
-            //
-            //            }, label: { Text("Add").bold() }))
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)

@@ -41,40 +41,26 @@ struct LoginView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 30){
-                    
-                    // LOGO & WELCOME
                     VStack(alignment: .leading, spacing: 30){
                         Image("MemoReminderIcon")
                             .resizable()
                             .frame(width: 60, height: 60)
                         Text("Welcome to MemoReminder")
-                            .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
+                            .modifier(CustomTextViewModifier(fontName: "MavenPro-Regular", fontSize: 23, fontColor: .black))
                     }
                     .padding(.top,55)
-                    // FORM
                     VStack {
-                        
-    //                    HStack {
-                            
                             VStack(alignment: .leading){
                                 VStack(spacing: 20) {
-                                    // Username
-                                    SFInputComponent(inputTitle: "Username", username: $username, isSecure: false)
-                                    // Password
+                                    AuthenticationInputComponentView(inputTitle: "Username", username: $username, isSecure: false)
                                     VStack(spacing: 15){
-                                        SFInputComponent(inputTitle: "Password", username: $password, isSecure: true)
-                                        // Forgot pass
-    //                                    Text("Forgot Password?")
-    //                                        .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
-    //                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        AuthenticationInputComponentView(inputTitle: "Password", username: $password, isSecure: true)
                                     }
                                 }
-                                
-                                // Login btn
                                 Button(action: { login() }){
                                     Text("LOGIN")
-                                        .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
-                                        .modifier(SFButton())
+                                        .modifier(CustomTextViewModifier(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
+                                        .modifier(AuthenticationCustomButtonViewModifier())
                                         .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
                                         .cornerRadius(10)
                                 }
@@ -86,27 +72,22 @@ struct LoginView: View {
                             }
                             .padding(.horizontal,30)
                             .padding(.vertical,40)
-                            
-                            
-    //                    }
                     }
                     .background(Color("card"))
                     .cornerRadius(10)
                     .padding(.top,20)
                     .shadow(radius: 20.0)
                     .offset(x: -25.0, y: 0.0)
-                    
-                    
+                     
                     Spacer()
-                    // SIGN UP
                     Button(action: { goToSignUp() }) {
                         HStack{
                             Text("New?")
                             Text("Sign up")
-                                .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 18, fontColor: Color.primary))
+                                .modifier(CustomTextViewModifier(fontName: "MavenPro-Bold", fontSize: 18, fontColor: Color.primary))
                             Text("for a new account.")
                         }
-                        .modifier(CustomTextM(fontName: "MavenPro-Regular", fontSize: 18, fontColor: Color.primary))
+                        .modifier(CustomTextViewModifier(fontName: "MavenPro-Regular", fontSize: 18, fontColor: Color.primary))
                         .foregroundColor(.primary)
                     }
                     .padding(.bottom, 30)
@@ -157,11 +138,7 @@ struct LoginView_Previews: PreviewProvider {
     }
 }
 
-
-// Screen Four(SF) UI Componets
-
-struct SFInputComponent: View {
-    //    MARK:- PROPERTIES
+struct AuthenticationInputComponentView: View {
     @State var inputTitle: String
     @Binding var username: String
     @State var isSecure: Bool
@@ -169,7 +146,7 @@ struct SFInputComponent: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             Text(inputTitle)
-                .modifier(CustomTextM(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
+                .modifier(CustomTextViewModifier(fontName: "MavenPro-Medium", fontSize: 16, fontColor: Color.gray))
             Group{
                 if !isSecure {
                     TextField("", text: $username)
@@ -186,7 +163,7 @@ struct SFInputComponent: View {
     }
 }
 
-struct SFButton: ViewModifier {
+struct AuthenticationCustomButtonViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity)
@@ -194,8 +171,7 @@ struct SFButton: ViewModifier {
     }
 }
 
-struct CustomTextM: ViewModifier {
-    //MARK:- PROPERTIES
+struct CustomTextViewModifier: ViewModifier {
     let fontName: String
     let fontSize: CGFloat
     let fontColor: Color
