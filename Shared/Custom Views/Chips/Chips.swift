@@ -24,7 +24,7 @@ struct Chips: View {
     
     var body: some View {
         Text(title)
-            .foregroundColor(textShouldBeLight ? .black : .white) // TODO: This is wrong?
+            .foregroundColor(textShouldBeLight ? .black : .white)
             .lineLimit(1)
             .padding(.all, 10)
             .foregroundColor(isSelected ? .white : .blue)

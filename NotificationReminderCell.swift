@@ -20,10 +20,10 @@ struct NotificationReminderCell: View {
         return HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(reminder.text)
-                    .font(.system(size: 22, weight: .bold, design: .default))
+                    .font(.system(size: 26, weight: .bold, design: .default))
                     .foregroundColor(.black)
                 Text(formatter.string(from: reminder.date))
-                    .font(.system(size: 14, weight: .bold, design: .default))
+                    .font(.system(size: 16, weight: .bold, design: .default))
                     .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255))
             }.padding(20)
             Spacer()

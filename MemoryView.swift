@@ -176,13 +176,7 @@ struct MemoryView: View {
         
         return ZStack {
             List {
-                // TODO: This:
-                //                if uploadImageState == .uploading {
-                //                    ProgressView("Uploading - \(Double(round(100 * viewModel.uploadAmount) / 100))%", value: viewModel.uploadAmount, total: 100)
-                //                        .listRowSeparator(.hidden)
-                //                }
                 if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
-                    //                    NavigationLink(destination: AsyncImage(url: URL(string: memory.imageLink)) {image in image.resizable().scaledToFill()}.navigationBarTitle("Image").edgesIgnoringSafeArea(.all)) {
                     Group {
                         HStack {
                             Spacer()
@@ -197,21 +191,11 @@ struct MemoryView: View {
                                 Color.purple.opacity(0)
                             }
                             .frame(maxHeight: 200)
-                            //                        .cornerRadius(20)
-                            //                        AsyncImage(url: URL(string: memory.imageLink)!)
-                            //                            .aspectRatio(contentMode: .fit)
-                            //                            .frame(maxHeight: 200)
-                            //                        URLImage(URL(string: memory.imageLink)!) { urlImage in
-                            //                            urlImage.resizable()
-                            //                        }
-                            //                        .aspectRatio(contentMode: .fit)
-                            //                        .frame(maxHeight: 200)
                             Spacer()
                         }
                         .frame(maxHeight: 200)
                         Text("").listRowSeparator(.hidden)
                     }
-                    //                    }
                 }
                 if (uploadImageState == .waitingToTapUpload || uploadImageState == .uploading) {
                     if let image = image {
@@ -320,10 +304,6 @@ struct MemoryView: View {
                 .alert("Error in uploading the image. Please try again", isPresented: $showingUploadErrorAlert) {
                     Button("OK", role: .cancel) { }
                 }
-                //                LocationRow(memory: memory)
-                //                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
-                //                    Text("Show on the map")
-                //                }
             }
             .alert("Error in deleting the memory. Please try again", isPresented: $showDeleteMemoryErrorAlert) {
                 Button("OK", role: .cancel) { }
@@ -350,14 +330,6 @@ struct MemoryView: View {
                         Button("No", role: .cancel) { }
                     }
                 }
-                
-                //                Button(action: {
-                //                    withAnimation {
-                //                        // edit memory (and show only when needed!)
-                //                    }
-                //                }) {
-                //                    Image(systemName: "square.and.pencil")
-                //                }
                 if imageLink.isEmpty && memory.creatorUserID == globalData.userID && uploadImageState != .uploading {
                     Button(action: {
                         if uploadImageState == .waitingToTapUpload {
