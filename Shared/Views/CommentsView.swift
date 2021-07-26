@@ -58,7 +58,18 @@ struct CommentsView: View {
                 .navigationBarTitle(Text("Comments"))
                 
                 if memory.usersMentioned.contains { $0.username == globalData.username } {
-                    AddNewCommentView()
+                    HStack(spacing: 5) {
+                        TextField("Enter your comment", text: $commentText)
+                            .font(.title3)
+                        Button(action: {
+                            async { await submitNewComment() }
+                        }, label: {
+                            Text("Send")
+                                .padding(.horizontal)
+                        })
+                            .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
+                    }
+                    .padding()
                 }
             }
             //            .navigationBarItems(trailing: Button(action: {
@@ -77,22 +88,5 @@ struct CommentsView_Previews: PreviewProvider {
         NavigationView {
             CommentsView(memory: Memory.sample)
         }
-    }
-}
-
-struct AddNewCommentView: View {
-    var body: some View {
-        HStack(spacing: 5) {
-            TextField("Enter your comment", text: $commentText)
-                .font(.title3)
-            Button(action: {
-                async { await submitNewComment() }
-            }, label: {
-                Text("Send")
-                    .padding(.horizontal)
-            })
-                .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
-        }
-        .padding()
     }
 }

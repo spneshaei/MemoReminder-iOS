@@ -65,6 +65,7 @@ struct MemoriesView: View {
             Button(action: {
                 isNavigationLinkToFilterActive = true
             }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
+                .accessibility(hint: Text("Filter memories"))
 
         })
     }

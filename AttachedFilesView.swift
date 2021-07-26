@@ -155,20 +155,11 @@ struct AttachedFilesView: View {
             .navigationBarItems(trailing: HStack {
                 if uploadFileState == .notStarted {
                     Button(action: { showFileSourcePicker = true }) {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                    }
-                    Button(action: { showFileSourcePicker = true }) {
                         Image(systemName: "plus")
+                            .accessibility(hint: Text("Add file"))
                     }
                 }
             })
-            .confirmationDialog("Are you sure you want to delete all the downloaded files?", isPresented: $isDeleteAllDownloadedFilesConfirmationDialogVisible, titleVisibility: .visible) {
-                Button("Yes", role: .destructive) {
-                    clearAllFiles()
-                }
-                Button("No", role: .cancel) { }
-            }
             NavigationLink(destination: VoiceRecordView(memory: memory, memoryViewModel: memoryViewModel), isActive: $isNavigationToVoiceRecordViewActive) {
                 EmptyView()
             }

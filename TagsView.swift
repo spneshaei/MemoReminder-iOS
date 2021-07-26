@@ -99,6 +99,7 @@ struct TagsView: View {
                 }, label: {
                     Image(systemName: "plus")
                         .padding(.horizontal)
+                        .accessibility(hint: Text("Add tag"))
                 })
 //                    .buttonStyle(AddMemoryButton(colors: [Color(red: 0.22, green: 0.22, blue: 0.70), Color(red: 0.32, green: 0.32, blue: 1)])).clipShape(Capsule())
 //                    .scaleEffect(0.84)

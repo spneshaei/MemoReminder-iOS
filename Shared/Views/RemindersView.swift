@@ -45,6 +45,7 @@ struct RemindersView: View {
             }) {
                 Image(systemName: "trash")
                     .foregroundColor(.red)
+                    .accessibility(hint: Text("Delete all fired reminders"))
             }
             
             NavigationLink(destination: AddReminderView(remindersViewModel: viewModel), isActive: $isNavigationToAddReminderViewActive) {

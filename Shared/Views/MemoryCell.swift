@@ -88,6 +88,7 @@ struct MemoryCell: View {
 //        .opacity(0.8)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
+        .accessibility(hint: Text("Open memory \(memory.title)"))
 //        .contextMenu {
 //            Button {
 //                seeCommentsCallback(memory)

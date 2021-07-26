@@ -92,6 +92,7 @@ struct UsersView: View {
             .navigationBarItems(trailing: NavigationLink(destination: ContactsSuggestionsView(viewModel: contactsSuggestionViewModel, searchViewModel: viewModel), isActive: $shouldNavigateToFindContactsPage) {
                 Button(action: { navigateToFindContactsPage() }) {
                     Image(systemName: "wand.and.stars")
+                        .accessibility(hint: Text("See contacts suggestions"))
                 }
             })
             
