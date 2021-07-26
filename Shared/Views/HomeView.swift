@@ -9,6 +9,7 @@ import SwiftUI
 import BottomSheet
 import ActivityIndicatorView
 import Intents
+import IntentsUI
 
 struct HomeView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -26,6 +27,8 @@ struct HomeView: View {
     @State var isSearchViewPresented = false
     @State var isDeepLinkToHottestMemoryActive = false
     @State var currentTopSliderImageIndex = 0
+    @State var shouldShowSiriAccessDeniedAlert = false
+    @State var isSiriViewPresented = false
     
     fileprivate func reloadData() async {
         do {
@@ -262,4 +265,25 @@ struct MemoryListInHomeView: View {
             .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
         }
     }
+}
+
+struct AddToSiriViewController: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> INUIAddVoiceShortcutViewController {
+        let userActivity = NSUserActivity(activityType: "com.spneshaei.MemoReminder.openHottestMemoryActivityType")
+        userActivity.isEligibleForSearch = true
+        userActivity.isEligibleForHandoff = true
+        userActivity.isEligibleForPrediction = true
+        userActivity.isEligibleForPublicIndexing = true
+        userActivity.webpageURL = URL(string: "memoreminder://open-most-top")!
+        userActivity.suggestedInvocationPhrase = "View top memory"
+        let shortcut = INShortcut(userActivity: userActivity)
+        let vc = INUIAddVoiceShortcutViewController(shortcut: shortcut)
+        vc.modalPresentationStyle = .formSheet
+        return vc
+    }
+    
+    func updateUIViewController(_ uiViewController: INUIAddVoiceShortcutViewController, context: Context) {
+    }
+    
+    typealias UIViewControllerType = INUIAddVoiceShortcutViewController
 }

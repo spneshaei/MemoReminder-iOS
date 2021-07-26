@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSSiriUsageDescription</key>
+	<string>To add Siri shortcuts, MemoReminder needs to access Siri.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>To record and upload your voice, MemoReminder has to access your microphone.</string>
 	<key>NSCameraUsageDescription</key>
@@ -88,6 +90,7 @@
 	<string>To upload a photo, MemoReminder has to access your library.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>com.spneshaei.MemoReminder.openHottestMemoryActivityType</string>
 		<string>ViewHottestMemoriesIntent</string>
 	</array>
 </dict>
