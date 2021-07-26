@@ -30,6 +30,7 @@ struct ProfileView: View {
     @State var showActivityIndicatorView = false
     @State var showLogoutConfirmationAlert = false
     @State var isNavigationToNotificationSchedulingViewActive = false
+    @State var showClearCacheConfirmationAlert = false
     
     init(viewModel: ProfileViewModel) {
         self.viewModel = viewModel
@@ -152,7 +153,6 @@ struct ProfileView: View {
                         .buttonStyle(PlainButtonStyle())
                         .listRowSeparator(.hidden)
                     }
-                    //                    .listRowBackground(isDarkMode ? Color.black : Color.white)
                     .listRowSeparator(.hidden)
                 }
                 .alert("Accept was successful", isPresented: $viewModel.shouldShowAcceptSuccessAlert) {
@@ -166,7 +166,7 @@ struct ProfileView: View {
             .task { await reloadData() }
             .refreshable { await reloadData() }
             .navigationBarTitle("My Profile")
-            .navigationBarItems(leading: Group {
+            .navigationBarItems(leading: HStack(spacing: 15) {
                 if editMode {
                     Button(action: {
                         withAnimation { editMode = false }
@@ -174,9 +174,7 @@ struct ProfileView: View {
                     }) {
                         Text("Cancel").bold()
                     }
-                }
-            }, trailing: HStack(spacing: 15) {
-                if !editMode {
+                } else {
                     Button(action: {
                         guard !showActivityIndicatorView else { return }
                         showLogoutConfirmationAlert = true
@@ -184,13 +182,32 @@ struct ProfileView: View {
                         Image(systemName: "rectangle.portrait.and.arrow.right")
                             .foregroundColor(.red)
                     }
-                    .confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert, titleVisibility: .visible) {
-                        Button("Yes", role: .destructive) {
-                            async { await logout() }
+                        .confirmationDialog("Are you sure you want to log out?", isPresented: $showLogoutConfirmationAlert, titleVisibility: .visible) {
+                            Button("Yes", role: .destructive) {
+                                async { await logout() }
+                            }
+                            Button("No", role: .cancel) { }
                         }
-                        Button("No", role: .cancel) { }
-                    }
+                        
+                        .accessibility(hint: Text("Log out"))
                     
+                    Button(action: {
+                        guard !showActivityIndicatorView else { return }
+                        showClearCacheConfirmationAlert = true
+                    }) {
+                        Image(systemName: "trash.circle")
+                            .foregroundColor(.red)
+                    }
+                        .confirmationDialog("Are you sure you want to clear cache data?", isPresented: $showClearCacheConfirmationAlert, titleVisibility: .visible) {
+                            Button("Yes", role: .destructive) {
+                                globalData.clearUserDefaults()
+                            }
+                            Button("No", role: .cancel) { }
+                        }
+                        .accessibility(hint: Text("Clear cache data"))
+                }
+            }, trailing: HStack(spacing: 15) {
+                if !editMode {
                     NavigationLink(destination: RemindersView(), isActive: $isNavigationToNotificationSchedulingViewActive) {
                         Button(action: {
                             isNavigationToNotificationSchedulingViewActive = true

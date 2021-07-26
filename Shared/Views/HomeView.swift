@@ -90,22 +90,12 @@ struct HomeView: View {
     
     var body: some View {
         ZStack {
-            
             List {
-//                    AsyncSlideshow(imageURLs: slideshowURLs)
-//                        .frame(height: 120)
-//                        .listRowSeparator(.hidden)
-                
-//                    AsyncSlideshow(imageURLs: slideshowURLs)
-//                        .frame(height: 120)
-//                        .listRowSeparator(.hidden)
-                
                 if let topMemoryWithImage = topMemoriesWithImages(index: currentTopSliderImageIndex) {
                     NavigationLink(destination: MemoryView(memory: topMemoryWithImage, imageLink: topMemoryWithImage.imageLink, numberOfLikes: topMemoryWithImage.numberOfLikes, hasCurrentUserLiked: topMemoryWithImage.hasCurrentUserLiked)) {
                         AsyncImagesPagingView(imageURLs: slideshowURLObjects, index: $currentTopSliderImageIndex)
                     }
                 }
-                
                 if !viewModel.nearReminders.isEmpty {
                     Group {
                         Text("Don't forget!")
@@ -120,7 +110,6 @@ struct HomeView: View {
                         .listRowSeparator(.hidden)
                     }
                 }
-                
                 if !memoriesViewModel.aYearAgoMemories.isEmpty {
                     Group {
                         Text("A year ago, these days!")
@@ -131,7 +120,6 @@ struct HomeView: View {
                         MemoryListInHomeView(memories: memoriesViewModel.aYearAgoMemories)
                     }
                 }
-                
                 if !viewModel.topMemories.isEmpty {
                     Group {
                         Text("Explore top memories")
@@ -142,7 +130,6 @@ struct HomeView: View {
                         MemoryListInHomeView(memories: viewModel.topMemories)
                     }
                 }
-                
                 if !viewModel.mentionedMemories.isEmpty {
                     Text("You where mentioned in")
                         .font(.title2)
@@ -151,15 +138,8 @@ struct HomeView: View {
                     
                     MemoryListInHomeView(memories: viewModel.mentionedMemories)
                 }
-                
             }
             .listStyle(PlainListStyle())
-//                .sheet(isPresented: $shouldPresentMemorySheet) {
-//                    MemoryView(memory: memoryToShowInMemorySheet, imageLink: memoryToShowInMemorySheet.imageLink, numberOfLikes: memoryToShowInMemorySheet.numberOfLikes, hasCurrentUserLiked: memoryToShowInMemorySheet.hasCurrentUserLiked)
-//                }
-            //                .alert("Error while loading top memories. Please pull to refresh to try again", isPresented: $showingLoadingMemoriesErrorAlert) {
-            //                    Button("OK", role: .cancel) { }
-            //                }
             .task { await reloadData() }
             .refreshable { await reloadData() }
             
@@ -169,10 +149,6 @@ struct HomeView: View {
                 }.buttonStyle(PlainButtonStyle())
             }
         }
-//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-//                handleQuickAction()
-//            }
-//            .onAppear(perform: handleQuickAction)
         .onAppear(perform: donateViewHottestMemoryShortcut)
         .navigationBarTitle("Home")
         .navigationBarItems(trailing: HStack(spacing: 20) {
@@ -191,19 +167,11 @@ struct HomeView: View {
             //                    Image(systemName: "plus.square")
             //                }
         })
-//        .bottomSheet(isPresented: $isBottomSheetPresented, height: 640) {
-//            AddMemoryView(memoryTitle: $memoryTitle, memoryContents: $memoryContents, showActivityIndicator: $showActivityIndicatorView, homeViewModel: viewModel, tagsViewModel: tagsViewModel, viewModel: addMemoryViewModel)
-//        }
         .onOpenURL { url in
             if url.absoluteString.hasSuffix("open-most-top") {
                 isDeepLinkToHottestMemoryActive = true
             }
         }
-//        .navigationViewStyle(.stack)
-//        .if(horizontalSizeClass == .regular) { view in
-//            view.navigationViewStyle(.columns)
-//        }
-        
     }
 }
 
