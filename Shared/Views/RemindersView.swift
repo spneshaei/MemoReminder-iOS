@@ -9,10 +9,12 @@ import SwiftUI
 import UserNotifications
 
 struct RemindersView: View {
+    @Environment(\.presentationMode) var mode
     @StateObject var viewModel = RemindersViewModel()
     
     @State var isNavigationToAddReminderViewActive = false
     @State var isDeleteSheetPresented = false
+    @State var shouldShowNotificationsAccessDeniedAlert = false
     
     func deleteReminders(at offsets: IndexSet) {
         viewModel.reminders.remove(atOffsets: offsets)
@@ -62,9 +64,14 @@ struct RemindersView: View {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
                     print("All set!")
-                } else if let error = error {
-                    print(error.localizedDescription)
+                } else if let _ = error {
+                    main { shouldShowNotificationsAccessDeniedAlert = true }
                 }
+            }
+        }
+        .alert("You've previously denied the app's ability to send you notifications. Please grant the app access to send you notifications by opening the Settings app.", isPresented: $shouldShowNotificationsAccessDeniedAlert) {
+            Button("OK", role: .cancel) {
+                self.mode.wrappedValue.dismiss()
             }
         }
     }

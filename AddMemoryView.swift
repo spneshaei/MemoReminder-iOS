@@ -26,12 +26,20 @@ struct AddMemoryView: View {
     @State var showOnlyForFollowings = false
     @State var saveTheCurrentLocationInMemory = false
     @State var showingNoTitleEnteredErrorAlert = false
+    @State var shouldShowLocationAccessDeniedAlert = false
     
     fileprivate func addMemoryToServer(location: CLLocation? = nil) {
         guard !memoryTitle.isEmpty else {
             showActivityIndicatorView = false
             showingNoTitleEnteredErrorAlert = true
             return
+        }
+        if location != nil {
+            guard SwiftLocation.authorizationStatus != .denied else {
+                showActivityIndicatorView = false
+                shouldShowLocationAccessDeniedAlert = true
+                return
+            }
         }
         async {
             do {
@@ -75,6 +83,11 @@ struct AddMemoryView: View {
                 Group {
                     Toggle("Show only for followings", isOn: $showOnlyForFollowings)
                     Toggle("Save the current location in memory", isOn: $saveTheCurrentLocationInMemory)
+                        .alert("You've previously denied the app's access to your location. Please grant the app access to your location by opening the Settings app.", isPresented: $shouldShowLocationAccessDeniedAlert) {
+                            Button("OK", role: .cancel) {
+                                self.mode.wrappedValue.dismiss()
+                            }
+                        }
                     HStack {
                         Text("")
                     }

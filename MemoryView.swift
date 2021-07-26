@@ -36,6 +36,7 @@ struct MemoryView: View {
     @State var showDeleteMemoryConfirmationAlert = false
     @State var showDeleteMemoryErrorAlert = false
     @State var isLoadingLocation = false
+    @State var shouldShowLocationAccessDeniedAlert = false
     
     enum UploadImageState {
         case notStarted, waitingToTapUpload, uploading
@@ -143,6 +144,10 @@ struct MemoryView: View {
     }
     
     func setMemoryLocationDataToCurrentLocation() {
+        guard SwiftLocation.authorizationStatus != .denied else {
+            shouldShowLocationAccessDeniedAlert = true
+            return
+        }
         isLoadingLocation = true
         SwiftLocation.gpsLocation().then {
             memory.latitude = $0.location?.coordinate.latitude ?? 0.0
@@ -413,6 +418,11 @@ struct MemoryView: View {
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
+        }
+        .alert("You've previously denied the app's access to your location. Please grant the app access to your location by opening the Settings app.", isPresented: $shouldShowLocationAccessDeniedAlert) {
+            Button("OK", role: .cancel) {
+                self.mode.wrappedValue.dismiss()
+            }
         }
         .onAppear(perform: fetchLocationName)
     }
