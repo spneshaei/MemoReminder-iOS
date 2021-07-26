@@ -24,7 +24,7 @@ struct LoginView: View {
     var alertTextMessage: String {
         switch loginStatus {
         case .failed:
-            return "Login failed. Please try again."
+            return "Login failed. Please double-check your username and password and then try again."
         case .invalidData:
             return "Invalid data provided. Please try again."
         default:
