@@ -13,7 +13,6 @@ struct UsersFilterView: View {
     var body: some View {
         Form {
             Toggle("Show only the users I follow", isOn: $searchViewModel.showOnlyTheUsersIFollow)
-            Toggle("Show only the users in my contacts", isOn: $searchViewModel.showOnlyTheUsersInMyContacts)
         }
         .navigationBarTitle("Filter Users")
     }

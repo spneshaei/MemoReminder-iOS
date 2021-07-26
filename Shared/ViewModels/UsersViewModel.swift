@@ -67,10 +67,9 @@ class UsersViewModel: ObservableObject {
     @Published var followingErrorAlert = false
     
     @Published var showOnlyTheUsersIFollow = false
-    @Published var showOnlyTheUsersInMyContacts = false
     
     var hasFilter: Bool {
-        return showOnlyTheUsersIFollow || showOnlyTheUsersInMyContacts
+        return showOnlyTheUsersIFollow
     }
     
     var filteredUsers: [User] {
@@ -81,9 +80,6 @@ class UsersViewModel: ObservableObject {
                 || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
             if showOnlyTheUsersIFollow {
                 result = result.filter { currentUser.followingIDs.contains($0.id) }
-            }
-            if showOnlyTheUsersInMyContacts {
-                // TODO: Filter!
             }
             return result
         }

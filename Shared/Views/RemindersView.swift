@@ -34,7 +34,6 @@ struct RemindersView: View {
         .navigationBarTitle("Reminders")
         .confirmationDialog("Are you sure you want to delete all previously fired reminders?", isPresented: $isDeleteSheetPresented, titleVisibility: .visible) {
             Button("Yes", role: .destructive) {
-//                UNUserNotificationCenter.current().removeAllDeliveredNotifications()
                 viewModel.reminders = []
             }
             Button("No", role: .cancel) { }

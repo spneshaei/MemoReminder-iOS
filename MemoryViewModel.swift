@@ -51,7 +51,6 @@ class MemoryViewModel: ObservableObject {
         //        return JSON(parseJSON: resultString)["file"].stringValue
     }
     
-    // TODO: Make the next function better (no Bool as input, duplicate code,...)
     // if isVoice = false, it's PDF
     func upload(memory: Memory, fileURL: URL, globalData: GlobalData, isVoice: Bool = false, completion: @escaping (String?) -> Void) {
         guard !isSample else {
