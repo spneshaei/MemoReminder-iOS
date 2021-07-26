@@ -18,6 +18,7 @@ struct AddTagView: View {
     @State var showingAddTagErrorAlert = false
     
     func addTagTapped() {
+        guard !showActivityIndicatorView else { return }
         async {
             do {
                 main { showActivityIndicatorView = true }

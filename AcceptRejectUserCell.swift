@@ -60,8 +60,8 @@ struct AcceptRejectUserCell: View {
             
         }
         .frame(maxWidth: .infinity, alignment: .center)
-        .background(isDarkMode ? Color.orange : Color(red: 247/255, green: 207/255, blue: 71/255))
-        .opacity(0.8)
+        .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
+        .listRowBackground(isDarkMode ? Color.black : Color.white)
         .modifier(MemoryCardModifier())
         .padding(.all, 10)
     }

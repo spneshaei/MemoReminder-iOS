@@ -10,6 +10,7 @@ import ActivityIndicatorView
 import MapKit
 import URLImage
 import ImagePickerView
+import SwiftLocation
 
 struct MemoryView: View {
     @Environment(\.presentationMode) var mode
@@ -25,6 +26,7 @@ struct MemoryView: View {
     @State var showingLikeErrorAlert = false
     @State var showingUploadErrorAlert = false
     @State var shouldEditMemoryErrorAlert = false
+    @State var showChooseMapConfirmationDialog = false
     
     @State var showImagePicker = false
     @State var showImageSourcePicker = false
@@ -33,6 +35,8 @@ struct MemoryView: View {
     @State var editMode = false
     @State var showDeleteMemoryConfirmationAlert = false
     @State var showDeleteMemoryErrorAlert = false
+    @State var isLoadingLocation = false
+    @State var shouldShowLocationAccessDeniedAlert = false
     
     enum UploadImageState {
         case notStarted, waitingToTapUpload, uploading
@@ -40,26 +44,34 @@ struct MemoryView: View {
     
     @State var uploadImageState: UploadImageState = .notStarted
     
-    func uploadPhoto() async {
-        do {
+    @State var cityCountryName = "Loading location details..."
+    
+    func uploadPhoto() {
+        let concurrentQueue = DispatchQueue(label: "MemoReminderUploadPhoto", attributes: .concurrent)
+        concurrentQueue.async {
             main {
                 showActivityIndicatorView = true
                 uploadImageState = .uploading
             }
-            let imageURL = try await viewModel.upload(memory: memory, image: image ?? UIImage(), globalData: globalData)
-            main {
-                memory.imageLink = imageURL
-                imageLink = imageURL
-                image = nil
-                uploadImageState = .notStarted
-                showActivityIndicatorView = false
-            }
-        } catch {
-            main {
-                image = nil
-                uploadImageState = .notStarted
-                showActivityIndicatorView = false
-                showingUploadErrorAlert = true
+            viewModel.upload(memory: memory, image: image ?? UIImage(), globalData: globalData) { r in
+                if let resultString = r {
+                    let result = JSON(parseJSON: resultString)
+                    let imageURL = result["file"].stringValue
+                    main {
+                        memory.imageLink = imageURL
+                        imageLink = imageURL
+                        image = nil
+                        uploadImageState = .notStarted
+                        showActivityIndicatorView = false
+                    }
+                } else {
+                    main {
+                        image = nil
+                        uploadImageState = .notStarted
+                        showActivityIndicatorView = false
+                        showingUploadErrorAlert = true
+                    }
+                }
             }
         }
     }
@@ -86,7 +98,7 @@ struct MemoryView: View {
     fileprivate func doneTapped() async {
         do {
             main { showActivityIndicatorView = true }
-            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, globalData: globalData)
+            try await viewModel.editMemoryDetails(id: memory.id, contents: memory.contents, latitude: memory.latitude, longitude: memory.longitude, privacyStatus: memory.privacyStatus, globalData: globalData)
             main {
                 showActivityIndicatorView = false
                 withAnimation { editMode = false }
@@ -116,16 +128,74 @@ struct MemoryView: View {
         
     }
     
+    // https://medium.com/swift-productions/launch-google-to-show-route-swift-580aca80cf88
+    func showAppleMaps() {
+        let coordinate = CLLocationCoordinate2DMake(memory.latitude, memory.longitude)
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary: nil))
+        mapItem.name = memory.title
+        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving])
+    }
+    
+    // https://medium.com/swift-productions/launch-google-to-show-route-swift-580aca80cf88
+    func showGoogleMaps() {
+        if let url = URL(string: "comgooglemaps://?daddr=\(memory.latitude),\(memory.longitude))&directionsmode=driving&zoom=14&views=traffic") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func setMemoryLocationDataToCurrentLocation() {
+        guard SwiftLocation.authorizationStatus != .denied else {
+            shouldShowLocationAccessDeniedAlert = true
+            return
+        }
+        isLoadingLocation = true
+        SwiftLocation.gpsLocation().then {
+            memory.latitude = $0.location?.coordinate.latitude ?? 0.0
+            memory.longitude = $0.location?.coordinate.longitude ?? 0.0
+            isLoadingLocation = false
+        }
+    }
+    
+    fileprivate func fetchLocationName() {
+        CLLocation(latitude: memory.latitude, longitude: memory.longitude).fetchCityAndCountry { city, country, error in
+            guard let city = city, let country = country, error == nil else { return }
+            main { cityCountryName = city + ", " + country }
+        }
+    }
+    
     var body: some View {
-        ZStack {
+        let latitudeBinding = Binding<String>(get: { String(memory.latitude) }, set: {
+            memory.latitude = Double($0) ?? 0.0
+            fetchLocationName()
+        })
+        let longitudeBinding = Binding<String>(get: { String(memory.longitude) }, set: {
+            memory.longitude = Double($0) ?? 0.0
+            fetchLocationName()
+        })
+        let followingsOnlyBinding = Binding<Bool>(get: { memory.privacyStatus == .privateStatus }, set: { memory.privacyStatus = $0 ? .privateStatus : .publicStatus })
+        
+        return ZStack {
             List {
                 if !memory.imageLink.isEmpty && uploadImageState == .notStarted {
-                    URLImage(URL(string: memory.imageLink)!) { urlImage in
-                        urlImage.resizable()
+                    Group {
+                        HStack {
+                            Spacer()
+                                .alert("Error in editing the memory. Please try again", isPresented: $shouldEditMemoryErrorAlert) {
+                                    Button("OK", role: .cancel) { }
+                                }
+                            AsyncImage(url: URL(string: memory.imageLink)) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                Color.purple.opacity(0)
+                            }
+                            .frame(maxHeight: 200)
+                            Spacer()
+                        }
+                        .frame(maxHeight: 200)
+                        Text("").listRowSeparator(.hidden)
                     }
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxHeight: 200)
-                    .listRowSeparator(.hidden)
                 }
                 if (uploadImageState == .waitingToTapUpload || uploadImageState == .uploading) {
                     if let image = image {
@@ -133,6 +203,7 @@ struct MemoryView: View {
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .listRowSeparator(.hidden)
+                        Text("").listRowSeparator(.hidden)
                     }
                 }
                 VStack(alignment: .leading, spacing: 5) {
@@ -148,37 +219,103 @@ struct MemoryView: View {
                     Text("Created on \(date)")
                         .listRowSeparator(.hidden)
                 }
-                NavigationLink(destination: Text("Hi")) {
-                    Text("**\(2)** people are tagged") // TODO: Here!
+                Group {
+                    NavigationLink(destination: UsersView(viewModel: UsersViewModel(predeterminedUsers: memory.usersMentioned))) {
+                        Text(memory.usersMentioned.count == 0 ? "No user is mentioned" : "\(memory.usersMentioned.count) \(memory.usersMentioned.count == 1 ? "user is" : "users are") mentioned")
+                    }
+                    Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
+                        .listRowSeparator(.hidden)
+                        .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
+                            Button("OK", role: .cancel) { }
+                        }
+                    NavigationLink(destination: CommentsView(memory: memory)) {
+                        Text("Show comments")
+                    }
                 }
-                Text("**\(numberOfLikes)** likes and **\(memory.comments.count)** comments")
+                
+                NavigationLink(destination: AttachedFilesView(memory: memory, memoryViewModel: viewModel)) {
+                    HStack {
+                        Image(systemName: "paperclip")
+                        Text("Attached Files")
+                        Spacer()
+                    }
+                }
+                
+                if editMode {
+                    HStack {
+                        Text("Latitude:")
+                            .listRowSeparator(.hidden)
+                        TextField("Enter latitude", text: latitudeBinding)
+                            .listRowSeparator(.hidden)
+                    }
                     .listRowSeparator(.hidden)
-                NavigationLink(destination: CommentsView(memory: memory)) {
-                    Text("Show comments")
+                    HStack {
+                        Text("Longitude:")
+                            .listRowSeparator(.hidden)
+                        TextField("Enter latitude", text: longitudeBinding)
+                            .listRowSeparator(.hidden)
+                    }
+                    .listRowSeparator(.hidden)
+                    Button(action: {
+                        if !isLoadingLocation {
+                            setMemoryLocationDataToCurrentLocation()
+                        }
+                    }) {
+                        HStack {
+                            if isLoadingLocation {
+                                ActivityIndicatorView(isVisible: $isLoadingLocation, type: .default)
+                                    .frame(width: 20, height: 20)
+                            } else {
+                                Image(systemName: "location.fill.viewfinder")
+                                    .frame(width: 20, height: 20)
+                            }
+                            Text("Set to the current location")
+                            Spacer()
+                        }
+                    }
+                } else {
+                    if memory.latitude != 0 || memory.longitude != 0 {
+                        Group {
+                            LocationRow(memory: memory)
+                                .listRowSeparator(.hidden)
+                            HStack(spacing: 5) {
+                                Image(systemName: "location.fill")
+                                Text(cityCountryName)
+                            }
+                            Button(action:
+                                    { showChooseMapConfirmationDialog = true }) {
+                                Text("Show on the map")
+                            }
+                                    .confirmationDialog("Select a map service", isPresented: $showChooseMapConfirmationDialog, titleVisibility: .visible) {
+                                        Button("Apple Maps") { showAppleMaps() }
+                                        Button("Google Maps") { showGoogleMaps() }
+                                        Button("Cancel", role: .cancel) { }
+                                    }
+                        }
+                    }
                 }
-                ScrollView {
-                    ChipsContent(selectedTags: memory.tags) { _ in }
+                if editMode {
+                    Toggle("Show the memory only for followings", isOn: followingsOnlyBinding)
+                        .listRowSeparator(.hidden)
+                    Text("When on, the memory will not be shown on the home tab's feed for other people.").font(.footnote)
                 }
+                ChipsContent(selectedTags: memory.tags) { _ in }
                 .frame(minHeight: 150)
-//                LocationRow(memory: memory)
-//                NavigationLink(destination: MemoryMapView(latitude: memory.latitude, longitude: memory.longitude)) {
-//                    Text("Show on the map")
-//                }
+                .alert("Error in uploading the image. Please try again", isPresented: $showingUploadErrorAlert) {
+                    Button("OK", role: .cancel) { }
+                }
             }
             .alert("Error in deleting the memory. Please try again", isPresented: $showDeleteMemoryErrorAlert) {
                 Button("OK", role: .cancel) { }
             }
-            .alert("Error in editing the memory. Please try again", isPresented: $shouldEditMemoryErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .alert("Error in liking the memory. Please try again", isPresented: $showingLikeErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
-            .alert("Error in uploading the image. Please try again", isPresented: $showingUploadErrorAlert) {
-                Button("OK", role: .cancel) { }
-            }
             .navigationBarTitle(Text(memory.title))
-            .navigationBarItems(trailing: HStack(spacing: 15) {
+            .navigationBarItems(leading: HStack {
+                if editMode {
+                    Button(action: {
+                        withAnimation { editMode = false }
+                    }) { Text("Cancel").bold() }
+                }
+            }, trailing: HStack(spacing: 15) {
                 if memory.creatorUserID == globalData.userID && !showActivityIndicatorView {
                     Button(action: {
                         showDeleteMemoryConfirmationAlert = true
@@ -193,18 +330,10 @@ struct MemoryView: View {
                         Button("No", role: .cancel) { }
                     }
                 }
-                
-//                Button(action: {
-//                    withAnimation {
-//                        // edit memory (and show only when needed!)
-//                    }
-//                }) {
-//                    Image(systemName: "square.and.pencil")
-//                }
                 if imageLink.isEmpty && memory.creatorUserID == globalData.userID && uploadImageState != .uploading {
                     Button(action: {
                         if uploadImageState == .waitingToTapUpload {
-                            async { await uploadPhoto() }
+                            uploadPhoto()
                         } else {
                             showImageSourcePicker = true
                             uploadImageState = .waitingToTapUpload
@@ -262,6 +391,12 @@ struct MemoryView: View {
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
         }
+        .alert("You've previously denied the app's access to your location. Please grant the app access to your location by opening the Settings app.", isPresented: $shouldShowLocationAccessDeniedAlert) {
+            Button("OK", role: .cancel) {
+                self.mode.wrappedValue.dismiss()
+            }
+        }
+        .onAppear(perform: fetchLocationName)
     }
 }
 
@@ -295,5 +430,11 @@ struct MemoryView_Previews: PreviewProvider {
             MemoryView(memory: Memory.sample, imageLink: Memory.sample.imageLink, numberOfLikes: Memory.sample.numberOfLikes, hasCurrentUserLiked: Memory.sample.hasCurrentUserLiked)
                 .environmentObject(GlobalData.sample)
         }
+    }
+}
+
+extension CLLocation {
+    func fetchCityAndCountry(completion: @escaping (_ city: String?, _ country:  String?, _ error: Error?) -> ()) {
+        CLGeocoder().reverseGeocodeLocation(self) { completion($0?.first?.locality, $0?.first?.country, $1) }
     }
 }

@@ -7,12 +7,23 @@
 
 import SwiftUI
 
-class SearchViewModel: ObservableObject {
-    let defaults = UserDefaults.standard
+class UsersViewModel: ObservableObject {
+    let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
     var isSample = false
+    
+    @Published var shouldShowPredeterminedUsers = false
+    @Published var predeterminedUsers: [User] = []
+    
+    init(predeterminedUsers: [User]) {
+        self.predeterminedUsers = predeterminedUsers
+        self.shouldShowPredeterminedUsers = true
+        self.users = []
+        self.friends = []
+        self.currentUser = User(id: 0)
+    }
     
     @Published var users: [User] {
         didSet {
@@ -23,6 +34,12 @@ class SearchViewModel: ObservableObject {
     @Published var friends: [User] {
         didSet {
             defaults.set(try? encoder.encode(friends), forKey: "SearchViewModel_friends")
+        }
+    }
+    
+    @Published var currentUser: User {
+        didSet {
+            defaults.set(try? encoder.encode(currentUser), forKey: "ProfileViewModel_user")
         }
     }
     
@@ -37,22 +54,45 @@ class SearchViewModel: ObservableObject {
         } else {
             self.friends = []
         }
+        if let currentUser = try? decoder.decode(User.self, from: defaults.data(forKey: "ProfileViewModel_user") ?? Data()) {
+            self.currentUser = currentUser
+        } else {
+            self.currentUser = User(id: 0)
+        }
     }
     
     @Published var searchPredicate = ""
-    @Published var shouldShowFollowedAlert = false
     @Published var showingLoadingUsersErrorAlert = false
-    @Published var followingErrorAlert = false
-    @Published var showingPreviouslyMentionedUserErrorAlert = false
+    @Published var showOnlyTheUsersIFollow = false
+    
+    var hasFilter: Bool {
+        return showOnlyTheUsersIFollow
+    }
     
     var filteredUsers: [User] {
-        searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
-            || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
+        if shouldShowPredeterminedUsers {
+            return predeterminedUsers
+        } else {
+            var result = searchPredicate.isEmpty ? users : users.filter { $0.username.lowercased().contains(searchPredicate.lowercased())
+                || $0.firstName.lowercased().contains(searchPredicate.lowercased()) || $0.lastName.lowercased().contains(searchPredicate.lowercased()) }
+            if showOnlyTheUsersIFollow {
+                result = result.filter { currentUser.followingIDs.contains($0.id) }
+            }
+            return result
+        }
+    }
+    
+    func loadUser(globalData: GlobalData) async throws {
+        guard !isSample else { return }
+        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get, globalData: globalData)
+        main {
+            self.currentUser = User.loadFromJSON(jsonString: resultString)
+        }
     }
     
     func loadUsers(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "memo-user/", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "memo-user/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.friends = []
@@ -79,11 +119,11 @@ class SearchViewModel: ObservableObject {
             "to_user": user.id
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: bodyString, method: .post)
+        try await Rester.rest(endPoint: "friend-request/", body: bodyString, method: .post, globalData: globalData)
     }
     
-    static var sample: SearchViewModel {
-        let viewModel = SearchViewModel()
+    static var sample: UsersViewModel {
+        let viewModel = UsersViewModel()
         viewModel.isSample = true
         viewModel.users = [User.sample, User.sample]
         viewModel.friends = []

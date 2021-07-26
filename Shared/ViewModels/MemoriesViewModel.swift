@@ -8,7 +8,7 @@
 import SwiftUI
 
 class MemoriesViewModel: ObservableObject {
-    let defaults = UserDefaults.standard
+    let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
@@ -38,13 +38,7 @@ class MemoriesViewModel: ObservableObject {
         }
     }
     
-    func isSameDay(date1: Date, date2: Date) -> Bool { // https://www.zerotoappstore.com/how-to-check-if-two-dates-are-from-the-same-day-swift.html
-//        let diff = Calendar.current.dateComponents([.day], from: date1, to: date2)
-//        if diff.day == 0 {
-//            return true
-//        } else {
-//            return false
-//        }
+    func isSameDay(date1: Date, date2: Date) -> Bool {
         return Calendar.current.isDate(date1, inSameDayAs: date2)
     }
     
@@ -77,7 +71,7 @@ class MemoriesViewModel: ObservableObject {
     
     func loadMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "post/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.memories = results.arrayValue.map { result -> Memory in

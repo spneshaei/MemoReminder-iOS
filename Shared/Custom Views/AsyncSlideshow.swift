@@ -20,6 +20,8 @@ struct AsyncSlideshow: View {
                     if URL(string: imageURL) != nil {
                         AsyncImage(url: URL(string: imageURL)!) { image in
                             image
+                                .resizable()
+                                .scaledToFit()
                         } placeholder: {
                             ActivityIndicatorView(isVisible: .constant(true), type: .default)
                                 .frame(width: 30.0, height: 30.0)

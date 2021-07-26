@@ -8,7 +8,7 @@
 import SwiftUI
 
 class ProfileViewModel: ObservableObject {
-    let defaults = UserDefaults.standard
+    let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
     
@@ -57,7 +57,7 @@ class ProfileViewModel: ObservableObject {
     
     func loadMyMemories(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "post/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "post/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.myMemories = results.arrayValue.map { result -> Memory in
@@ -68,26 +68,15 @@ class ProfileViewModel: ObservableObject {
     
     func loadUser(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "memo-user/\(globalData.userID)/", body: "", method: .get, globalData: globalData)
         main {
-            let result = JSON(parseJSON: resultString)
-            let user = User(id: result["id"].intValue)
-            user.username = result["username"].stringValue
-            user.firstName = result["first_name"].stringValue
-            user.lastName = result["last_name"].stringValue
-            user.email = result["email"].stringValue
-            user.phoneNumber = result["phone_number"].stringValue
-            user.birthday = result["birthday_date"].stringValue
-            user.numberOfLikes = result["likes_received_count"].intValue
-            user.numberOfMemories = result["posts_count"].intValue
-            user.numberOfComments = result["comments_received_count"].intValue
-            self.user = user
+            self.user = User.loadFromJSON(jsonString: resultString)
         }
     }
     
     func loadFollowRequests(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        let resultString = try await Rester.rest(endPoint: "friend-request/?token=\(globalData.token)", body: "", method: .get)
+        let resultString = try await Rester.rest(endPoint: "friend-request/", body: "", method: .get, globalData: globalData)
         main {
             let results = JSON(parseJSON: resultString)["results"]
             self.followRequests = results.arrayValue.map { result -> User in
@@ -109,10 +98,10 @@ class ProfileViewModel: ObservableObject {
             "status": "accepted"
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/?token=\(globalData.token)", body: bodyString, method: .patch)
+        try await Rester.rest(endPoint: "friend-request/\(user.followRequestID)/", body: bodyString, method: .patch, globalData: globalData)
     }
     
-    func editUserDetails(id: Int, firstName: String, username: String, email: String, birthday: Date, newPassword: String, globalData: GlobalData) async throws {
+    func editUserDetails(id: Int, firstName: String, email: String, birthday: Date, newPassword: String, globalData: GlobalData) async throws {
         guard !isSample else { return }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "YYYY-MM-dd"
@@ -120,26 +109,24 @@ class ProfileViewModel: ObservableObject {
         if newPassword.isEmpty {
             body = [
                 "first_name": firstName,
-                "username": username,
                 "email": email,
                 "birthday": dateFormatter.string(from: birthday)
             ]
         } else {
             body = [
                 "first_name": firstName,
-                "username": username,
                 "email": email,
                 "birthday": dateFormatter.string(from: birthday),
                 "password": newPassword
             ]
         }
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "memo-user/\(id)/?token=\(globalData.token)", body: bodyString, method: .patch)
+        try await Rester.rest(endPoint: "memo-user/\(id)/", body: bodyString, method: .patch, globalData: globalData)
     }
     
     func logout(globalData: GlobalData) async throws {
         guard !isSample else { return }
-        try await Rester.rest(endPoint: "logout/?token=\(globalData.token)", body: "", method: .post)
+        try await Rester.rest(endPoint: "logout/", body: "", method: .post, globalData: globalData)
     }
     
     static var sample: ProfileViewModel {

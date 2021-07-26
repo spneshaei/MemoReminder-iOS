@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainTabView: View {
     @EnvironmentObject var quickActions: QuickActionService
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @State private var selectedIndex = 0
     
     let items: [BottomBarItem] = [
@@ -42,49 +43,33 @@ struct MainTabView: View {
     }
     
     var body: some View {
-        VStack {
-            if selectedIndex == 0 || quickActions.action == .home {
+        NavigationView {
+            if horizontalSizeClass == .compact {
+                VStack {
+                    if selectedIndex == 0 || quickActions.action == .home {
+                        HomeView(viewModel: homeViewModel, memoriesViewModel: memoriesViewModel)
+                    } else if selectedIndex == 1 || quickActions.action == .memories {
+                        MemoriesView(viewModel: memoriesViewModel)
+                    } else if selectedIndex == 2 || quickActions.action == .profile {
+                        ProfileView(viewModel: profileViewModel)
+                    }
+                    BottomBar(selectedIndex: $selectedIndex, items: items)
+                }
+                .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                    handleQuickAction()
+                }
+                .onAppear(perform: handleQuickAction)
+                .onOpenURL { url in
+                    if url.absoluteString.hasSuffix("open-most-top") {
+                        selectedIndex = 0
+                    }
+                }
+            } else {
+                SidebarList(homeViewModel: homeViewModel, memoriesViewModel: memoriesViewModel, profileViewModel: profileViewModel)
                 HomeView(viewModel: homeViewModel, memoriesViewModel: memoriesViewModel)
-            } else if selectedIndex == 1 || quickActions.action == .memories {
-                MemoriesView(viewModel: memoriesViewModel)
-            } else if selectedIndex == 2 || quickActions.action == .profile {
-                ProfileView(viewModel: profileViewModel)
+                Text("Select a memory to show its details")
             }
-            BottomBar(selectedIndex: $selectedIndex, items: items)
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-            handleQuickAction()
-        }
-        .onAppear(perform: handleQuickAction)
-//        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-//                    .onEnded({ value in
-//            if value.translation.width < 0 && selectedIndex != 2 {
-//                withAnimation {
-//                    selectedIndex += 1
-//                }
-//            }
-//
-//            if value.translation.width > 0 && selectedIndex != 0 {
-//                withAnimation {
-//                    selectedIndex -= 1
-//                }
-//            }
-//        }))
-        
-        //        TabView {
-        //            HomeView(viewModel: homeViewModel)
-        //                .tabItem {
-        //                    Label("Home", systemImage: "house")
-        //                }
-        //            MemoriesView(viewModel: memoriesViewModel)
-        //                .tabItem {
-        //                    Label("Memories", systemImage: "list.bullet")
-        //                }
-        //            ProfileView(viewModel: profileViewModel)
-        //                .tabItem {
-        //                    Label("Profile", systemImage: "person")
-        //                }
-        //        }
     }
 }
 

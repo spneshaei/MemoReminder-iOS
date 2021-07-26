@@ -14,12 +14,15 @@ struct TopView: View {
         switch viewModel.currentView {
         case .login:
             LoginView()
+                .environmentObject(viewModel)
                 .erasedToAnyView()
         case .signUp:
             SignUpView()
+                .environmentObject(viewModel)
                 .erasedToAnyView()
         case .mainTabView:
             MainTabView()
+                .environmentObject(viewModel)
                 .erasedToAnyView()
         }
     }

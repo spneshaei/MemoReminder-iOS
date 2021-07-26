@@ -82,12 +82,12 @@ struct TagsView: View {
                         }
                     }
                     .onDelete(perform: onSwipeToDelete)
+                    .alert("Error in deleting. Please try again", isPresented: $showingDeletingTagsErrorAlert) {
+                        Button("OK", role: .cancel) { }
+                    }
                 }
                 .task { async { await reloadData() }}
                 .refreshable { async { await reloadData() }}
-            }
-            .alert("Error in deleting. Please try again", isPresented: $showingDeletingTagsErrorAlert) {
-                Button("OK", role: .cancel) { }
             }
             .alert("Error in loading tags. Please pull to refresh to try again", isPresented: $showingLoadingTagsErrorAlert) {
                 Button("OK", role: .cancel) { }
@@ -99,9 +99,8 @@ struct TagsView: View {
                 }, label: {
                     Image(systemName: "plus")
                         .padding(.horizontal)
+                        .accessibility(hint: Text("Add tag"))
                 })
-//                    .buttonStyle(AddMemoryButton(colors: [Color(red: 0.22, green: 0.22, blue: 0.70), Color(red: 0.32, green: 0.32, blue: 1)])).clipShape(Capsule())
-//                    .scaleEffect(0.84)
             })
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)

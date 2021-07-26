@@ -9,6 +9,9 @@ import SwiftUI
 import ActivityIndicatorView
 
 struct MemoriesView: View {
+    @Environment(\.colorScheme) var colorScheme
+    var isDarkMode: Bool { colorScheme == .dark }
+    
     @EnvironmentObject var globalData: GlobalData
     @ObservedObject var viewModel: MemoriesViewModel
     @State var showActivityIndicatorView = false
@@ -29,40 +32,38 @@ struct MemoriesView: View {
     }
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                List(viewModel.filteredMemories(globalData: globalData)) { memory in
-                    ZStack {
-                        MemoryCell(memory: memory)
-                            .listRowSeparator(.hidden)
-                        NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
-                            EmptyView()
-                        }.buttonStyle(PlainButtonStyle())
-                            .listRowSeparator(.hidden)
-                    }
+        ZStack {
+            List(viewModel.filteredMemories(globalData: globalData)) { memory in
+                ZStack {
+                    MemoryCell(memory: memory, shouldShowProfilePicture: false)
+                        .listRowSeparator(.hidden)
+                    NavigationLink(destination: MemoryView(memory: memory, imageLink: memory.imageLink, numberOfLikes: memory.numberOfLikes, hasCurrentUserLiked: memory.hasCurrentUserLiked)) {
+                        EmptyView()
+                    }.buttonStyle(PlainButtonStyle())
+                        .listRowSeparator(.hidden)
                 }
-                .listStyle(PlainListStyle())
-                .searchable(text: $viewModel.searchPredicate)
-                .task { await reloadData() }
-                .refreshable { await reloadData() }
-                .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-                .navigationBarTitle("Memories Feed")
-                //                .sheet(isPresented: $shouldPresentMemorySheet) {
-                //                    MemoryView(memory: memoryToShowInMemorySheet)
-                //                }
-                
-                ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
-                    .frame(width: 100.0, height: 100.0)
-                    .foregroundColor(.orange)
+                .listRowBackground(isDarkMode ? Color.black : Color.white)
+                .listRowSeparator(.hidden)
             }
-            .navigationBarItems(trailing: NavigationLink(destination: FilterView(memoriesViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
-                Button(action: {
-                    isNavigationLinkToFilterActive = true
-                }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
-            })
+            .listStyle(PlainListStyle())
+            .searchable(text: $viewModel.searchPredicate)
+            .task { await reloadData() }
+            .refreshable { await reloadData() }
+            .alert("An error has occurred when trying to load memories. Please pull to refresh again.", isPresented: $showingLoadingMemoriesErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            .navigationBarTitle("Memories Feed")
+            ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
+                .frame(width: 100.0, height: 100.0)
+                .foregroundColor(.orange)
         }
+        .navigationBarItems(trailing: NavigationLink(destination: MemoriesFilterView(memoriesViewModel: viewModel), isActive: $isNavigationLinkToFilterActive) {
+            Button(action: {
+                isNavigationLinkToFilterActive = true
+            }) { Image(systemName: viewModel.hasFilter ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle") }
+                .accessibility(hint: Text("Filter memories"))
+
+        })
     }
 }
 

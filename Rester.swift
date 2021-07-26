@@ -23,12 +23,7 @@ class Rester {
         case get = "GET", post = "POST", put = "PUT", delete = "DELETE", patch = "PATCH"
     }
     
-    fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post) async throws -> String {
-//        guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
-//            throw RestError.wrongURLFormat
-//        }
-//        var imageData :NSData = UIImageJPEGRepresentation(data, 1.0) as! NSData
-        
+    fileprivate static func upload(endPoint: String, token: String, body: String, data: Data, method: RestMethod = .post, globalData: GlobalData) async throws -> String {
         guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
             throw RestError.wrongURLFormat
         }
@@ -39,6 +34,9 @@ class Rester {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         if !token.isEmpty {
             request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
+        }
+        if !globalData.token.isEmpty {
+            request.setValue(globalData.token, forHTTPHeaderField: "Memouser-Token")
         }
         do {
             let (dataReceived, response) = try await session.upload(for: request, from: data)
@@ -53,28 +51,16 @@ class Rester {
         } catch {
             throw RestError.networkError
         }
-        
-        
-        
-        
-//        let boundary = "Boundary-\(UUID().uuidString)"
-//        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-//        let body = NSMutableData()
-//        let boundaryPrefix = " — \(boundary)\r\n"
-//        for (key, value) in params {
-//            body.appendString(boundaryPrefix)
-//            body.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
-//            body.appendString("\(value)\r\n")
-//        }
     }
     
-    fileprivate static func rest(endPoint: String, token: String, body: String = "", method: RestMethod = .get) async throws -> String {
+    fileprivate static func rest(endPoint: String, token: String, body: String = "", method: RestMethod = .get, globalData: GlobalData) async throws -> String {
         guard let url = URL(string: server.isEmpty ? endPoint : "\(server)/\(endPoint)") else {
             throw RestError.wrongURLFormat
         }
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         request.httpBody = Data(body.utf8)
+        request.setValue(globalData.token, forHTTPHeaderField: "Memouser-Token")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         if !token.isEmpty {
             request.setValue("token \(token)", forHTTPHeaderField: "Authorization")
@@ -96,12 +82,12 @@ class Rester {
         }
     }
     
-    @discardableResult static func rest(endPoint: String, body: String = "", method: RestMethod = .get) async throws -> String {
-        return try await rest(endPoint: endPoint, token: token, body: body, method: method)
+    @discardableResult static func rest(endPoint: String, body: String = "", method: RestMethod = .get, globalData: GlobalData) async throws -> String {
+        return try await rest(endPoint: endPoint, token: token, body: body, method: method, globalData: globalData)
     }
     
     // returns url of image uploaded
-    static func upload(endPoint: String, body: String, data: Data, method: RestMethod = .post) async throws -> String {
-        return try await upload(endPoint: endPoint, token: token, body: body, data: data, method: method)
+    static func upload(endPoint: String, body: String, data: Data, method: RestMethod = .post, globalData: GlobalData) async throws -> String {
+        return try await upload(endPoint: endPoint, token: token, body: body, data: data, method: method, globalData: globalData)
     }
 }

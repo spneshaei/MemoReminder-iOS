@@ -28,7 +28,7 @@ class CommentsViewModel: ObservableObject {
             "text": text
         ]
         guard let bodyString = body.rawString() else { throw CommentSubmissionError.error }
-        let resultString = try await Rester.rest(endPoint: "comment/?token=\(globalData.token)", body: bodyString, method: .post)
+        let resultString = try await Rester.rest(endPoint: "comment/", body: bodyString, method: .post, globalData: globalData)
         return JSON(parseJSON: resultString)["id"].intValue
     }
     
@@ -38,7 +38,7 @@ class CommentsViewModel: ObservableObject {
             "comment": comment.id
         ]
         guard let bodyString = body.rawString() else { return }
-        try await Rester.rest(endPoint: "comment-like/?token=\(globalData.token)", body: bodyString, method: .post)
+        try await Rester.rest(endPoint: "comment-like/", body: bodyString, method: .post, globalData: globalData)
     }
     
     static var sample: CommentsViewModel {

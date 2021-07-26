@@ -24,19 +24,18 @@ struct Chips: View {
     
     var body: some View {
         Text(title)
-            .foregroundColor(textShouldBeLight ? .black : .white) // TODO: This is wrong?
+            .foregroundColor(textShouldBeLight ? .black : .white)
             .lineLimit(1)
             .padding(.all, 10)
             .foregroundColor(isSelected ? .white : .blue)
             .background(color)
-            .cornerRadius(40)  //rounded Corner
+            .cornerRadius(40)
             .overlay(
                 RoundedRectangle(cornerRadius: 40)
                     .stroke(Color.blue, lineWidth: 1.5)
                 
             ).onTapGesture {
                 onTap(id)
-//                isSelected.toggle() // toggle select - not selected
             }
     }
 }

@@ -18,6 +18,7 @@ extension View {
 struct MemoReminderApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.openURL) var openURL
     
     let persistenceController = PersistenceController.shared
     @StateObject var globalData = GlobalData()
@@ -26,7 +27,7 @@ struct MemoReminderApp: App {
     private let quickActionService = QuickActionService()
     
     init() {
-        Rester.server = "http://memoreminder.ir/api/v1"
+        Rester.server = "https://memoreminder.ir/api/v1"
     }
 
     var body: some Scene {
@@ -43,8 +44,8 @@ struct MemoReminderApp: App {
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase {
             case .active:
-                guard let shortcutItem = appDelegate.shortcutItem else { return }
-                quickActionService.action = QuickAction(rawValue: shortcutItem.type)
+                guard appDelegate.shortcutItem != nil else { return }
+                openURL(URL(string: "memoreminder://open-most-top")!)
             default:
                 return
             }

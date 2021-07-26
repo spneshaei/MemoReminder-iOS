@@ -8,7 +8,7 @@
 import SwiftUI
 
 class GlobalData: ObservableObject {
-    let defaults = UserDefaults.standard
+    let defaults = UserDefaults(suiteName: "group.com.spneshaei.MemoReminder") ?? .standard
     
     @Published var loggedIn: Bool {
         didSet {
@@ -68,7 +68,7 @@ class GlobalData: ObservableObject {
         token = defaults.string(forKey: "GlobalData_token") ?? ""
     }
     
-    func logout() {
+    fileprivate func clearGlobalDataItems() {
         loggedIn = false
         userID = 0
         username = ""
@@ -78,6 +78,25 @@ class GlobalData: ObservableObject {
         phoneNumber = ""
         birthday = ""
         token = ""
+    }
+    
+    func clearUserDefaults() {
+        defaults.set(Data(), forKey: "NotificationRemindersViewModel_reminders")
+        defaults.set(Data(), forKey: "TagsViewModel_allTags")
+        defaults.set(Data(), forKey: "SearchViewModel_users")
+        defaults.set(Data(), forKey: "SearchViewModel_friends")
+        defaults.set(Data(), forKey: "ProfileViewModel_user")
+        defaults.set(Data(), forKey: "HomeViewModel_topMemories")
+        defaults.set(Data(), forKey: "HomeViewModel_mentionedMemories")
+        defaults.set(Data(), forKey: "MemoriesViewModel_memories")
+        defaults.set(Data(), forKey: "ProfileViewModel_myMemories")
+        defaults.set(Data(), forKey: "ProfileViewModel_user")
+        defaults.set(Data(), forKey: "ProfileViewModel_followRequests")
+    }
+    
+    func logout() {
+        clearGlobalDataItems()
+        clearUserDefaults()
     }
     
     static var sample: GlobalData {

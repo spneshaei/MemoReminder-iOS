@@ -21,6 +21,7 @@ class User: Identifiable, Codable {
     var numberOfMemories = 0
     var numberOfLikes = 0
     var numberOfComments = 0
+    var followingIDs: [Int] = []
     var followRequestID = -1
     
     init(id: Int) {
@@ -35,11 +36,12 @@ class User: Identifiable, Codable {
         user.email = "spn@spn.spn"
         user.birthday = "1943/23/12"
         user.phoneNumber = "12345678911"
-        user.profilePictureURL = "" // adjust this!
+        user.profilePictureURL = ""
         user.numberOfMemories = 12
         user.numberOfLikes = 125
         user.numberOfComments = 32
-        user.followRequestID = -1 // not used in following acceptance or rejection...
+        user.followingIDs = []
+        user.followRequestID = -1
         return user
     }
     
@@ -49,7 +51,23 @@ class User: Identifiable, Codable {
         case success
     }
     
-    static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String) async -> AuthenticationStatus {
+    static func loadFromJSON(jsonString resultString: String) -> User {
+        let result = JSON(parseJSON: resultString)
+        let user = User(id: result["id"].intValue)
+        user.username = result["username"].stringValue
+        user.firstName = result["first_name"].stringValue
+        user.lastName = result["last_name"].stringValue
+        user.email = result["email"].stringValue
+        user.phoneNumber = result["phone_number"].stringValue
+        user.birthday = result["birthday_date"].stringValue
+        user.numberOfLikes = result["likes_received_count"].intValue
+        user.numberOfMemories = result["posts_count"].intValue
+        user.numberOfComments = result["comments_received_count"].intValue
+        user.followingIDs = result["friends"].arrayValue.map { $0.intValue }
+        return user
+    }
+    
+    static func signUp(username: String, firstName: String, lastName: String, birthday: String, password: String, phoneNumber: String, email: String, globalData: GlobalData) async -> AuthenticationStatus {
         let body: JSON = [
             "username": username,
             "first_name": firstName,
@@ -61,7 +79,7 @@ class User: Identifiable, Codable {
         ]
         guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
         do {
-            try await Rester.rest(endPoint: "memo-user/", body: bodyString, method: .post)
+            try await Rester.rest(endPoint: "memo-user/", body: bodyString, method: .post, globalData: globalData)
             return .success
         } catch {
             return .failed
@@ -75,7 +93,7 @@ class User: Identifiable, Codable {
         ]
         guard let bodyString = body.rawString() else { return AuthenticationStatus.invalidData }
         do {
-            let result = try await Rester.rest(endPoint: "login/", body: bodyString, method: .post)
+            let result = try await Rester.rest(endPoint: "login/", body: bodyString, method: .post, globalData: globalData)
             main {
                 let json = JSON(parseJSON: result)
                 globalData.loggedIn = true

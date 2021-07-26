@@ -57,22 +57,21 @@ struct CommentsView: View {
                 }
                 .navigationBarTitle(Text("Comments"))
                 
-                HStack(spacing: 5) {
-                    TextField("Enter your comment", text: $commentText)
-                        .font(.title3)
-                    Button(action: {
-                        async { await submitNewComment() }
-                    }, label: {
-                        Text("Send")
-                            .padding(.horizontal)
-                    })
-                        .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
+                if memory.usersMentioned.contains { $0.username == globalData.username } {
+                    HStack(spacing: 5) {
+                        TextField("Enter your comment", text: $commentText)
+                            .font(.title3)
+                        Button(action: {
+                            async { await submitNewComment() }
+                        }, label: {
+                            Text("Send")
+                                .padding(.horizontal)
+                        })
+                            .buttonStyle(AddMemoryButton(colors: [Color(red: 0.70, green: 0.22, blue: 0.22), Color(red: 1, green: 0.32, blue: 0.32)])).clipShape(Capsule())
+                    }
+                    .padding()
                 }
-                .padding()
             }
-            //            .navigationBarItems(trailing: Button(action: {
-            //
-            //            }, label: { Text("Add").bold() }))
             
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FilterView: View {
+struct MemoriesFilterView: View {
     @ObservedObject var memoriesViewModel: MemoriesViewModel
     
     var body: some View {
@@ -24,6 +24,6 @@ struct FilterView: View {
 
 struct FilterView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterView(memoriesViewModel: .sample)
+        MemoriesFilterView(memoriesViewModel: .sample)
     }
 }
