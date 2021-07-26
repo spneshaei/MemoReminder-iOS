@@ -61,7 +61,6 @@ struct AttachedFilesView: View {
             }
         }
     }
-    
     func upload(image: UIImage) {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadPhotoAsAttachment", attributes: .concurrent)
         concurrentQueue.async {
@@ -88,7 +87,6 @@ struct AttachedFilesView: View {
             }
         }
     }
-    
     func upload(video: Data) {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadVideoAsAttachment", attributes: .concurrent)
         concurrentQueue.async {
@@ -113,28 +111,6 @@ struct AttachedFilesView: View {
                     }
                 }
             }
-        }
-    }
-    
-    // https://stackoverflow.com/questions/50014062/remove-all-files-from-within-documentdirectory-in-swift
-    func clearAllFiles() {
-        let fileManager = FileManager.default
-        
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        
-        print("Directory: \(paths)")
-        
-        do
-        {
-            let fileName = try fileManager.contentsOfDirectory(atPath: paths)
-            
-            for file in fileName {
-                // For each file in the directory, create full path and delete the file
-                let filePath = URL(fileURLWithPath: paths).appendingPathComponent(file).absoluteURL
-                try fileManager.removeItem(at: filePath)
-            }
-        }catch let error {
-            print(error.localizedDescription)
         }
     }
     
