@@ -15,6 +15,8 @@ struct SearchUserCell: View {
     var user: User
     @ObservedObject var searchViewModel: UsersViewModel
     @EnvironmentObject var globalData: GlobalData
+    @State var followingErrorAlert = false
+    @State var shouldShowFollowedAlert = false
     var shouldShowProfilePicture: Bool
     var shouldSelectUsers = false
     
@@ -47,7 +49,12 @@ struct SearchUserCell: View {
                 Text(user.username)
                     .font(.system(size: 16, weight: .bold, design: .default))
                     .foregroundColor(Color(red: 70/255, green: 70/255, blue: 70/255))
-            }.padding(20)
+            }
+            .padding(20)
+            .alert("Error in following the user. Please try again", isPresented: $followingErrorAlert) {
+                Button("OK", role: .cancel) { }
+            }
+            
             Spacer()
             if !shouldSelectUsers {
                 if hasFollowed {
@@ -60,9 +67,9 @@ struct SearchUserCell: View {
                         async {
                             do {
                                 try await searchViewModel.follow(user: user, globalData: globalData)
-                                main { searchViewModel.shouldShowFollowedAlert = true }
+                                main { shouldShowFollowedAlert = true }
                             } catch {
-                                main { searchViewModel.followingErrorAlert = true }
+                                main { followingErrorAlert = true }
                             }
                         }
                     }, label: { Text("FOLLOW").bold().foregroundColor(isDarkMode ? Color(red: 0.05, green: 0.05, blue: 0.95) : .blue) })
@@ -71,6 +78,9 @@ struct SearchUserCell: View {
                     .padding()
                 }
             }
+        }
+        .alert("Your follow request has been sent; when accepted, the user will be displayed as \"Following\" in this list.", isPresented: $shouldShowFollowedAlert) {
+            Button("OK", role: .cancel) { }
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))

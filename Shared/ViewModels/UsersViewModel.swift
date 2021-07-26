@@ -62,10 +62,7 @@ class UsersViewModel: ObservableObject {
     }
     
     @Published var searchPredicate = ""
-    @Published var shouldShowFollowedAlert = false
     @Published var showingLoadingUsersErrorAlert = false
-    @Published var followingErrorAlert = false
-    
     @Published var showOnlyTheUsersIFollow = false
     
     var hasFilter: Bool {

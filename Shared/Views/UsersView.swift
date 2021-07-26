@@ -121,12 +121,7 @@ struct UsersView: View {
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
-                .alert("Your follow request has been sent; when accepted, the user will be displayed as \"Following\" in this list.", isPresented: $viewModel.shouldShowFollowedAlert) {
-                    Button("OK", role: .cancel) { }
-                }
-        }
-        .alert("Error in following the user. Please try again", isPresented: $viewModel.followingErrorAlert) {
-            Button("OK", role: .cancel) { }
+                
         }
     }
 }
