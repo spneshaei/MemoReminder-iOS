@@ -17,7 +17,7 @@ struct RemindersView: View {
     @State var shouldShowNotificationsAccessDeniedAlert = false
     
     func deleteReminders(at offsets: IndexSet) {
-        viewModel.reminders.remove(atOffsets: offsets)
+        withAnimation { viewModel.reminders.remove(atOffsets: offsets) }
     }
     
     var body: some View {
@@ -27,6 +27,13 @@ struct RemindersView: View {
                     NotificationReminderCell(reminder: reminder)
                         .opacity(reminder.date < Date() ? 0.75 : 1)
                         .listRowSeparator(.hidden)
+                        .contextMenu {
+                            Button {
+                                withAnimation { viewModel.reminders.removeAll { $0.id == reminder.id } }
+                            } label: {
+                                Label("Remove Reminder", systemImage: "trash")
+                            }
+                        }
                 }
                 .onDelete(perform: deleteReminders)
                 .listRowSeparator(.hidden)

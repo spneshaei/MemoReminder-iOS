@@ -58,7 +58,7 @@ struct AddReminderView: View {
         .navigationBarTitle("Add Reminder")
         .navigationBarItems(trailing: Button(action: addReminder) {
             Text("Add").bold()
-        })
+        }.disabled(text.isEmpty))
     }
 }
 
