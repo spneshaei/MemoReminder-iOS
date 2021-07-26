@@ -93,5 +93,16 @@
 		<string>com.spneshaei.MemoReminder.openHottestMemoryActivityType</string>
 		<string>ViewHottestMemoriesIntent</string>
 	</array>
+<!--    <key>UIApplicationShortcutItems</key>-->
+<!--    <array>-->
+<!--      <dict>-->
+<!--        <key>UIApplicationShortcutItemType</key>-->
+<!--        <string>com.spneshaei.MemoReminder.SeeHottestMemoryAction</string>-->
+<!--        <key>UIApplicationShortcutItemIconType</key>-->
+<!--        <string>UIApplicationShortcutIconTypeFavorite</string>-->
+<!--        <key>UIApplicationShortcutItemTitle</key>-->
+<!--        <string>See the hottest memory</string>-->
+<!--      </dict>-->
+<!--    </array>-->
 </dict>
 </plist>
