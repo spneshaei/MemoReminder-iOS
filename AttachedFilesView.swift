@@ -21,7 +21,7 @@ struct AttachedFilesView: View {
     }
     
     enum FileSourceSelection {
-        case files, voice, photoLibrary, camera
+        case files, voice, photoLibrary, camera, video
     }
     
     @State var uploadFileState: UploadFileState = .notStarted
@@ -33,6 +33,7 @@ struct AttachedFilesView: View {
     @State var isSelectingFileSheetPresented = false
     @State var isNavigationToVoiceRecordViewActive = false
     @State var isDeleteAllDownloadedFilesConfirmationDialogVisible = false
+    @State var showVideoPicker = false
     
     func upload(fileURL: URL) {
         let concurrentQueue = DispatchQueue(label: "MemoReminderUploadFileAsAttachment", attributes: .concurrent)
@@ -74,6 +75,33 @@ struct AttachedFilesView: View {
                     let imageURL = result["file"].stringValue
                     main {
                         memory.attachedFileURLs.append(imageURL)
+                        uploadFileState = .notStarted
+                        showActivityIndicatorView = false
+                    }
+                } else {
+                    main {
+                        uploadFileState = .notStarted
+                        showActivityIndicatorView = false
+                        showingUploadErrorAlert = true
+                    }
+                }
+            }
+        }
+    }
+    
+    func upload(video: Data) {
+        let concurrentQueue = DispatchQueue(label: "MemoReminderUploadVideoAsAttachment", attributes: .concurrent)
+        concurrentQueue.async {
+            main {
+                showActivityIndicatorView = true
+                uploadFileState = .uploading
+            }
+            memoryViewModel.upload(memory: memory, data: video, globalData: globalData) { r in
+                if let resultString = r {
+                    let result = JSON(parseJSON: resultString)
+                    let fileURL = result["file"].stringValue
+                    main {
+                        memory.attachedFileURLs.append(fileURL)
                         uploadFileState = .notStarted
                         showActivityIndicatorView = false
                     }
@@ -157,6 +185,10 @@ struct AttachedFilesView: View {
                     fileSourceSelection = .photoLibrary
                     showImagePicker = true
                 }
+                Button("Select from the Videos") {
+                    fileSourceSelection = .video
+                    showVideoPicker = true
+                }
                 Button("Take a new photo") {
                     fileSourceSelection = .camera
                     showImagePicker = true
@@ -179,6 +211,11 @@ struct AttachedFilesView: View {
             ActivityIndicatorView(isVisible: $showActivityIndicatorView, type: .equalizer)
                 .frame(width: 100.0, height: 100.0)
                 .foregroundColor(.orange)
+        }
+        .sheet(isPresented: $showVideoPicker) {
+            VideoPickerView(sourceType: .photoLibrary) { video in
+                upload(video: video)
+            }
         }
     }
 }

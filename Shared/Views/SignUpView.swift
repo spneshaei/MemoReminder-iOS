@@ -92,7 +92,7 @@ struct SignUpView: View {
                                 Text("SIGN UP")
                                     .modifier(CustomTextM(fontName: "MavenPro-Bold", fontSize: 14, fontColor: Color.black))
                                     .modifier(SFButton())
-                                    .background(Color("yellow"))
+                                    .background(isDarkMode ? Color(red: 231/255, green: 133/255, blue: 54/255) : Color(red: 247/255, green: 207/255, blue: 71/255))
                                     .cornerRadius(10)
                             }
                             .padding(.top,30)

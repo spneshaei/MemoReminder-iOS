@@ -110,6 +110,7 @@ struct LoginView: View {
                         .foregroundColor(.primary)
                     }
                     .padding(.bottom, 30)
+                    .padding(.top, 30)
                     
                 }
                 .offset(x:40)

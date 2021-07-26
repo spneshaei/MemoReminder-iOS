@@ -51,7 +51,7 @@ struct AddReminderView: View {
                 .listRowSeparator(.hidden)
             TextField("Add Memory...", text: $text)
                 .textFieldStyle(.roundedBorder)
-            DatePicker("Time", selection: $date)
+            DatePicker("Time", selection: $date, in: Date()...)
                 .listRowSeparator(.hidden)
             Text("You'll be notified at the selected time.")
         }

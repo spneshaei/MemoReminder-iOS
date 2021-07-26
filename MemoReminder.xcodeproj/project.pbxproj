@@ -124,6 +124,8 @@
 		42A0FD9026A5C43D002BC56A /* MainAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D0198E26A144C000D20808 /* MainAsync.swift */; };
 		42A0FD9226A5E57C002BC56A /* UsersFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */; };
 		42A0FD9326A5E57C002BC56A /* UsersFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */; };
+		42A7599826AE5DF80096A967 /* VideoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A7599726AE5DF80096A967 /* VideoPickerView.swift */; };
+		42A7599926AE5DF80096A967 /* VideoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A7599726AE5DF80096A967 /* VideoPickerView.swift */; };
 		42B22C2A2696274300091D30 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C292696274300091D30 /* Tests_iOS.swift */; };
 		42B22C342696274300091D30 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C332696274300091D30 /* Tests_macOS.swift */; };
 		42B22C352696274300091D30 /* MemoReminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 42B22C102696274200091D30 /* MemoReminder.xcdatamodeld */; };
@@ -335,6 +337,7 @@
 		42A0FD6F26A5A78B002BC56A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42A0FD7E26A5A82E002BC56A /* ViewHottestMemoriesIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHottestMemoriesIntentHandler.swift; sourceTree = "<group>"; };
 		42A0FD9126A5E57C002BC56A /* UsersFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersFilterView.swift; sourceTree = "<group>"; };
+		42A7599726AE5DF80096A967 /* VideoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPickerView.swift; sourceTree = "<group>"; };
 		42B22C112696274200091D30 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		42B22C122696274200091D30 /* MemoReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoReminderApp.swift; sourceTree = "<group>"; };
 		42B22C132696274200091D30 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -620,6 +623,7 @@
 		42B22C542696B49000091D30 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
+				42A7599726AE5DF80096A967 /* VideoPickerView.swift */,
 				429801B326A3569800928A03 /* Chips */,
 				42D0199A26A27DD700D20808 /* BottomBar */,
 				42D0198526A01D2C00D20808 /* SearchUserCell.swift */,
@@ -1052,6 +1056,7 @@
 				42D019A526A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AE26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198326A011CB00D20808 /* UsersViewModel.swift in Sources */,
+				42A7599826AE5DF80096A967 /* VideoPickerView.swift in Sources */,
 				42A0FC0526A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				42A0FD5126A5884F002BC56A /* PagingView.swift in Sources */,
 				42E69D4226A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */,
@@ -1140,6 +1145,7 @@
 				42D019A626A27E4400D20808 /* BarButtonItemView.swift in Sources */,
 				429801AF26A334D700928A03 /* TagsViewModel.swift in Sources */,
 				42D0198426A011CB00D20808 /* UsersViewModel.swift in Sources */,
+				42A7599926AE5DF80096A967 /* VideoPickerView.swift in Sources */,
 				42A0FC0626A52655002BC56A /* AddMemoryViewModel.swift in Sources */,
 				42A0FD5226A5884F002BC56A /* PagingView.swift in Sources */,
 				42E69D4326A6A12000F8670D /* ContactsSuggestionsViewModel.swift in Sources */,
